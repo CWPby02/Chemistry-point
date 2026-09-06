@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="About Chemistry Point, Pardeep Sir and Code With Piyush.">
+
+    <title>About | Chemistry Point</title>
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="assets/css/root.css">
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="assets/css/responsive.css">
+
+
+    <style>
+
+        /* ==========================================
+           ABOUT HERO
+        ========================================== */
+
+        .about-hero {
+
+            padding: 85px 0 75px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(217, 154, 22, 0.10),
+                    transparent 35%
+                ),
+                var(--bg-main);
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .about-hero-content {
+
+            max-width: 760px;
+
+        }
+
+
+        .about-hero h1 {
+
+            margin-top: 8px;
+
+            font-size: clamp(38px, 5vw, 58px);
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+        }
+
+
+        .about-hero h1 span {
+
+            color: var(--primary-light);
+
+        }
+
+
+        .about-hero p {
+
+            max-width: 650px;
+
+            margin-top: 18px;
+
+            color: var(--text-secondary);
+
+            font-family: var(--font-secondary);
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* ==========================================
+           ABOUT MAIN
+        ========================================== */
+
+        .about-main {
+
+            padding: 85px 0 110px;
+
+            background: var(--bg-secondary);
+
+        }
+
+
+        /* ==========================================
+           INTRO
+        ========================================== */
+
+        .about-intro {
+
+            max-width: 850px;
+
+            margin: 0 auto 80px;
+
+            text-align: center;
+
+        }
+
+
+        .about-intro h2 {
+
+            font-size: clamp(27px, 4vw, 38px);
+
+            font-weight: 800;
+
+        }
+
+
+        .about-intro p {
+
+            margin-top: 15px;
+
+            color: var(--text-secondary);
+
+            font-family: var(--font-secondary);
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+        }
+
+
+        /* ==========================================
+           PERSON CARDS
+        ========================================== */
+
+        .person-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 25px;
+
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+        }
+
+
+        .person-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 32px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            background: var(--bg-card);
+
+            transition:
+                transform var(--transition-normal),
+                border-color var(--transition-normal),
+                box-shadow var(--transition-normal);
+
+        }
+
+
+        .person-card:hover {
+
+            transform: translateY(-6px);
+
+            border-color: var(--border-gold);
+
+            box-shadow: var(--shadow-gold);
+
+        }
+
+
+        .person-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 180px;
+
+            top: -100px;
+
+            right: -80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(217, 154, 22, 0.07);
+
+        }
+
+
+        .person-image {
+
+            width: 115px;
+
+            height: 115px;
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+
+            border-radius: 50%;
+
+            border: 2px solid
+                rgba(217, 154, 22, 0.30);
+
+            background: #101216;
+
+        }
+
+
+        .person-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+        }
+
+
+        .person-role {
+
+            display: inline-block;
+
+            margin-bottom: 9px;
+
+            color: var(--primary-light);
+
+            font-family: var(--font-secondary);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .person-card h3 {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+        }
+
+
+        .person-card p {
+
+            margin-top: 13px;
+
+            color: var(--text-secondary);
+
+            font-family: var(--font-secondary);
+
+            font-size: 13px;
+
+            line-height: 1.85;
+
+        }
+
+
+        .person-social {
+
+            display: flex;
+
+            gap: 9px;
+
+            margin-top: 22px;
+
+        }
+
+
+        .person-social a {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            color: var(--text-muted);
+
+            transition:
+                color var(--transition-normal),
+                border-color var(--transition-normal),
+                background var(--transition-normal);
+
+        }
+
+
+        .person-social a:hover {
+
+            color: var(--primary-light);
+
+            border-color: var(--border-gold);
+
+            background:
+                rgba(217, 154, 22, 0.07);
+
+        }
+
+
+        /* ==========================================
+           MISSION
+        ========================================== */
+
+        .mission-section {
+
+            max-width: 1050px;
+
+            margin: 80px auto 0;
+
+        }
+
+
+        .mission-heading {
+
+            margin-bottom: 28px;
+
+            text-align: center;
+
+        }
+
+
+        .mission-heading h2 {
+
+            margin-top: 8px;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+        }
+
+
+        .mission-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+
+        }
+
+
+        .mission-card {
+
+            padding: 27px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: var(--bg-card);
+
+        }
+
+
+        .mission-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 12px;
+
+            border: 1px solid
+                rgba(217, 154, 22, 0.20);
+
+            background:
+                rgba(217, 154, 22, 0.08);
+
+            color: var(--primary-light);
+
+        }
+
+
+        .mission-card h3 {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+        }
+
+
+        .mission-card p {
+
+            margin-top: 8px;
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 12px;
+
+            line-height: 1.75;
+
+        }
+
+
+        /* ==========================================
+           CODE WITH PIYUSH
+        ========================================== */
+
+        .cwp-section {
+
+            max-width: 1050px;
+
+            margin: 75px auto 0;
+
+            padding: 35px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(217, 154, 22, 0.06),
+                    transparent
+                );
+
+        }
+
+
+        .cwp-content {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 35px;
+
+        }
+
+
+        .cwp-text {
+
+            flex: 1;
+
+        }
+
+
+        .cwp-text h2 {
+
+            margin-top: 8px;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+        }
+
+
+        .cwp-text h2 span {
+
+            color: var(--primary-light);
+
+        }
+
+
+        .cwp-text p {
+
+            max-width: 650px;
+
+            margin-top: 12px;
+
+            color: var(--text-secondary);
+
+            font-family: var(--font-secondary);
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .cwp-badge {
+
+            min-width: 150px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border: 1px solid
+                rgba(217, 154, 22, 0.20);
+
+            border-radius: 15px;
+
+            background:
+                rgba(217, 154, 22, 0.06);
+
+        }
+
+
+        .cwp-badge i {
+
+            color: var(--primary-light);
+
+            font-size: 28px;
+
+        }
+
+
+        .cwp-badge strong {
+
+            display: block;
+
+            margin-top: 10px;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==========================================
+           CTA
+        ========================================== */
+
+        .about-cta {
+
+            max-width: 800px;
+
+            margin: 75px auto 0;
+
+            text-align: center;
+
+        }
+
+
+        .about-cta h2 {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+        }
+
+
+        .about-cta p {
+
+            margin-top: 9px;
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 12px;
+
+        }
+
+
+        .about-cta-buttons {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 23px;
+
+        }
+
+
+        .about-btn {
+
+            min-width: 130px;
+
+            height: 43px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 0 18px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .about-btn-primary {
+
+            background: var(--primary);
+
+            color: #111;
+
+        }
+
+
+        .about-btn-secondary {
+
+            border: 1px solid var(--border);
+
+            background: var(--bg-card);
+
+            color: var(--text-primary);
+
+        }
+
+
+        .about-btn-secondary:hover {
+
+            border-color: var(--border-gold);
+
+            color: var(--primary-light);
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .mission-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+            .mission-card:last-child {
+
+                grid-column: 1 / -1;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .person-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .cwp-content {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+            .cwp-badge {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .about-hero {
+
+                padding: 65px 0 55px;
+
+            }
+
+            .about-hero h1 {
+
+                font-size: 36px;
+
+            }
+
+            .about-hero p {
+
+                font-size: 13px;
+
+            }
+
+            .about-main {
+
+                padding: 60px 0 80px;
+
+            }
+
+            .about-intro {
+
+                margin-bottom: 55px;
+
+            }
+
+            .person-card {
+
+                padding: 25px;
+
+            }
+
+            .mission-section {
+
+                margin-top: 60px;
+
+            }
+
+            .mission-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .mission-card:last-child {
+
+                grid-column: auto;
+
+            }
+
+            .cwp-section {
+
+                margin-top: 60px;
+
+                padding: 25px;
+
+            }
+
+            .about-cta {
+
+                margin-top: 60px;
+
+            }
+
+            .about-cta-buttons {
+
+                flex-direction: column;
+
+            }
+
+            .about-btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <div class="container nav-container">
+
+
+        <a href="index.html"
+           class="brand">
+
+            <img src="assets/images/logo/logo.png"
+                 alt="Chemistry Point Logo">
+
+            <div class="brand-text">
+
+                <strong>
+                    Chemistry Point
+                </strong>
+
+                <span>
+                    By Pardeep Sir
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="videos.html">
+                Videos
+            </a>
+
+            <a href="objectives.html">
+                Objectives
+            </a>
+
+            <a href="quiz.html">
+                Quiz
+            </a>
+
+            <a href="about.html"
+               class="active">
+                About
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <button class="menu-btn"
+                id="menuBtn"
+                aria-label="Open Menu">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+
+    <div class="mobile-nav"
+         id="mobileNav">
+
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+        <a href="videos.html">
+
+            <i class="fa-solid fa-play"></i>
+
+            Videos
+
+        </a>
+
+
+        <a href="objectives.html">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            Objectives
+
+        </a>
+
+
+        <a href="quiz.html">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+            Quiz
+
+        </a>
+
+
+        <a href="about.html"
+           class="active">
+
+            <i class="fa-solid fa-user"></i>
+
+            About
+
+        </a>
+
+
+        <a href="contact.html">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            Contact
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="about-hero">
+
+    <div class="container about-hero-content">
+
+        <span class="section-label">
+            KNOW US
+        </span>
+
+
+        <h1>
+
+            About
+            <span>Us</span>
+
+        </h1>
+
+
+        <p>
+
+            Chemistry Point का उद्देश्य students को
+            Chemistry की बेहतर preparation के लिए
+            quality learning resources, objectives,
+            quizzes और educational videos एक ही
+            platform पर उपलब्ध कराना है।
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT MAIN
+===================================================== -->
+
+<section class="about-main">
+
+    <div class="container">
+
+
+        <!-- INTRO -->
+
+        <div class="about-intro">
+
+            <span class="section-label">
+                CHEMISTRY POINT
+            </span>
+
+
+            <h2>
+                Learning Made Simple
+            </h2>
+
+
+            <p>
+
+                Chemistry Point एक educational platform
+                है जहाँ students को Chemistry preparation
+                के लिए videos, chapter-wise objectives,
+                PYQ questions और online quizzes उपलब्ध
+                कराने का लक्ष्य है।
+
+                हमारा focus simple, useful और
+                exam-oriented learning experience पर है।
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PEOPLE
+        ================================================== -->
+
+        <div class="person-grid">
+
+
+            <!-- PARDEEP SIR -->
+
+            <article class="person-card">
+
+
+                <div class="person-image">
+
+                    <img src="assets/images/teachers/pardeep-sir.jpg"
+                         alt="Pardeep Sir">
+
+                </div>
+
+
+                <span class="person-role">
+                    Chemistry Educator
+                </span>
+
+
+                <h3>
+                    Pardeep Sir
+                </h3>
+
+
+                <p>
+
+                    Pardeep Sir Chemistry education और
+                    students की exam preparation में
+                    महत्वपूर्ण भूमिका निभाते हैं।
+
+                    उनका उद्देश्य Chemistry concepts को
+                    सरल तरीके से students तक पहुँचाना और
+                    उनकी preparation को बेहतर बनाना है।
+
+                </p>
+
+
+                <div class="person-social">
+
+
+                    <a href="#"
+                       aria-label="YouTube">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                       aria-label="Instagram">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PIYUSH -->
+
+            <article class="person-card">
+
+
+                <div class="person-image">
+
+                    <img src="assets/images/teachers/piyush.jpg"
+                         alt="Piyush">
+
+                </div>
+
+
+                <span class="person-role">
+                    Website & Technology
+                </span>
+
+
+                <h3>
+                    Piyush
+                </h3>
+
+
+                <p>
+
+                    Website design, development और
+                    technology side को manage करने का
+                    काम Code With Piyush के द्वारा किया
+                    जाता है।
+
+                    हमारा लक्ष्य students के लिए
+                    simple और useful digital learning
+                    experience बनाना है।
+
+                </p>
+
+
+                <div class="person-social">
+
+
+                    <a href="#"
+                       aria-label="YouTube">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                       aria-label="Instagram">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             MISSION
+        ================================================== -->
+
+        <div class="mission-section">
+
+
+            <div class="mission-heading">
+
+                <span class="section-label">
+                    OUR PURPOSE
+                </span>
+
+
+                <h2>
+                    What We Provide
+                </h2>
+
+            </div>
+
+
+            <div class="mission-grid">
+
+
+                <!-- CARD 1 -->
+
+                <article class="mission-card">
+
+                    <div class="mission-icon">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Educational Videos
+                    </h3>
+
+
+                    <p>
+
+                        Chemistry से जुड़े educational
+                        videos को एक ही जगह आसानी से
+                        access करने की सुविधा।
+
+                    </p>
+
+                </article>
+
+
+
+                <!-- CARD 2 -->
+
+                <article class="mission-card">
+
+                    <div class="mission-icon">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Objectives
+                    </h3>
+
+
+                    <p>
+
+                        Chapter-wise V.V.I, PYQ और
+                        All Objectives के माध्यम से
+                        focused practice।
+
+                    </p>
+
+                </article>
+
+
+
+                <!-- CARD 3 -->
+
+                <article class="mission-card">
+
+                    <div class="mission-icon">
+
+                        <i class="fa-solid fa-circle-question"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Online Quiz
+                    </h3>
+
+
+                    <p>
+
+                        PYQ Sets और Chapter Wise Quiz
+                        के माध्यम से अपनी preparation
+                        को test करने की सुविधा।
+
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CODE WITH PIYUSH
+        ================================================== -->
+
+        <div class="cwp-section">
+
+
+            <div class="cwp-content">
+
+
+                <div class="cwp-text">
+
+                    <span class="section-label">
+                        TECHNOLOGY
+                    </span>
+
+
+                    <h2>
+
+                        Built with
+                        <span>Code With Piyush</span>
+
+                    </h2>
+
+
+                    <p>
+
+                        Chemistry Point website के
+                        design और development को
+                        modern web technologies के
+                        साथ बनाया जा रहा है।
+
+                        इसका उद्देश्य students को
+                        clean, fast और easy-to-use
+                        learning platform देना है।
+
+                    </p>
+
+                </div>
+
+
+                <div class="cwp-badge">
+
+                    <i class="fa-solid fa-code"></i>
+
+
+                    <strong>
+                        Code With Piyush
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CTA
+        ================================================== -->
+
+        <div class="about-cta">
+
+
+            <h2>
+                Start Your Chemistry Preparation
+            </h2>
+
+
+            <p>
+
+                Videos देखें, Objectives practice करें
+                और Quiz के साथ अपनी preparation test करें।
+
+            </p>
+
+
+            <div class="about-cta-buttons">
+
+
+                <a href="videos.html"
+                   class="about-btn about-btn-primary">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Watch Videos
+
+                </a>
+
+
+                <a href="objectives.html"
+                   class="about-btn about-btn-secondary">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Practice Objectives
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <img src="assets/images/logo/logo.png"
+                 alt="Chemistry Point">
+
+
+            <h3>
+                Code With Piyush
+            </h3>
+
+
+            <p>
+
+                Modern educational websites और
+                digital learning experiences बनाने
+                का प्रयास।
+
+            </p>
+
+
+            <div class="social-links">
+
+                <a href="#"
+                   aria-label="YouTube">
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                </a>
+
+
+                <a href="#"
+                   aria-label="Instagram">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Quick Links
+            </h4>
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="videos.html">
+                Videos
+            </a>
+
+
+            <a href="objectives.html">
+                Objectives
+            </a>
+
+
+            <a href="quiz.html">
+                Quiz
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Information
+            </h4>
+
+
+            <a href="about.html">
+                About Us
+            </a>
+
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Learning
+            </h4>
+
+
+            <a href="objectives.html">
+                V.V.I Objectives
+            </a>
+
+
+            <a href="objectives.html">
+                PYQ Objectives
+            </a>
+
+
+            <a href="quiz.html">
+                Chapter Wise Quiz
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                © 2026 Code With Piyush.
+                All Rights Reserved.
+            </p>
+
+
+            <p>
+                Built with ❤️
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* ==========================================
+       MOBILE MENU
+    ========================================== */
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+
+    const mobileNav =
+        document.getElementById("mobileNav");
+
+
+    menuBtn.addEventListener("click", () => {
+
+        mobileNav.classList.toggle("show");
+
+
+        const icon =
+            menuBtn.querySelector("i");
+
+
+        if (
+            mobileNav.classList.contains("show")
+        ) {
+
+            icon.classList.remove("fa-bars");
+
+            icon.classList.add("fa-xmark");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
