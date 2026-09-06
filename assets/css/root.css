@@ -1,0 +1,401 @@
+/* =====================================================
+   CHEMISTRY POINT
+   ROOT / GLOBAL VARIABLES
+===================================================== */
+
+:root {
+
+    /* ---------- Brand Colors ---------- */
+
+    --primary: #d99a16;
+    --primary-light: #f3bd45;
+    --primary-dark: #a86f00;
+
+    --gold-gradient:
+        linear-gradient(
+            135deg,
+            #a86f00 0%,
+            #f5c04a 45%,
+            #c98600 100%
+        );
+
+
+    /* ---------- Background ---------- */
+
+    --bg-main: #08090b;
+    --bg-secondary: #0e1013;
+    --bg-card: #13161a;
+    --bg-card-light: #191c21;
+
+    --bg-white: #ffffff;
+    --bg-soft: #f6f6f6;
+
+
+    /* ---------- Text ---------- */
+
+    --text-primary: #ffffff;
+    --text-secondary: #b7bbc2;
+    --text-muted: #858a93;
+    --text-dark: #17191c;
+
+
+    /* ---------- Border ---------- */
+
+    --border: rgba(255, 255, 255, 0.10);
+    --border-light: rgba(255, 255, 255, 0.16);
+    --border-gold: rgba(217, 154, 22, 0.40);
+
+
+    /* ---------- Shadows ---------- */
+
+    --shadow-sm:
+        0 5px 15px rgba(0, 0, 0, 0.20);
+
+    --shadow-md:
+        0 12px 30px rgba(0, 0, 0, 0.30);
+
+    --shadow-lg:
+        0 20px 50px rgba(0, 0, 0, 0.40);
+
+    --shadow-gold:
+        0 10px 35px rgba(217, 154, 22, 0.18);
+
+
+    /* ---------- Radius ---------- */
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-xl: 30px;
+    --radius-full: 999px;
+
+
+    /* ---------- Container ---------- */
+
+    --container-width: 1200px;
+
+    --container-padding: 20px;
+
+
+    /* ---------- Typography ---------- */
+
+    --font-primary:
+        "Poppins",
+        "Inter",
+        Arial,
+        sans-serif;
+
+    --font-secondary:
+        "Inter",
+        Arial,
+        sans-serif;
+
+
+    /* ---------- Font Sizes ---------- */
+
+    --fs-xs: 12px;
+    --fs-sm: 14px;
+    --fs-md: 16px;
+    --fs-lg: 18px;
+    --fs-xl: 22px;
+    --fs-2xl: 28px;
+    --fs-3xl: 36px;
+    --fs-4xl: 48px;
+    --fs-5xl: 60px;
+
+
+    /* ---------- Font Weight ---------- */
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+
+    /* ---------- Transition ---------- */
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+
+    /* ---------- Z Index ---------- */
+
+    --z-header: 1000;
+    --z-modal: 2000;
+    --z-toast: 3000;
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: var(--font-primary);
+    background: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+/* =====================================================
+   COMMON CONTAINER
+===================================================== */
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+
+/* =====================================================
+   COMMON SECTION
+===================================================== */
+
+section {
+    position: relative;
+    width: 100%;
+}
+
+
+.section-heading {
+    margin-bottom: 45px;
+}
+
+
+.section-heading.center {
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.section-label {
+    display: inline-block;
+
+    color: var(--primary-light);
+
+    font-family: var(--font-secondary);
+
+    font-size: var(--fs-xs);
+
+    font-weight: var(--fw-bold);
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+}
+
+
+.section-heading h2,
+.section-heading h2 span {
+    font-size: clamp(
+        30px,
+        4vw,
+        46px
+    );
+
+    line-height: 1.2;
+
+    font-weight: var(--fw-extrabold);
+}
+
+
+.section-heading h2 span {
+    color: var(--primary-light);
+}
+
+
+.section-heading p {
+    margin-top: 15px;
+
+    color: var(--text-secondary);
+
+    font-size: var(--fs-md);
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 48px;
+
+    padding: 12px 24px;
+
+    border-radius: var(--radius-full);
+
+    font-size: var(--fs-sm);
+
+    font-weight: var(--fw-semibold);
+
+    transition:
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal),
+        background var(--transition-normal);
+}
+
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+
+.btn-primary {
+    color: #111;
+
+    background: var(--gold-gradient);
+
+    box-shadow: var(--shadow-gold);
+}
+
+
+.btn-primary:hover {
+    box-shadow:
+        0 15px 40px rgba(217, 154, 22, 0.28);
+}
+
+
+.btn-outline {
+    color: var(--text-primary);
+
+    background: transparent;
+
+    border: 1px solid var(--border-light);
+}
+
+
+.btn-outline:hover {
+    border-color: var(--primary);
+
+    color: var(--primary-light);
+}
+
+
+.btn-light {
+    color: #111;
+
+    background: #fff;
+}
+
+
+.btn-light:hover {
+    background: #f1f1f1;
+}
+
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #08090b;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #3b3d40;
+
+    border-radius: var(--radius-full);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+
+/* =====================================================
+   TEXT SELECTION
+===================================================== */
+
+::selection {
+    background: var(--primary);
+
+    color: #111;
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary-light);
+
+    outline-offset: 3px;
+}
