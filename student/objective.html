@@ -9,9 +9,9 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Chapter Objectives - Chemistry Point">
+          content="Chapter Wise Objectives - Chemistry Point">
 
-    <title>Chapter Objectives | Chemistry Point</title>
+    <title>Objectives | Chemistry Point</title>
 
 
     <!-- Google Fonts -->
@@ -36,13 +36,13 @@
     <!-- Main CSS -->
 
     <link rel="stylesheet"
-          href="../assets/css/root.css">
+          href="assets/css/root.css">
 
     <link rel="stylesheet"
-          href="../assets/css/style.css">
+          href="assets/css/style.css">
 
     <link rel="stylesheet"
-          href="../assets/css/responsive.css">
+          href="assets/css/responsive.css">
 
 
     <style>
@@ -105,6 +105,7 @@
         }
 
 
+
         /* ==========================================
            MAIN
         ========================================== */
@@ -118,11 +119,12 @@
         }
 
 
+
         /* ==========================================
-           CHAPTER HEADER
+           TOP BAR
         ========================================== */
 
-        .chapter-header {
+        .objective-top {
 
             display: flex;
 
@@ -134,122 +136,37 @@
 
             margin-bottom: 28px;
 
-            padding: 22px 24px;
-
-            border: 1px solid var(--border);
-
-            border-radius: 16px;
-
-            background: var(--bg-card);
-
         }
 
 
-        .chapter-info {
+        .objective-top h2 {
 
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-
-        }
-
-
-        .chapter-icon {
-
-            width: 50px;
-
-            height: 50px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 12px;
-
-            background:
-                rgba(217, 154, 22, 0.09);
-
-            border: 1px solid
-                rgba(217, 154, 22, 0.20);
-
-            color: var(--primary-light);
-
-            font-size: 18px;
-
-        }
-
-
-        .chapter-label {
-
-            color: var(--text-muted);
-
-            font-family: var(--font-secondary);
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-
-        }
-
-
-        .chapter-info h2 {
-
-            margin-top: 4px;
-
-            font-size: 21px;
+            font-size: 22px;
 
             font-weight: 800;
 
         }
 
 
-        .back-btn {
+        .objective-top p {
 
-            display: inline-flex;
+            margin-top: 5px;
 
-            align-items: center;
+            color: var(--text-muted);
 
-            gap: 7px;
-
-            padding: 9px 13px;
-
-            border: 1px solid var(--border);
-
-            border-radius: 9px;
-
-            color: var(--text-secondary);
+            font-family: var(--font-secondary);
 
             font-size: 10px;
 
-            font-weight: 600;
-
-            text-decoration: none;
-
         }
 
-
-        .back-btn:hover {
-
-            color: var(--primary-light);
-
-            border-color: var(--border-gold);
-
-        }
 
 
         /* ==========================================
-           OBJECTIVE GRID
+           CHAPTER GRID
         ========================================== */
 
-        .objective-grid {
+        .chapter-grid {
 
             display: grid;
 
@@ -261,15 +178,20 @@
         }
 
 
-        .objective-card {
+
+        /* ==========================================
+           CHAPTER CARD
+        ========================================== */
+
+        .chapter-card {
 
             position: relative;
 
             overflow: hidden;
 
-            min-height: 230px;
+            padding: 24px;
 
-            padding: 25px;
+            min-height: 190px;
 
             display: flex;
 
@@ -283,6 +205,10 @@
 
             background: var(--bg-card);
 
+            text-decoration: none;
+
+            color: inherit;
+
             transition:
                 transform var(--transition-normal),
                 border-color var(--transition-normal),
@@ -291,7 +217,7 @@
         }
 
 
-        .objective-card:hover {
+        .chapter-card:hover {
 
             transform: translateY(-5px);
 
@@ -302,19 +228,19 @@
         }
 
 
-        .objective-card::after {
+        .chapter-card::after {
 
             content: "";
 
             position: absolute;
 
-            width: 130px;
+            width: 140px;
 
-            height: 130px;
+            height: 140px;
 
-            right: -70px;
+            right: -75px;
 
-            top: -70px;
+            top: -75px;
 
             border-radius: 50%;
 
@@ -326,7 +252,12 @@
         }
 
 
-        .objective-card-icon {
+
+        /* ==========================================
+           ICON
+        ========================================== */
+
+        .chapter-card-icon {
 
             width: 48px;
 
@@ -348,38 +279,48 @@
 
             color: var(--primary-light);
 
-            font-size: 16px;
+            font-size: 17px;
 
         }
 
 
-        .objective-card h3 {
 
-            margin-top: 18px;
+        /* ==========================================
+           CARD TEXT
+        ========================================== */
 
-            font-size: 18px;
+        .chapter-card h3 {
+
+            margin-top: 17px;
+
+            font-size: 17px;
 
             font-weight: 800;
 
         }
 
 
-        .objective-card p {
+        .chapter-card p {
 
-            margin-top: 7px;
+            margin-top: 6px;
 
             color: var(--text-muted);
 
             font-family: var(--font-secondary);
 
-            font-size: 11px;
+            font-size: 10px;
 
             line-height: 1.7;
 
         }
 
 
-        .objective-card-bottom {
+
+        /* ==========================================
+           CARD BOTTOM
+        ========================================== */
+
+        .chapter-card-bottom {
 
             display: flex;
 
@@ -389,18 +330,12 @@
 
             gap: 10px;
 
-            margin-top: 22px;
+            margin-top: 20px;
 
         }
 
 
-        .pdf-status {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 5px;
+        .chapter-number {
 
             color: var(--text-muted);
 
@@ -411,24 +346,15 @@
         }
 
 
-        .pdf-status i {
-
-            color: var(--primary-light);
-
-        }
-
-
-        .view-pdf-btn {
+        .open-chapter {
 
             display: inline-flex;
 
             align-items: center;
 
-            justify-content: center;
-
             gap: 6px;
 
-            padding: 9px 12px;
+            padding: 8px 11px;
 
             border-radius: 8px;
 
@@ -436,24 +362,12 @@
 
             color: #111;
 
-            font-size: 10px;
+            font-size: 9px;
 
             font-weight: 700;
 
-            text-decoration: none;
-
-            transition: 0.2s ease;
-
         }
 
-
-        .view-pdf-btn:hover {
-
-            opacity: 0.9;
-
-            transform: translateY(-1px);
-
-        }
 
 
         /* ==========================================
@@ -504,13 +418,14 @@
         }
 
 
+
         /* ==========================================
            RESPONSIVE
         ========================================== */
 
         @media (max-width: 850px) {
 
-            .objective-grid {
+            .chapter-grid {
 
                 grid-template-columns:
                     repeat(2, minmax(0, 1fr));
@@ -536,25 +451,7 @@
             }
 
 
-            .chapter-header {
-
-                align-items: flex-start;
-
-                flex-direction: column;
-
-            }
-
-
-            .back-btn {
-
-                width: 100%;
-
-                justify-content: center;
-
-            }
-
-
-            .objective-grid {
+            .chapter-grid {
 
                 grid-template-columns: 1fr;
 
@@ -581,10 +478,10 @@
 
         <!-- BRAND -->
 
-        <a href="../index.html"
+        <a href="index.html"
            class="brand">
 
-            <img src="../assets/images/logo/logo.png"
+            <img src="assets/images/logo/logo.png"
                  alt="Chemistry Point Logo">
 
 
@@ -603,41 +500,43 @@
         </a>
 
 
+
         <!-- DESKTOP NAV -->
 
         <nav class="main-nav">
 
-            <a href="../index.html">
+            <a href="index.html">
                 Home
             </a>
 
 
-            <a href="../videos.html">
+            <a href="videos.html">
                 Videos
             </a>
 
 
-            <a href="../objectives.html"
+            <a href="objectives.html"
                class="active">
                 Objectives
             </a>
 
 
-            <a href="../quiz.html">
+            <a href="quiz.html">
                 Quiz
             </a>
 
 
-            <a href="../about.html">
+            <a href="about.html">
                 About
             </a>
 
 
-            <a href="../contact.html">
+            <a href="contact.html">
                 Contact
             </a>
 
         </nav>
+
 
 
         <!-- MOBILE MENU BUTTON -->
@@ -653,13 +552,14 @@
     </div>
 
 
+
     <!-- MOBILE NAV -->
 
     <div class="mobile-nav"
          id="mobileNav">
 
 
-        <a href="../index.html">
+        <a href="index.html">
 
             <i class="fa-solid fa-house"></i>
 
@@ -668,7 +568,7 @@
         </a>
 
 
-        <a href="../videos.html">
+        <a href="videos.html">
 
             <i class="fa-solid fa-play"></i>
 
@@ -677,7 +577,7 @@
         </a>
 
 
-        <a href="../objectives.html"
+        <a href="objectives.html"
            class="active">
 
             <i class="fa-solid fa-book-open"></i>
@@ -687,7 +587,7 @@
         </a>
 
 
-        <a href="../quiz.html">
+        <a href="quiz.html">
 
             <i class="fa-solid fa-circle-question"></i>
 
@@ -696,7 +596,7 @@
         </a>
 
 
-        <a href="../about.html">
+        <a href="about.html">
 
             <i class="fa-solid fa-user"></i>
 
@@ -705,7 +605,7 @@
         </a>
 
 
-        <a href="../contact.html">
+        <a href="contact.html">
 
             <i class="fa-solid fa-envelope"></i>
 
@@ -750,9 +650,9 @@
 
             <p>
 
-                Chapter-wise V.V.I, PYQ और All Objectives
-                की practice करें और अपनी Chemistry
-                preparation को बेहतर बनाएं।
+                अपने Chemistry syllabus के किसी भी chapter को
+                select करें और V.V.I, PYQ तथा All Objectives
+                की practice करें।
 
             </p>
 
@@ -769,228 +669,608 @@
         <div class="container">
 
 
-            <!-- CHAPTER HEADER -->
+            <!-- TOP -->
 
-            <div class="chapter-header">
+            <div class="objective-top">
 
+                <div>
 
-                <div class="chapter-info">
+                    <h2>
+                        Select Chapter
+                    </h2>
 
-
-                    <div class="chapter-icon">
-
-                        <i class="fa-solid fa-atom"></i>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="chapter-label">
-                            Selected Chapter
-                        </span>
-
-
-                        <h2>
-                            Solid State
-                        </h2>
-
-                    </div>
+                    <p>
+                        जिस chapter की objective practice करनी है,
+                        उसे select करें।
+                    </p>
 
                 </div>
-
-
-                <!-- BACK -->
-
-                <a href="../objectives.html"
-                   class="back-btn">
-
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    All Chapters
-
-                </a>
 
             </div>
 
 
 
-            <!-- OBJECTIVE CARDS -->
+            <!-- ==========================================
+                 CHAPTER GRID
+            =========================================== -->
 
-            <div class="objective-grid">
+            <div class="chapter-grid">
 
 
-                <!-- =====================================
-                     V.V.I
-                ====================================== -->
 
-                <article class="objective-card">
+                <!-- 01 SOLID STATE -->
 
+                <a href="student/chapter.html?chapter=solid-state"
+                   class="chapter-card">
 
                     <div>
 
-                        <div class="objective-card-icon">
+                        <div class="chapter-card-icon">
 
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-cube"></i>
 
                         </div>
 
 
                         <h3>
-                            V.V.I Objectives
+                            Solid State
                         </h3>
 
 
                         <p>
-
-                            Exam के लिए महत्वपूर्ण और
-                            selected objective questions।
-
+                            Solid State chapter के V.V.I,
+                            PYQ और All Objectives।
                         </p>
 
                     </div>
 
 
-                    <div class="objective-card-bottom">
+                    <div class="chapter-card-bottom">
 
-
-                        <span class="pdf-status">
-
-                            <i class="fa-solid fa-file-pdf"></i>
-
-                            PDF Available
-
+                        <span class="chapter-number">
+                            Chapter 01
                         </span>
 
 
-                        <a href="pdf.html?chapter=solid-state&type=vvi"
-                           class="view-pdf-btn">
+                        <span class="open-chapter">
 
-                            <i class="fa-solid fa-eye"></i>
+                            Open Chapter
 
-                            View PDF
+                            <i class="fa-solid fa-arrow-right"></i>
 
-                        </a>
+                        </span>
 
                     </div>
 
-                </article>
+                </a>
 
 
 
-                <!-- =====================================
-                     PYQ
-                ====================================== -->
+                <!-- 02 SOLUTIONS -->
 
-                <article class="objective-card">
-
+                <a href="student/chapter.html?chapter=solutions"
+                   class="chapter-card">
 
                     <div>
 
-                        <div class="objective-card-icon">
+                        <div class="chapter-card-icon">
 
-                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <i class="fa-solid fa-flask"></i>
 
                         </div>
 
 
                         <h3>
-                            PYQ Objectives
+                            Solutions
                         </h3>
 
 
                         <p>
-
-                            Previous Year Questions पर
-                            आधारित objective practice।
-
+                            Solutions chapter के important
+                            objective questions।
                         </p>
 
                     </div>
 
 
-                    <div class="objective-card-bottom">
+                    <div class="chapter-card-bottom">
 
-
-                        <span class="pdf-status">
-
-                            <i class="fa-solid fa-file-pdf"></i>
-
-                            PDF Available
-
+                        <span class="chapter-number">
+                            Chapter 02
                         </span>
 
 
-                        <a href="pdf.html?chapter=solid-state&type=pyq"
-                           class="view-pdf-btn">
+                        <span class="open-chapter">
 
-                            <i class="fa-solid fa-eye"></i>
+                            Open Chapter
 
-                            View PDF
+                            <i class="fa-solid fa-arrow-right"></i>
 
-                        </a>
+                        </span>
 
                     </div>
 
-                </article>
+                </a>
 
 
 
-                <!-- =====================================
-                     ALL OBJECTIVES
-                ====================================== -->
+                <!-- 03 ELECTROCHEMISTRY -->
 
-                <article class="objective-card">
-
+                <a href="student/chapter.html?chapter=electrochemistry"
+                   class="chapter-card">
 
                     <div>
 
-                        <div class="objective-card-icon">
+                        <div class="chapter-card-icon">
 
-                            <i class="fa-solid fa-list-check"></i>
+                            <i class="fa-solid fa-bolt"></i>
 
                         </div>
 
 
                         <h3>
-                            All Objectives
+                            Electrochemistry
                         </h3>
 
 
                         <p>
-
-                            पूरे chapter के सभी objective
-                            questions एक जगह।
-
+                            Electrochemistry chapter के
+                            objective questions।
                         </p>
 
                     </div>
 
 
-                    <div class="objective-card-bottom">
+                    <div class="chapter-card-bottom">
 
-
-                        <span class="pdf-status">
-
-                            <i class="fa-solid fa-file-pdf"></i>
-
-                            PDF Available
-
+                        <span class="chapter-number">
+                            Chapter 03
                         </span>
 
 
-                        <a href="pdf.html?chapter=solid-state&type=all"
-                           class="view-pdf-btn">
+                        <span class="open-chapter">
 
-                            <i class="fa-solid fa-eye"></i>
+                            Open Chapter
 
-                            View PDF
+                            <i class="fa-solid fa-arrow-right"></i>
 
-                        </a>
+                        </span>
 
                     </div>
 
-                </article>
+                </a>
+
+
+
+                <!-- 04 CHEMICAL KINETICS -->
+
+                <a href="student/chapter.html?chapter=chemical-kinetics"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Chemical Kinetics
+                        </h3>
+
+
+                        <p>
+                            Chemical Kinetics के selected
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 04
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 05 SURFACE CHEMISTRY -->
+
+                <a href="student/chapter.html?chapter=surface-chemistry"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Surface Chemistry
+                        </h3>
+
+
+                        <p>
+                            Surface Chemistry के important
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 05
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 06 d AND f BLOCK -->
+
+                <a href="student/chapter.html?chapter=d-and-f-block"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-atom"></i>
+
+                        </div>
+
+
+                        <h3>
+                            d &amp; f Block Elements
+                        </h3>
+
+
+                        <p>
+                            d और f Block Elements के
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 06
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 07 COORDINATION -->
+
+                <a href="student/chapter.html?chapter=coordination-compounds"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-diagram-project"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Coordination Compounds
+                        </h3>
+
+
+                        <p>
+                            Coordination Compounds के
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 07
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 08 HALOALKANES -->
+
+                <a href="student/chapter.html?chapter=haloalkanes-haloarenes"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-vial"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Haloalkanes &amp; Haloarenes
+                        </h3>
+
+
+                        <p>
+                            Organic Chemistry के important
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 08
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 09 ALCOHOLS -->
+
+                <a href="student/chapter.html?chapter=alcohols-phenols-ethers"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-droplet"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Alcohols, Phenols &amp; Ethers
+                        </h3>
+
+
+                        <p>
+                            Alcohols, Phenols और Ethers के
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 09
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 10 ALDEHYDES -->
+
+                <a href="student/chapter.html?chapter=aldehydes-ketones-carboxylic-acids"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-flask-vial"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Aldehydes, Ketones &amp; Carboxylic Acids
+                        </h3>
+
+
+                        <p>
+                            Aldehydes, Ketones और Carboxylic
+                            Acids के objectives।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 10
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 11 AMINES -->
+
+                <a href="student/chapter.html?chapter=amines"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-atom"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Amines
+                        </h3>
+
+
+                        <p>
+                            Amines chapter के important
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 11
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- 12 BIOMOLECULES -->
+
+                <a href="student/chapter.html?chapter=biomolecules"
+                   class="chapter-card">
+
+                    <div>
+
+                        <div class="chapter-card-icon">
+
+                            <i class="fa-solid fa-dna"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Biomolecules
+                        </h3>
+
+
+                        <p>
+                            Biomolecules chapter के
+                            objective questions।
+                        </p>
+
+                    </div>
+
+
+                    <div class="chapter-card-bottom">
+
+                        <span class="chapter-number">
+                            Chapter 12
+                        </span>
+
+
+                        <span class="open-chapter">
+
+                            Open Chapter
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                    </div>
+
+                </a>
 
 
             </div>
@@ -1006,11 +1286,12 @@
 
                 <p>
 
-                    PDF files Google Drive पर रखी जाएंगी।
-                    Firebase में केवल PDF का Google Drive
-                    link और उससे संबंधित information save
-                    होगी। Admin panel से PDF link add,
-                    edit और delete की जा सकेगी।
+                    किसी भी chapter पर click करने के बाद
+                    आपको उस chapter के V.V.I Objectives,
+                    PYQ Objectives और All Objectives के
+                    sections दिखाई देंगे। PDFs Google Drive
+                    पर host की जाएंगी और उनके links Firebase
+                    Database से load किए जाएंगे।
 
                 </p>
 
@@ -1038,8 +1319,7 @@
 
         <div class="footer-brand">
 
-
-            <img src="../assets/images/logo/logo.png"
+            <img src="assets/images/logo/logo.png"
                  alt="Code With Piyush">
 
 
@@ -1058,7 +1338,6 @@
 
 
             <div class="social-links">
-
 
                 <a href="#"
                    aria-label="YouTube">
@@ -1090,22 +1369,22 @@
             </h4>
 
 
-            <a href="../index.html">
+            <a href="index.html">
                 Home
             </a>
 
 
-            <a href="../videos.html">
+            <a href="videos.html">
                 Videos
             </a>
 
 
-            <a href="../objectives.html">
+            <a href="objectives.html">
                 Objectives
             </a>
 
 
-            <a href="../quiz.html">
+            <a href="quiz.html">
                 Quiz
             </a>
 
@@ -1122,12 +1401,12 @@
             </h4>
 
 
-            <a href="../about.html">
+            <a href="about.html">
                 About Us
             </a>
 
 
-            <a href="../contact.html">
+            <a href="contact.html">
                 Contact
             </a>
 
@@ -1144,17 +1423,17 @@
             </h4>
 
 
-            <a href="../objectives.html">
+            <a href="objectives.html">
                 V.V.I Objectives
             </a>
 
 
-            <a href="../objectives.html">
+            <a href="objectives.html">
                 PYQ Objectives
             </a>
 
 
-            <a href="../quiz.html">
+            <a href="quiz.html">
                 Chapter Wise Quiz
             </a>
 
@@ -1171,7 +1450,6 @@
 
         <div class="container">
 
-
             <p>
 
                 © 2026 Code With Piyush.
@@ -1185,7 +1463,6 @@
                 Built with ❤️
 
             </p>
-
 
         </div>
 
