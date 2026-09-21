@@ -6,179 +6,742 @@
 
   <title>Objectives | Chemistry Point</title>
 
+  <!-- Existing CSS -->
   <link rel="stylesheet" href="../assets/css/root.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <!-- Page Specific CSS -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #070809;
+      color: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .objective-container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    /* ================= HEADER ================= */
+
+    .objective-header {
+      background: #0c0d0f;
+      border-bottom: 1px solid #242529;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .objective-header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .objective-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .objective-brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .objective-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .objective-nav a {
+      padding: 10px 14px;
+      color: #bdbdbd;
+      font-size: 14px;
+      border-radius: 8px;
+      transition: 0.25s;
+    }
+
+    .objective-nav a:hover,
+    .objective-nav a.active {
+      color: #fff;
+      background: #17181b;
+    }
+
+    .objective-nav a.active {
+      color: #f0c75e;
+    }
+
+    .objective-menu {
+      display: none;
+      background: transparent;
+      border: 1px solid #333;
+      color: #fff;
+      font-size: 23px;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .objective-hero {
+      padding: 70px 0 55px;
+      background:
+        radial-gradient(circle at top right, rgba(212, 168, 65, 0.10), transparent 35%),
+        linear-gradient(180deg, #0c0d0f 0%, #08090a 100%);
+      border-bottom: 1px solid #1e2023;
+    }
+
+    .hero-small {
+      display: inline-block;
+      color: #d8ad48;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .objective-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    .objective-hero p {
+      margin: 0;
+      max-width: 650px;
+      color: #a9abad;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ================= MAIN ================= */
+
+    .objective-main {
+      padding: 60px 0 80px;
+    }
+
+    .section-top {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 38px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: #d8ad48;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      margin-bottom: 10px;
+    }
+
+    .section-top h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .section-top p {
+      margin: 0;
+      color: #999da1;
+      line-height: 1.7;
+    }
+
+    /* ================= CARDS ================= */
+
+    .objective-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .objective-card {
+      position: relative;
+      min-height: 245px;
+      padding: 28px;
+      border: 1px solid #292c30;
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, #111315, #0b0c0e);
+      overflow: hidden;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .objective-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #d8ad48;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: 0.3s;
+    }
+
+    .objective-card:hover {
+      transform: translateY(-7px);
+      border-color: #5c4b27;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .objective-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .objective-number {
+      color: #777b80;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .objective-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      background: #191714;
+      border: 1px solid #393025;
+      color: #e2b84f;
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .objective-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .objective-card p {
+      margin: 0;
+      color: #9da0a4;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .objective-arrow {
+      position: absolute;
+      right: 25px;
+      bottom: 24px;
+      width: 35px;
+      height: 35px;
+      border: 1px solid #303236;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d8ad48;
+      transition: 0.25s;
+    }
+
+    .objective-card:hover .objective-arrow {
+      background: #d8ad48;
+      color: #111;
+      border-color: #d8ad48;
+    }
+
+    /* ================= INFO ================= */
+
+    .study-box {
+      margin-top: 35px;
+      padding: 25px;
+      border: 1px solid #292c30;
+      border-radius: 16px;
+      background: #0d0f11;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .study-icon {
+      min-width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #191714;
+      border: 1px solid #393025;
+      font-size: 20px;
+    }
+
+    .study-box h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .study-box p {
+      margin: 0;
+      color: #999da1;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .objective-footer {
+      border-top: 1px solid #222428;
+      background: #090a0b;
+      padding: 35px 0 20px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-brand h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .footer-brand p {
+      margin: 0;
+      color: #777b80;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-content: flex-start;
+    }
+
+    .footer-links a {
+      color: #8d9195;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #d8ad48;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1c1e21;
+      margin-top: 25px;
+      padding-top: 18px;
+      color: #606469;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 800px) {
+
+      .objective-header-inner {
+        min-height: 64px;
+      }
+
+      .objective-menu {
+        display: block;
+      }
+
+      .objective-nav {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: #0c0d0f;
+        border-bottom: 1px solid #242529;
+        padding: 12px 4%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .objective-nav.show {
+        display: flex;
+      }
+
+      .objective-nav a {
+        padding: 13px;
+      }
+
+      .objective-hero {
+        padding: 48px 0 42px;
+      }
+
+      .objective-main {
+        padding: 45px 0 60px;
+      }
+
+      .objective-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .objective-card {
+        min-height: 210px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 12px 20px;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      .objective-container {
+        width: 90%;
+      }
+
+      .objective-brand span {
+        font-size: 15px;
+      }
+
+      .objective-brand img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .objective-hero h1 {
+        font-size: 36px;
+      }
+
+      .section-top h2 {
+        font-size: 25px;
+      }
+
+      .objective-card {
+        padding: 23px;
+      }
+
+      .study-box {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
+  <!-- ================= HEADER ================= -->
 
-      <a href="../index.html" class="brand">
-        <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
+  <header class="objective-header">
+    <div class="objective-container objective-header-inner">
+
+      <a href="../index.html" class="objective-brand">
+        <img
+          src="../assets/images/logo/logo.png"
+          alt="Chemistry Point Logo"
+        >
         <span>Chemistry Point</span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+      <button
+        class="objective-menu"
+        id="objectiveMenu"
+        aria-label="Open Menu"
+      >
         ☰
       </button>
 
-      <nav class="main-nav" id="mainNav">
+      <nav class="objective-nav" id="objectiveNav">
+
         <a href="../index.html">Home</a>
+
         <a href="../videos.html">Videos</a>
-        <a href="../objectives.html" class="active">Objectives</a>
+
+        <a href="../objectives.html" class="active">
+          Objectives
+        </a>
+
         <a href="../quiz.html">Quiz</a>
+
         <a href="../about.html">About</a>
+
         <a href="../contact.html">Contact</a>
+
       </nav>
 
     </div>
   </header>
 
 
-  <!-- PAGE HERO -->
-  <section class="page-hero">
-    <div class="container">
-      <span class="hero-label">CHEMISTRY POINT</span>
+  <!-- ================= HERO ================= -->
 
-      <h1 id="pageTitle">Objectives</h1>
+  <section class="objective-hero">
 
-      <p id="pageSubtitle">
+    <div class="objective-container">
+
+      <span class="hero-small">
+        CHEMISTRY POINT
+      </span>
+
+      <h1>Solid State</h1>
+
+      <p>
         Chapter-wise important objective questions
+        और परीक्षा की तैयारी के लिए useful study material.
       </p>
+
     </div>
+
   </section>
 
 
-  <!-- MAIN CONTENT -->
-  <main class="container objective-page">
+  <!-- ================= MAIN ================= -->
 
-    <div class="section-heading">
-      <span class="section-tag">OBJECTIVE SECTION</span>
-      <h2 id="chapterTitle">Solid State</h2>
-      <p>
-        नीचे दिए गए sections में से अपनी जरूरत के अनुसार objectives पढ़ें।
-      </p>
-    </div>
+  <main class="objective-main">
 
+    <div class="objective-container">
 
-    <!-- OBJECTIVE CARDS -->
-    <section class="objective-grid">
+      <div class="section-top">
 
-      <!-- VVI -->
-      <a href="pdf.html?type=vvi&chapter=solid-state"
-         class="objective-card">
+        <span class="section-tag">
+          OBJECTIVE SECTION
+        </span>
 
-        <div class="objective-icon">⭐</div>
-
-        <div class="objective-content">
-          <h3>V.V.I Objectives</h3>
-          <p>
-            परीक्षा के लिए सबसे महत्वपूर्ण objective questions.
-          </p>
-        </div>
-
-        <span class="objective-arrow">→</span>
-      </a>
-
-
-      <!-- PYQ -->
-      <a href="pdf.html?type=pyq&chapter=solid-state"
-         class="objective-card">
-
-        <div class="objective-icon">📚</div>
-
-        <div class="objective-content">
-          <h3>PYQ Objectives</h3>
-          <p>
-            Previous Year Questions से जुड़े महत्वपूर्ण objectives.
-          </p>
-        </div>
-
-        <span class="objective-arrow">→</span>
-      </a>
-
-
-      <!-- ALL -->
-      <a href="pdf.html?type=all&chapter=solid-state"
-         class="objective-card">
-
-        <div class="objective-icon">📖</div>
-
-        <div class="objective-content">
-          <h3>All Objectives</h3>
-          <p>
-            Chapter के सभी available objective questions.
-          </p>
-        </div>
-
-        <span class="objective-arrow">→</span>
-      </a>
-
-    </section>
-
-
-    <!-- INFO BOX -->
-    <section class="objective-info">
-
-      <div class="info-icon">💡</div>
-
-      <div>
-        <h3>Study Tip</h3>
+        <h2>Choose Your Objective Set</h2>
 
         <p>
-          पहले V.V.I Objectives को अच्छी तरह पढ़ें,
-          फिर PYQ Objectives solve करें और अंत में
-          All Objectives से अपनी preparation check करें।
+          अपनी तैयारी के अनुसार नीचे दिए गए किसी भी
+          objective section को select करें।
         </p>
+
       </div>
 
-    </section>
+
+      <!-- OBJECTIVE CARDS -->
+
+      <div class="objective-grid">
+
+        <!-- VVI -->
+
+        <a
+          href="pdf.html?type=vvi&chapter=solid-state"
+          class="objective-card"
+        >
+
+          <div class="objective-number">
+            01 / V.V.I
+          </div>
+
+          <div class="objective-icon">
+            ★
+          </div>
+
+          <h3>
+            V.V.I Objectives
+          </h3>
+
+          <p>
+            परीक्षा के लिए चुने गए
+            सबसे महत्वपूर्ण objective questions.
+          </p>
+
+          <span class="objective-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <!-- PYQ -->
+
+        <a
+          href="pdf.html?type=pyq&chapter=solid-state"
+          class="objective-card"
+        >
+
+          <div class="objective-number">
+            02 / PYQ
+          </div>
+
+          <div class="objective-icon">
+            📚
+          </div>
+
+          <h3>
+            PYQ Objectives
+          </h3>
+
+          <p>
+            Previous Year Questions से जुड़े
+            महत्वपूर्ण objective questions.
+          </p>
+
+          <span class="objective-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <!-- ALL -->
+
+        <a
+          href="pdf.html?type=all&chapter=solid-state"
+          class="objective-card"
+        >
+
+          <div class="objective-number">
+            03 / ALL
+          </div>
+
+          <div class="objective-icon">
+            📖
+          </div>
+
+          <h3>
+            All Objectives
+          </h3>
+
+          <p>
+            इस chapter के सभी available
+            objective questions एक जगह।
+          </p>
+
+          <span class="objective-arrow">
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <!-- STUDY TIP -->
+
+      <div class="study-box">
+
+        <div class="study-icon">
+          💡
+        </div>
+
+        <div>
+
+          <h3>
+            Study Tip
+          </h3>
+
+          <p>
+            पहले V.V.I Objectives पढ़ें,
+            फिर PYQ Objectives solve करें और
+            अंत में All Objectives से अपनी तैयारी check करें।
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </main>
 
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
+  <!-- ================= FOOTER ================= -->
 
-      <div class="footer-brand">
-        <h3>Code With Piyush</h3>
-        <p>
-          Chemistry learning made simple and accessible.
-        </p>
+  <footer class="objective-footer">
+
+    <div class="objective-container">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+
+          <h3>
+            Code With Piyush
+          </h3>
+
+          <p>
+            Chemistry learning made simple and accessible.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="../index.html">Home</a>
+          <a href="../videos.html">Videos</a>
+          <a href="../objectives.html">Objectives</a>
+          <a href="../quiz.html">Quiz</a>
+          <a href="../about.html">About</a>
+          <a href="../contact.html">Contact</a>
+
+        </div>
+
       </div>
 
-      <div class="footer-links">
-        <a href="../index.html">Home</a>
-        <a href="../videos.html">Videos</a>
-        <a href="../objectives.html">Objectives</a>
-        <a href="../quiz.html">Quiz</a>
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
+
+      <div class="footer-bottom">
+
+        © 2026 Code With Piyush. All Rights Reserved.
+
       </div>
 
     </div>
 
-    <div class="footer-bottom">
-      <p>© 2026 Code With Piyush. All Rights Reserved.</p>
-    </div>
   </footer>
 
 
-  <!-- MOBILE MENU -->
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
+  <!-- ================= JAVASCRIPT ================= -->
 
-    if (menuToggle && mainNav) {
-      menuToggle.addEventListener("click", () => {
-        mainNav.classList.toggle("show");
+  <script>
+
+    const objectiveMenu =
+      document.getElementById("objectiveMenu");
+
+    const objectiveNav =
+      document.getElementById("objectiveNav");
+
+
+    objectiveMenu.addEventListener("click", function () {
+
+      objectiveNav.classList.toggle("show");
+
+    });
+
+
+    document.querySelectorAll(".objective-nav a")
+      .forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+          objectiveNav.classList.remove("show");
+
+        });
+
       });
-    }
+
   </script>
 
 </body>
