@@ -64,12 +64,14 @@
 
         .quiz-page-hero::before {
             content: "";
+
             position: absolute;
 
             width: 300px;
             height: 300px;
 
             border: 1px solid rgba(217, 154, 22, 0.12);
+
             border-radius: 50%;
 
             right: -100px;
@@ -89,6 +91,7 @@
         .quiz-badge {
             display: inline-flex;
             align-items: center;
+
             gap: 8px;
 
             padding: 8px 16px;
@@ -96,6 +99,7 @@
             border-radius: 50px;
 
             background: rgba(217, 154, 22, 0.10);
+
             border: 1px solid rgba(217, 154, 22, 0.25);
 
             color: var(--primary-light);
@@ -150,6 +154,7 @@
 
         .quiz-container {
             max-width: var(--container);
+
             margin: auto;
         }
 
@@ -185,8 +190,6 @@
             transform: translateY(-50%);
 
             color: var(--text-muted);
-
-            z-index: 2;
         }
 
         .quiz-search input {
@@ -215,7 +218,8 @@
             border-color: var(--primary);
 
             box-shadow:
-                0 0 0 3px rgba(217, 154, 22, 0.10);
+                0 0 0 3px
+                rgba(217, 154, 22, 0.10);
         }
 
 
@@ -257,7 +261,8 @@
 
             border-radius: 12px;
 
-            background: rgba(217, 154, 22, 0.12);
+            background:
+                rgba(217, 154, 22, 0.12);
 
             color: var(--primary-light);
 
@@ -292,7 +297,8 @@
         .quiz-grid {
             display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns:
+                repeat(3, 1fr);
 
             gap: 20px;
         }
@@ -328,21 +334,22 @@
 
             border-radius: 50%;
 
-            background: rgba(217, 154, 22, 0.06);
+            background:
+                rgba(217, 154, 22, 0.06);
 
             top: -60px;
             right: -60px;
-
-            pointer-events: none;
         }
 
         .quiz-card:hover {
             transform: translateY(-5px);
 
-            border-color: rgba(217, 154, 22, 0.45);
+            border-color:
+                rgba(217, 154, 22, 0.45);
 
             box-shadow:
-                0 15px 35px rgba(0, 0, 0, 0.18);
+                0 15px 35px
+                rgba(0, 0, 0, 0.18);
         }
 
         .quiz-card-top {
@@ -365,7 +372,8 @@
 
             border-radius: 13px;
 
-            background: rgba(217, 154, 22, 0.12);
+            background:
+                rgba(217, 154, 22, 0.12);
 
             color: var(--primary-light);
 
@@ -378,14 +386,16 @@
             border-radius: 30px;
 
             font-size: 11px;
-
             font-weight: 600;
 
             color: var(--primary-light);
 
-            background: rgba(217, 154, 22, 0.09);
+            background:
+                rgba(217, 154, 22, 0.09);
 
-            border: 1px solid rgba(217, 154, 22, 0.18);
+            border:
+                1px solid
+                rgba(217, 154, 22, 0.18);
         }
 
         .quiz-card h3 {
@@ -407,11 +417,6 @@
 
             margin-bottom: 18px;
         }
-
-
-        /* =========================================
-           QUIZ META
-        ========================================= */
 
         .quiz-meta {
             display: flex;
@@ -439,13 +444,9 @@
             color: var(--primary-light);
         }
 
-
-        /* =========================================
-           START BUTTON
-        ========================================= */
-
         .quiz-start-btn {
             width: 100%;
+
             height: 44px;
 
             display: flex;
@@ -459,7 +460,8 @@
 
             text-decoration: none;
 
-            background: var(--gold-gradient);
+            background:
+                var(--gold-gradient);
 
             color: #17191c;
 
@@ -474,7 +476,8 @@
             transform: translateY(-2px);
 
             box-shadow:
-                0 8px 20px rgba(217, 154, 22, 0.20);
+                0 8px 20px
+                rgba(217, 154, 22, 0.20);
         }
 
 
@@ -489,7 +492,9 @@
 
             padding: 55px 20px;
 
-            border: 1px dashed var(--border);
+            border:
+                1px dashed
+                var(--border);
 
             border-radius: 18px;
 
@@ -518,11 +523,97 @@
 
 
         /* =========================================
+           THEME TOGGLE
+        ========================================= */
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--border);
+
+            background: var(--dark-card);
+
+            color: var(--primary-light);
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition: 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(12deg);
+
+            border-color: var(--primary);
+        }
+
+
+        /* =========================================
+           MOBILE HEADER FIX
+        ========================================= */
+
+        .mobile-actions {
+            display: none;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .mobile-theme-toggle {
+            display: none;
+        }
+
+
+        .menu-btn {
+            border: 0;
+
+            outline: none;
+
+            background: transparent;
+
+            color: var(--white);
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            font-size: 21px;
+
+            transition: 0.25s ease;
+
+            -webkit-tap-highlight-color:
+                transparent;
+        }
+
+        .menu-btn:hover {
+            background:
+                rgba(217, 154, 22, 0.10);
+
+            color: var(--primary-light);
+        }
+
+
+        /* =========================================
            LIGHT MODE
         ========================================= */
 
         body.light-mode {
-
             --dark: #f7f7f8;
             --dark-card: #ffffff;
             --dark-soft: #f1f2f4;
@@ -539,9 +630,11 @@
         }
 
         body.light-mode .site-header {
-            background: rgba(255, 255, 255, 0.96);
+            background:
+                rgba(255, 255, 255, 0.96);
 
-            border-bottom-color: #e3e4e7;
+            border-bottom-color:
+                #e3e4e7;
         }
 
         body.light-mode .main-nav a {
@@ -571,11 +664,14 @@
         body.light-mode .quiz-search input,
         body.light-mode .quiz-empty {
             box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.04);
+                0 8px 25px
+                rgba(0, 0, 0, 0.04);
         }
 
         body.light-mode .quiz-search input {
             background: #ffffff;
+
+            color: #17191c;
         }
 
         body.light-mode .quiz-hero-content h1,
@@ -587,221 +683,156 @@
 
         body.light-mode .site-footer {
             background: #111315;
+
             color: #fff;
         }
 
-
-        /* =========================================
-           THEME TOGGLE
-        ========================================= */
-
-        .theme-toggle {
-            width: 40px;
-            height: 40px;
-
-            min-width: 40px;
-
-            border-radius: 50%;
-
-            border: 1px solid var(--border);
-
-            background: var(--dark-card);
-
-            color: var(--primary-light);
-
-            cursor: pointer;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 8px;
-
-            transition: 0.3s ease;
-
-            margin-left: 10px;
-
-            position: relative;
-
-            z-index: 1002;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(12deg);
-
-            border-color: var(--primary);
+        body.light-mode .menu-btn {
+            color: #17191c;
         }
 
 
         /* =========================================
-           MOBILE HEADER FIX
-        ========================================= */
-
-        .site-header {
-            position: relative;
-            z-index: 9999;
-        }
-
-
-        .menu-btn {
-            position: relative;
-
-            z-index: 10001;
-
-            cursor: pointer;
-
-            -webkit-tap-highlight-color: transparent;
-        }
-
-
-        .mobile-nav {
-            z-index: 10000;
-        }
-
-
-        /* =========================================
-           MOBILE NAVIGATION
+           MOBILE NAV
         ========================================= */
 
         @media (max-width: 900px) {
 
             .site-header {
-                position: fixed;
+                position: fixed !important;
 
                 top: 0;
                 left: 0;
                 right: 0;
 
                 width: 100%;
-            }
 
+                z-index: 99999;
+            }
 
             .nav-container {
                 position: relative;
 
-                z-index: 10001;
-            }
+                z-index: 100001;
 
-
-            .menu-btn {
-                display: flex !important;
+                display: flex;
 
                 align-items: center;
-                justify-content: center;
+
+                justify-content:
+                    space-between;
+            }
+
+            .main-nav {
+                display: none !important;
+            }
+
+            .mobile-actions {
+                display: flex !important;
+            }
+
+            .mobile-theme-toggle {
+                display: flex !important;
 
                 width: 42px;
                 height: 42px;
 
-                border: none;
+                margin: 0 !important;
 
-                background: transparent;
+                border-radius: 10px;
 
-                color: var(--white);
-
-                font-size: 21px;
-
-                cursor: pointer;
+                flex-shrink: 0;
             }
 
+            .menu-btn {
+                display: flex !important;
+
+                flex-shrink: 0;
+            }
 
             .mobile-nav {
                 position: fixed !important;
 
-                top: 68px;
+                top: 68px !important;
 
-                left: 0;
-                right: 0;
+                left: 0 !important;
+                right: 0 !important;
 
-                width: 100%;
+                width: 100% !important;
 
                 display: none !important;
 
-                flex-direction: column;
+                flex-direction: column !important;
 
-                align-items: stretch;
+                align-items: stretch !important;
 
-                padding: 14px 20px 20px;
+                padding:
+                    10px 20px 20px !important;
 
-                background: var(--dark-card);
+                background:
+                    var(--dark-card) !important;
 
-                border-bottom: 1px solid var(--border);
+                border-bottom:
+                    1px solid var(--border) !important;
 
                 box-shadow:
-                    0 15px 35px rgba(0, 0, 0, 0.18);
+                    0 15px 35px
+                    rgba(0, 0, 0, 0.20);
 
-                max-height: calc(100vh - 68px);
+                z-index: 100000;
+
+                max-height:
+                    calc(100vh - 68px);
 
                 overflow-y: auto;
             }
-
 
             .mobile-nav.active {
                 display: flex !important;
             }
 
-
             .mobile-nav a {
                 display: block !important;
 
-                width: 100%;
+                width: 100% !important;
 
-                padding: 13px 8px;
+                padding: 15px 8px !important;
 
-                color: var(--white);
+                color: var(--white) !important;
 
                 text-decoration: none;
 
                 font-size: 14px;
 
-                border-bottom: 1px solid var(--border);
+                font-weight: 500;
+
+                border-bottom:
+                    1px solid var(--border);
 
                 transition: 0.2s ease;
             }
 
-
             .mobile-nav a:hover,
             .mobile-nav a.active {
-                color: var(--primary-light);
+                color:
+                    var(--primary-light) !important;
+
+                padding-left: 14px !important;
             }
 
-
-            .mobile-nav .theme-toggle {
-                width: 100%;
-
-                height: 44px;
-
-                margin: 14px 0 0;
-
-                border-radius: 10px;
-
-                justify-content: center;
-
-                font-size: 13px;
-
-                transform: none !important;
+            .quiz-page-hero {
+                padding:
+                    115px 20px 55px;
             }
-
-
-            .mobile-nav .theme-toggle span {
-                display: inline;
-            }
-
-
-            .main-nav .theme-toggle {
-                display: none;
-            }
-
 
             .quiz-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
-
 
             .quiz-tools {
                 align-items: stretch;
             }
-
 
             .quiz-search {
                 max-width: none;
@@ -811,30 +842,79 @@
 
 
         /* =========================================
-           MOBILE SMALL SCREEN
+           LIGHT MODE MOBILE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            body.light-mode .mobile-theme-toggle {
+                background: #ffffff;
+
+                color: var(--primary-dark);
+
+                border-color: #e1e3e7;
+            }
+
+            body.light-mode .mobile-nav {
+                background: #ffffff !important;
+            }
+
+            body.light-mode .mobile-nav a {
+                color: #17191c !important;
+            }
+
+            body.light-mode .mobile-nav a:hover,
+            body.light-mode .mobile-nav a.active {
+                color:
+                    var(--primary-dark) !important;
+            }
+
+        }
+
+
+        /* =========================================
+           DESKTOP
+        ========================================= */
+
+        @media (min-width: 901px) {
+
+            .mobile-actions {
+                display: none !important;
+            }
+
+            .mobile-nav {
+                display: none !important;
+            }
+
+            .desktop-theme-toggle {
+                display: flex !important;
+            }
+
+        }
+
+
+        /* =========================================
+           600px
         ========================================= */
 
         @media (max-width: 600px) {
 
             .quiz-page-hero {
-                padding: 115px 20px 55px;
+                padding:
+                    115px 20px 55px;
             }
-
 
             .quiz-main {
                 padding-bottom: 60px;
             }
 
-
             .quiz-tools {
                 flex-direction: column;
             }
 
-
             .quiz-grid {
                 grid-template-columns: 1fr;
             }
-
 
             .quiz-section-heading {
                 align-items: flex-start;
@@ -842,49 +922,41 @@
                 flex-direction: column;
             }
 
-
             .quiz-section-title h2 {
                 font-size: 21px;
-            }
-
-
-            .quiz-section-title-icon {
-                width: 42px;
-                height: 42px;
-            }
-
-
-            .theme-toggle {
-                margin-left: 5px;
             }
 
         }
 
 
         /* =========================================
-           VERY SMALL MOBILE
+           SMALL MOBILE
         ========================================= */
 
         @media (max-width: 380px) {
 
-            .mobile-nav {
-                padding-left: 15px;
-                padding-right: 15px;
+            .brand-text strong {
+                font-size: 14px;
             }
 
-
-            .quiz-card {
-                padding: 20px;
+            .brand-text span {
+                font-size: 9px;
             }
 
+            .mobile-actions {
+                gap: 4px;
+            }
 
-            .quiz-hero-content h1 {
-                font-size: 30px;
+            .mobile-theme-toggle,
+            .menu-btn {
+                width: 38px;
+                height: 38px;
             }
 
         }
 
     </style>
+
 </head>
 
 
@@ -899,6 +971,8 @@
 
         <div class="container nav-container">
 
+            <!-- Brand -->
+
             <a href="index.html" class="brand">
 
                 <img
@@ -907,39 +981,56 @@
 
                 <div class="brand-text">
 
-                    <strong>Chemistry Point</strong>
+                    <strong>
+                        Chemistry Point
+                    </strong>
 
-                    <span>By Pardeep Sir</span>
+                    <span>
+                        By Pardeep Sir
+                    </span>
 
                 </div>
 
             </a>
 
 
-            <!-- DESKTOP NAV -->
+            <!-- Desktop Navigation -->
 
             <nav class="main-nav">
 
-                <a href="index.html">Home</a>
+                <a href="index.html">
+                    Home
+                </a>
 
-                <a href="videos.html">Videos</a>
+                <a href="videos.html">
+                    Videos
+                </a>
 
-                <a href="objectives.html">Objectives</a>
+                <a href="objectives.html">
+                    Objectives
+                </a>
 
-                <a href="quiz.html" class="active">Quiz</a>
+                <a href="quiz.html"
+                   class="active">
+                    Quiz
+                </a>
 
-                <a href="about.html">About</a>
+                <a href="about.html">
+                    About
+                </a>
 
-                <a href="contact.html">Contact</a>
+                <a href="contact.html">
+                    Contact
+                </a>
 
 
                 <!-- Desktop Theme -->
 
                 <button
-                    class="theme-toggle"
+                    class="theme-toggle desktop-theme-toggle"
                     id="themeToggle"
-                    aria-label="Toggle theme"
-                    type="button">
+                    type="button"
+                    aria-label="Toggle theme">
 
                     <i class="fa-solid fa-moon"></i>
 
@@ -948,51 +1039,71 @@
             </nav>
 
 
-            <!-- MOBILE MENU BUTTON -->
+            <!-- Mobile Actions -->
 
-            <button
-                class="menu-btn"
-                id="menuBtn"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false">
+            <div class="mobile-actions">
 
-                <i class="fa-solid fa-bars"></i>
+                <!-- Mobile Theme -->
 
-            </button>
+                <button
+                    class="theme-toggle mobile-theme-toggle"
+                    id="mobileThemeToggle"
+                    type="button"
+                    aria-label="Toggle theme">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+
+                <!-- Mobile Menu -->
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+            </div>
 
         </div>
 
 
-        <!-- MOBILE NAV -->
+        <!-- Mobile Navigation -->
 
-        <div class="mobile-nav" id="mobileNav">
+        <div
+            class="mobile-nav"
+            id="mobileNav">
 
-            <a href="index.html">Home</a>
+            <a href="index.html">
+                Home
+            </a>
 
-            <a href="videos.html">Videos</a>
+            <a href="videos.html">
+                Videos
+            </a>
 
-            <a href="objectives.html">Objectives</a>
+            <a href="objectives.html">
+                Objectives
+            </a>
 
-            <a href="quiz.html" class="active">Quiz</a>
+            <a href="quiz.html"
+               class="active">
+                Quiz
+            </a>
 
-            <a href="about.html">About</a>
+            <a href="about.html">
+                About
+            </a>
 
-            <a href="contact.html">Contact</a>
-
-
-            <!-- Mobile Theme -->
-
-            <button
-                class="theme-toggle"
-                id="mobileThemeToggle"
-                type="button">
-
-                <i class="fa-solid fa-moon"></i>
-
-                <span>Light / Dark</span>
-
-            </button>
+            <a href="contact.html">
+                Contact
+            </a>
 
         </div>
 
@@ -1001,10 +1112,13 @@
 
 
     <!-- =========================================
-         QUIZ HERO
+         QUIZ PAGE
     ========================================== -->
 
     <main class="quiz-page">
+
+
+        <!-- Hero -->
 
         <section class="quiz-page-hero">
 
@@ -1022,15 +1136,18 @@
                 <h1>
 
                     Test Your
-                    <span>Chemistry Knowledge</span>
+                    <span>
+                        Chemistry Knowledge
+                    </span>
 
                 </h1>
 
 
                 <p>
 
-                    Bihar Board Chemistry की तैयारी को मजबूत बनाने के लिए
-                    PYQ और Chapter Wise Online Quiz attempt करें।
+                    Bihar Board Chemistry की तैयारी को मजबूत
+                    बनाने के लिए PYQ और Chapter Wise Online
+                    Quiz attempt करें।
 
                 </p>
 
@@ -1049,19 +1166,20 @@
             <div class="quiz-container">
 
 
-                <!-- SEARCH -->
+                <!-- Search -->
 
                 <div class="quiz-tools">
 
                     <div class="quiz-search">
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i
+                            class="fa-solid fa-magnifying-glass">
+                        </i>
 
                         <input
                             type="text"
                             id="quizSearch"
-                            placeholder="Search quiz or chapter..."
-                            autocomplete="off">
+                            placeholder="Search quiz or chapter...">
 
                     </div>
 
@@ -1084,17 +1202,22 @@
 
                                 <div class="quiz-section-title-icon">
 
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                    <i
+                                        class="fa-solid fa-clock-rotate-left">
+                                    </i>
 
                                 </div>
 
 
                                 <div>
 
-                                    <h2>PYQ Quiz</h2>
+                                    <h2>
+                                        PYQ Quiz
+                                    </h2>
 
                                     <p>
-                                        Previous Year Questions based practice
+                                        Previous Year Questions
+                                        based practice
                                     </p>
 
                                 </div>
@@ -1122,7 +1245,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-file-lines"></i>
+                                    <i
+                                        class="fa-solid fa-file-lines">
+                                    </i>
 
                                 </div>
 
@@ -1139,8 +1264,9 @@
 
 
                             <p>
-                                Previous year chemistry objective questions
-                                का practice test.
+                                Previous year chemistry
+                                objective questions का
+                                practice test.
                             </p>
 
 
@@ -1148,7 +1274,9 @@
 
                                 <span>
 
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
 
@@ -1157,7 +1285,9 @@
 
                                 <span>
 
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
 
@@ -1172,7 +1302,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1190,7 +1322,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-atom"></i>
+                                    <i
+                                        class="fa-solid fa-atom">
+                                    </i>
 
                                 </div>
 
@@ -1207,8 +1341,9 @@
 
 
                             <p>
-                                Solid State chapter के previous year
-                                questions का practice test.
+                                Solid State chapter के
+                                previous year questions
+                                का practice test.
                             </p>
 
 
@@ -1216,7 +1351,9 @@
 
                                 <span>
 
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     25 Questions
 
@@ -1225,7 +1362,9 @@
 
                                 <span>
 
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     25 Minutes
 
@@ -1240,7 +1379,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1258,7 +1399,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-flask"></i>
+                                    <i
+                                        class="fa-solid fa-flask">
+                                    </i>
 
                                 </div>
 
@@ -1275,8 +1418,9 @@
 
 
                             <p>
-                                Solutions chapter के important PYQ
-                                questions को solve करें।
+                                Solutions chapter के
+                                important PYQ questions
+                                को solve करें।
                             </p>
 
 
@@ -1284,7 +1428,9 @@
 
                                 <span>
 
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     25 Questions
 
@@ -1293,7 +1439,9 @@
 
                                 <span>
 
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     25 Minutes
 
@@ -1308,7 +1456,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1333,7 +1483,9 @@
 
                             <div class="quiz-section-title-icon">
 
-                                <i class="fa-solid fa-book-open"></i>
+                                <i
+                                    class="fa-solid fa-book-open">
+                                </i>
 
                             </div>
 
@@ -1345,7 +1497,8 @@
                                 </h2>
 
                                 <p>
-                                    Chapter के अनुसार online practice test
+                                    Chapter के अनुसार
+                                    online practice test
                                 </p>
 
                             </div>
@@ -1361,7 +1514,7 @@
                         id="chapterQuizGrid">
 
 
-                        <!-- SOLID STATE -->
+                        <!-- Solid State -->
 
                         <article
                             class="quiz-card"
@@ -1371,7 +1524,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-cubes"></i>
+                                    <i
+                                        class="fa-solid fa-cubes">
+                                    </i>
 
                                 </div>
 
@@ -1388,28 +1543,29 @@
 
 
                             <p>
-                                Solid State chapter के objective questions
-                                का online quiz.
+                                Solid State chapter के
+                                objective questions का
+                                online quiz.
                             </p>
 
 
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1421,7 +1577,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1429,7 +1587,7 @@
 
 
 
-                        <!-- SOLUTIONS -->
+                        <!-- Solutions -->
 
                         <article
                             class="quiz-card"
@@ -1439,7 +1597,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-vial"></i>
+                                    <i
+                                        class="fa-solid fa-vial">
+                                    </i>
 
                                 </div>
 
@@ -1456,28 +1616,29 @@
 
 
                             <p>
-                                Solutions chapter के important questions
-                                का online practice test.
+                                Solutions chapter के
+                                important questions का
+                                online practice test.
                             </p>
 
 
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1489,7 +1650,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1497,7 +1660,7 @@
 
 
 
-                        <!-- ELECTROCHEMISTRY -->
+                        <!-- Electrochemistry -->
 
                         <article
                             class="quiz-card"
@@ -1507,7 +1670,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-bolt"></i>
+                                    <i
+                                        class="fa-solid fa-bolt">
+                                    </i>
 
                                 </div>
 
@@ -1524,28 +1689,29 @@
 
 
                             <p>
-                                Electrochemistry chapter का complete
-                                objective practice quiz.
+                                Electrochemistry chapter
+                                का complete objective
+                                practice quiz.
                             </p>
 
 
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1557,7 +1723,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1565,7 +1733,7 @@
 
 
 
-                        <!-- CHEMICAL KINETICS -->
+                        <!-- Chemical Kinetics -->
 
                         <article
                             class="quiz-card"
@@ -1575,7 +1743,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-gauge-high"></i>
+                                    <i
+                                        class="fa-solid fa-gauge-high">
+                                    </i>
 
                                 </div>
 
@@ -1592,7 +1762,8 @@
 
 
                             <p>
-                                Chemical Kinetics के selected objective
+                                Chemical Kinetics के
+                                selected objective
                                 questions का test.
                             </p>
 
@@ -1600,20 +1771,20 @@
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1625,7 +1796,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1633,7 +1806,7 @@
 
 
 
-                        <!-- SURFACE CHEMISTRY -->
+                        <!-- Surface Chemistry -->
 
                         <article
                             class="quiz-card"
@@ -1643,7 +1816,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-layer-group"></i>
+                                    <i
+                                        class="fa-solid fa-layer-group">
+                                    </i>
 
                                 </div>
 
@@ -1660,28 +1835,29 @@
 
 
                             <p>
-                                Surface Chemistry chapter का practice
-                                objective quiz.
+                                Surface Chemistry chapter
+                                का practice objective
+                                quiz.
                             </p>
 
 
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1693,7 +1869,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1701,7 +1879,7 @@
 
 
 
-                        <!-- D & F BLOCK -->
+                        <!-- D & F Block -->
 
                         <article
                             class="quiz-card"
@@ -1711,7 +1889,9 @@
 
                                 <div class="quiz-card-icon">
 
-                                    <i class="fa-solid fa-atom"></i>
+                                    <i
+                                        class="fa-solid fa-atom">
+                                    </i>
 
                                 </div>
 
@@ -1723,12 +1903,13 @@
 
 
                             <h3>
-                                D & F Block
+                                D &amp; F Block
                             </h3>
 
 
                             <p>
-                                D & F Block chapter के important objective
+                                D &amp; F Block chapter के
+                                important objective
                                 questions का quiz.
                             </p>
 
@@ -1736,20 +1917,20 @@
                             <div class="quiz-meta">
 
                                 <span>
-
-                                    <i class="fa-solid fa-list"></i>
+                                    <i
+                                        class="fa-solid fa-list">
+                                    </i>
 
                                     30 Questions
-
                                 </span>
 
 
                                 <span>
-
-                                    <i class="fa-regular fa-clock"></i>
+                                    <i
+                                        class="fa-regular fa-clock">
+                                    </i>
 
                                     30 Minutes
-
                                 </span>
 
                             </div>
@@ -1761,7 +1942,9 @@
 
                                 Start Quiz
 
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i
+                                    class="fa-solid fa-arrow-right">
+                                </i>
 
                             </a>
 
@@ -1771,20 +1954,23 @@
 
 
 
-                    <!-- EMPTY -->
+                    <!-- Empty -->
 
                     <div
                         class="quiz-empty"
                         id="quizEmpty">
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i
+                            class="fa-solid fa-magnifying-glass">
+                        </i>
 
                         <h3>
                             Quiz नहीं मिला
                         </h3>
 
                         <p>
-                            Search करके किसी दूसरे quiz या chapter को try करें।
+                            Search करके किसी दूसरे quiz
+                            या chapter को try करें।
                         </p>
 
                     </div>
@@ -1810,7 +1996,9 @@
 
             <div class="footer-brand">
 
-                <a href="index.html" class="brand">
+                <a
+                    href="index.html"
+                    class="brand">
 
                     <img
                         src="assets/images/logo/logo.png"
@@ -1833,8 +2021,9 @@
 
                 <p>
 
-                    Bihar Board Chemistry की बेहतर तैयारी के लिए
-                    quality study materials, videos और quizzes।
+                    Bihar Board Chemistry की बेहतर तैयारी
+                    के लिए quality study materials,
+                    videos और quizzes।
 
                 </p>
 
@@ -1845,7 +2034,9 @@
                         href="#"
                         aria-label="YouTube">
 
-                        <i class="fa-brands fa-youtube"></i>
+                        <i
+                            class="fa-brands fa-youtube">
+                        </i>
 
                     </a>
 
@@ -1854,7 +2045,9 @@
                         href="#"
                         aria-label="Instagram">
 
-                        <i class="fa-brands fa-instagram"></i>
+                        <i
+                            class="fa-brands fa-instagram">
+                        </i>
 
                     </a>
 
@@ -1919,18 +2112,15 @@
             <div class="container">
 
                 <p>
-                    © 2026 Chemistry Point. All Rights Reserved.
+                    © 2026 Chemistry Point.
+                    All Rights Reserved.
                 </p>
 
-
                 <p>
-
-                    Designed & Developed by
-
+                    Designed &amp; Developed by
                     <strong>
                         Code With Piyush
                     </strong>
-
                 </p>
 
             </div>
@@ -1961,73 +2151,115 @@
 
         if (menuBtn && mobileNav) {
 
-            menuBtn.addEventListener("click", function () {
+            menuBtn.addEventListener(
+                "click",
+                function () {
 
-                const isOpen =
-                    mobileNav.classList.toggle("active");
-
-
-                const icon =
-                    menuBtn.querySelector("i");
-
-
-                if (isOpen) {
-
-                    icon.classList.remove("fa-bars");
-
-                    icon.classList.add("fa-xmark");
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                } else {
-
-                    icon.classList.remove("fa-xmark");
-
-                    icon.classList.add("fa-bars");
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            });
-
-
-            /* Close mobile menu when link clicked */
-
-            const mobileLinks =
-                mobileNav.querySelectorAll("a");
-
-
-            mobileLinks.forEach(function (link) {
-
-                link.addEventListener("click", function () {
-
-                    mobileNav.classList.remove("active");
+                    const isOpen =
+                        mobileNav.classList.toggle(
+                            "active"
+                        );
 
 
                     const icon =
                         menuBtn.querySelector("i");
 
 
-                    icon.classList.remove("fa-xmark");
+                    if (isOpen) {
 
-                    icon.classList.add("fa-bars");
+                        icon.classList.remove(
+                            "fa-bars"
+                        );
+
+                        icon.classList.add(
+                            "fa-xmark"
+                        );
 
 
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
+                        menuBtn.setAttribute(
+                            "aria-expanded",
+                            "true"
+                        );
+
+                        menuBtn.setAttribute(
+                            "aria-label",
+                            "Close menu"
+                        );
+
+                    } else {
+
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
+
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+
+                        menuBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                        menuBtn.setAttribute(
+                            "aria-label",
+                            "Open menu"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* Close mobile menu
+               after clicking link */
+
+            const mobileLinks =
+                mobileNav.querySelectorAll("a");
+
+
+            mobileLinks.forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            mobileNav.classList.remove(
+                                "active"
+                            );
+
+
+                            const icon =
+                                menuBtn.querySelector("i");
+
+
+                            icon.classList.remove(
+                                "fa-xmark"
+                            );
+
+                            icon.classList.add(
+                                "fa-bars"
+                            );
+
+
+                            menuBtn.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                            menuBtn.setAttribute(
+                                "aria-label",
+                                "Open menu"
+                            );
+
+                        }
                     );
 
-                });
-
-            });
+                }
+            );
 
         }
 
@@ -2035,10 +2267,12 @@
 
         /* =========================================
            DARK / LIGHT MODE
-        ========================================= */
+        ========================================== */
 
         const themeButtons =
-            document.querySelectorAll(".theme-toggle");
+            document.querySelectorAll(
+                ".theme-toggle"
+            );
 
 
         function updateThemeIcon() {
@@ -2049,41 +2283,44 @@
                 );
 
 
-            themeButtons.forEach(function (button) {
+            themeButtons.forEach(
+                function (button) {
 
-                const icon =
-                    button.querySelector("i");
-
-
-                if (!icon) return;
+                    const icon =
+                        button.querySelector("i");
 
 
-                if (isLight) {
+                    if (!icon) {
+                        return;
+                    }
 
-                    icon.classList.remove(
-                        "fa-moon"
-                    );
 
-                    icon.classList.add(
-                        "fa-sun"
-                    );
+                    if (isLight) {
 
-                } else {
+                        icon.classList.remove(
+                            "fa-moon"
+                        );
 
-                    icon.classList.remove(
-                        "fa-sun"
-                    );
+                        icon.classList.add(
+                            "fa-sun"
+                        );
 
-                    icon.classList.add(
-                        "fa-moon"
-                    );
+                    } else {
+
+                        icon.classList.remove(
+                            "fa-sun"
+                        );
+
+                        icon.classList.add(
+                            "fa-moon"
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         }
-
 
 
         function toggleTheme() {
@@ -2112,18 +2349,18 @@
         }
 
 
+        /* Add event to both buttons */
 
-        /* Add click to BOTH theme buttons */
+        themeButtons.forEach(
+            function (button) {
 
-        themeButtons.forEach(function (button) {
+                button.addEventListener(
+                    "click",
+                    toggleTheme
+                );
 
-            button.addEventListener(
-                "click",
-                toggleTheme
-            );
-
-        });
-
+            }
+        );
 
 
         /* Load saved theme */
@@ -2149,18 +2386,24 @@
 
         /* =========================================
            QUIZ SEARCH
-        ========================================= */
+        ========================================== */
 
         const searchInput =
-            document.getElementById("quizSearch");
+            document.getElementById(
+                "quizSearch"
+            );
 
 
         const quizCards =
-            document.querySelectorAll(".quiz-card");
+            document.querySelectorAll(
+                ".quiz-card"
+            );
 
 
         const quizEmpty =
-            document.getElementById("quizEmpty");
+            document.getElementById(
+                "quizEmpty"
+            );
 
 
         if (searchInput) {
@@ -2183,8 +2426,10 @@
 
                             const searchText =
                                 (
-                                    card.dataset.search || ""
-                                ).toLowerCase();
+                                    card.dataset.search ||
+                                    ""
+                                )
+                                .toLowerCase();
 
 
                             if (
@@ -2193,13 +2438,15 @@
                                 )
                             ) {
 
-                                card.style.display = "";
+                                card.style.display =
+                                    "";
 
                                 visibleCards++;
 
                             } else {
 
-                                card.style.display = "none";
+                                card.style.display =
+                                    "none";
 
                             }
 
@@ -2220,6 +2467,7 @@
             );
 
         }
+
 
     </script>
 
