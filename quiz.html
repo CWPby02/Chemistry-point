@@ -748,6 +748,9 @@
                 display: flex !important;
 
                 flex-shrink: 0;
+                position: relative;
+                z-index: 100002;
+                pointer-events: auto !important;
             }
 
             .mobile-nav {
@@ -2148,14 +2151,16 @@
             const menuBtn = document.getElementById("menuBtn");
             const mobileNav = document.getElementById("mobileNav");
 
-            if (!menuBtn || !mobileNav) return;
+            if (!menuBtn || !mobileNav) {
+                return;
+            }
 
             const icon = menuBtn.querySelector("i");
             const mobileLinks = mobileNav.querySelectorAll("a");
 
             function openMenu() {
                 mobileNav.classList.add("active");
-                mobileNav.style.setProperty("display", "flex", "important");
+                mobileNav.style.display = "flex";
 
                 if (icon) {
                     icon.classList.remove("fa-bars");
@@ -2168,7 +2173,7 @@
 
             function closeMenu() {
                 mobileNav.classList.remove("active");
-                mobileNav.style.setProperty("display", "none", "important");
+                mobileNav.style.display = "none";
 
                 if (icon) {
                     icon.classList.remove("fa-xmark");
@@ -2179,22 +2184,16 @@
                 menuBtn.setAttribute("aria-label", "Open menu");
             }
 
-            function toggleMenu(event) {
-                if (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+            menuBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                const isOpen = mobileNav.classList.contains("active");
-
-                if (isOpen) {
+                if (mobileNav.classList.contains("active")) {
                     closeMenu();
                 } else {
                     openMenu();
                 }
-            }
-
-            menuBtn.addEventListener("click", toggleMenu);
+            });
 
             mobileLinks.forEach(function (link) {
                 link.addEventListener("click", function () {
@@ -2204,8 +2203,16 @@
 
             window.addEventListener("resize", function () {
                 if (window.innerWidth > 900) {
-                    closeMenu();
+                    mobileNav.classList.remove("active");
                     mobileNav.style.removeProperty("display");
+
+                    if (icon) {
+                        icon.classList.remove("fa-xmark");
+                        icon.classList.add("fa-bars");
+                    }
+
+                    menuBtn.setAttribute("aria-expanded", "false");
+                    menuBtn.setAttribute("aria-label", "Open menu");
                 }
             });
 
