@@ -777,7 +777,7 @@
 
     function openMenu() {
 
-      mobileNav.classList.add("show");
+      mobileNav.classList.add("active");
 
       menuBtn.innerHTML =
         '<i class="fa-solid fa-xmark"></i>';
@@ -795,7 +795,7 @@
 
     function closeMenu() {
 
-      mobileNav.classList.remove("show");
+      mobileNav.classList.remove("active");
 
       menuBtn.innerHTML =
         '<i class="fa-solid fa-bars"></i>';
@@ -816,7 +816,7 @@
       event.preventDefault();
       event.stopPropagation();
 
-      if (mobileNav.classList.contains("show")) {
+      if (mobileNav.classList.contains("active")) {
         closeMenu();
       } else {
         openMenu();
