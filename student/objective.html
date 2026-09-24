@@ -1,748 +1,892 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Objectives | Chemistry Point</title>
-
-  <!-- Existing CSS -->
-  <link rel="stylesheet" href="../assets/css/root.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
-
-  <!-- Page Specific CSS -->
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #070809;
-      color: #f5f5f5;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .objective-container {
-      width: min(1100px, 92%);
-      margin: auto;
-    }
-
-    /* ================= HEADER ================= */
-
-    .objective-header {
-      background: #0c0d0f;
-      border-bottom: 1px solid #242529;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .objective-header-inner {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .objective-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .objective-brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    .objective-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .objective-nav a {
-      padding: 10px 14px;
-      color: #bdbdbd;
-      font-size: 14px;
-      border-radius: 8px;
-      transition: 0.25s;
-    }
-
-    .objective-nav a:hover,
-    .objective-nav a.active {
-      color: #fff;
-      background: #17181b;
-    }
-
-    .objective-nav a.active {
-      color: #f0c75e;
-    }
-
-    .objective-menu {
-      display: none;
-      background: transparent;
-      border: 1px solid #333;
-      color: #fff;
-      font-size: 23px;
-      border-radius: 8px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    /* ================= HERO ================= */
-
-    .objective-hero {
-      padding: 70px 0 55px;
-      background:
-        radial-gradient(circle at top right, rgba(212, 168, 65, 0.10), transparent 35%),
-        linear-gradient(180deg, #0c0d0f 0%, #08090a 100%);
-      border-bottom: 1px solid #1e2023;
-    }
-
-    .hero-small {
-      display: inline-block;
-      color: #d8ad48;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-    }
-
-    .objective-hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 6vw, 58px);
-      line-height: 1.1;
-      font-weight: 800;
-    }
-
-    .objective-hero p {
-      margin: 0;
-      max-width: 650px;
-      color: #a9abad;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    /* ================= MAIN ================= */
-
-    .objective-main {
-      padding: 60px 0 80px;
-    }
-
-    .section-top {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 38px;
-    }
-
-    .section-tag {
-      display: inline-block;
-      color: #d8ad48;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      margin-bottom: 10px;
-    }
-
-    .section-top h2 {
-      margin: 0 0 10px;
-      font-size: 30px;
-    }
-
-    .section-top p {
-      margin: 0;
-      color: #999da1;
-      line-height: 1.7;
-    }
-
-    /* ================= CARDS ================= */
-
-    .objective-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .objective-card {
-      position: relative;
-      min-height: 245px;
-      padding: 28px;
-      border: 1px solid #292c30;
-      border-radius: 18px;
-      background:
-        linear-gradient(145deg, #111315, #0b0c0e);
-      overflow: hidden;
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    .objective-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: #d8ad48;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: 0.3s;
-    }
-
-    .objective-card:hover {
-      transform: translateY(-7px);
-      border-color: #5c4b27;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-    }
-
-    .objective-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .objective-number {
-      color: #777b80;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 22px;
-    }
-
-    .objective-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 13px;
-      background: #191714;
-      border: 1px solid #393025;
-      color: #e2b84f;
-      font-size: 22px;
-      margin-bottom: 22px;
-    }
-
-    .objective-card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #fff;
-    }
-
-    .objective-card p {
-      margin: 0;
-      color: #9da0a4;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .objective-arrow {
-      position: absolute;
-      right: 25px;
-      bottom: 24px;
-      width: 35px;
-      height: 35px;
-      border: 1px solid #303236;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #d8ad48;
-      transition: 0.25s;
-    }
-
-    .objective-card:hover .objective-arrow {
-      background: #d8ad48;
-      color: #111;
-      border-color: #d8ad48;
-    }
-
-    /* ================= INFO ================= */
-
-    .study-box {
-      margin-top: 35px;
-      padding: 25px;
-      border: 1px solid #292c30;
-      border-radius: 16px;
-      background: #0d0f11;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .study-icon {
-      min-width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      background: #191714;
-      border: 1px solid #393025;
-      font-size: 20px;
-    }
-
-    .study-box h3 {
-      margin: 0 0 7px;
-      font-size: 17px;
-    }
-
-    .study-box p {
-      margin: 0;
-      color: #999da1;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    /* ================= FOOTER ================= */
-
-    .objective-footer {
-      border-top: 1px solid #222428;
-      background: #090a0b;
-      padding: 35px 0 20px;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    .footer-brand h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-    }
-
-    .footer-brand p {
-      margin: 0;
-      color: #777b80;
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      align-content: flex-start;
-    }
-
-    .footer-links a {
-      color: #8d9195;
-      font-size: 13px;
-      transition: 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: #d8ad48;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid #1c1e21;
-      margin-top: 25px;
-      padding-top: 18px;
-      color: #606469;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 800px) {
-
-      .objective-header-inner {
-        min-height: 64px;
-      }
-
-      .objective-menu {
-        display: block;
-      }
-
-      .objective-nav {
-        display: none;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: #0c0d0f;
-        border-bottom: 1px solid #242529;
-        padding: 12px 4%;
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .objective-nav.show {
-        display: flex;
-      }
-
-      .objective-nav a {
-        padding: 13px;
-      }
-
-      .objective-hero {
-        padding: 48px 0 42px;
-      }
-
-      .objective-main {
-        padding: 45px 0 60px;
-      }
-
-      .objective-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .objective-card {
-        min-height: 210px;
-      }
-
-      .footer-top {
-        flex-direction: column;
-      }
-
-      .footer-links {
-        gap: 12px 20px;
-      }
-    }
-
-    @media (max-width: 450px) {
-
-      .objective-container {
-        width: 90%;
-      }
-
-      .objective-brand span {
-        font-size: 15px;
-      }
-
-      .objective-brand img {
-        width: 42px;
-        height: 42px;
-      }
-
-      .objective-hero h1 {
-        font-size: 36px;
-      }
-
-      .section-top h2 {
-        font-size: 25px;
-      }
-
-      .objective-card {
-        padding: 23px;
-      }
-
-      .study-box {
-        padding: 20px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Objectives | Chemistry Point</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .objective-header {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a8a
+            );
+
+            padding: 18px 20px;
+            color: white;
+        }
+
+        .header-inner {
+            width: min(1100px, 92%);
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .brand img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: rgba(255,255,255,.9);
+            font-size: 13px;
+
+            transition: .25s;
+        }
+
+        .back-btn:hover {
+            color: white;
+            transform: translateX(-3px);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .objective-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 35px 20px 70px;
+
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,.12);
+
+            border: 1px solid rgba(255,255,255,.2);
+
+            font-size: 31px;
+        }
+
+        .objective-hero h1 {
+            margin: 0 0 8px;
+
+            font-size: clamp(27px, 5vw, 38px);
+
+            font-weight: 800;
+        }
+
+        .objective-hero p {
+            margin: 0;
+
+            color: rgba(255,255,255,.78);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .objective-container {
+            width: min(1100px, 92%);
+            margin: -35px auto 60px;
+
+            position: relative;
+        }
+
+        .content-card {
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(15,23,42,.08);
+
+            border: 1px solid #edf0f5;
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .content-heading {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 28px;
+
+            padding-bottom: 22px;
+
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .heading-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 20px;
+        }
+
+        .content-heading h2 {
+            margin: 0 0 4px;
+
+            font-size: 22px;
+        }
+
+        .content-heading p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           PDF AREA
+        ========================= */
+
+        .pdf-area {
+            min-height: 300px;
+
+            border: 2px dashed #dbe3ef;
+
+            border-radius: 17px;
+
+            background: #f8fafc;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+        .pdf-placeholder {
+            max-width: 500px;
+        }
+
+        .pdf-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 18px;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .pdf-placeholder h3 {
+            margin: 0 0 9px;
+
+            font-size: 20px;
+        }
+
+        .pdf-placeholder p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .action-buttons {
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: .25s;
+        }
+
+        .back-chapter {
+            background: #111827;
+
+            color: white;
+        }
+
+        .back-chapter:hover {
+            background: #1f2937;
+
+            transform: translateY(-2px);
+        }
+
+        .download-btn {
+            background: #2563eb;
+
+            color: white;
+
+            opacity: .55;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           NOTICE
+        ========================= */
+
+        .notice {
+            margin-top: 25px;
+
+            display: flex;
+
+            gap: 13px;
+
+            align-items: flex-start;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+
+            border: 1px solid #dbeafe;
+        }
+
+        .notice i {
+            color: #2563eb;
+
+            font-size: 18px;
+
+            margin-top: 2px;
+        }
+
+        .notice h4 {
+            margin: 0 0 4px;
+
+            font-size: 13px;
+        }
+
+        .notice p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .objective-footer {
+            text-align: center;
+
+            padding: 25px 15px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            border-top: 1px solid #e5e7eb;
+
+            background: white;
+        }
+
+        .objective-footer strong {
+            color: #111827;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+                width: 92%;
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .objective-hero {
+                padding: 30px 15px 60px;
+            }
+
+            .objective-container {
+                width: 92%;
+            }
+
+            .content-card {
+                padding: 22px 17px;
+            }
+
+            .content-heading h2 {
+                font-size: 19px;
+            }
+
+            .pdf-area {
+                min-height: 270px;
+                padding: 25px 15px;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <!-- ================= HEADER ================= -->
 
-  <header class="objective-header">
-    <div class="objective-container objective-header-inner">
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-      <a href="../index.html" class="objective-brand">
-        <img
-          src="../assets/images/logo/logo.png"
-          alt="Chemistry Point Logo"
-        >
-        <span>Chemistry Point</span>
-      </a>
+    <header class="objective-header">
 
-      <button
-        class="objective-menu"
-        id="objectiveMenu"
-        aria-label="Open Menu"
-      >
-        ☰
-      </button>
+        <div class="header-inner">
 
-      <nav class="objective-nav" id="objectiveNav">
+            <a href="../index.html" class="brand">
 
-        <a href="../index.html">Home</a>
+                <img
+                    src="../assets/images/logo/logo.png"
+                    alt="Chemistry Point">
 
-        <a href="../videos.html">Videos</a>
+                <span>
+                    Chemistry Point
+                </span>
 
-        <a href="../objectives.html" class="active">
-          Objectives
-        </a>
-
-        <a href="../quiz.html">Quiz</a>
-
-        <a href="../about.html">About</a>
-
-        <a href="../contact.html">Contact</a>
-
-      </nav>
-
-    </div>
-  </header>
+            </a>
 
 
-  <!-- ================= HERO ================= -->
+            <a
+                href="chapter.html"
+                id="backButton"
+                class="back-btn">
 
-  <section class="objective-hero">
+                <i class="fa-solid fa-arrow-left"></i>
 
-    <div class="objective-container">
+                Back to Chapter
 
-      <span class="hero-small">
-        CHEMISTRY POINT
-      </span>
+            </a>
 
-      <h1>Solid State</h1>
+        </div>
 
-      <p>
-        Chapter-wise important objective questions
-        और परीक्षा की तैयारी के लिए useful study material.
-      </p>
-
-    </div>
-
-  </section>
+    </header>
 
 
-  <!-- ================= MAIN ================= -->
 
-  <main class="objective-main">
+    <!-- =========================
+         HERO
+    ========================= -->
 
-    <div class="objective-container">
+    <section class="objective-hero">
 
-      <div class="section-top">
+        <div class="hero-icon">
 
-        <span class="section-tag">
-          OBJECTIVE SECTION
-        </span>
+            <i
+                id="heroIcon"
+                class="fa-solid fa-star">
+            </i>
 
-        <h2>Choose Your Objective Set</h2>
+        </div>
 
-        <p>
-          अपनी तैयारी के अनुसार नीचे दिए गए किसी भी
-          objective section को select करें।
+
+        <h1 id="objectiveTitle">
+            V.V.I Objectives
+        </h1>
+
+
+        <p id="chapterName">
+            Solid State
         </p>
 
-      </div>
+    </section>
 
 
-      <!-- OBJECTIVE CARDS -->
 
-      <div class="objective-grid">
+    <!-- =========================
+         MAIN
+    ========================= -->
 
-        <!-- VVI -->
+    <main class="objective-container">
 
-        <a
-          href="pdf.html?type=vvi&chapter=solid-state"
-          class="objective-card"
-        >
-
-          <div class="objective-number">
-            01 / V.V.I
-          </div>
-
-          <div class="objective-icon">
-            ★
-          </div>
-
-          <h3>
-            V.V.I Objectives
-          </h3>
-
-          <p>
-            परीक्षा के लिए चुने गए
-            सबसे महत्वपूर्ण objective questions.
-          </p>
-
-          <span class="objective-arrow">
-            →
-          </span>
-
-        </a>
+        <div class="content-card">
 
 
-        <!-- PYQ -->
+            <!-- Heading -->
 
-        <a
-          href="pdf.html?type=pyq&chapter=solid-state"
-          class="objective-card"
-        >
+            <div class="content-heading">
 
-          <div class="objective-number">
-            02 / PYQ
-          </div>
+                <div class="heading-icon">
 
-          <div class="objective-icon">
-            📚
-          </div>
+                    <i class="fa-solid fa-book-open"></i>
 
-          <h3>
-            PYQ Objectives
-          </h3>
-
-          <p>
-            Previous Year Questions से जुड़े
-            महत्वपूर्ण objective questions.
-          </p>
-
-          <span class="objective-arrow">
-            →
-          </span>
-
-        </a>
+                </div>
 
 
-        <!-- ALL -->
+                <div>
 
-        <a
-          href="pdf.html?type=all&chapter=solid-state"
-          class="objective-card"
-        >
+                    <h2 id="sectionHeading">
+                        V.V.I Objectives
+                    </h2>
 
-          <div class="objective-number">
-            03 / ALL
-          </div>
+                    <p>
+                        Chapter-wise objective study material
+                    </p>
 
-          <div class="objective-icon">
-            📖
-          </div>
+                </div>
 
-          <h3>
-            All Objectives
-          </h3>
-
-          <p>
-            इस chapter के सभी available
-            objective questions एक जगह।
-          </p>
-
-          <span class="objective-arrow">
-            →
-          </span>
-
-        </a>
-
-      </div>
+            </div>
 
 
-      <!-- STUDY TIP -->
 
-      <div class="study-box">
+            <!-- PDF -->
 
-        <div class="study-icon">
-          💡
+            <div class="pdf-area">
+
+                <div class="pdf-placeholder">
+
+                    <div class="pdf-icon">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                    </div>
+
+
+                    <h3 id="pdfTitle">
+                        PDF Study Material
+                    </h3>
+
+
+                    <p id="pdfDescription">
+                        इस section का PDF study material
+                        यहाँ दिखाई देगा।
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Buttons -->
+
+            <div class="action-buttons">
+
+                <a
+                    id="backChapter"
+                    href="chapter.html"
+                    class="action-btn back-chapter">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Chapter
+
+                </a>
+
+
+                <span
+                    class="action-btn download-btn">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download PDF
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Notice -->
+
+            <div class="notice">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <div>
+
+                    <h4>
+                        Study Material
+                    </h4>
+
+                    <p>
+                        PDF links बाद में Firebase Database
+                        से load किए जाएंगे। अभी यह page
+                        केवल objective section और navigation
+                        के लिए तैयार किया गया है।
+                    </p>
+
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div>
-
-          <h3>
-            Study Tip
-          </h3>
-
-          <p>
-            पहले V.V.I Objectives पढ़ें,
-            फिर PYQ Objectives solve करें और
-            अंत में All Objectives से अपनी तैयारी check करें।
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
+    </main>
 
 
-  <!-- ================= FOOTER ================= -->
 
-  <footer class="objective-footer">
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
-    <div class="objective-container">
+    <footer class="objective-footer">
 
-      <div class="footer-top">
+        © <span id="year"></span>
 
-        <div class="footer-brand">
-
-          <h3>
+        <strong>
             Code With Piyush
-          </h3>
+        </strong>
 
-          <p>
-            Chemistry learning made simple and accessible.
-          </p>
+        . All Rights Reserved.
 
-        </div>
+    </footer>
 
 
-        <div class="footer-links">
 
-          <a href="../index.html">Home</a>
-          <a href="../videos.html">Videos</a>
-          <a href="../objectives.html">Objectives</a>
-          <a href="../quiz.html">Quiz</a>
-          <a href="../about.html">About</a>
-          <a href="../contact.html">Contact</a>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-        </div>
+    <script>
 
-      </div>
+        /* Current Year */
 
-
-      <div class="footer-bottom">
-
-        © 2026 Code With Piyush. All Rights Reserved.
-
-      </div>
-
-    </div>
-
-  </footer>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
 
 
-  <!-- ================= JAVASCRIPT ================= -->
 
-  <script>
+        /* URL Parameters */
 
-    const objectiveMenu =
-      document.getElementById("objectiveMenu");
-
-    const objectiveNav =
-      document.getElementById("objectiveNav");
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
 
 
-    objectiveMenu.addEventListener("click", function () {
-
-      objectiveNav.classList.toggle("show");
-
-    });
+        const chapter =
+            params.get("chapter") || "solid-state";
 
 
-    document.querySelectorAll(".objective-nav a")
-      .forEach(function (link) {
+        const type =
+            params.get("type") || "vvi";
 
-        link.addEventListener("click", function () {
 
-          objectiveNav.classList.remove("show");
 
-        });
+        /* Chapter Names */
 
-      });
+        const chapters = {
 
-  </script>
+            "solid-state":
+                "Solid State",
+
+            "solutions":
+                "Solutions",
+
+            "electrochemistry":
+                "Electrochemistry",
+
+            "chemical-kinetics":
+                "Chemical Kinetics",
+
+            "surface-chemistry":
+                "Surface Chemistry",
+
+            "d-and-f-block":
+                "d and f Block Elements",
+
+            "coordination-compounds":
+                "Coordination Compounds",
+
+            "haloalkanes-haloarenes":
+                "Haloalkanes and Haloarenes",
+
+            "alcohols-phenols-ethers":
+                "Alcohols, Phenols and Ethers",
+
+            "aldehydes-ketones-carboxylic-acids":
+                "Aldehydes, Ketones and Carboxylic Acids",
+
+            "amines":
+                "Amines",
+
+            "biomolecules":
+                "Biomolecules"
+
+        };
+
+
+
+        /* Objective Types */
+
+        const objectiveTypes = {
+
+            "vvi": {
+
+                title: "V.V.I Objectives",
+
+                description:
+                    "परीक्षा के लिए सबसे महत्वपूर्ण objective questions.",
+
+                icon:
+                    "fa-solid fa-star"
+
+            },
+
+
+            "pyq": {
+
+                title: "PYQ Objectives",
+
+                description:
+                    "Previous Year Questions से जुड़े objective questions.",
+
+                icon:
+                    "fa-solid fa-clock-rotate-left"
+
+            },
+
+
+            "all": {
+
+                title: "All Objectives",
+
+                description:
+                    "इस chapter के सभी available objective questions.",
+
+                icon:
+                    "fa-solid fa-layer-group"
+
+            }
+
+        };
+
+
+
+        /* Get Data */
+
+        const currentChapter =
+            chapters[chapter] || "Solid State";
+
+
+        const currentType =
+            objectiveTypes[type] ||
+            objectiveTypes.vvi;
+
+
+
+        /* Update Page */
+
+        document.title =
+            currentType.title +
+            " | " +
+            currentChapter +
+            " | Chemistry Point";
+
+
+        document.getElementById(
+            "chapterName"
+        ).textContent =
+            currentChapter;
+
+
+        document.getElementById(
+            "objectiveTitle"
+        ).textContent =
+            currentType.title;
+
+
+        document.getElementById(
+            "sectionHeading"
+        ).textContent =
+            currentType.title;
+
+
+        document.getElementById(
+            "pdfTitle"
+        ).textContent =
+            currentType.title +
+            " PDF";
+
+
+        document.getElementById(
+            "pdfDescription"
+        ).textContent =
+            currentType.description;
+
+
+
+        /* Change Icon */
+
+        const heroIcon =
+            document.getElementById("heroIcon");
+
+        heroIcon.className =
+            currentType.icon;
+
+
+
+        /* Back Links */
+
+        const chapterURL =
+            "chapter.html?chapter=" +
+            encodeURIComponent(chapter);
+
+
+        document.getElementById(
+            "backButton"
+        ).href =
+            chapterURL;
+
+
+        document.getElementById(
+            "backChapter"
+        ).href =
+            chapterURL;
+
+    </script>
+
 
 </body>
+
 </html>
