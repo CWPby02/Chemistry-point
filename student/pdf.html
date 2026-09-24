@@ -1,945 +1,1643 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>PDF Study Material | Chemistry Point</title>
-  <meta name="description" content="Chemistry Point chapter-wise PDF study material.">
+    <meta charset="UTF-8">
 
-  <link rel="stylesheet" href="../assets/css/root.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description"
+          content="Contact Chemistry Point - Contact Pardeep Sir and Code With Piyush.">
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Contact | Chemistry Point</title>
 
-  <style>
-    /* =========================================
-       PDF PAGE
-    ========================================= */
 
-    .pdf-page {
-      min-height: calc(100vh - 80px);
-      padding: 110px 0 70px;
-      background: var(--dark-bg);
-    }
+    <!-- Google Fonts -->
 
-    .pdf-container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    .pdf-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 42px;
-    }
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    .pdf-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 15px;
-      color: var(--primary-light);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-    .pdf-header h1 {
-      margin: 0 0 13px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.2;
-    }
 
-    .pdf-header h1 span {
-      color: var(--primary-light);
-    }
+    <!-- Font Awesome -->
 
-    .pdf-header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    .chapter-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: fit-content;
-      max-width: 100%;
-      margin: 20px auto 0;
-      padding: 10px 17px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--dark-card);
-      color: var(--white);
-      font-size: 13px;
-      font-weight: 600;
-    }
 
-    .chapter-info i {
-      color: var(--primary-light);
-    }
+    <!-- Main CSS -->
 
-    .pdf-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
+    <link rel="stylesheet"
+          href="assets/css/root.css">
 
-    .pdf-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-height: 330px;
-      padding: 26px 23px 22px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--dark-card);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
+    <link rel="stylesheet"
+          href="assets/css/style.css">
 
-    .pdf-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(
-        90deg,
-        var(--primary-dark),
-        var(--primary-light),
-        var(--primary-dark)
-      );
-    }
+    <link rel="stylesheet"
+          href="assets/css/responsive.css">
 
-    .pdf-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(217, 154, 22, .55);
-      box-shadow: 0 20px 42px rgba(0, 0, 0, .22);
-    }
 
-    .pdf-icon {
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 19px;
-      border: 1px solid rgba(217, 154, 22, .25);
-      border-radius: 15px;
-      background: rgba(217, 154, 22, .11);
-      color: var(--primary-light);
-      font-size: 24px;
-    }
+    <style>
 
-    .pdf-card h2 {
-      margin: 0 0 9px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: 20px;
-      line-height: 1.35;
-    }
+        /* ==========================================
+           CONTACT HERO
+        ========================================== */
 
-    .pdf-card p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.75;
-    }
+        .contact-hero {
 
-    .pdf-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      width: fit-content;
-      margin-top: 17px;
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-    }
+            padding: 85px 0 75px;
 
-    .pdf-status i {
-      color: var(--primary-light);
-    }
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(217, 154, 22, 0.10),
+                    transparent 35%
+                ),
+                var(--bg-main);
 
-    .pdf-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: auto;
-      padding-top: 23px;
-    }
+            border-bottom: 1px solid var(--border);
 
-    .pdf-btn {
-      min-height: 43px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      transition: .25s ease;
-    }
+        }
 
-    .pdf-btn-view {
-      color: var(--white);
-      border: 1px solid var(--border);
-      background: transparent;
-    }
 
-    .pdf-btn-view:hover {
-      color: var(--primary-light);
-      border-color: var(--primary-light);
-    }
+        .contact-hero-content {
 
-    .pdf-btn-download {
-      color: #111;
-      border: 1px solid var(--primary-light);
-      background: var(--primary-light);
-    }
+            max-width: 760px;
 
-    .pdf-btn-download:hover {
-      border-color: var(--primary);
-      background: var(--primary);
-      transform: translateY(-1px);
-    }
+        }
 
-    .pdf-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      max-width: 850px;
-      margin: 28px auto 0;
-      padding: 15px 17px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--dark-card);
-    }
 
-    .pdf-note i {
-      margin-top: 2px;
-      color: var(--primary-light);
-    }
+        .contact-hero h1 {
 
-    .pdf-note p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
+            margin-top: 8px;
 
-    /* Light mode */
-    body.light-mode .pdf-page {
-      background: #f7f7f8;
-    }
+            font-size: clamp(38px, 5vw, 58px);
 
-    body.light-mode .pdf-header h1,
-    body.light-mode .pdf-card h2 {
-      color: #17191c;
-    }
+            line-height: 1.1;
 
-    body.light-mode .pdf-header p,
-    body.light-mode .pdf-card p,
-    body.light-mode .pdf-note p {
-      color: #666b74;
-    }
+            font-weight: 800;
 
-    body.light-mode .chapter-info,
-    body.light-mode .pdf-card,
-    body.light-mode .pdf-note {
-      background: #fff;
-      border-color: #e4e5e8;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, .07);
-    }
+            letter-spacing: -1.5px;
 
-    body.light-mode .pdf-btn-view {
-      color: #17191c;
-      border-color: #dedfe3;
-    }
+        }
 
-    body.light-mode .pdf-btn-view:hover {
-      color: var(--primary-dark);
-      border-color: var(--primary);
-    }
 
-    /* =========================================
-       MOBILE NAV - SOLID BACKGROUND
-    ========================================= */
+        .contact-hero h1 span {
 
-    @media (max-width: 900px) {
-      .pdf-page {
-        padding: 92px 20px 55px;
-      }
+            color: var(--primary-light);
 
-      .pdf-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+        }
 
-      /* Force the mobile menu state on this page.
-         Both CSS and JS use the SAME class: active. */
-      .mobile-nav {
-        display: none !important;
-        position: fixed !important;
-        top: 68px !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 10px 20px 20px !important;
-        background: #13161a !important;
-        background-color: #13161a !important;
-        opacity: 1 !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border-bottom: 1px solid var(--border) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,.20) !important;
-        z-index: 100000 !important;
-        max-height: calc(100vh - 68px);
-        overflow-y: auto;
-        isolation: isolate;
-      }
 
-      .mobile-nav.active {
-        display: flex !important;
-      }
+        .contact-hero p {
 
-      .mobile-nav a {
-        display: flex !important;
-        align-items: center;
-        min-height: 48px;
-        padding: 12px 8px;
-        color: var(--white) !important;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-      }
+            max-width: 650px;
 
-      .mobile-nav a:last-child {
-        border-bottom: 0;
-      }
+            margin-top: 18px;
 
-      body.light-mode .mobile-nav {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
+            color: var(--text-secondary);
 
-      body.light-mode .mobile-nav a {
-        color: #17191c !important;
-        border-bottom-color: #e4e5e8;
-      }
-    }
+            font-family: var(--font-secondary);
 
-    @media (max-width: 600px) {
-      .pdf-page {
-        padding: 88px 15px 45px;
-      }
+            font-size: 15px;
 
-      .pdf-header {
-        margin-bottom: 30px;
-      }
+            line-height: 1.8;
 
-      .pdf-header h1 {
-        font-size: 29px;
-      }
+        }
 
-      .pdf-header p {
-        font-size: 13px;
-      }
 
-      .chapter-info {
-        font-size: 12px;
-        padding: 9px 13px;
-      }
+        /* ==========================================
+           CONTACT MAIN
+        ========================================== */
 
-      .pdf-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+        .contact-main {
 
-      .pdf-card {
-        min-height: 0;
-        padding: 23px 19px 20px;
-      }
+            padding: 85px 0 110px;
 
-      .pdf-note {
-        padding: 13px;
-      }
-    }
+            background: var(--bg-secondary);
 
-    @media (max-width: 380px) {
-      .pdf-actions {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        }
+
+
+        /* ==========================================
+           CONTACT GRID
+        ========================================== */
+
+        .contact-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr 0.9fr;
+
+            gap: 25px;
+
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+        }
+
+
+        /* ==========================================
+           PERSON CONTACT CARD
+        ========================================== */
+
+        .contact-person {
+
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background: var(--bg-card);
+
+        }
+
+
+        .contact-person-head {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .contact-person-image {
+
+            width: 72px;
+
+            height: 72px;
+
+            flex-shrink: 0;
+
+            overflow: hidden;
+
+            border-radius: 50%;
+
+            border: 2px solid
+                rgba(217, 154, 22, 0.30);
+
+            background: #101216;
+
+        }
+
+
+        .contact-person-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+        }
+
+
+        .contact-person-role {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--primary-light);
+
+            font-family: var(--font-secondary);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .contact-person-head h2 {
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* ==========================================
+           CONTACT ITEMS
+        ========================================== */
+
+        .contact-items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 11px;
+
+        }
+
+
+        .contact-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 255, 255, 0.01);
+
+            transition:
+                border-color var(--transition-normal),
+                background var(--transition-normal);
+
+        }
+
+
+        .contact-item:hover {
+
+            border-color: var(--border-gold);
+
+            background:
+                rgba(217, 154, 22, 0.04);
+
+        }
+
+
+        .contact-item-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(217, 154, 22, 0.08);
+
+            border: 1px solid
+                rgba(217, 154, 22, 0.18);
+
+            color: var(--primary-light);
+
+            font-size: 14px;
+
+        }
+
+
+        .contact-item-text {
+
+            min-width: 0;
+
+        }
+
+
+        .contact-item-text span {
+
+            display: block;
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 9px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .contact-item-text strong {
+
+            display: block;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+
+            color: var(--text-primary);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==========================================
+           CONTACT FORM
+        ========================================== */
+
+        .contact-form-card {
+
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background: var(--bg-card);
+
+        }
+
+
+        .contact-form-card h2 {
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+        }
+
+
+        .contact-form-card > p {
+
+            margin-top: 7px;
+
+            margin-bottom: 25px;
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--text-primary);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #101216;
+
+            color: var(--text-primary);
+
+            font-family: var(--font-secondary);
+
+            font-size: 12px;
+
+            transition:
+                border-color var(--transition-normal),
+                box-shadow var(--transition-normal);
+
+        }
+
+
+        .form-group input {
+
+            height: 45px;
+
+            padding: 0 14px;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 125px;
+
+            padding: 13px 14px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: var(--border-gold);
+
+            box-shadow:
+                0 0 0 3px rgba(217, 154, 22, 0.05);
+
+        }
+
+
+        .contact-submit {
+
+            width: 100%;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: #111;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform var(--transition-normal),
+                opacity var(--transition-normal);
+
+        }
+
+
+        .contact-submit:hover {
+
+            transform: translateY(-2px);
+
+            opacity: 0.92;
+
+        }
+
+
+        /* ==========================================
+           SOCIAL SECTION
+        ========================================== */
+
+        .social-section {
+
+            max-width: 1050px;
+
+            margin: 65px auto 0;
+
+            text-align: center;
+
+        }
+
+
+        .social-section h2 {
+
+            margin-top: 8px;
+
+            font-size: 29px;
+
+            font-weight: 800;
+
+        }
+
+
+        .social-section p {
+
+            margin-top: 8px;
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 11px;
+
+        }
+
+
+        .social-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 27px;
+
+        }
+
+
+        .social-card {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            min-height: 55px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: var(--bg-card);
+
+            color: var(--text-secondary);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            transition:
+                color var(--transition-normal),
+                border-color var(--transition-normal),
+                transform var(--transition-normal);
+
+        }
+
+
+        .social-card:hover {
+
+            transform: translateY(-3px);
+
+            color: var(--primary-light);
+
+            border-color: var(--border-gold);
+
+        }
+
+
+        .social-card i {
+
+            font-size: 15px;
+
+        }
+
+
+        /* ==========================================
+           NOTE
+        ========================================== */
+
+        .contact-note {
+
+            max-width: 1050px;
+
+            margin: 45px auto 0;
+
+            padding: 20px 22px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            background:
+                rgba(217, 154, 22, 0.04);
+
+        }
+
+
+        .contact-note i {
+
+            margin-top: 3px;
+
+            color: var(--primary-light);
+
+            font-size: 14px;
+
+        }
+
+
+        .contact-note p {
+
+            color: var(--text-muted);
+
+            font-family: var(--font-secondary);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 850px) {
+
+            .contact-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .social-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .contact-hero {
+
+                padding: 65px 0 55px;
+
+            }
+
+
+            .contact-hero h1 {
+
+                font-size: 36px;
+
+            }
+
+
+            .contact-hero p {
+
+                font-size: 13px;
+
+            }
+
+
+            .contact-main {
+
+                padding: 60px 0 80px;
+
+            }
+
+
+            .contact-person,
+            .contact-form-card {
+
+                padding: 23px;
+
+            }
+
+
+            .social-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .contact-note {
+
+                padding: 17px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
 
-  <header class="site-header">
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
 
     <div class="container nav-container">
 
-      <a href="../index.html" class="brand">
-        <img
-          src="../assets/images/logo/logo.png"
-          alt="Chemistry Point Logo">
 
-        <div class="brand-text">
-          <strong>Chemistry Point</strong>
-          <span>By Pardeep Sir</span>
-        </div>
-      </a>
+        <a href="index.html"
+           class="brand">
 
-      <nav class="main-nav">
+            <img src="assets/images/logo/logo.png"
+                 alt="Chemistry Point Logo">
 
-        <a href="../index.html">Home</a>
-        <a href="../videos.html">Videos</a>
-        <a href="../objectives.html" class="active">Objectives</a>
-        <a href="../quiz.html">Quiz</a>
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
+            <div class="brand-text">
 
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
+                <strong>
+                    Chemistry Point
+                </strong>
 
-      </nav>
+                <span>
+                    By Pardeep Sir
+                </span>
 
-      <div class="mobile-actions">
-
-        <button
-          class="theme-toggle mobile-theme-toggle"
-          id="mobileThemeToggle"
-          type="button"
-          aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-
-        <button
-          class="menu-btn"
-          id="menuBtn"
-          type="button"
-          aria-label="Open menu"
-          aria-expanded="false">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="mobile-nav" id="mobileNav">
-
-      <a href="../index.html">Home</a>
-      <a href="../videos.html">Videos</a>
-      <a href="../objectives.html" class="active">Objectives</a>
-      <a href="../quiz.html">Quiz</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
-
-    </div>
-
-  </header>
-
-
-  <!-- =========================================
-       PDF CONTENT
-  ========================================== -->
-
-  <main class="pdf-page">
-
-    <div class="pdf-container">
-
-      <section class="pdf-header">
-
-        <div class="pdf-label">
-          <i class="fa-solid fa-file-pdf"></i>
-          Study Material
-        </div>
-
-        <h1>
-          Chemistry <span>PDFs</span>
-        </h1>
-
-        <p>
-          Chapter-wise objective study material एक ही जगह से
-          पढ़ें और बाद में PDF उपलब्ध होने पर View या Download करें।
-        </p>
-
-        <div class="chapter-info">
-          <i class="fa-solid fa-book-open"></i>
-          <span id="chapterName">Chemistry Chapter</span>
-        </div>
-
-      </section>
-
-
-      <section class="pdf-grid">
-
-        <!-- V.V.I -->
-        <article class="pdf-card">
-
-          <div class="pdf-icon">
-            <i class="fa-solid fa-star"></i>
-          </div>
-
-          <h2>V.V.I Objectives</h2>
-
-          <p>
-            परीक्षा के लिए सबसे महत्वपूर्ण objective questions
-            का study PDF.
-          </p>
-
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- PYQ -->
-        <article class="pdf-card">
-
-          <div class="pdf-icon">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
-
-          <h2>PYQ Objectives</h2>
-
-          <p>
-            Previous Year Questions से जुड़े objective
-            questions का study PDF.
-          </p>
-
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- ALL -->
-        <article class="pdf-card">
-
-          <div class="pdf-icon">
-            <i class="fa-solid fa-layer-group"></i>
-          </div>
-
-          <h2>All Objectives</h2>
-
-          <p>
-            इस chapter के सभी available objective questions
-            का complete study PDF.
-          </p>
-
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <div class="pdf-note">
-
-        <i class="fa-solid fa-circle-info"></i>
-
-        <p>
-          अभी इस page पर कोई Firebase या Google Drive connection नहीं है।
-          PDF links बाद में backend/admin system से जोड़े जाएंगे।
-        </p>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- =========================================
-       FOOTER
-  ========================================== -->
-
-  <footer class="site-footer">
-
-    <div class="container footer-grid">
-
-      <div class="footer-brand">
-
-        <a href="../index.html" class="brand">
-
-          <img
-            src="../assets/images/logo/logo.png"
-            alt="Chemistry Point Logo">
-
-          <div class="brand-text">
-            <strong>Chemistry Point</strong>
-            <span>By Pardeep Sir</span>
-          </div>
+            </div>
 
         </a>
 
-        <p>
-          Bihar Board Chemistry की बेहतर तैयारी के लिए
-          quality study materials, videos और quizzes।
-        </p>
 
-      </div>
+        <nav class="main-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="videos.html">
+                Videos
+            </a>
+
+            <a href="objectives.html">
+                Objectives
+            </a>
+
+            <a href="quiz.html">
+                Quiz
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="contact.html"
+               class="active">
+                Contact
+            </a>
+
+        </nav>
 
 
-      <div class="footer-column">
+        <button class="menu-btn"
+                id="menuBtn"
+                aria-label="Open Menu">
 
-        <h4>Quick Links</h4>
+            <i class="fa-solid fa-bars"></i>
 
-        <a href="../index.html">Home</a>
-        <a href="../videos.html">Videos</a>
-        <a href="../objectives.html">Objectives</a>
-        <a href="../quiz.html">Quiz</a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h4>Important</h4>
-
-        <a href="../about.html">About Us</a>
-        <a href="../contact.html">Contact</a>
-        <a href="../objectives.html">Study Material</a>
-
-      </div>
+        </button>
 
     </div>
+
+
+    <div class="mobile-nav"
+         id="mobileNav">
+
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+        <a href="videos.html">
+
+            <i class="fa-solid fa-play"></i>
+
+            Videos
+
+        </a>
+
+
+        <a href="objectives.html">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            Objectives
+
+        </a>
+
+
+        <a href="quiz.html">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+            Quiz
+
+        </a>
+
+
+        <a href="about.html">
+
+            <i class="fa-solid fa-user"></i>
+
+            About
+
+        </a>
+
+
+        <a href="contact.html"
+           class="active">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            Contact
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="contact-hero">
+
+    <div class="container contact-hero-content">
+
+        <span class="section-label">
+            GET IN TOUCH
+        </span>
+
+
+        <h1>
+
+            Contact
+            <span>Us</span>
+
+        </h1>
+
+
+        <p>
+
+            Chemistry Point से जुड़े किसी भी
+            educational या website related
+            query के लिए हमसे contact कर सकते हैं।
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT MAIN
+===================================================== -->
+
+<section class="contact-main">
+
+    <div class="container">
+
+
+        <div class="contact-grid">
+
+
+            <!-- =================================================
+                 PARDEEP SIR
+            ================================================== -->
+
+            <div class="contact-person">
+
+
+                <div class="contact-person-head">
+
+
+                    <div class="contact-person-image">
+
+                        <img src="assets/images/teachers/pardeep-sir.jpg"
+                             alt="Pardeep Sir">
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="contact-person-role">
+                            Chemistry Educator
+                        </span>
+
+                        <h2>
+                            Pardeep Sir
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-items">
+
+
+                    <!-- PHONE -->
+
+                    <a href="tel:+910000000000"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                Phone
+                            </span>
+
+                            <strong>
+                                +91 XXXXX XXXXX
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- WHATSAPP -->
+
+                    <a href="#"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-brands fa-whatsapp"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                WhatsApp
+                            </span>
+
+                            <strong>
+                                Contact on WhatsApp
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a href="#"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                Instagram
+                            </span>
+
+                            <strong>
+                                Pardeep Sir
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PIYUSH
+            ================================================== -->
+
+            <div class="contact-person">
+
+
+                <div class="contact-person-head">
+
+
+                    <div class="contact-person-image">
+
+                        <img src="assets/images/teachers/piyush.jpg"
+                             alt="Piyush">
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="contact-person-role">
+                            Website & Technology
+                        </span>
+
+                        <h2>
+                            Piyush
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-items">
+
+
+                    <!-- EMAIL -->
+
+                    <a href="mailto:your@email.com"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                Email
+                            </span>
+
+                            <strong>
+                                your@email.com
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a href="#"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                Instagram
+                            </span>
+
+                            <strong>
+                                Code With Piyush
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- YOUTUBE -->
+
+                    <a href="#"
+                       class="contact-item">
+
+                        <div class="contact-item-icon">
+
+                            <i class="fa-brands fa-youtube"></i>
+
+                        </div>
+
+
+                        <div class="contact-item-text">
+
+                            <span>
+                                YouTube
+                            </span>
+
+                            <strong>
+                                Code With Piyush
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             CONTACT FORM
+        ================================================== -->
+
+        <div style="
+            max-width:1050px;
+            margin:25px auto 0;
+        ">
+
+            <div class="contact-form-card">
+
+
+                <h2>
+                    Send Us a Message
+                </h2>
+
+
+                <p>
+
+                    अपना message लिखें। बाद में इसे
+                    Firebase से connect करके admin panel
+                    में messages manage किए जा सकेंगे।
+
+                </p>
+
+
+                <form id="contactForm">
+
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Your Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Write your message..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="contact-submit">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Send Message
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SOCIAL
+        ================================================== -->
+
+        <div class="social-section">
+
+
+            <span class="section-label">
+                SOCIAL MEDIA
+            </span>
+
+
+            <h2>
+                Connect With Us
+            </h2>
+
+
+            <p>
+                हमारे educational content और updates
+                के लिए social platforms पर जुड़े रहें।
+            </p>
+
+
+            <div class="social-grid">
+
+
+                <a href="#"
+                   class="social-card">
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                    YouTube
+
+                </a>
+
+
+                <a href="#"
+                   class="social-card">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                    Instagram
+
+                </a>
+
+
+                <a href="#"
+                   class="social-card">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp
+
+                </a>
+
+
+                <a href="mailto:your@email.com"
+                   class="social-card">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    Email
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NOTE
+        ================================================== -->
+
+        <div class="contact-note">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+
+            <p>
+
+                ऊपर दिए गए contact details अभी
+                placeholder हैं। Actual phone number,
+                WhatsApp, Instagram और YouTube links
+                मिलने के बाद इन्हें replace किया जाएगा।
+                Contact form को भी Firebase backend से
+                connect किया जाएगा।
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <img src="assets/images/logo/logo.png"
+                 alt="Code With Piyush">
+
+
+            <h3>
+                Code With Piyush
+            </h3>
+
+
+            <p>
+
+                Modern educational websites और
+                digital learning experiences बनाने
+                का प्रयास।
+
+            </p>
+
+
+            <div class="social-links">
+
+                <a href="#"
+                   aria-label="YouTube">
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                </a>
+
+
+                <a href="#"
+                   aria-label="Instagram">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Quick Links
+            </h4>
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="videos.html">
+                Videos
+            </a>
+
+
+            <a href="objectives.html">
+                Objectives
+            </a>
+
+
+            <a href="quiz.html">
+                Quiz
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Information
+            </h4>
+
+
+            <a href="about.html">
+                About Us
+            </a>
+
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                Learning
+            </h4>
+
+
+            <a href="objectives.html">
+                V.V.I Objectives
+            </a>
+
+
+            <a href="objectives.html">
+                PYQ Objectives
+            </a>
+
+
+            <a href="quiz.html">
+                Chapter Wise Quiz
+            </a>
+
+        </div>
+
+
+    </div>
+
 
 
     <div class="footer-bottom">
 
-      <p>
-        © <span id="year"></span> Chemistry Point. All Rights Reserved.
-      </p>
+        <div class="container">
 
-      <p>
-        Developed by <strong>Code With Piyush</strong>
-      </p>
+            <p>
+                © 2026 Code With Piyush.
+                All Rights Reserved.
+            </p>
+
+
+            <p>
+                Built with ❤️
+            </p>
+
+        </div>
 
     </div>
 
-  </footer>
+</footer>
 
 
-  <script>
-    /* =========================================
-       THEME
-    ========================================== */
 
-    const body = document.body;
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-    const themeToggle = document.getElementById("themeToggle");
-    const mobileThemeToggle =
-      document.getElementById("mobileThemeToggle");
-
-    function applyTheme(theme) {
-
-      const isLight = theme === "light";
-
-      body.classList.toggle("light-mode", isLight);
-
-      const icon = isLight
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
-
-      themeToggle.innerHTML = icon;
-      mobileThemeToggle.innerHTML = icon;
-
-      themeToggle.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark mode" : "Switch to light mode"
-      );
-
-      mobileThemeToggle.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark mode" : "Switch to light mode"
-      );
-    }
-
-    const savedTheme =
-      localStorage.getItem("chemistryPointTheme") || "dark";
-
-    applyTheme(savedTheme);
-
-    function toggleTheme() {
-
-      const nextTheme =
-        body.classList.contains("light-mode")
-          ? "dark"
-          : "light";
-
-      localStorage.setItem(
-        "chemistryPointTheme",
-        nextTheme
-      );
-
-      applyTheme(nextTheme);
-    }
-
-    themeToggle.addEventListener("click", toggleTheme);
-    mobileThemeToggle.addEventListener("click", toggleTheme);
+<script>
 
 
-    /* =========================================
+    /* ==========================================
        MOBILE MENU
     ========================================== */
 
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileNav = document.getElementById("mobileNav");
+    const menuBtn =
+        document.getElementById("menuBtn");
 
-    function openMenu() {
 
-      mobileNav.classList.add("active");
-      mobileNav.style.setProperty(
-        "display",
-        "flex",
-        "important"
-      );
+    const mobileNav =
+        document.getElementById("mobileNav");
 
-      menuBtn.innerHTML =
-        '<i class="fa-solid fa-xmark"></i>';
 
-      menuBtn.setAttribute(
-        "aria-label",
-        "Close menu"
-      );
+    menuBtn.addEventListener("click", () => {
 
-      menuBtn.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-    }
+        mobileNav.classList.toggle("show");
 
-    function closeMenu() {
 
-      mobileNav.classList.remove("active");
-      mobileNav.style.setProperty(
-        "display",
-        "none",
-        "important"
-      );
+        const icon =
+            menuBtn.querySelector("i");
 
-      menuBtn.innerHTML =
-        '<i class="fa-solid fa-bars"></i>';
 
-      menuBtn.setAttribute(
-        "aria-label",
-        "Open menu"
-      );
+        if (
+            mobileNav.classList.contains("show")
+        ) {
 
-      menuBtn.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-    }
+            icon.classList.remove("fa-bars");
 
-    menuBtn.addEventListener("click", function (event) {
+            icon.classList.add("fa-xmark");
 
-      event.preventDefault();
-      event.stopPropagation();
+        } else {
 
-      if (mobileNav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
 
     });
 
-    mobileNav
-      .querySelectorAll("a")
-      .forEach(function(link) {
-
-        link.addEventListener("click", function () {
-          closeMenu();
-        });
-
-      });
-
-    /* Keep the state correct when screen size changes. */
-    window.addEventListener("resize", function () {
-
-      if (window.innerWidth > 900) {
-        mobileNav.classList.remove("active");
-        mobileNav.style.removeProperty("display");
-
-        menuBtn.innerHTML =
-          '<i class="fa-solid fa-bars"></i>';
-
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.setAttribute("aria-label", "Open menu");
-      }
-
-    });
-
-    /* Start closed on mobile. */
-    closeMenu();
 
 
-    /* =========================================
-       CHAPTER NAME
-       Standalone only — no page connection yet.
+    /* ==========================================
+       CONTACT FORM
     ========================================== */
 
-    const chapterNames = {
-
-      "solid-state":
-        "Solid State",
-
-      "solutions":
-        "Solutions",
-
-      "electrochemistry":
-        "Electrochemistry",
-
-      "chemical-kinetics":
-        "Chemical Kinetics",
-
-      "surface-chemistry":
-        "Surface Chemistry",
-
-      "d-and-f-block":
-        "D & F Block Elements",
-
-      "coordination-compounds":
-        "Coordination Compounds",
-
-      "haloalkanes-haloarenes":
-        "Haloalkanes & Haloarenes",
-
-      "alcohols-phenols-ethers":
-        "Alcohols, Phenols & Ethers",
-
-      "aldehydes-ketones-carboxylic-acids":
-        "Aldehydes, Ketones & Carboxylic Acids",
-
-      "amines":
-        "Amines",
-
-      "biomolecules":
-        "Biomolecules"
-    };
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    const chapter =
-      params.get("chapter");
-
-    if (chapter && chapterNames[chapter]) {
-
-      document.getElementById(
-        "chapterName"
-      ).textContent =
-        chapterNames[chapter];
-
-    } else {
-
-      document.getElementById(
-        "chapterName"
-      ).textContent =
-        "All Chemistry Chapters";
-
-    }
+    const contactForm =
+        document.getElementById("contactForm");
 
 
-    /* =========================================
-       YEAR
-    ========================================== */
+    contactForm.addEventListener(
+        "submit",
+        function(event) {
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+            event.preventDefault();
+
+
+            /*
+                Firebase integration बाद में होगी.
+
+                Form data:
+                name
+                email
+                message
+
+                Firebase Firestore / Realtime Database
+                में save किया जाएगा.
+            */
+
+
+            alert(
+                "Message form ready. Firebase connection will be added later."
+            );
+
+
+            contactForm.reset();
+
+        }
+    );
+
+</script>
+
 
 </body>
+
 </html>
