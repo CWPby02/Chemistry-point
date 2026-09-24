@@ -2140,129 +2140,76 @@
 
         /* =========================================
            MOBILE MENU
-        ========================================= */
+        ========================================== */
 
-        const menuBtn =
-            document.getElementById("menuBtn");
+        document.addEventListener("DOMContentLoaded", function () {
 
-        const mobileNav =
-            document.getElementById("mobileNav");
+            const menuBtn = document.getElementById("menuBtn");
+            const mobileNav = document.getElementById("mobileNav");
 
+            if (!menuBtn || !mobileNav) return;
 
-        if (menuBtn && mobileNav) {
+            const icon = menuBtn.querySelector("i");
+            const mobileLinks = mobileNav.querySelectorAll("a");
 
-            menuBtn.addEventListener(
-                "click",
-                function () {
+            function openMenu() {
+                mobileNav.classList.add("active");
+                mobileNav.style.setProperty("display", "flex", "important");
 
-                    const isOpen =
-                        mobileNav.classList.toggle(
-                            "active"
-                        );
-
-
-                    const icon =
-                        menuBtn.querySelector("i");
-
-
-                    if (isOpen) {
-
-                        icon.classList.remove(
-                            "fa-bars"
-                        );
-
-                        icon.classList.add(
-                            "fa-xmark"
-                        );
-
-
-                        menuBtn.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-
-                        menuBtn.setAttribute(
-                            "aria-label",
-                            "Close menu"
-                        );
-
-                    } else {
-
-                        icon.classList.remove(
-                            "fa-xmark"
-                        );
-
-                        icon.classList.add(
-                            "fa-bars"
-                        );
-
-
-                        menuBtn.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        menuBtn.setAttribute(
-                            "aria-label",
-                            "Open menu"
-                        );
-
-                    }
-
+                if (icon) {
+                    icon.classList.remove("fa-bars");
+                    icon.classList.add("fa-xmark");
                 }
-            );
 
+                menuBtn.setAttribute("aria-expanded", "true");
+                menuBtn.setAttribute("aria-label", "Close menu");
+            }
 
-            /* Close mobile menu
-               after clicking link */
+            function closeMenu() {
+                mobileNav.classList.remove("active");
+                mobileNav.style.setProperty("display", "none", "important");
 
-            const mobileLinks =
-                mobileNav.querySelectorAll("a");
-
-
-            mobileLinks.forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            mobileNav.classList.remove(
-                                "active"
-                            );
-
-
-                            const icon =
-                                menuBtn.querySelector("i");
-
-
-                            icon.classList.remove(
-                                "fa-xmark"
-                            );
-
-                            icon.classList.add(
-                                "fa-bars"
-                            );
-
-
-                            menuBtn.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-
-                            menuBtn.setAttribute(
-                                "aria-label",
-                                "Open menu"
-                            );
-
-                        }
-                    );
-
+                if (icon) {
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
                 }
-            );
 
-        }
+                menuBtn.setAttribute("aria-expanded", "false");
+                menuBtn.setAttribute("aria-label", "Open menu");
+            }
 
+            function toggleMenu(event) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                const isOpen = mobileNav.classList.contains("active");
+
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }
+
+            menuBtn.addEventListener("click", toggleMenu);
+
+            mobileLinks.forEach(function (link) {
+                link.addEventListener("click", function () {
+                    closeMenu();
+                });
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 900) {
+                    closeMenu();
+                    mobileNav.style.removeProperty("display");
+                }
+            });
+
+            closeMenu();
+        });
 
 
         /* =========================================
