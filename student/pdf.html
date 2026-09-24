@@ -1,935 +1,892 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>PDF Study Material | Chemistry Point</title>
-  <meta name="description" content="Chemistry Point chapter-wise PDF study material.">
+    <title>Objectives | Chemistry Point</title>
 
-  <link rel="stylesheet" href="../assets/css/root.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-  <link rel="stylesheet"
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <style>
-    /* =========================================
-       PDF PAGE
-    ========================================= */
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
 
-    .pdf-page {
-      min-height: calc(100vh - 80px);
-      padding: 110px 0 70px;
-      background: var(--dark-bg);
-    }
 
-    .pdf-container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    <style>
 
-    .pdf-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 42px;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .pdf-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 15px;
-      color: var(--primary-light);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-    }
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
 
-    .pdf-header h1 {
-      margin: 0 0 13px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.2;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    .pdf-header h1 span {
-      color: var(--primary-light);
-    }
 
-    .pdf-header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
+        /* =========================
+           HEADER
+        ========================= */
 
-    .chapter-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: fit-content;
-      max-width: 100%;
-      margin: 20px auto 0;
-      padding: 10px 17px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--dark-card);
-      color: var(--white);
-      font-size: 13px;
-      font-weight: 600;
-    }
+        .objective-header {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a8a
+            );
 
-    .chapter-info i {
-      color: var(--primary-light);
-    }
+            padding: 18px 20px;
+            color: white;
+        }
 
-    .pdf-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
+        .header-inner {
+            width: min(1100px, 92%);
+            margin: auto;
 
-    .pdf-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-height: 330px;
-      padding: 26px 23px 22px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--dark-card);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .pdf-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(
-        90deg,
-        var(--primary-dark),
-        var(--primary-light),
-        var(--primary-dark)
-      );
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
-    .pdf-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(217, 154, 22, .55);
-      box-shadow: 0 20px 42px rgba(0, 0, 0, .22);
-    }
+            color: white;
+            font-weight: 700;
+            font-size: 17px;
+        }
 
-    .pdf-icon {
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 19px;
-      border: 1px solid rgba(217, 154, 22, .25);
-      border-radius: 15px;
-      background: rgba(217, 154, 22, .11);
-      color: var(--primary-light);
-      font-size: 24px;
-    }
+        .brand img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
 
-    .pdf-card h2 {
-      margin: 0 0 9px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: 20px;
-      line-height: 1.35;
-    }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
 
-    .pdf-card p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.75;
-    }
+            color: rgba(255,255,255,.9);
+            font-size: 13px;
 
-    .pdf-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      width: fit-content;
-      margin-top: 17px;
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-    }
+            transition: .25s;
+        }
 
-    .pdf-status i {
-      color: var(--primary-light);
-    }
+        .back-btn:hover {
+            color: white;
+            transform: translateX(-3px);
+        }
 
-    .pdf-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: auto;
-      padding-top: 23px;
-    }
 
-    .pdf-btn {
-      min-height: 43px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      transition: .25s ease;
-    }
+        /* =========================
+           HERO
+        ========================= */
 
-    .pdf-btn-view {
-      color: var(--white);
-      border: 1px solid var(--border);
-      background: transparent;
-    }
+        .objective-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
 
-    .pdf-btn-view:hover {
-      color: var(--primary-light);
-      border-color: var(--primary-light);
-    }
+            color: white;
 
-    .pdf-btn-download {
-      color: #111;
-      border: 1px solid var(--primary-light);
-      background: var(--primary-light);
-    }
+            padding: 35px 20px 70px;
 
-    .pdf-btn-download:hover {
-      border-color: var(--primary);
-      background: var(--primary);
-      transform: translateY(-1px);
-    }
+            text-align: center;
+        }
 
-    .pdf-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      max-width: 850px;
-      margin: 28px auto 0;
-      padding: 15px 17px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--dark-card);
-    }
+        .hero-icon {
+            width: 75px;
+            height: 75px;
 
-    .pdf-note i {
-      margin-top: 2px;
-      color: var(--primary-light);
-    }
+            margin: 0 auto 18px;
 
-    .pdf-note p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    /* Light mode */
-    body.light-mode .pdf-page {
-      background: #f7f7f8;
-    }
+            border-radius: 20px;
 
-    body.light-mode .pdf-header h1,
-    body.light-mode .pdf-card h2 {
-      color: #17191c;
-    }
+            background: rgba(255,255,255,.12);
 
-    body.light-mode .pdf-header p,
-    body.light-mode .pdf-card p,
-    body.light-mode .pdf-note p {
-      color: #666b74;
-    }
+            border: 1px solid rgba(255,255,255,.2);
 
-    body.light-mode .chapter-info,
-    body.light-mode .pdf-card,
-    body.light-mode .pdf-note {
-      background: #fff;
-      border-color: #e4e5e8;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, .07);
-    }
+            font-size: 31px;
+        }
 
-    body.light-mode .pdf-btn-view {
-      color: #17191c;
-      border-color: #dedfe3;
-    }
+        .objective-hero h1 {
+            margin: 0 0 8px;
 
-    body.light-mode .pdf-btn-view:hover {
-      color: var(--primary-dark);
-      border-color: var(--primary);
-    }
+            font-size: clamp(27px, 5vw, 38px);
 
-    /* =========================================
-       MOBILE NAV - SOLID BACKGROUND
-    ========================================= */
+            font-weight: 800;
+        }
 
-    @media (max-width: 900px) {
-      .pdf-page {
-        padding: 92px 20px 55px;
-      }
+        .objective-hero p {
+            margin: 0;
 
-      .pdf-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+            color: rgba(255,255,255,.78);
 
-      /* Force the mobile menu state on this page.
-         Both CSS and JS use the SAME class: active. */
-      .mobile-nav {
-        display: none !important;
-        position: fixed !important;
-        top: 68px !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 10px 20px 20px !important;
-        background: #13161a !important;
-        background-color: #13161a !important;
-        opacity: 1 !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border-bottom: 1px solid var(--border) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,.20) !important;
-        z-index: 100000 !important;
-        max-height: calc(100vh - 68px);
-        overflow-y: auto;
-        isolation: isolate;
-      }
+            font-size: 14px;
+        }
 
-      .mobile-nav.active {
-        display: flex !important;
-      }
 
-      .mobile-nav a {
-        display: flex !important;
-        align-items: center;
-        min-height: 48px;
-        padding: 12px 8px;
-        color: var(--white) !important;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-      }
+        /* =========================
+           MAIN
+        ========================= */
 
-      .mobile-nav a:last-child {
-        border-bottom: 0;
-      }
+        .objective-container {
+            width: min(1100px, 92%);
+            margin: -35px auto 60px;
 
-      body.light-mode .mobile-nav {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
+            position: relative;
+        }
 
-      body.light-mode .mobile-nav a {
-        color: #17191c !important;
-        border-bottom-color: #e4e5e8;
-      }
-    }
+        .content-card {
+            background: white;
 
-    @media (max-width: 600px) {
-      .pdf-page {
-        padding: 88px 15px 45px;
-      }
+            border-radius: 22px;
 
-      .pdf-header {
-        margin-bottom: 30px;
-      }
+            padding: 35px;
 
-      .pdf-header h1 {
-        font-size: 29px;
-      }
+            box-shadow:
+                0 15px 45px
+                rgba(15,23,42,.08);
 
-      .pdf-header p {
-        font-size: 13px;
-      }
+            border: 1px solid #edf0f5;
+        }
 
-      .chapter-info {
-        font-size: 12px;
-        padding: 9px 13px;
-      }
 
-      .pdf-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+        /* =========================
+           TITLE
+        ========================= */
 
-      .pdf-card {
-        min-height: 0;
-        padding: 23px 19px 20px;
-      }
+        .content-heading {
+            display: flex;
 
-      .pdf-note {
-        padding: 13px;
-      }
-    }
+            align-items: center;
 
-    @media (max-width: 380px) {
-      .pdf-actions {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+            gap: 15px;
+
+            margin-bottom: 28px;
+
+            padding-bottom: 22px;
+
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .heading-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 20px;
+        }
+
+        .content-heading h2 {
+            margin: 0 0 4px;
+
+            font-size: 22px;
+        }
+
+        .content-heading p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           PDF AREA
+        ========================= */
+
+        .pdf-area {
+            min-height: 300px;
+
+            border: 2px dashed #dbe3ef;
+
+            border-radius: 17px;
+
+            background: #f8fafc;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+        .pdf-placeholder {
+            max-width: 500px;
+        }
+
+        .pdf-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 18px;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .pdf-placeholder h3 {
+            margin: 0 0 9px;
+
+            font-size: 20px;
+        }
+
+        .pdf-placeholder p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .action-buttons {
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: .25s;
+        }
+
+        .back-chapter {
+            background: #111827;
+
+            color: white;
+        }
+
+        .back-chapter:hover {
+            background: #1f2937;
+
+            transform: translateY(-2px);
+        }
+
+        .download-btn {
+            background: #2563eb;
+
+            color: white;
+
+            opacity: .55;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           NOTICE
+        ========================= */
+
+        .notice {
+            margin-top: 25px;
+
+            display: flex;
+
+            gap: 13px;
+
+            align-items: flex-start;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+
+            border: 1px solid #dbeafe;
+        }
+
+        .notice i {
+            color: #2563eb;
+
+            font-size: 18px;
+
+            margin-top: 2px;
+        }
+
+        .notice h4 {
+            margin: 0 0 4px;
+
+            font-size: 13px;
+        }
+
+        .notice p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .objective-footer {
+            text-align: center;
+
+            padding: 25px 15px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            border-top: 1px solid #e5e7eb;
+
+            background: white;
+        }
+
+        .objective-footer strong {
+            color: #111827;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+                width: 92%;
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .objective-hero {
+                padding: 30px 15px 60px;
+            }
+
+            .objective-container {
+                width: 92%;
+            }
+
+            .content-card {
+                padding: 22px 17px;
+            }
+
+            .content-heading h2 {
+                font-size: 19px;
+            }
+
+            .pdf-area {
+                min-height: 270px;
+                padding: 25px 15px;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
 
-  <header class="site-header">
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-    <div class="container nav-container">
+    <header class="objective-header">
 
-      <a href="../index.html" class="brand">
-        <img
-          src="../assets/images/logo/logo.png"
-          alt="Chemistry Point Logo">
+        <div class="header-inner">
 
-        <div class="brand-text">
-          <strong>Chemistry Point</strong>
-          <span>By Pardeep Sir</span>
-        </div>
-      </a>
+            <a href="../index.html" class="brand">
 
-      <nav class="main-nav">
+                <img
+                    src="../assets/images/logo/logo.png"
+                    alt="Chemistry Point">
 
-        <a href="../index.html">Home</a>
-        <a href="../videos.html">Videos</a>
-        <a href="../objectives.html" class="active">Objectives</a>
-        <a href="../quiz.html">Quiz</a>
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
+                <span>
+                    Chemistry Point
+                </span>
 
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-
-      </nav>
-
-      <div class="mobile-actions">
-
-        <button
-          class="theme-toggle mobile-theme-toggle"
-          id="mobileThemeToggle"
-          type="button"
-          aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-
-        <button
-          class="menu-btn"
-          id="menuBtn"
-          type="button"
-          aria-label="Open menu"
-          aria-expanded="false">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="mobile-nav" id="mobileNav">
-
-      <a href="../index.html">Home</a>
-      <a href="../videos.html">Videos</a>
-      <a href="../objectives.html" class="active">Objectives</a>
-      <a href="../quiz.html">Quiz</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
-
-    </div>
-
-  </header>
+            </a>
 
 
-  <!-- =========================================
-       PDF CONTENT
-  ========================================== -->
+            <a
+                href="chapter.html"
+                id="backButton"
+                class="back-btn">
 
-  <main class="pdf-page">
+                <i class="fa-solid fa-arrow-left"></i>
 
-    <div class="pdf-container">
+                Back to Chapter
 
-      <section class="pdf-header">
+            </a>
 
-        <div class="pdf-label">
-          <i class="fa-solid fa-file-pdf"></i>
-          Study Material
         </div>
 
-        <h1>
-          Chemistry <span>PDFs</span>
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="objective-hero">
+
+        <div class="hero-icon">
+
+            <i
+                id="heroIcon"
+                class="fa-solid fa-star">
+            </i>
+
+        </div>
+
+
+        <h1 id="objectiveTitle">
+            V.V.I Objectives
         </h1>
 
-        <p>
-          Chapter-wise objective study material एक ही जगह से
-          पढ़ें और बाद में PDF उपलब्ध होने पर View या Download करें।
+
+        <p id="chapterName">
+            Solid State
         </p>
 
-        <div class="chapter-info">
-          <i class="fa-solid fa-book-open"></i>
-          <span id="chapterName">Chemistry Chapter</span>
+    </section>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="objective-container">
+
+        <div class="content-card">
+
+
+            <!-- Heading -->
+
+            <div class="content-heading">
+
+                <div class="heading-icon">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2 id="sectionHeading">
+                        V.V.I Objectives
+                    </h2>
+
+                    <p>
+                        Chapter-wise objective study material
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PDF -->
+
+            <div class="pdf-area">
+
+                <div class="pdf-placeholder">
+
+                    <div class="pdf-icon">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                    </div>
+
+
+                    <h3 id="pdfTitle">
+                        PDF Study Material
+                    </h3>
+
+
+                    <p id="pdfDescription">
+                        इस section का PDF study material
+                        यहाँ दिखाई देगा।
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Buttons -->
+
+            <div class="action-buttons">
+
+                <a
+                    id="backChapter"
+                    href="chapter.html"
+                    class="action-btn back-chapter">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Chapter
+
+                </a>
+
+
+                <span
+                    class="action-btn download-btn">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download PDF
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Notice -->
+
+            <div class="notice">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <div>
+
+                    <h4>
+                        Study Material
+                    </h4>
+
+                    <p>
+                        PDF links बाद में Firebase Database
+                        से load किए जाएंगे। अभी यह page
+                        केवल objective section और navigation
+                        के लिए तैयार किया गया है।
+                    </p>
+
+                </div>
+
+            </div>
+
+
         </div>
 
-      </section>
+    </main>
 
 
-      <section class="pdf-grid">
 
-        <!-- V.V.I -->
-        <article class="pdf-card">
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
-          <div class="pdf-icon">
-            <i class="fa-solid fa-star"></i>
-          </div>
+    <footer class="objective-footer">
 
-          <h2>V.V.I Objectives</h2>
+        © <span id="year"></span>
 
-          <p>
-            परीक्षा के लिए सबसे महत्वपूर्ण objective questions
-            का study PDF.
-          </p>
+        <strong>
+            Code With Piyush
+        </strong>
 
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
+        . All Rights Reserved.
 
-          <div class="pdf-actions">
+    </footer>
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
 
-          </div>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-        </article>
+    <script>
 
+        /* Current Year */
 
-        <!-- PYQ -->
-        <article class="pdf-card">
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
 
-          <div class="pdf-icon">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
 
-          <h2>PYQ Objectives</h2>
 
-          <p>
-            Previous Year Questions से जुड़े objective
-            questions का study PDF.
-          </p>
+        /* URL Parameters */
 
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
 
-          <div class="pdf-actions">
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
+        const chapter =
+            params.get("chapter") || "solid-state";
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
 
-          </div>
+        const type =
+            params.get("type") || "vvi";
 
-        </article>
 
 
-        <!-- ALL -->
-        <article class="pdf-card">
+        /* Chapter Names */
 
-          <div class="pdf-icon">
-            <i class="fa-solid fa-layer-group"></i>
-          </div>
+        const chapters = {
 
-          <h2>All Objectives</h2>
+            "solid-state":
+                "Solid State",
 
-          <p>
-            इस chapter के सभी available objective questions
-            का complete study PDF.
-          </p>
+            "solutions":
+                "Solutions",
 
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
+            "electrochemistry":
+                "Electrochemistry",
 
-          <div class="pdf-actions">
+            "chemical-kinetics":
+                "Chemical Kinetics",
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
+            "surface-chemistry":
+                "Surface Chemistry",
 
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
+            "d-and-f-block":
+                "d and f Block Elements",
 
-          </div>
+            "coordination-compounds":
+                "Coordination Compounds",
 
-        </article>
+            "haloalkanes-haloarenes":
+                "Haloalkanes and Haloarenes",
 
-      </section>
+            "alcohols-phenols-ethers":
+                "Alcohols, Phenols and Ethers",
 
+            "aldehydes-ketones-carboxylic-acids":
+                "Aldehydes, Ketones and Carboxylic Acids",
 
-      <div class="pdf-note">
+            "amines":
+                "Amines",
 
-        <i class="fa-solid fa-circle-info"></i>
+            "biomolecules":
+                "Biomolecules"
 
-        <p>
-          अभी इस page पर कोई Firebase या Google Drive connection नहीं है।
-          PDF links बाद में backend/admin system से जोड़े जाएंगे।
-        </p>
+        };
 
-      </div>
 
-    </div>
 
-  </main>
+        /* Objective Types */
 
+        const objectiveTypes = {
 
-  <!-- =========================================
-       FOOTER
-  ========================================== -->
+            "vvi": {
 
-  <footer class="site-footer">
+                title: "V.V.I Objectives",
 
-    <div class="container footer-grid">
+                description:
+                    "परीक्षा के लिए सबसे महत्वपूर्ण objective questions.",
 
-      <div class="footer-brand">
+                icon:
+                    "fa-solid fa-star"
 
-        <a href="../index.html" class="brand">
+            },
 
-          <img
-            src="../assets/images/logo/logo.png"
-            alt="Chemistry Point Logo">
 
-          <div class="brand-text">
-            <strong>Chemistry Point</strong>
-            <span>By Pardeep Sir</span>
-          </div>
+            "pyq": {
 
-        </a>
+                title: "PYQ Objectives",
 
-        <p>
-          Bihar Board Chemistry की बेहतर तैयारी के लिए
-          quality study materials, videos और quizzes।
-        </p>
+                description:
+                    "Previous Year Questions से जुड़े objective questions.",
 
-      </div>
+                icon:
+                    "fa-solid fa-clock-rotate-left"
 
+            },
 
-      <div class="footer-column">
 
-        <h4>Quick Links</h4>
+            "all": {
 
-        <a href="../index.html">Home</a>
-        <a href="../videos.html">Videos</a>
-        <a href="../objectives.html">Objectives</a>
-        <a href="../quiz.html">Quiz</a>
+                title: "All Objectives",
 
-      </div>
+                description:
+                    "इस chapter के सभी available objective questions.",
 
+                icon:
+                    "fa-solid fa-layer-group"
 
-      <div class="footer-column">
+            }
 
-        <h4>Important</h4>
+        };
 
-        <a href="../about.html">About Us</a>
-        <a href="../contact.html">Contact</a>
-        <a href="../objectives.html">Study Material</a>
 
-      </div>
 
-    </div>
+        /* Get Data */
 
+        const currentChapter =
+            chapters[chapter] || "Solid State";
 
-    <div class="footer-bottom">
 
-      <p>
-        © <span id="year"></span> Chemistry Point. All Rights Reserved.
-      </p>
+        const currentType =
+            objectiveTypes[type] ||
+            objectiveTypes.vvi;
 
-      <p>
-        Developed by <strong>Code With Piyush</strong>
-      </p>
 
-    </div>
 
-  </footer>
+        /* Update Page */
 
+        document.title =
+            currentType.title +
+            " | " +
+            currentChapter +
+            " | Chemistry Point";
 
-  <script>
-    /* =========================================
-       THEME
-    ========================================== */
 
-    const body = document.body;
+        document.getElementById(
+            "chapterName"
+        ).textContent =
+            currentChapter;
 
-    const themeToggle = document.getElementById("themeToggle");
-    const mobileThemeToggle =
-      document.getElementById("mobileThemeToggle");
 
-    function applyTheme(theme) {
+        document.getElementById(
+            "objectiveTitle"
+        ).textContent =
+            currentType.title;
 
-      const isLight = theme === "light";
 
-      body.classList.toggle("light-mode", isLight);
+        document.getElementById(
+            "sectionHeading"
+        ).textContent =
+            currentType.title;
 
-      const icon = isLight
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
 
-      themeToggle.innerHTML = icon;
-      mobileThemeToggle.innerHTML = icon;
+        document.getElementById(
+            "pdfTitle"
+        ).textContent =
+            currentType.title +
+            " PDF";
 
-      themeToggle.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark mode" : "Switch to light mode"
-      );
 
-      mobileThemeToggle.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark mode" : "Switch to light mode"
-      );
-    }
+        document.getElementById(
+            "pdfDescription"
+        ).textContent =
+            currentType.description;
 
-    const savedTheme =
-      localStorage.getItem("chemistryPointTheme") || "dark";
 
-    applyTheme(savedTheme);
 
-    function toggleTheme() {
+        /* Change Icon */
 
-      const nextTheme =
-        body.classList.contains("light-mode")
-          ? "dark"
-          : "light";
+        const heroIcon =
+            document.getElementById("heroIcon");
 
-      localStorage.setItem(
-        "chemistryPointTheme",
-        nextTheme
-      );
+        heroIcon.className =
+            currentType.icon;
 
-      applyTheme(nextTheme);
-    }
 
-    themeToggle.addEventListener("click", toggleTheme);
-    mobileThemeToggle.addEventListener("click", toggleTheme);
 
+        /* Back Links */
 
-    /* =========================================
-       MOBILE MENU
-    ========================================== */
+        const chapterURL =
+            "chapter.html?chapter=" +
+            encodeURIComponent(chapter);
 
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileNav = document.getElementById("mobileNav");
 
-    function openMenu() {
+        document.getElementById(
+            "backButton"
+        ).href =
+            chapterURL;
 
-      mobileNav.classList.add("active");
 
-      menuBtn.innerHTML =
-        '<i class="fa-solid fa-xmark"></i>';
+        document.getElementById(
+            "backChapter"
+        ).href =
+            chapterURL;
 
-      menuBtn.setAttribute(
-        "aria-label",
-        "Close menu"
-      );
+    </script>
 
-      menuBtn.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-    }
-
-    function closeMenu() {
-
-      mobileNav.classList.remove("active");
-
-      menuBtn.innerHTML =
-        '<i class="fa-solid fa-bars"></i>';
-
-      menuBtn.setAttribute(
-        "aria-label",
-        "Open menu"
-      );
-
-      menuBtn.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-    }
-
-    menuBtn.addEventListener("click", function (event) {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (mobileNav.classList.contains("active")) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-
-    });
-
-    mobileNav
-      .querySelectorAll("a")
-      .forEach(function(link) {
-
-        link.addEventListener("click", function () {
-          closeMenu();
-        });
-
-      });
-
-    /* Keep the state correct when screen size changes. */
-    window.addEventListener("resize", function () {
-
-      if (window.innerWidth > 900) {
-        mobileNav.classList.remove("active");
-        mobileNav.style.removeProperty("display");
-
-        menuBtn.innerHTML =
-          '<i class="fa-solid fa-bars"></i>';
-
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.setAttribute("aria-label", "Open menu");
-      }
-
-    });
-
-    /* Start closed on mobile. */
-    closeMenu();
-
-
-    /* =========================================
-       CHAPTER NAME
-       Standalone only — no page connection yet.
-    ========================================== */
-
-    const chapterNames = {
-
-      "solid-state":
-        "Solid State",
-
-      "solutions":
-        "Solutions",
-
-      "electrochemistry":
-        "Electrochemistry",
-
-      "chemical-kinetics":
-        "Chemical Kinetics",
-
-      "surface-chemistry":
-        "Surface Chemistry",
-
-      "d-and-f-block":
-        "D & F Block Elements",
-
-      "coordination-compounds":
-        "Coordination Compounds",
-
-      "haloalkanes-haloarenes":
-        "Haloalkanes & Haloarenes",
-
-      "alcohols-phenols-ethers":
-        "Alcohols, Phenols & Ethers",
-
-      "aldehydes-ketones-carboxylic-acids":
-        "Aldehydes, Ketones & Carboxylic Acids",
-
-      "amines":
-        "Amines",
-
-      "biomolecules":
-        "Biomolecules"
-    };
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    const chapter =
-      params.get("chapter");
-
-    if (chapter && chapterNames[chapter]) {
-
-      document.getElementById(
-        "chapterName"
-      ).textContent =
-        chapterNames[chapter];
-
-    } else {
-
-      document.getElementById(
-        "chapterName"
-      ).textContent =
-        "All Chemistry Chapters";
-
-    }
-
-
-    /* =========================================
-       YEAR
-    ========================================== */
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
 
 </body>
+
 </html>
