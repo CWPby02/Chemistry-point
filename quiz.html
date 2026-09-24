@@ -579,7 +579,7 @@
 
             background: transparent;
 
-            color: var(--text-primary);
+            color: var(--white);
 
             cursor: pointer;
 
@@ -748,9 +748,6 @@
                 display: flex !important;
 
                 flex-shrink: 0;
-                position: relative;
-                z-index: 100002;
-                pointer-events: auto !important;
             }
 
             .mobile-nav {
@@ -773,7 +770,7 @@
                     10px 20px 20px !important;
 
                 background:
-                    var(--bg-card) !important;
+                    var(--dark-card) !important;
 
                 border-bottom:
                     1px solid var(--border) !important;
@@ -801,7 +798,7 @@
 
                 padding: 15px 8px !important;
 
-                color: var(--text-primary) !important;
+                color: var(--white) !important;
 
                 text-decoration: none;
 
@@ -858,8 +855,7 @@
                 border-color: #e1e3e7;
             }
 
-            body.light-mode .mobile-nav,
-            body.light-mode .mobile-nav.active {
+            body.light-mode .mobile-nav {
                 background: #ffffff !important;
             }
 
@@ -2151,16 +2147,14 @@
             const menuBtn = document.getElementById("menuBtn");
             const mobileNav = document.getElementById("mobileNav");
 
-            if (!menuBtn || !mobileNav) {
-                return;
-            }
+            if (!menuBtn || !mobileNav) return;
 
             const icon = menuBtn.querySelector("i");
             const mobileLinks = mobileNav.querySelectorAll("a");
 
             function openMenu() {
                 mobileNav.classList.add("active");
-                mobileNav.style.display = "flex";
+                mobileNav.style.setProperty("display", "flex", "important");
 
                 if (icon) {
                     icon.classList.remove("fa-bars");
@@ -2173,7 +2167,7 @@
 
             function closeMenu() {
                 mobileNav.classList.remove("active");
-                mobileNav.style.display = "none";
+                mobileNav.style.setProperty("display", "none", "important");
 
                 if (icon) {
                     icon.classList.remove("fa-xmark");
@@ -2184,16 +2178,22 @@
                 menuBtn.setAttribute("aria-label", "Open menu");
             }
 
-            menuBtn.addEventListener("click", function (event) {
-                event.preventDefault();
-                event.stopPropagation();
+            function toggleMenu(event) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
 
-                if (mobileNav.classList.contains("active")) {
+                const isOpen = mobileNav.classList.contains("active");
+
+                if (isOpen) {
                     closeMenu();
                 } else {
                     openMenu();
                 }
-            });
+            }
+
+            menuBtn.addEventListener("click", toggleMenu);
 
             mobileLinks.forEach(function (link) {
                 link.addEventListener("click", function () {
@@ -2203,16 +2203,8 @@
 
             window.addEventListener("resize", function () {
                 if (window.innerWidth > 900) {
-                    mobileNav.classList.remove("active");
+                    closeMenu();
                     mobileNav.style.removeProperty("display");
-
-                    if (icon) {
-                        icon.classList.remove("fa-xmark");
-                        icon.classList.add("fa-bars");
-                    }
-
-                    menuBtn.setAttribute("aria-expanded", "false");
-                    menuBtn.setAttribute("aria-label", "Open menu");
                 }
             });
 
