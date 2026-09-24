@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chapter PDFs | Chemistry Point</title>
+  <meta name="description" content="Chemistry Point chapter-wise study PDFs for chemistry students.">
+
+  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    /* ==============================
+       PDF PAGE
+    ============================== */
+
+    .pdf-page {
+      min-height: calc(100vh - 80px);
+      padding: 110px 0 70px;
+      background: var(--dark-bg);
+    }
+
+    .pdf-top {
+      max-width: 820px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .pdf-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: var(--primary-light);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: .25s ease;
+    }
+
+    .pdf-back:hover {
+      color: var(--white);
+      transform: translateX(-3px);
+    }
+
+    .pdf-top h1 {
+      margin: 0 0 12px;
+      font-family: Poppins, sans-serif;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.2;
+      color: var(--white);
+    }
+
+    .pdf-top h1 span {
+      color: var(--primary-light);
+    }
+
+    .pdf-top p {
+      margin: 0 auto;
+      max-width: 650px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .chapter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 20px;
+      padding: 9px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--dark-card);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .chapter-badge i {
+      color: var(--primary-light);
+    }
+
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pdf-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 24px 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--dark-card);
+      box-shadow: 0 15px 35px rgba(0,0,0,.16);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .pdf-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(217,154,22,.55);
+      box-shadow: 0 20px 42px rgba(0,0,0,.22);
+    }
+
+    .pdf-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary-light), var(--primary-dark));
+    }
+
+    .pdf-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: rgba(217,154,22,.12);
+      border: 1px solid rgba(217,154,22,.25);
+      color: var(--primary-light);
+      font-size: 24px;
+    }
+
+    .pdf-card h2 {
+      margin: 0 0 9px;
+      color: var(--white);
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .pdf-card p {
+      min-height: 51px;
+      margin: 0 0 21px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .pdf-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pdf-btn {
+      flex: 1;
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .pdf-btn-view {
+      color: var(--white);
+      border: 1px solid var(--border);
+      background: transparent;
+    }
+
+    .pdf-btn-view:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .pdf-btn-download {
+      color: #111;
+      background: var(--primary-light);
+      border: 1px solid var(--primary-light);
+    }
+
+    .pdf-btn-download:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .empty-state {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 42px 25px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      background: var(--dark-card);
+    }
+
+    .empty-state i {
+      color: var(--primary-light);
+      font-size: 38px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state h2 {
+      margin: 0 0 8px;
+      color: var(--white);
+      font-family: Poppins, sans-serif;
+      font-size: 21px;
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* Light mode */
+    body.light-mode .pdf-page {
+      background: #f7f7f8;
+    }
+
+    body.light-mode .pdf-top h1,
+    body.light-mode .pdf-card h2,
+    body.light-mode .empty-state h2 {
+      color: #17191c;
+    }
+
+    body.light-mode .pdf-card,
+    body.light-mode .chapter-badge,
+    body.light-mode .empty-state {
+      background: #fff;
+      border-color: #e4e5e8;
+      box-shadow: 0 12px 30px rgba(0,0,0,.07);
+    }
+
+    body.light-mode .pdf-top p,
+    body.light-mode .pdf-card p,
+    body.light-mode .empty-state p {
+      color: #666b74;
+    }
+
+    body.light-mode .pdf-btn-view {
+      color: #17191c;
+      border-color: #dedfe3;
+    }
+
+    body.light-mode .pdf-btn-view:hover {
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .pdf-page {
+        padding: 92px 20px 55px;
+      }
+
+      .pdf-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .pdf-page {
+        padding: 88px 15px 45px;
+      }
+
+      .pdf-top {
+        margin-bottom: 26px;
+      }
+
+      .pdf-top h1 {
+        font-size: 29px;
+      }
+
+      .pdf-top p {
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .pdf-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .pdf-card {
+        padding: 23px 19px 20px;
+      }
+
+      .pdf-card p {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .pdf-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="../index.html" class="brand">
+        <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
+        <span class="brand-text">Chemistry <strong>Point</strong></span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../videos.html">Videos</a>
+        <a href="../objectives.html" class="active">Objectives</a>
+        <a href="../quiz.html">Quiz</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="../index.html">Home</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../objectives.html" class="active">Objectives</a>
+      <a href="../quiz.html">Quiz</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ================= PDF CONTENT ================= -->
+  <main class="pdf-page">
+    <div class="container">
+
+      <div class="pdf-top">
+        <a href="javascript:history.back()" class="pdf-back">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back
+        </a>
+
+        <h1>Study <span>PDFs</span></h1>
+
+        <p>
+          अपने chapter के important study material, V.V.I objectives,
+          PYQ और complete objective PDFs यहाँ से पढ़ें।
+        </p>
+
+        <div class="chapter-badge" id="chapterBadge">
+          <i class="fa-solid fa-book-open"></i>
+          <span id="chapterName">Chapter</span>
+        </div>
+      </div>
+
+      <section class="pdf-grid" id="pdfGrid">
+
+        <!--
+          अभी Google Drive/Firebase connect नहीं किया गया है।
+          नीचे # की जगह बाद में Admin से मिलने वाला Google Drive PDF URL लगाया जाएगा।
+        -->
+
+        <article class="pdf-card">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-star"></i>
+          </div>
+
+          <h2>V.V.I Objectives</h2>
+
+          <p>
+            परीक्षा के लिए सबसे महत्वपूर्ण objective questions का PDF।
+          </p>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view" data-pdf="vvi">
+              <i class="fa-regular fa-eye"></i>
+              View
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download" data-pdf="vvi">
+              <i class="fa-solid fa-download"></i>
+              Download
+            </a>
+          </div>
+        </article>
+
+        <article class="pdf-card">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+
+          <h2>PYQ Objectives</h2>
+
+          <p>
+            Previous Year Questions से जुड़े objective questions का PDF।
+          </p>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view" data-pdf="pyq">
+              <i class="fa-regular fa-eye"></i>
+              View
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download" data-pdf="pyq">
+              <i class="fa-solid fa-download"></i>
+              Download
+            </a>
+          </div>
+        </article>
+
+        <article class="pdf-card">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+
+          <h2>All Objectives</h2>
+
+          <p>
+            इस chapter के सभी available objective questions का PDF।
+          </p>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view" data-pdf="all">
+              <i class="fa-regular fa-eye"></i>
+              View
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download" data-pdf="all">
+              <i class="fa-solid fa-download"></i>
+              Download
+            </a>
+          </div>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>
+          © <span id="year"></span> Chemistry Point. All Rights Reserved.
+        </p>
+
+        <p>
+          Developed by <strong>Code With Piyush</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ================= THEME ================= */
+
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme(theme) {
+      if (theme === "light") {
+        body.classList.add("light-mode");
+        themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        themeToggle.setAttribute("aria-label", "Switch to dark mode");
+      } else {
+        body.classList.remove("light-mode");
+        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        themeToggle.setAttribute("aria-label", "Switch to light mode");
+      }
+    }
+
+    const savedTheme = localStorage.getItem("chemistryPointTheme") || "dark";
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener("click", function () {
+      const nextTheme = body.classList.contains("light-mode") ? "dark" : "light";
+      localStorage.setItem("chemistryPointTheme", nextTheme);
+      applyTheme(nextTheme);
+    });
+
+
+    /* ================= MOBILE MENU ================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    function openMenu() {
+      mobileNav.classList.add("active");
+      mobileNav.style.setProperty("display", "flex", "important");
+
+      menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+      menuBtn.setAttribute("aria-label", "Close menu");
+      menuBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      mobileNav.classList.remove("active");
+      mobileNav.style.setProperty("display", "none", "important");
+
+      menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      menuBtn.setAttribute("aria-label", "Open menu");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    menuBtn.addEventListener("click", function () {
+      if (mobileNav.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    mobileNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
+
+    /* ================= CHAPTER NAME ================= */
+
+    const chapterNames = {
+      "solid-state": "Solid State",
+      "solutions": "Solutions",
+      "electrochemistry": "Electrochemistry",
+      "chemical-kinetics": "Chemical Kinetics",
+      "surface-chemistry": "Surface Chemistry",
+      "d-and-f-block": "D & F Block Elements",
+      "coordination-compounds": "Coordination Compounds",
+      "haloalkanes-haloarenes": "Haloalkanes & Haloarenes",
+      "alcohols-phenols-ethers": "Alcohols, Phenols & Ethers",
+      "aldehydes-ketones-carboxylic-acids": "Aldehydes, Ketones & Carboxylic Acids",
+      "amines": "Amines",
+      "biomolecules": "Biomolecules"
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const chapter = params.get("chapter") || "solid-state";
+    const chapterName = chapterNames[chapter] || "Chemistry Chapter";
+
+    document.getElementById("chapterName").textContent = chapterName;
+
+
+    /* ================= PDF PLACEHOLDER ================= */
+
+    /*
+      अभी backend connect नहीं है।
+
+      बाद में Firebase Realtime Database से data इस तरह आएगा:
+
+      {
+        title: "V.V.I Objectives",
+        viewUrl: "GOOGLE_DRIVE_VIEW_URL",
+        downloadUrl: "GOOGLE_DRIVE_DOWNLOAD_URL"
+      }
+
+      फिलहाल buttons intentionally inactive रखे गए हैं।
+    */
+
+    document.querySelectorAll("[data-pdf]").forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        alert(
+          "PDF अभी available नहीं है।\\n\\n" +
+          "Google Drive + Firebase connect होने के बाद यहाँ से PDF View/Download किया जा सकेगा।"
+        );
+      });
+    });
+
+
+    /* ================= YEAR ================= */
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
