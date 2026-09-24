@@ -569,6 +569,10 @@
 
         .mobile-theme-toggle {
             display: none;
+            background: var(--dark-card);
+            color: var(--primary-light);
+            border-color: var(--border);
+            flex-shrink: 0;
         }
 
 
@@ -761,6 +765,9 @@
                 width: 100% !important;
 
                 display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
 
                 flex-direction: column !important;
 
@@ -787,12 +794,16 @@
                 overflow-y: auto;
             }
 
-            .mobile-nav.active {
+            .mobile-nav.show {
                 display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
             }
 
             .mobile-nav a {
-                display: block !important;
+                display: flex !important;
+                align-items: center !important;
 
                 width: 100% !important;
 
@@ -2153,9 +2164,8 @@
             const mobileLinks = mobileNav.querySelectorAll("a");
 
             function openMenu() {
-                mobileNav.classList.add("active");
-                mobileNav.style.setProperty("display", "flex", "important");
-
+                mobileNav.classList.add("show");
+                
                 if (icon) {
                     icon.classList.remove("fa-bars");
                     icon.classList.add("fa-xmark");
@@ -2166,9 +2176,8 @@
             }
 
             function closeMenu() {
-                mobileNav.classList.remove("active");
-                mobileNav.style.setProperty("display", "none", "important");
-
+                mobileNav.classList.remove("show");
+                
                 if (icon) {
                     icon.classList.remove("fa-xmark");
                     icon.classList.add("fa-bars");
@@ -2184,7 +2193,7 @@
                     event.stopPropagation();
                 }
 
-                const isOpen = mobileNav.classList.contains("active");
+                const isOpen = mobileNav.classList.contains("show");
 
                 if (isOpen) {
                     closeMenu();
@@ -2204,7 +2213,6 @@
             window.addEventListener("resize", function () {
                 if (window.innerWidth > 900) {
                     closeMenu();
-                    mobileNav.style.removeProperty("display");
                 }
             });
 
