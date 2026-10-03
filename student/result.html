@@ -48,10 +48,77 @@
 </main>
 <footer class="site-footer"><div class="container"><p>© <span id="year"></span> Chemistry Point. Developed by <strong>Code With Piyush</strong>.</p></div></footer>
 <script>
-const menuBtn=document.getElementById("menuBtn");const mobileNav=document.getElementById("mobileNav");
-menuBtn.addEventListener("click",()=>{mobileNav.classList.toggle("show");const icon=menuBtn.querySelector("i");if(mobileNav.classList.contains("show")){icon.classList.remove("fa-bars");icon.classList.add("fa-xmark")}else{icon.classList.remove("fa-xmark");icon.classList.add("fa-bars")}});
-document.querySelectorAll(".mobile-nav a").forEach(link=>{link.addEventListener("click",()=>{mobileNav.classList.remove("show");const icon=menuBtn.querySelector("i");icon.classList.remove("fa-xmark");icon.classList.add("fa-bars")})});
-document.getElementById("year").textContent=new Date().getFullYear();
+const params = new URLSearchParams(window.location.search);
+const score = Number(params.get("score"));
+const total = Number(params.get("total"));
+const answered = Number(params.get("answered"));
+const unattempted = Number(params.get("unattempted"));
+const percentage = Number(params.get("percentage"));
+
+if (Number.isFinite(score) && Number.isFinite(total) && total > 0) {
+    const safeScore = Math.max(0, Math.min(score, total));
+    const safeAnswered = Number.isFinite(answered) ? Math.max(0, Math.min(answered, total)) : safeScore;
+    const safeUnattempted = Number.isFinite(unattempted) ? Math.max(0, Math.min(unattempted, total)) : total - safeAnswered;
+    const safePercentage = Number.isFinite(percentage) ? Math.max(0, Math.min(percentage, 100)) : Math.round((safeScore / total) * 100);
+    const wrong = Math.max(0, total - safeScore - safeUnattempted);
+
+    document.getElementById("percentage").textContent = safePercentage + "%";
+    document.getElementById("correctCount").textContent = safeScore;
+    document.getElementById("wrongCount").textContent = wrong;
+    document.getElementById("unattemptedCount").textContent = safeUnattempted;
+
+    const circle = document.getElementById("scoreCircle");
+    if (circle) {
+        circle.style.background = `conic-gradient(var(--primary,#d99a16) 0 ${safePercentage}%, rgba(255,255,255,.08) ${safePercentage}% 100%)`;
+    }
+
+    const message = document.getElementById("resultMessage");
+    const resultText = document.getElementById("resultText");
+    if (safePercentage >= 80) {
+        message.textContent = "Excellent Work! 🎉";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। आपकी preparation अच्छी दिशा में है।`;
+    } else if (safePercentage >= 50) {
+        message.textContent = "Good Attempt! 👍";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। थोड़ा और practice करने से improvement हो सकता है।`;
+    } else {
+        message.textContent = "Keep Practicing! 💪";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। Questions को दोबारा practice करें।`;
+    }
+
+    document.querySelectorAll(".breakdown-item").forEach((item, index) => {
+        const status = item.querySelector(".answer-status");
+        if (!status) return;
+        const values = [safeScore, wrong, safeUnattempted];
+        status.textContent = `${values[index]} ${values[index] === 1 ? "Question" : "Questions"}`;
+    });
+}
+
+const year = document.getElementById("year");
+if (year) year.textContent = new Date().getFullYear();
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileNav = document.getElementById("mobileNav");
+if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", () => {
+        mobileNav.classList.toggle("show");
+        const icon = menuBtn.querySelector("i");
+        if (mobileNav.classList.contains("show")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+    });
+    document.querySelectorAll(".mobile-nav a").forEach(link => {
+        link.addEventListener("click", () => {
+            mobileNav.classList.remove("show");
+            const icon = menuBtn.querySelector("i");
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        });
+    });
+}
 </script>
 </body>
 </html>
