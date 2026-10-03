@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Chemistry Point Admin Login">
+
+    <title>Admin Login | Chemistry Point</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Existing Project CSS -->
+    <link
+        rel="stylesheet"
+        href="../assets/css/root.css">
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/responsive.css">
+
+
+    <style>
+
+        /* ========================================
+           ADMIN LOGIN PAGE
+        ======================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(217, 154, 22, 0.12),
+                    transparent 35%
+                ),
+                #08090b;
+            color: #fff;
+        }
+
+        .admin-login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-login-page::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(217, 154, 22, 0.08);
+            filter: blur(80px);
+            top: -150px;
+            left: -100px;
+        }
+
+        .admin-login-page::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(245, 192, 74, 0.06);
+            filter: blur(90px);
+            bottom: -180px;
+            right: -100px;
+        }
+
+
+        /* ========================================
+           LOGIN CARD
+        ======================================== */
+
+        .admin-login-card {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 2;
+
+            padding: 38px 34px;
+
+            background: rgba(19, 22, 26, 0.94);
+
+            border: 1px solid rgba(217, 154, 22, 0.25);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.45),
+                0 0 0 1px rgba(255, 255, 255, 0.02);
+
+            backdrop-filter: blur(20px);
+
+            animation: loginCardIn 0.6s ease;
+        }
+
+        @keyframes loginCardIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* ========================================
+           BRAND
+        ======================================== */
+
+        .admin-brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-logo {
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #a86f00,
+                #f5c04a,
+                #c98600
+            );
+
+            box-shadow:
+                0 12px 35px rgba(217, 154, 22, 0.20);
+
+            overflow: hidden;
+        }
+
+        .admin-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .admin-brand h1 {
+            margin: 0;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            background: linear-gradient(
+                90deg,
+                #f5c04a,
+                #fff,
+                #d99a16
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-brand p {
+            margin: 7px 0 0;
+
+            color: #858a93;
+            font-size: 13px;
+        }
+
+
+        /* ========================================
+           ADMIN BADGE
+        ======================================== */
+
+        .admin-badge {
+            width: fit-content;
+
+            margin: 0 auto 25px;
+
+            padding: 7px 13px;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            border-radius: 50px;
+
+            color: #f5c04a;
+            background: rgba(217, 154, 22, 0.08);
+
+            border: 1px solid rgba(217, 154, 22, 0.18);
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .admin-badge i {
+            font-size: 11px;
+        }
+
+
+        /* ========================================
+           FORM
+        ======================================== */
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            color: #d7d9dd;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #858a93;
+
+            font-size: 14px;
+
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 46px;
+
+            border: 1px solid #292d33;
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #0e1013;
+            color: #fff;
+
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        .form-input::placeholder {
+            color: #62666e;
+        }
+
+        .form-input:focus {
+            border-color: #d99a16;
+
+            box-shadow:
+                0 0 0 3px rgba(217, 154, 22, 0.10);
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: 0;
+            background: transparent;
+
+            color: #777c84;
+
+            cursor: pointer;
+
+            padding: 5px;
+        }
+
+        .password-toggle:hover {
+            color: #f5c04a;
+        }
+
+
+        /* ========================================
+           LOGIN BUTTON
+        ======================================== */
+
+        .login-btn {
+            width: 100%;
+            height: 52px;
+
+            margin-top: 5px;
+
+            border: none;
+            border-radius: 13px;
+
+            background: linear-gradient(
+                135deg,
+                #a86f00,
+                #f5c04a,
+                #c98600
+            );
+
+            color: #111;
+
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 10px 25px rgba(217, 154, 22, 0.15);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 35px rgba(217, 154, 22, 0.22);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
+        /* ========================================
+           ERROR / SUCCESS MESSAGE
+        ======================================== */
+
+        .message {
+            display: none;
+
+            padding: 11px 13px;
+
+            border-radius: 11px;
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .message.show {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+        }
+
+        .message.error {
+            color: #ffb4b4;
+
+            background: rgba(220, 53, 69, 0.08);
+
+            border: 1px solid rgba(220, 53, 69, 0.20);
+        }
+
+        .message.success {
+            color: #b8f5c8;
+
+            background: rgba(40, 167, 69, 0.08);
+
+            border: 1px solid rgba(40, 167, 69, 0.20);
+        }
+
+
+        /* ========================================
+           FORGOT PASSWORD
+        ======================================== */
+
+        .forgot-wrap {
+            text-align: right;
+            margin-top: -7px;
+        }
+
+        .forgot-btn {
+            border: none;
+            background: transparent;
+
+            color: #d99a16;
+
+            font-family: "Poppins", sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            padding: 0;
+        }
+
+        .forgot-btn:hover {
+            color: #f5c04a;
+        }
+
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        .admin-login-footer {
+            margin-top: 28px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #24272c;
+
+            text-align: center;
+
+            color: #666b73;
+
+            font-size: 11px;
+        }
+
+        .admin-login-footer strong {
+            color: #a7abb2;
+            font-weight: 600;
+        }
+
+
+        /* ========================================
+           LOADING
+        ======================================== */
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+
+            border: 2px solid rgba(17, 17, 17, 0.25);
+            border-top-color: #111;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* ========================================
+           LIGHT MODE
+        ======================================== */
+
+        body.light-mode {
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(217, 154, 22, 0.10),
+                    transparent 35%
+                ),
+                #f6f7f9;
+
+            color: #17191c;
+        }
+
+        body.light-mode .admin-login-card {
+            background: rgba(255, 255, 255, 0.96);
+
+            border-color: rgba(217, 154, 22, 0.25);
+
+            box-shadow:
+                0 25px 70px rgba(20, 25, 30, 0.12);
+        }
+
+        body.light-mode .admin-brand p {
+            color: #737880;
+        }
+
+        body.light-mode .form-label {
+            color: #34373c;
+        }
+
+        body.light-mode .form-input {
+            background: #f8f9fa;
+            color: #17191c;
+            border-color: #dfe2e6;
+        }
+
+        body.light-mode .form-input::placeholder {
+            color: #9a9ea5;
+        }
+
+        body.light-mode .admin-login-footer {
+            border-color: #e3e5e8;
+            color: #858a92;
+        }
+
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media (max-width: 600px) {
+
+            .admin-login-page {
+                padding: 20px 14px;
+            }
+
+            .admin-login-card {
+                padding: 30px 21px;
+                border-radius: 20px;
+            }
+
+            .admin-logo {
+                width: 64px;
+                height: 64px;
+                border-radius: 17px;
+            }
+
+            .admin-brand h1 {
+                font-size: 22px;
+            }
+
+            .admin-brand p {
+                font-size: 12px;
+            }
+
+            .form-input,
+            .login-btn {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .admin-login-card {
+                padding: 26px 17px;
+            }
+
+            .admin-brand h1 {
+                font-size: 20px;
+            }
+
+            .admin-badge {
+                font-size: 11px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="admin-login-page">
+
+        <section class="admin-login-card">
+
+            <!-- BRAND -->
+            <div class="admin-brand">
+
+                <div class="admin-logo">
+
+                    <img
+                        src="../assets/images/logo/logo.png"
+                        alt="Chemistry Point Logo">
+
+                </div>
+
+                <h1>Chemistry Point</h1>
+
+                <p>Admin Management Panel</p>
+
+            </div>
+
+
+            <!-- ADMIN BADGE -->
+            <div class="admin-badge">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>Secure Admin Login</span>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+            <div
+                class="message"
+                id="message">
+
+                <i
+                    class="fa-solid fa-circle-exclamation"
+                    id="messageIcon"></i>
+
+                <span id="messageText"></span>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+            <form
+                class="admin-form"
+                id="loginForm">
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="email">
+
+                        Admin Email
+
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <i
+                            class="fa-solid fa-envelope input-icon"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-input"
+                            placeholder="Enter admin email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="password">
+
+                        Password
+
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <i
+                            class="fa-solid fa-lock input-icon"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-input"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORGOT -->
+                <div class="forgot-wrap">
+
+                    <button
+                        type="button"
+                        class="forgot-btn"
+                        id="forgotBtn">
+
+                        Forgot Password?
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN -->
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginBtn">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    <span>Login to Admin Panel</span>
+
+                </button>
+
+            </form>
+
+
+            <!-- FOOTER -->
+            <div class="admin-login-footer">
+
+                <div>
+                    Chemistry Point Admin Panel
+                </div>
+
+                <div style="margin-top: 5px;">
+                    Developed by
+                    <strong>Code With Piyush</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FIREBASE AUTHENTICATION
+    =========================================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            sendPasswordResetEmail,
+            signOut
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            get
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+        /* ========================================
+           FIREBASE CONFIG
+        ======================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+            authDomain:
+                "chemistry-point-9a41b.firebaseapp.com",
+
+            projectId:
+                "chemistry-point-9a41b",
+
+            storageBucket:
+                "chemistry-point-9a41b.firebasestorage.app",
+
+            messagingSenderId:
+                "791007663942",
+
+            appId:
+                "1:791007663942:web:693c008e475a2e74357747",
+
+            databaseURL:
+                "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+
+        };
+
+
+        /* ========================================
+           INITIALIZE FIREBASE
+        ======================================== */
+
+        const app =
+            initializeApp(firebaseConfig);
+
+        const auth =
+            getAuth(app);
+
+        const db =
+            getDatabase(app);
+
+
+        /* ========================================
+           ELEMENTS
+        ======================================== */
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const passwordToggle =
+            document.getElementById("passwordToggle");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const forgotBtn =
+            document.getElementById("forgotBtn");
+
+        const message =
+            document.getElementById("message");
+
+        const messageIcon =
+            document.getElementById("messageIcon");
+
+        const messageText =
+            document.getElementById("messageText");
+
+
+        /* ========================================
+           MESSAGE FUNCTION
+        ======================================== */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            message.className =
+                `message show ${type}`;
+
+            messageText.textContent =
+                text;
+
+            if (type === "success") {
+
+                messageIcon.className =
+                    "fa-solid fa-circle-check";
+
+            } else {
+
+                messageIcon.className =
+                    "fa-solid fa-circle-exclamation";
+
+            }
+
+        }
+
+
+        function hideMessage() {
+
+            message.className =
+                "message";
+
+            messageText.textContent =
+                "";
+
+        }
+
+
+        /* ========================================
+           FIREBASE ERROR MESSAGE
+        ======================================== */
+
+        function getFirebaseErrorMessage(
+            errorCode
+        ) {
+
+            switch (errorCode) {
+
+                case "auth/invalid-email":
+                    return "Email address सही नहीं है।";
+
+                case "auth/invalid-credential":
+                    return "Email या password गलत है।";
+
+                case "auth/user-not-found":
+                    return "यह admin account मौजूद नहीं है।";
+
+                case "auth/wrong-password":
+                    return "Password गलत है।";
+
+                case "auth/too-many-requests":
+                    return "बहुत ज्यादा login attempts हुए हैं। थोड़ी देर बाद try करें।";
+
+                case "auth/network-request-failed":
+                    return "Internet connection check करें।";
+
+                case "auth/user-disabled":
+                    return "यह account disabled है।";
+
+                default:
+                    return "Login नहीं हो पाया। कृपया दोबारा try करें।";
+            }
+
+        }
+
+
+        /* ========================================
+           PASSWORD SHOW / HIDE
+        ======================================== */
+
+        passwordToggle.addEventListener(
+            "click",
+            () => {
+
+                const icon =
+                    passwordToggle.querySelector("i");
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    icon.classList.remove(
+                        "fa-eye"
+                    );
+
+                    icon.classList.add(
+                        "fa-eye-slash"
+                    );
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    icon.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+                    icon.classList.add(
+                        "fa-eye"
+                    );
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           LOGIN
+        ======================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                hideMessage();
+
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    showMessage(
+                        "Email और password दोनों भरें।"
+                    );
+
+                    return;
+                }
+
+
+                loginBtn.disabled =
+                    true;
+
+                loginBtn.innerHTML = `
+                    <span class="spinner"></span>
+                    <span>Checking...</span>
+                `;
+
+
+                try {
+
+                    /*
+                     * Firebase Authentication login
+                     */
+
+                    const userCredential =
+                        await signInWithEmailAndPassword(
+                            auth,
+                            email,
+                            password
+                        );
+
+
+                    const user =
+                        userCredential.user;
+
+
+                    /*
+                     * Check whether this
+                     * Firebase user is an admin.
+                     */
+
+                    const adminRef =
+                        ref(
+                            db,
+                            `admins/${user.uid}`
+                        );
+
+                    const adminSnapshot =
+                        await get(adminRef);
+
+
+                    if (
+                        !adminSnapshot.exists()
+                    ) {
+
+                        await signOut(auth);
+
+                        showMessage(
+                            "यह account Admin Panel के लिए authorized नहीं है।"
+                        );
+
+                        loginBtn.disabled =
+                            false;
+
+                        loginBtn.innerHTML = `
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <span>Login to Admin Panel</span>
+                        `;
+
+                        return;
+                    }
+
+
+                    const adminData =
+                        adminSnapshot.val();
+
+
+                    if (
+                        adminData.active === false
+                    ) {
+
+                        await signOut(auth);
+
+                        showMessage(
+                            "यह admin account currently inactive है।"
+                        );
+
+                        loginBtn.disabled =
+                            false;
+
+                        loginBtn.innerHTML = `
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <span>Login to Admin Panel</span>
+                        `;
+
+                        return;
+                    }
+
+
+                    /*
+                     * Login successful
+                     */
+
+                    showMessage(
+                        "Login successful! Dashboard खोल रहे हैं...",
+                        "success"
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        700
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Firebase Login Error:",
+                        error
+                    );
+
+                    showMessage(
+                        getFirebaseErrorMessage(
+                            error.code
+                        )
+                    );
+
+                    loginBtn.disabled =
+                        false;
+
+                    loginBtn.innerHTML = `
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login to Admin Panel</span>
+                    `;
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           FORGOT PASSWORD
+        ======================================== */
+
+        forgotBtn.addEventListener(
+            "click",
+            async () => {
+
+                hideMessage();
+
+                const email =
+                    emailInput.value.trim();
+
+
+                if (!email) {
+
+                    showMessage(
+                        "Password reset के लिए पहले अपना email डालें।"
+                    );
+
+                    emailInput.focus();
+
+                    return;
+                }
+
+
+                try {
+
+                    await sendPasswordResetEmail(
+                        auth,
+                        email
+                    );
+
+                    showMessage(
+                        "Password reset email भेज दिया गया है। अपना inbox check करें।",
+                        "success"
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Password Reset Error:",
+                        error
+                    );
+
+                    showMessage(
+                        getFirebaseErrorMessage(
+                            error.code
+                        )
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           AUTH STATE
+        ======================================== */
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                if (!user) {
+                    return;
+                }
+
+
+                /*
+                 * If already logged in,
+                 * verify admin status before
+                 * opening dashboard.
+                 */
+
+                try {
+
+                    const adminRef =
+                        ref(
+                            db,
+                            `admins/${user.uid}`
+                        );
+
+                    const snapshot =
+                        await get(adminRef);
+
+
+                    if (
+                        snapshot.exists()
+                        &&
+                        snapshot.val().active !== false
+                    ) {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    } else {
+
+                        await signOut(auth);
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Admin verification error:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
