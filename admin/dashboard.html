@@ -1,88 +1,78 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard | Chemistry Point Admin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<title>Admin Dashboard | Chemistry Point</title>
+<link rel="icon" href="../assets/images/logo/logo.png">
 <link rel="stylesheet" href="../assets/css/root.css">
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Poppins,sans-serif;background:#08090b;color:#fff}.layout{min-height:100vh}.sidebar{width:255px;position:fixed;inset:0 auto 0 0;background:#0e1013;border-right:1px solid #25292e;padding:20px 15px;z-index:100;transition:.25s}.brand{display:flex;align-items:center;gap:10px;padding:5px 7px 22px;border-bottom:1px solid #25292e}.brand img{width:45px;height:45px;object-fit:contain;border-radius:12px;background:linear-gradient(135deg,#a86f00,#f5c04a,#c98600);padding:3px}.brand strong{display:block;font-size:14px;color:#f5c04a}.brand span{font-size:9px;color:#747981}.label{margin:22px 8px 8px;color:#62676f;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.nav{display:grid;gap:5px}.nav a{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;color:#999ea6;text-decoration:none;font-size:12px}.nav a i{width:18px;text-align:center}.nav a:hover,.nav a.active{color:#f5c04a;background:rgba(217,154,22,.09)}.side-bottom{position:absolute;left:15px;right:15px;bottom:17px}.dev{text-align:center;color:#656a72;font-size:9px;margin-bottom:9px}.dev strong{display:block;color:#aeb2b8;margin-top:3px}.logout{width:100%;height:40px;border:1px solid rgba(220,53,69,.2);border-radius:9px;background:rgba(220,53,69,.06);color:#ff9da6;font-family:inherit;font-size:11px;cursor:pointer}.main{margin-left:255px;min-height:100vh}.top{height:72px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 27px;background:rgba(8,9,11,.93);border-bottom:1px solid #25292e;backdrop-filter:blur(14px)}.left{display:flex;align-items:center;gap:12px}.menu{display:none;width:40px;height:40px;border:1px solid #292d33;border-radius:9px;background:#13161a;color:#ddd}.title h1{font-size:19px;margin:0}.title p{font-size:10px;color:#747981;margin:3px 0 0}.right{display:flex;align-items:center;gap:10px}.theme{width:39px;height:39px;border:1px solid #292d33;border-radius:9px;background:#13161a;color:#bbb;cursor:pointer}.profile{display:flex;align-items:center;gap:8px}.avatar{width:37px;height:37px;display:grid;place-items:center;border-radius:50%;color:#111;background:linear-gradient(135deg,#f5c04a,#c98600)}.email{font-size:10px;color:#ddd;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.role{font-size:8px;color:#70757d}.content{padding:27px;max-width:1450px}.welcome{padding:24px;border:1px solid rgba(217,154,22,.22);border-radius:17px;background:linear-gradient(135deg,#15181c,#0e1013);margin-bottom:20px}.welcome h2{font-size:21px;margin:0 0 5px}.welcome p{font-size:11px;color:#8b9098;margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}.card{border:1px solid #25292e;border-radius:15px;background:#111418}.stat{padding:17px}.stat-top{display:flex;justify-content:space-between;align-items:center}.icon{width:41px;height:41px;display:grid;place-items:center;border-radius:11px;background:rgba(217,154,22,.09);color:#f5c04a}.small{font-size:8px;color:#656a72}.stat-label{font-size:10px;color:#7d828a;margin-top:13px}.value{font-size:24px;font-weight:800;margin-top:2px}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:17px}.head{height:60px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #25292e}.head h3{font-size:13px;margin:0}.head span{font-size:9px;color:#656a72}.actions{padding:17px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.action{display:flex;align-items:center;gap:10px;min-height:72px;padding:12px;border:1px solid #292d33;border-radius:11px;background:#0e1013;color:#ccc;text-decoration:none}.action:hover{border-color:rgba(217,154,22,.35);color:#fff}.action i{width:35px;height:35px;display:grid;place-items:center;border-radius:9px;background:rgba(217,154,22,.09);color:#f5c04a}.action strong{display:block;font-size:10px}.action small{display:block;font-size:8px;color:#6d727a;margin-top:2px}.status{padding:8px 17px 16px}.row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #202328}.row:last-child{border-bottom:0}.row .si{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:rgba(217,154,22,.08);color:#f5c04a}.row strong{display:block;font-size:9px}.row span{display:block;color:#6d727a;font-size:8px;margin-top:2px}.dot{width:7px;height:7px;border-radius:50%;background:#55c98a;margin-left:auto}.msg{display:none;margin-bottom:15px;padding:10px 13px;border-radius:10px;font-size:10px}.msg.show{display:block}.msg.error{color:#ffb4b4;background:rgba(220,53,69,.08);border:1px solid rgba(220,53,69,.18)}
-body.light-mode{background:#f5f6f8;color:#17191c}body.light-mode .sidebar,body.light-mode .top{background:#fff;border-color:#e2e4e7}body.light-mode .brand{border-color:#e2e4e7}body.light-mode .nav a{color:#666b73}body.light-mode .nav a.active{color:#9a6800;background:rgba(217,154,22,.08)}body.light-mode .top{background:rgba(255,255,255,.93)}body.light-mode .theme,body.light-mode .menu{background:#f5f6f8;border-color:#e0e3e6;color:#555}body.light-mode .welcome{background:linear-gradient(135deg,#fff,#faf7ef)}body.light-mode .card{background:#fff;border-color:#e0e3e6}body.light-mode .head{border-color:#e5e7e9}body.light-mode .action{background:#f8f9fa;border-color:#e0e3e6;color:#333}body.light-mode .welcome p,body.light-mode .stat-label,body.light-mode .action small,body.light-mode .row span{color:#777c84}.overlay{display:none}
-@media(max-width:1050px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
-@media(max-width:850px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.menu{display:block}.overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:90}.top{padding:0 15px}}
-@media(max-width:600px){.content{padding:17px 13px}.welcome{padding:19px}.welcome h2{font-size:18px}.stats{gap:9px}.stat{padding:13px}.value{font-size:20px}.profile .info{display:none}.actions{grid-template-columns:1fr}.title h1{font-size:16px}.title p{font-size:8px}}
-@media(max-width:390px){.stats{grid-template-columns:1fr}.theme{display:none}}
+:root{--bg:#08090b;--card:#13161a;--card2:#0e1013;--border:rgba(217,154,22,.18);--text:#fff;--muted:#858a93;--gold:#d99a16;--gold2:#f3bd45;--sidebar:260px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}body.light-mode{--bg:#f5f5f5;--card:#fff;--card2:#f8f8f8;--border:rgba(168,111,0,.18);--text:#17191c;--muted:#666}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:var(--card);border-right:1px solid var(--border);z-index:1000;display:flex;flex-direction:column}.brand{height:76px;padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}.brand img{width:44px;height:44px;object-fit:contain;border-radius:10px}.brand strong{font-family:Poppins;font-size:17px}.brand span{display:block;color:var(--gold2);font-size:10px;margin-top:2px}.nav{padding:18px 12px;overflow:auto}.nav a{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:12px 13px;border-radius:11px;margin-bottom:5px;font-size:13px;font-weight:600;transition:.2s}.nav a i{width:19px;text-align:center}.nav a:hover,.nav a.active{color:var(--gold2);background:rgba(217,154,22,.1)}.sidefoot{margin-top:auto;padding:15px;border-top:1px solid var(--border)}.logout{width:100%;border:1px solid rgba(220,53,69,.25);background:rgba(220,53,69,.07);color:#ff8994;border-radius:10px;padding:11px;cursor:pointer;font-family:inherit;font-weight:600}.main{margin-left:var(--sidebar);min-height:100vh}.top{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:900}.left{display:flex;align-items:center;gap:14px}.mobilebtn,.theme{border:1px solid var(--border);background:transparent;color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer}.mobilebtn{display:none}.title{font-family:Poppins;font-size:20px;margin:0}.right{display:flex;align-items:center;gap:12px}.theme{color:var(--gold2)}.user{display:flex;align-items:center;gap:10px;padding-left:12px;border-left:1px solid var(--border)}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(217,154,22,.12);color:var(--gold2)}.email{font-size:12px;color:var(--muted);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.content{padding:28px}.welcome{border:1px solid var(--border);border-radius:18px;padding:25px;background:linear-gradient(135deg,rgba(217,154,22,.12),transparent 55%),var(--card);margin-bottom:22px}.welcome h1{font-family:Poppins;font-size:25px;margin:0 0 7px}.welcome h1 span{color:var(--gold2)}.welcome p{margin:0;color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:19px;display:flex;align-items:center;gap:14px}.icon{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:rgba(217,154,22,.11);color:var(--gold2);font-size:18px}.label{color:var(--muted);font-size:11px;margin-bottom:5px}.value{font-family:Poppins;font-size:24px;font-weight:700}.heading{font-family:Poppins;font-size:18px;margin:0 0 14px}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:25px}.quick a{text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;transition:.2s}.quick a:hover{transform:translateY(-3px);border-color:rgba(217,154,22,.45)}.quick i{color:var(--gold2);font-size:19px;margin-bottom:12px}.quick h3{font-family:Poppins;font-size:14px;margin:0 0 5px}.quick p{font-size:11px;color:var(--muted);margin:0}.status{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}.row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--border);font-size:13px}.row:last-child{border:0}.name{display:flex;align-items:center;gap:10px}.name i{width:20px;color:var(--gold2);text-align:center}.badge{padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700;color:#6ee7a3;background:rgba(25,135,84,.1);border:1px solid rgba(25,135,84,.18)}.badge.loading{color:var(--gold2);background:rgba(217,154,22,.08)}.badge.error{color:#ff8994;background:rgba(220,53,69,.08)}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:950}.overlay.show{display:block}
+@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(2,1fr)}}@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.show{transform:translateX(0)}.main{margin-left:0}.mobilebtn{display:block}.email{max-width:140px}}@media(max-width:600px){.top{padding:0 15px;height:68px}.content{padding:17px}.title{font-size:17px}.user{display:none}.stats,.quick{grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px}.icon{width:42px;height:42px}.value{font-size:21px}.welcome{padding:19px}.welcome h1{font-size:20px}}@media(max-width:400px){.stats,.quick{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="layout">
+<div class="overlay" id="overlay"></div>
 <aside class="sidebar" id="sidebar">
-<div class="brand"><img src="../assets/images/logo/logo.png" alt="Chemistry Point"><div><strong>Chemistry Point</strong><span>Admin Management Panel</span></div></div>
-<div class="label">Main Menu</div>
+<div class="brand"><img src="../assets/images/logo/logo.png" alt="Chemistry Point"><div><strong>Chemistry Point</strong><span>ADMIN PANEL</span></div></div>
 <nav class="nav">
-<a href="dashboard.html" class="active"><i class="fa-solid fa-chart-pie"></i>Dashboard</a>
-<a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
+<a href="dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
+<a href="videos.html"><i class="fa-solid fa-video"></i>Videos</a>
 <a href="objectives.html"><i class="fa-solid fa-book-open"></i>Objectives</a>
 <a href="quizzes.html"><i class="fa-solid fa-circle-question"></i>Quizzes</a>
 <a href="questions.html"><i class="fa-solid fa-list-check"></i>Questions</a>
-</nav>
-<div class="label">Management</div>
-<nav class="nav">
-<a href="students.html"><i class="fa-solid fa-user-graduate"></i>Students</a>
+<a href="students.html"><i class="fa-solid fa-users"></i>Students</a>
 <a href="notices.html"><i class="fa-solid fa-bullhorn"></i>Notices</a>
 <a href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
 </nav>
-<div class="side-bottom"><div class="dev">Developed by<strong>Code With Piyush</strong></div><button class="logout" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> &nbsp;Logout</button></div>
+<div class="sidefoot"><button class="logout" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div>
 </aside>
-<div class="overlay" id="overlay"></div>
 <main class="main">
-<header class="top"><div class="left"><button class="menu" id="menuBtn"><i class="fa-solid fa-bars"></i></button><div class="title"><h1>Dashboard</h1><p>Welcome to Chemistry Point Admin Panel</p></div></div><div class="right"><button class="theme" id="themeBtn"><i class="fa-solid fa-moon"></i></button><div class="profile"><div class="avatar"><i class="fa-solid fa-user-shield"></i></div><div class="info"><div class="email" id="adminEmail">Loading...</div><div class="role">Administrator</div></div></div></div></header>
-<section class="content">
-<div class="msg" id="msg"></div>
-<div class="welcome"><h2>Welcome, Admin 👋</h2><p>Manage Chemistry Point content, quizzes, objectives and students from one place.</p></div>
-<div class="stats">
-<div class="card stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-play"></i></div><span class="small">Firebase</span></div><div class="stat-label">Total Videos</div><div class="value" id="videosCount">—</div></div>
-<div class="card stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-book-open"></i></div><span class="small">Firebase</span></div><div class="stat-label">Total Chapters</div><div class="value" id="chaptersCount">—</div></div>
-<div class="card stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-circle-question"></i></div><span class="small">Firebase</span></div><div class="stat-label">Total Quizzes</div><div class="value" id="quizzesCount">—</div></div>
-<div class="card stat"><div class="stat-top"><div class="icon"><i class="fa-solid fa-user-graduate"></i></div><span class="small">Firebase</span></div><div class="stat-label">Total Students</div><div class="value" id="studentsCount">—</div></div>
-</div>
-<div class="grid">
-<div class="card"><div class="head"><h3>Quick Actions</h3><span>Admin Tools</span></div><div class="actions">
-<a href="videos.html" class="action"><i class="fa-solid fa-video"></i><div><strong>Manage Videos</strong><small>Add, edit or delete videos</small></div></a>
-<a href="objectives.html" class="action"><i class="fa-solid fa-file-lines"></i><div><strong>Manage Objectives</strong><small>Manage chapter objectives</small></div></a>
-<a href="quizzes.html" class="action"><i class="fa-solid fa-pen-to-square"></i><div><strong>Manage Quizzes</strong><small>Create and edit quizzes</small></div></a>
-<a href="questions.html" class="action"><i class="fa-solid fa-list-check"></i><div><strong>Manage Questions</strong><small>Add quiz questions</small></div></a>
-</div></div>
-<div class="card"><div class="head"><h3>System Status</h3><i class="fa-solid fa-shield-halved" style="color:#d99a16"></i></div><div class="status">
-<div class="row"><div class="si"><i class="fa-solid fa-fire"></i></div><div><strong>Firebase Authentication</strong><span id="authStatus">Checking...</span></div><div class="dot" id="authDot"></div></div>
-<div class="row"><div class="si"><i class="fa-solid fa-database"></i></div><div><strong>Realtime Database</strong><span id="dbStatus">Checking...</span></div><div class="dot" id="dbDot"></div></div>
-<div class="row"><div class="si"><i class="fa-solid fa-hard-drive"></i></div><div><strong>PDF Storage</strong><span>Google Drive Links</span></div><div class="dot"></div></div>
-<div class="row"><div class="si"><i class="fa-solid fa-code"></i></div><div><strong>Developer</strong><span>Code With Piyush</span></div><div class="dot"></div></div>
-</div></div>
-</div>
+<header class="top"><div class="left"><button class="mobilebtn" id="sideBtn"><i class="fa-solid fa-bars"></i></button><h1 class="title">Dashboard</h1></div><div class="right"><button class="theme" id="theme"><i class="fa-solid fa-moon"></i></button><div class="user"><div class="avatar"><i class="fa-solid fa-user-shield"></i></div><span class="email" id="email">Checking...</span></div></div></header>
+<div class="content">
+<section class="welcome"><h1>Welcome back, <span>Admin</span> 👋</h1><p>यहाँ से Chemistry Point की website का content manage किया जा सकेगा।</p></section>
+<section class="stats">
+<div class="stat"><div class="icon"><i class="fa-solid fa-video"></i></div><div><div class="label">Total Videos</div><div class="value" id="videosCount">—</div></div></div>
+<div class="stat"><div class="icon"><i class="fa-solid fa-book-open"></i></div><div><div class="label">Total Chapters</div><div class="value" id="chaptersCount">—</div></div></div>
+<div class="stat"><div class="icon"><i class="fa-solid fa-circle-question"></i></div><div><div class="label">Total Quizzes</div><div class="value" id="quizzesCount">—</div></div></div>
+<div class="stat"><div class="icon"><i class="fa-solid fa-users"></i></div><div><div class="label">Total Students</div><div class="value" id="studentsCount">—</div></div></div>
 </section>
-</main></div>
+<h2 class="heading">Quick Actions</h2>
+<section class="quick">
+<a href="videos.html"><i class="fa-solid fa-video"></i><h3>Manage Videos</h3><p>Add, edit and delete YouTube videos.</p></a>
+<a href="objectives.html"><i class="fa-solid fa-file-pdf"></i><h3>Manage Objectives</h3><p>Manage chapters and Google Drive PDFs.</p></a>
+<a href="quizzes.html"><i class="fa-solid fa-circle-question"></i><h3>Manage Quizzes</h3><p>Create and manage online quizzes.</p></a>
+<a href="questions.html"><i class="fa-solid fa-list-check"></i><h3>Manage Questions</h3><p>Add and edit quiz questions.</p></a>
+</section>
+<h2 class="heading">System Status</h2>
+<section class="status">
+<div class="row"><div class="name"><i class="fa-solid fa-user-lock"></i>Firebase Authentication</div><span class="badge">Connected</span></div>
+<div class="row"><div class="name"><i class="fa-solid fa-database"></i>Realtime Database</div><span class="badge loading" id="dbStatus">Checking...</span></div>
+<div class="row"><div class="name"><i class="fa-solid fa-file-arrow-down"></i>PDF Storage</div><span class="badge">Google Drive Links</span></div>
+<div class="row"><div class="name"><i class="fa-solid fa-code"></i>Developer</div><span class="badge">Code With Piyush</span></div>
+</section>
+</div></main>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import {getAuth,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import {getDatabase,ref,get} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",authDomain:"chemistry-point-9a41b.firebaseapp.com",projectId:"chemistry-point-9a41b",storageBucket:"chemistry-point-9a41b.firebasestorage.app",messagingSenderId:"791007663942",appId:"1:791007663942:web:693c008e475a2e74357747",databaseURL:"https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app);
-const $=id=>document.getElementById(id);
-function msg(t){$("msg").textContent=t;$("msg").className="msg show error"}
-async function count(path){const s=await get(ref(db,path));if(!s.exists())return 0;const v=s.val();return v&&typeof v==="object"?Object.keys(v).length:0}
-async function loadCounts(){try{$("videosCount").textContent=await count("videos");$("chaptersCount").textContent=await count("chapters");$("quizzesCount").textContent=await count("quizzes");$("studentsCount").textContent=await count("students");$("dbStatus").textContent="Connected";$("dbDot").style.background="#55c98a"}catch(e){console.error(e);["videosCount","chaptersCount","quizzesCount","studentsCount"].forEach(id=>$(id).textContent="—");$("dbStatus").textContent="Rules need setup";$("dbDot").style.background="#e06a75"}}
-onAuthStateChanged(auth,async user=>{if(!user){location.href="login.html";return}$("adminEmail").textContent=user.email||"Admin";$("authStatus").textContent="Authenticated";try{const s=await get(ref(db,`admins/${user.uid}`));if(!s.exists()||s.val().active===false){await signOut(auth);location.href="login.html";return}await loadCounts()}catch(e){console.error(e);msg("Admin verification failed. Realtime Database Rules check करें।")}});
-$("logoutBtn").onclick=async()=>{await signOut(auth);location.href="login.html"};
-$("menuBtn").onclick=()=>{$("sidebar").classList.toggle("open");$("overlay").classList.toggle("show")};$("overlay").onclick=()=>{$("sidebar").classList.remove("open");$("overlay").classList.remove("show")};
-function theme(t){document.body.classList.toggle("light-mode",t==="light");$("themeBtn").innerHTML=t==="light"?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';localStorage.setItem("chemistryPointTheme",t)}
-const saved=localStorage.getItem("chemistryPointTheme");theme(saved==="light"?"light":"dark");$("themeBtn").onclick=()=>theme(document.body.classList.contains("light-mode")?"dark":"light");
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import{getDatabase,ref,get}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+const firebaseConfig={apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",authDomain:"chemistry-point-9a41b.firebaseapp.com",projectId:"chemistry-point-9a41b",storageBucket:"chemistry-point-9a41b.firebasestorage.app",messagingSenderId:"791007663942",appId:"1:791007663942:web:693c008e475a2e74357747"};
+const app=initializeApp(firebaseConfig);const auth=getAuth(app);const db=getDatabase(app,"https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/");
+const email=document.getElementById("email"),dbStatus=document.getElementById("dbStatus");
+async function verifyAdmin(user){const s=await get(ref(db,`admins/${user.uid}`));if(!s.exists())throw Error("NOT_ADMIN");const d=s.val();if(d.role!=="admin"||d.active===false)throw Error("NOT_ADMIN");}
+async function count(path){const s=await get(ref(db,path));return s.exists()&&s.val()&&typeof s.val()==="object"?Object.keys(s.val()).length:0;}
+async function load(){try{const[v,c,q,s]=await Promise.all([count("videos"),count("chapters"),count("quizzes"),count("students")]);document.getElementById("videosCount").textContent=v;document.getElementById("chaptersCount").textContent=c;document.getElementById("quizzesCount").textContent=q;document.getElementById("studentsCount").textContent=s;dbStatus.textContent="Connected";dbStatus.className="badge";}catch(e){console.error(e);dbStatus.textContent="Rules / Data check";dbStatus.className="badge error";}}
+onAuthStateChanged(auth,async user=>{if(!user){location.href="login.html";return;}email.textContent=user.email||"Admin";try{await verifyAdmin(user);await load();}catch(e){await signOut(auth);location.href="login.html";}});
+document.getElementById("logout").onclick=async()=>{await signOut(auth);location.href="login.html";};
+const sidebar=document.getElementById("sidebar"),overlay=document.getElementById("overlay");document.getElementById("sideBtn").onclick=()=>{sidebar.classList.toggle("show");overlay.classList.toggle("show")};overlay.onclick=()=>{sidebar.classList.remove("show");overlay.classList.remove("show")};document.querySelectorAll(".nav a").forEach(a=>a.onclick=()=>{sidebar.classList.remove("show");overlay.classList.remove("show")});
+const theme=document.getElementById("theme");function applyTheme(t){document.body.classList.toggle("light-mode",t==="light");theme.innerHTML=t==="light"?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>'}applyTheme(localStorage.getItem("chemistryPointTheme")||"dark");theme.onclick=()=>{const t=document.body.classList.contains("light-mode")?"dark":"light";localStorage.setItem("chemistryPointTheme",t);applyTheme(t)};
 </script>
 </body>
 </html>
