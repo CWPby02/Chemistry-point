@@ -13,15 +13,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
     /* =========================================
        PDF PAGE
-    ========================================= */
+    ========================================== */
 
     .pdf-page {
       min-height: calc(100vh - 80px);
@@ -109,7 +112,10 @@
       border-radius: 18px;
       background: var(--dark-card);
       box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
     }
 
     .pdf-card::before {
@@ -225,6 +231,12 @@
       transform: translateY(-1px);
     }
 
+    .pdf-btn.disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     .pdf-note {
       display: flex;
       align-items: flex-start;
@@ -249,7 +261,48 @@
       line-height: 1.7;
     }
 
-    /* Light mode */
+    /* Loading */
+    .pdf-loading {
+      grid-column: 1 / -1;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--dark-card);
+    }
+
+    .pdf-loading i {
+      color: var(--primary-light);
+      font-size: 28px;
+    }
+
+    /* Error */
+    .pdf-error {
+      grid-column: 1 / -1;
+      display: none;
+      padding: 22px;
+      text-align: center;
+      border: 1px solid rgba(220, 70, 70, .25);
+      border-radius: 15px;
+      background: var(--dark-card);
+      color: var(--text-muted);
+    }
+
+    .pdf-error i {
+      margin-bottom: 10px;
+      color: #e26b6b;
+      font-size: 25px;
+    }
+
+    /* =========================================
+       LIGHT MODE
+    ========================================== */
+
     body.light-mode .pdf-page {
       background: #f7f7f8;
     }
@@ -267,7 +320,9 @@
 
     body.light-mode .chapter-info,
     body.light-mode .pdf-card,
-    body.light-mode .pdf-note {
+    body.light-mode .pdf-note,
+    body.light-mode .pdf-loading,
+    body.light-mode .pdf-error {
       background: #fff;
       border-color: #e4e5e8;
       box-shadow: 0 12px 30px rgba(0, 0, 0, .07);
@@ -284,10 +339,11 @@
     }
 
     /* =========================================
-       MOBILE NAV - SOLID BACKGROUND
-    ========================================= */
+       MOBILE NAV
+    ========================================== */
 
     @media (max-width: 900px) {
+
       .pdf-page {
         padding: 92px 20px 55px;
       }
@@ -296,8 +352,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      /* Force the mobile menu state on this page.
-         Same mobile menu state as index.html: show. */
       .mobile-nav {
         display: none !important;
         position: fixed !important;
@@ -351,6 +405,7 @@
     }
 
     @media (max-width: 600px) {
+
       .pdf-page {
         padding: 88px 15px 45px;
       }
@@ -388,6 +443,7 @@
     }
 
     @media (max-width: 380px) {
+
       .pdf-actions {
         grid-template-columns: 1fr;
       }
@@ -406,6 +462,7 @@
     <div class="container nav-container">
 
       <a href="../index.html" class="brand">
+
         <img
           src="../assets/images/logo/logo.png"
           alt="Chemistry Point Logo">
@@ -414,24 +471,27 @@
           <strong>Chemistry Point</strong>
           <span>By Pardeep Sir</span>
         </div>
+
       </a>
 
       <nav class="main-nav">
 
         <a href="../index.html">Home</a>
         <a href="../videos.html">Videos</a>
-        <a href="../objectives.html">Objectives</a>
+        <a href="../objectives.html" class="active">Objectives</a>
         <a href="../quiz.html">Quiz</a>
         <a href="../about.html">About</a>
         <a href="../contact.html">Contact</a>
 
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button class="menu-btn"
-              id="menuBtn"
-              aria-label="Open Menu">
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="Open Menu">
+
         <i class="fa-solid fa-bars"></i>
+
       </button>
 
     </div>
@@ -484,8 +544,11 @@
       <section class="pdf-header">
 
         <div class="pdf-label">
+
           <i class="fa-solid fa-file-pdf"></i>
+
           Study Material
+
         </div>
 
         <h1>
@@ -494,131 +557,37 @@
 
         <p>
           Chapter-wise objective study material एक ही जगह से
-          पढ़ें और बाद में PDF उपलब्ध होने पर View या Download करें।
+          पढ़ें और PDF को online view या download करें।
         </p>
 
         <div class="chapter-info">
+
           <i class="fa-solid fa-book-open"></i>
-          <span id="chapterName">Chemistry Chapter</span>
+
+          <span id="chapterName">
+            Chemistry Chapter
+          </span>
+
         </div>
 
       </section>
 
 
-      <section class="pdf-grid">
+      <!-- =====================================
+           PDF CARDS
+      ====================================== -->
 
-        <!-- V.V.I -->
-        <article class="pdf-card">
+      <section class="pdf-grid" id="pdfGrid">
 
-          <div class="pdf-icon">
-            <i class="fa-solid fa-star"></i>
-          </div>
+        <div class="pdf-loading">
 
-          <h2>V.V.I Objectives</h2>
+          <i class="fa-solid fa-spinner fa-spin"></i>
 
-          <p>
-            परीक्षा के लिए सबसे महत्वपूर्ण objective questions
-            का study PDF.
-          </p>
+          <span>
+            PDF details load हो रही हैं...
+          </span>
 
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- PYQ -->
-        <article class="pdf-card">
-
-          <div class="pdf-icon">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
-
-          <h2>PYQ Objectives</h2>
-
-          <p>
-            Previous Year Questions से जुड़े objective
-            questions का study PDF.
-          </p>
-
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- ALL -->
-        <article class="pdf-card">
-
-          <div class="pdf-icon">
-            <i class="fa-solid fa-layer-group"></i>
-          </div>
-
-          <h2>All Objectives</h2>
-
-          <p>
-            इस chapter के सभी available objective questions
-            का complete study PDF.
-          </p>
-
-          <div class="pdf-status">
-            <i class="fa-solid fa-clock"></i>
-            <span>PDF बाद में उपलब्ध होगा</span>
-          </div>
-
-          <div class="pdf-actions">
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-view">
-              <i class="fa-regular fa-eye"></i>
-              View PDF
-            </a>
-
-            <!-- Future Google Drive URL -->
-            <a href="#" class="pdf-btn pdf-btn-download">
-              <i class="fa-solid fa-download"></i>
-              Download
-            </a>
-
-          </div>
-
-        </article>
+        </div>
 
       </section>
 
@@ -627,9 +596,9 @@
 
         <i class="fa-solid fa-circle-info"></i>
 
-        <p>
-          अभी इस page पर कोई Firebase या Google Drive connection नहीं है।
-          PDF links बाद में backend/admin system से जोड़े जाएंगे।
+        <p id="pdfNoteText">
+          Admin panel में Google Drive PDF link add होने के बाद
+          यहाँ View और Download options automatically दिखाई देंगे।
         </p>
 
       </div>
@@ -656,8 +625,11 @@
             alt="Chemistry Point Logo">
 
           <div class="brand-text">
+
             <strong>Chemistry Point</strong>
+
             <span>By Pardeep Sir</span>
+
           </div>
 
         </a>
@@ -710,19 +682,81 @@
   </footer>
 
 
-  <script>
+  <!-- =========================================
+       FIREBASE
+  ========================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+    import {
+      getDatabase,
+      ref,
+      onValue
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+      authDomain:
+        "chemistry-point-9a41b.firebaseapp.com",
+
+      projectId:
+        "chemistry-point-9a41b",
+
+      storageBucket:
+        "chemistry-point-9a41b.firebasestorage.app",
+
+      messagingSenderId:
+        "791007663942",
+
+      appId:
+        "1:791007663942:web:693c008e475a2e74357747"
+
+    };
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const db =
+      getDatabase(
+        app,
+        "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+      );
+
+
     /* =========================================
        MOBILE MENU
     ========================================== */
 
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileNav = document.getElementById("mobileNav");
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const mobileNav =
+      document.getElementById("mobileNav");
+
 
     menuBtn.addEventListener("click", () => {
 
       mobileNav.classList.toggle("show");
 
-      const icon = menuBtn.querySelector("i");
+      const icon =
+        menuBtn.querySelector("i");
+
 
       if (mobileNav.classList.contains("show")) {
 
@@ -738,25 +772,28 @@
 
     });
 
-    document.querySelectorAll(".mobile-nav a").forEach(link => {
 
-      link.addEventListener("click", () => {
+    document
+      .querySelectorAll(".mobile-nav a")
+      .forEach(link => {
 
-        mobileNav.classList.remove("show");
+        link.addEventListener("click", () => {
 
-        const icon = menuBtn.querySelector("i");
+          mobileNav.classList.remove("show");
 
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+          const icon =
+            menuBtn.querySelector("i");
+
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+
+        });
 
       });
 
-    });
-
 
     /* =========================================
-       CHAPTER NAME
-       Standalone only — no page connection yet.
+       CHAPTER NAMES
     ========================================== */
 
     const chapterNames = {
@@ -796,31 +833,528 @@
 
       "biomolecules":
         "Biomolecules"
+
     };
+
+
+    /* =========================================
+       URL PARAMETER
+    ========================================== */
 
     const params =
       new URLSearchParams(
         window.location.search
       );
 
+
     const chapter =
       params.get("chapter");
 
-    if (chapter && chapterNames[chapter]) {
 
-      document.getElementById(
-        "chapterName"
-      ).textContent =
+    const type =
+      params.get("type");
+
+
+    const chapterNameElement =
+      document.getElementById("chapterName");
+
+
+    if (
+      chapter &&
+      chapterNames[chapter]
+    ) {
+
+      chapterNameElement.textContent =
         chapterNames[chapter];
 
     } else {
 
-      document.getElementById(
-        "chapterName"
-      ).textContent =
+      chapterNameElement.textContent =
         "All Chemistry Chapters";
 
     }
+
+
+    /* =========================================
+       PDF TYPE
+    ========================================== */
+
+    const pdfTypes = {
+
+      vvi: {
+        title: "V.V.I Objectives",
+        description:
+          "परीक्षा के लिए सबसे महत्वपूर्ण objective questions का study PDF.",
+        icon: "fa-star"
+      },
+
+      pyq: {
+        title: "PYQ Objectives",
+        description:
+          "Previous Year Questions से जुड़े objective questions का study PDF.",
+        icon: "fa-clock-rotate-left"
+      },
+
+      all: {
+        title: "All Objectives",
+        description:
+          "इस chapter के सभी available objective questions का complete study PDF.",
+        icon: "fa-layer-group"
+      }
+
+    };
+
+
+    /* =========================================
+       GOOGLE DRIVE ID
+    ========================================== */
+
+    function getGoogleDriveId(url) {
+
+      if (!url) {
+        return null;
+      }
+
+
+      try {
+
+        const cleanUrl =
+          decodeURIComponent(
+            String(url).trim()
+          );
+
+
+        /* /file/d/FILE_ID/ */
+
+        const fileMatch =
+          cleanUrl.match(
+            /\/file\/d\/([a-zA-Z0-9_-]+)/
+          );
+
+
+        if (fileMatch) {
+          return fileMatch[1];
+        }
+
+
+        /* ?id=FILE_ID */
+
+        const idMatch =
+          cleanUrl.match(
+            /[?&]id=([a-zA-Z0-9_-]+)/
+          );
+
+
+        if (idMatch) {
+          return idMatch[1];
+        }
+
+
+        /* /open?id=FILE_ID */
+
+        const openMatch =
+          cleanUrl.match(
+            /\/open\?id=([a-zA-Z0-9_-]+)/
+          );
+
+
+        if (openMatch) {
+          return openMatch[1];
+        }
+
+
+        return null;
+
+      } catch (error) {
+
+        return null;
+
+      }
+
+    }
+
+
+    /* =========================================
+       VIEW URL
+    ========================================== */
+
+    function getViewUrl(url) {
+
+      const driveId =
+        getGoogleDriveId(url);
+
+
+      if (driveId) {
+
+        return `https://drive.google.com/file/d/${driveId}/view`;
+
+      }
+
+
+      return url;
+
+    }
+
+
+    /* =========================================
+       DOWNLOAD URL
+    ========================================== */
+
+    function getDownloadUrl(url) {
+
+      const driveId =
+        getGoogleDriveId(url);
+
+
+      if (driveId) {
+
+        return `https://drive.usercontent.google.com/download?id=${driveId}&export=download`;
+
+      }
+
+
+      return url;
+
+    }
+
+
+    /* =========================================
+       CREATE PDF CARD
+    ========================================== */
+
+    function createPdfCard(
+      key,
+      pdfUrl
+    ) {
+
+      const config =
+        pdfTypes[key];
+
+
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "pdf-card";
+
+
+      const hasPdf =
+        typeof pdfUrl === "string" &&
+        pdfUrl.trim() !== "" &&
+        pdfUrl.trim() !== "#";
+
+
+      let viewUrl = "#";
+      let downloadUrl = "#";
+
+
+      if (hasPdf) {
+
+        viewUrl =
+          getViewUrl(
+            pdfUrl.trim()
+          );
+
+        downloadUrl =
+          getDownloadUrl(
+            pdfUrl.trim()
+          );
+
+      }
+
+
+      const statusText =
+        hasPdf
+          ? "PDF Available"
+          : "PDF अभी उपलब्ध नहीं है";
+
+
+      const statusIcon =
+        hasPdf
+          ? "fa-circle-check"
+          : "fa-clock";
+
+
+      card.innerHTML = `
+
+        <div class="pdf-icon">
+
+          <i class="fa-solid ${config.icon}"></i>
+
+        </div>
+
+
+        <h2>
+          ${config.title}
+        </h2>
+
+
+        <p>
+          ${config.description}
+        </p>
+
+
+        <div class="pdf-status">
+
+          <i class="fa-solid ${statusIcon}"></i>
+
+          <span>
+            ${statusText}
+          </span>
+
+        </div>
+
+
+        <div class="pdf-actions">
+
+          <a
+            href="${viewUrl}"
+            class="pdf-btn pdf-btn-view ${hasPdf ? "" : "disabled"}"
+            ${hasPdf ? 'target="_blank" rel="noopener noreferrer"' : ''}
+          >
+
+            <i class="fa-regular fa-eye"></i>
+
+            View PDF
+
+          </a>
+
+
+          <a
+            href="${downloadUrl}"
+            class="pdf-btn pdf-btn-download ${hasPdf ? "" : "disabled"}"
+            ${hasPdf ? 'target="_blank" rel="noopener noreferrer"' : ''}
+          >
+
+            <i class="fa-solid fa-download"></i>
+
+            Download
+
+          </a>
+
+        </div>
+
+      `;
+
+
+      return card;
+
+    }
+
+
+    /* =========================================
+       SHOW ERROR
+    ========================================== */
+
+    function showError(message) {
+
+      const grid =
+        document.getElementById("pdfGrid");
+
+
+      grid.innerHTML = `
+
+        <div class="pdf-error"
+             style="display:block;">
+
+          <i class="fa-solid fa-triangle-exclamation"></i>
+
+          <div>
+            ${message}
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================================
+       LOAD CHAPTER PDFS
+    ========================================== */
+
+    function loadChapterPDFs() {
+
+      const grid =
+        document.getElementById("pdfGrid");
+
+
+      if (
+        !chapter ||
+        !chapterNames[chapter]
+      ) {
+
+        showError(
+          "Chapter नहीं मिला। कृपया Objectives से किसी chapter को खोलें।"
+        );
+
+        return;
+
+      }
+
+
+      const chaptersRef =
+        ref(db, "chapters");
+
+
+      onValue(
+
+        chaptersRef,
+
+        snapshot => {
+
+          const data =
+            snapshot.val();
+
+
+          if (!data) {
+
+            showError(
+              "अभी कोई chapter data उपलब्ध नहीं है।"
+            );
+
+            return;
+
+          }
+
+
+          let selectedChapter =
+            null;
+
+
+          Object.keys(data).forEach(id => {
+
+            const item =
+              data[id];
+
+
+            if (!item) {
+              return;
+            }
+
+
+            const itemSlug =
+              String(
+                item.slug || ""
+              )
+              .trim()
+              .toLowerCase();
+
+
+            if (
+              itemSlug ===
+              String(chapter)
+                .trim()
+                .toLowerCase()
+            ) {
+
+              selectedChapter = item;
+
+            }
+
+          });
+
+
+          if (!selectedChapter) {
+
+            showError(
+              "इस chapter का PDF data अभी उपलब्ध नहीं है।"
+            );
+
+            return;
+
+          }
+
+
+          grid.innerHTML = "";
+
+
+          const cards = [
+
+            createPdfCard(
+              "vvi",
+              selectedChapter.vviPdf
+            ),
+
+            createPdfCard(
+              "pyq",
+              selectedChapter.pyqPdf
+            ),
+
+            createPdfCard(
+              "all",
+              selectedChapter.allPdf
+            )
+
+          ];
+
+
+          cards.forEach(card => {
+
+            grid.appendChild(card);
+
+          });
+
+
+          const availableCount =
+            cards.filter(card =>
+              !card
+                .querySelector(".pdf-btn-view")
+                .classList
+                .contains("disabled")
+            ).length;
+
+
+          const note =
+            document.getElementById(
+              "pdfNoteText"
+            );
+
+
+          if (availableCount === 3) {
+
+            note.textContent =
+              "इस chapter के सभी PDF available हैं। आप किसी भी PDF को online view या download कर सकते हैं।";
+
+          } else if (availableCount > 0) {
+
+            note.textContent =
+              `${availableCount} PDF अभी available है। बाकी PDF admin panel में add होने के बाद यहाँ automatically दिखाई देंगी।`;
+
+          } else {
+
+            note.textContent =
+              "अभी इस chapter की कोई PDF available नहीं है। Admin panel में Google Drive PDF links add होने के बाद यहाँ automatically दिखाई देंगी।";
+
+          }
+
+        },
+
+        error => {
+
+          console.error(
+            "Firebase PDF Error:",
+            error
+          );
+
+
+          showError(
+            "PDF data load नहीं हो पाया। कृपया कुछ देर बाद फिर try करें।"
+          );
+
+        }
+
+      );
+
+    }
+
+
+    /* =========================================
+       START
+    ========================================== */
+
+    loadChapterPDFs();
 
 
     /* =========================================
@@ -829,6 +1363,7 @@
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
+
   </script>
 
 </body>
