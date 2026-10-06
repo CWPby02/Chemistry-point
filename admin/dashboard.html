@@ -1,758 +1,1330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Dashboard | Chemistry Point</title>
-
-<link rel="icon" href="../assets/images/logo/logo.png">
-
-<link rel="stylesheet" href="../assets/css/root.css">
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/responsive.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<style>
-
-:root{
-    --bg:#08090b;
-    --card:#13161a;
-    --card2:#0e1013;
-    --border:rgba(217,154,22,.18);
-    --text:#fff;
-    --muted:#858a93;
-    --gold:#d99a16;
-    --gold2:#f3bd45;
-    --sidebar:260px;
-}
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Inter,sans-serif;
-}
-
-body.light-mode{
-    --bg:#f5f5f5;
-    --card:#fff;
-    --card2:#f8f8f8;
-    --border:rgba(168,111,0,.18);
-    --text:#17191c;
-    --muted:#666;
-}
-
-.sidebar{
-    position:fixed;
-    inset:0 auto 0 0;
-    width:var(--sidebar);
-    background:var(--card);
-    border-right:1px solid var(--border);
-    z-index:1000;
-    display:flex;
-    flex-direction:column;
-}
-
-.brand{
-    height:76px;
-    padding:14px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    border-bottom:1px solid var(--border);
-}
-
-.brand img{
-    width:44px;
-    height:44px;
-    object-fit:contain;
-    border-radius:10px;
-}
-
-.brand strong{
-    font-family:Poppins;
-    font-size:17px;
-}
-
-.brand span{
-    display:block;
-    color:var(--gold2);
-    font-size:10px;
-    margin-top:2px;
-}
-
-.nav{
-    padding:18px 12px;
-    overflow:auto;
-}
-
-.nav a{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    color:var(--muted);
-    padding:12px 13px;
-    border-radius:11px;
-    margin-bottom:5px;
-    font-size:13px;
-    font-weight:600;
-    transition:.2s;
-}
-
-.nav a i{
-    width:19px;
-    text-align:center;
-}
-
-.nav a:hover,
-.nav a.active{
-    color:var(--gold2);
-    background:rgba(217,154,22,.1);
-}
-
-.sidefoot{
-    margin-top:auto;
-    padding:15px;
-    border-top:1px solid var(--border);
-}
-
-.logout{
-    width:100%;
-    border:1px solid rgba(220,53,69,.25);
-    background:rgba(220,53,69,.07);
-    color:#ff8994;
-    border-radius:10px;
-    padding:11px;
-    cursor:pointer;
-    font-family:inherit;
-    font-weight:600;
-}
-
-.main{
-    margin-left:var(--sidebar);
-    min-height:100vh;
-}
-
-.top{
-    height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 28px;
-    border-bottom:1px solid var(--border);
-    background:var(--card);
-    position:sticky;
-    top:0;
-    z-index:900;
-}
-
-.left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.mobilebtn,
-.theme{
-    border:1px solid var(--border);
-    background:transparent;
-    color:var(--text);
-    width:40px;
-    height:40px;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.mobilebtn{
-    display:none;
-}
-
-.title{
-    font-family:Poppins;
-    font-size:20px;
-    margin:0;
-}
-
-.right{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.theme{
-    color:var(--gold2);
-}
-
-.user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding-left:12px;
-    border-left:1px solid var(--border);
-}
-
-.avatar{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:rgba(217,154,22,.12);
-    color:var(--gold2);
-}
-
-.email{
-    font-size:12px;
-    color:var(--muted);
-    max-width:220px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.content{
-    padding:28px;
-}
-
-.welcome{
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:25px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(217,154,22,.12),
-            transparent 55%
-        ),
-        var(--card);
-    margin-bottom:22px;
-}
-
-.welcome h1{
-    font-family:Poppins;
-    font-size:25px;
-    margin:0 0 7px;
-}
-
-.welcome h1 span{
-    color:var(--gold2);
-}
-
-.welcome p{
-    margin:0;
-    color:var(--muted);
-    font-size:13px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:24px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:19px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.icon{
-    width:48px;
-    height:48px;
-    border-radius:13px;
-    display:grid;
-    place-items:center;
-    background:rgba(217,154,22,.11);
-    color:var(--gold2);
-    font-size:18px;
-}
-
-.label{
-    color:var(--muted);
-    font-size:11px;
-    margin-bottom:5px;
-}
-
-.value{
-    font-family:Poppins;
-    font-size:24px;
-    font-weight:700;
-}
-
-.heading{
-    font-family:Poppins;
-    font-size:18px;
-    margin:0 0 14px;
-}
-
-.quick{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-bottom:25px;
-}
-
-.quick a{
-    text-decoration:none;
-    color:var(--text);
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:18px;
-    transition:.2s;
-}
-
-.quick a:hover{
-    transform:translateY(-3px);
-    border-color:rgba(217,154,22,.45);
-}
-
-.quick i{
-    color:var(--gold2);
-    font-size:19px;
-    margin-bottom:12px;
-}
-
-.quick h3{
-    font-family:Poppins;
-    font-size:14px;
-    margin:0 0 5px;
-}
-
-.quick p{
-    font-size:11px;
-    color:var(--muted);
-    margin:0;
-}
-
-.status{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:20px;
-}
-
-.row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
-    font-size:13px;
-}
-
-.row:last-child{
-    border:0;
-}
-
-.name{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.name i{
-    width:20px;
-    color:var(--gold2);
-    text-align:center;
-}
-
-.badge{
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:10px;
-    font-weight:700;
-    color:#6ee7a3;
-    background:rgba(25,135,84,.1);
-    border:1px solid rgba(25,135,84,.18);
-}
-
-.badge.loading{
-    color:var(--gold2);
-    background:rgba(217,154,22,.08);
-}
-
-.badge.error{
-    color:#ff8994;
-    background:rgba(220,53,69,.08);
-}
-
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:950;
-}
-
-.overlay.show{
-    display:block;
-}
-
-@media(max-width:1050px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .quick{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:900px){
-
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.25s;
-    }
-
-    .sidebar.show{
-        transform:translateX(0);
-    }
-
-    .main{
-        margin-left:0;
-    }
-
-    .mobilebtn{
-        display:block;
-    }
-
-    .email{
-        max-width:140px;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .top{
-        padding:0 15px;
-        height:68px;
-    }
-
-    .content{
-        padding:17px;
-    }
-
-    .title{
-        font-size:17px;
-    }
-
-    .user{
-        display:none;
-    }
-
-    .stats,
-    .quick{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .stat{
-        padding:14px;
-    }
-
-    .icon{
-        width:42px;
-        height:42px;
-    }
-
-    .value{
-        font-size:21px;
-    }
-
-    .welcome{
-        padding:19px;
-    }
-
-    .welcome h1{
-        font-size:20px;
-    }
-
-}
-
-@media(max-width:400px){
-
-    .stats,
-    .quick{
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Chemistry Point</title>
+
+    <link
+        rel="icon"
+        href="../assets/images/logo/logo.png">
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/root.css">
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/responsive.css">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <style>
+
+        :root {
+
+            --bg: #08090b;
+            --card: #13161a;
+            --card2: #0e1013;
+            --border: rgba(217,154,22,.18);
+
+            --text: #ffffff;
+            --muted: #858a93;
+
+            --gold: #d99a16;
+            --gold2: #f3bd45;
+
+            --sidebar: 260px;
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            font-family: Inter, sans-serif;
+
+            transition:
+                background .25s ease,
+                color .25s ease;
+
+        }
+
+
+        body.light-mode {
+
+            --bg: #f5f5f5;
+            --card: #ffffff;
+            --card2: #f8f8f8;
+
+            --border: rgba(168,111,0,.18);
+
+            --text: #17191c;
+            --muted: #666666;
+
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            inset: 0 auto 0 0;
+
+            width: var(--sidebar);
+
+            background: var(--card);
+
+            border-right:
+                1px solid var(--border);
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .brand {
+
+            height: 76px;
+
+            padding: 14px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .brand img {
+
+            width: 44px;
+
+            height: 44px;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+        }
+
+
+        .brand strong {
+
+            font-family: Poppins;
+
+            font-size: 17px;
+
+        }
+
+
+        .brand span {
+
+            display: block;
+
+            color: var(--gold2);
+
+            font-size: 10px;
+
+            margin-top: 2px;
+
+            letter-spacing: .5px;
+
+        }
+
+
+        .nav {
+
+            padding: 18px 12px;
+
+            overflow-y: auto;
+
+        }
+
+
+        .nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            color: var(--muted);
+
+            padding: 12px 13px;
+
+            border-radius: 11px;
+
+            margin-bottom: 5px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav a i {
+
+            width: 19px;
+
+            text-align: center;
+
+        }
+
+
+        .nav a:hover,
+        .nav a.active {
+
+            color: var(--gold2);
+
+            background:
+                rgba(217,154,22,.1);
+
+        }
+
+
+        .sidefoot {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .logout {
+
+            width: 100%;
+
+            border:
+                1px solid rgba(220,53,69,.25);
+
+            background:
+                rgba(220,53,69,.07);
+
+            color: #ff8994;
+
+            border-radius: 10px;
+
+            padding: 11px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+
+            margin-left: var(--sidebar);
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================================
+           TOP BAR
+        ========================================= */
+
+        .top {
+
+            height: 76px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            background: var(--card);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+
+        }
+
+
+        .left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .mobilebtn,
+        .theme {
+
+            border:
+                1px solid var(--border);
+
+            background: transparent;
+
+            color: var(--text);
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+        }
+
+
+        .mobilebtn {
+
+            display: none;
+
+        }
+
+
+        .title {
+
+            font-family: Poppins;
+
+            font-size: 20px;
+
+            margin: 0;
+
+        }
+
+
+        .right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .theme {
+
+            color: var(--gold2);
+
+        }
+
+
+        .user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding-left: 12px;
+
+            border-left:
+                1px solid var(--border);
+
+        }
+
+
+        .avatar {
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                rgba(217,154,22,.12);
+
+            color: var(--gold2);
+
+        }
+
+
+        .email {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            max-width: 220px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+
+            padding: 28px;
+
+        }
+
+
+        .welcome {
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(217,154,22,.12),
+                    transparent 55%
+                ),
+                var(--card);
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .welcome h1 {
+
+            font-family: Poppins;
+
+            font-size: 25px;
+
+            margin: 0 0 7px;
+
+        }
+
+
+        .welcome h1 span {
+
+            color: var(--gold2);
+
+        }
+
+
+        .welcome p {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================
+           FIXED MAIN STATS
+        ========================================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .stat {
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 16px;
+
+            padding: 19px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 13px;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                rgba(217,154,22,.11);
+
+            color: var(--gold2);
+
+            font-size: 18px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .label {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .value {
+
+            font-family: Poppins;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================
+           SECTION HEADING
+        ========================================= */
+
+        .heading {
+
+            font-family: Poppins;
+
+            font-size: 18px;
+
+            margin:
+                0 0 14px;
+
+        }
+
+
+        /* =========================================
+           QUICK ACTIONS
+        ========================================= */
+
+        .quick {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .quick a {
+
+            text-decoration: none;
+
+            color: var(--text);
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            transition: .2s ease;
+
+        }
+
+
+        .quick a:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(217,154,22,.45);
+
+        }
+
+
+        .quick i {
+
+            color: var(--gold2);
+
+            font-size: 19px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .quick h3 {
+
+            font-family: Poppins;
+
+            font-size: 14px;
+
+            margin:
+                0 0 5px;
+
+        }
+
+
+        .quick p {
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            margin: 0;
+
+        }
+
+
+        /* =========================================
+           AUTO DATABASE SECTION
+        ========================================= */
+
+        .database-section {
+
+            margin-top: 28px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .database-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .database-header .heading {
+
+            margin: 0;
+
+        }
+
+
+        .live-indicator {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #6ee7a3;
+
+            background:
+                rgba(25,135,84,.1);
+
+            border:
+                1px solid rgba(25,135,84,.18);
+
+        }
+
+
+        .live-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #49d889;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(73,216,137,.08);
+
+        }
+
+
+        .database-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+        }
+
+
+        .database-card {
+
+            position: relative;
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 17px;
+
+            overflow: hidden;
+
+            transition: .2s ease;
+
+        }
+
+
+        .database-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(217,154,22,.4);
+
+        }
+
+
+        .database-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(217,154,22,.05);
+
+            top: -35px;
+
+            right: -35px;
+
+        }
+
+
+        .database-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 11px;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                rgba(217,154,22,.1);
+
+            color: var(--gold2);
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .database-name {
+
+            font-family: Poppins;
+
+            font-size: 13px;
+
+            margin-bottom: 4px;
+
+            word-break: break-word;
+
+        }
+
+
+        .database-count {
+
+            font-family: Poppins;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+        }
+
+
+        .database-type {
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .database-empty {
+
+            padding: 30px;
+
+            text-align: center;
+
+            background: var(--card);
+
+            border:
+                1px dashed var(--border);
+
+            border-radius: 15px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================
+           SYSTEM STATUS
+        ========================================= */
+
+        .status {
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+        }
+
+
+        .row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+            font-size: 13px;
+
+        }
+
+
+        .row:last-child {
+
+            border: 0;
+
+        }
+
+
+        .name {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .name i {
+
+            width: 20px;
+
+            color: var(--gold2);
+
+            text-align: center;
+
+        }
+
+
+        .badge {
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #6ee7a3;
+
+            background:
+                rgba(25,135,84,.1);
+
+            border:
+                1px solid rgba(25,135,84,.18);
+
+        }
+
+
+        .badge.loading {
+
+            color: var(--gold2);
+
+            background:
+                rgba(217,154,22,.08);
+
+        }
+
+
+        .badge.error {
+
+            color: #ff8994;
+
+            background:
+                rgba(220,53,69,.08);
+
+        }
+
+
+        /* =========================================
+           OVERLAY
+        ========================================= */
+
+        .overlay {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,.55);
+
+            z-index: 950;
+
+        }
+
+
+        .overlay.show {
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media(max-width:1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .quick {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .database-grid {
+
+                grid-template-columns:
+                    repeat(3,1fr);
+
+            }
+
+        }
+
+
+        @media(max-width:900px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+                transition: .25s ease;
+
+            }
+
+
+            .sidebar.show {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+            }
+
+
+            .mobilebtn {
+
+                display: block;
+
+            }
+
+
+            .email {
+
+                max-width: 140px;
+
+            }
+
+
+            .database-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .top {
+
+                padding: 0 15px;
+
+                height: 68px;
+
+            }
+
+
+            .content {
+
+                padding: 17px;
+
+            }
+
+
+            .title {
+
+                font-size: 17px;
+
+            }
+
+
+            .user {
+
+                display: none;
+
+            }
+
+
+            .stats,
+            .quick {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap: 10px;
+
+            }
+
+
+            .stat {
+
+                padding: 14px;
+
+            }
+
+
+            .icon {
+
+                width: 42px;
+
+                height: 42px;
+
+            }
+
+
+            .value {
+
+                font-size: 21px;
+
+            }
+
+
+            .welcome {
+
+                padding: 19px;
+
+            }
+
+
+            .welcome h1 {
+
+                font-size: 20px;
+
+            }
+
+
+            .database-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap: 10px;
+
+            }
+
+
+            .database-card {
+
+                padding: 14px;
+
+            }
+
+
+            .database-count {
+
+                font-size: 20px;
+
+            }
+
+
+            .database-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+
+        @media(max-width:400px) {
+
+            .stats,
+            .quick,
+            .database-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="overlay" id="overlay"></div>
 
-<aside class="sidebar" id="sidebar">
+    <!-- =========================================
+         OVERLAY
+    ========================================== -->
 
-    <div class="brand">
-        <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
-
-        <div>
-            <strong>Chemistry Point</strong>
-            <span>ADMIN PANEL</span>
-        </div>
+    <div
+        class="overlay"
+        id="overlay">
     </div>
 
-    <nav class="nav">
 
-        <a href="dashboard.html" class="active">
-            <i class="fa-solid fa-gauge-high"></i>
-            Dashboard
-        </a>
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
 
-        <a href="videos.html">
-            <i class="fa-solid fa-video"></i>
-            Videos
-        </a>
-
-        <a href="objectives.html">
-            <i class="fa-solid fa-book-open"></i>
-            Objectives
-        </a>
-
-        <a href="quizzes.html">
-            <i class="fa-solid fa-circle-question"></i>
-            Quizzes
-        </a>
-
-        <a href="questions.html">
-            <i class="fa-solid fa-list-check"></i>
-            Questions
-        </a>
-
-        <a href="students.html">
-            <i class="fa-solid fa-users"></i>
-            Students
-        </a>
-
-        <a href="notices.html">
-            <i class="fa-solid fa-bullhorn"></i>
-            Notices
-        </a>
-
-        <a href="settings.html">
-            <i class="fa-solid fa-gear"></i>
-            Settings
-        </a>
-
-    </nav>
-
-    <div class="sidefoot">
-
-        <button class="logout" id="logout">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Logout
-        </button>
-
-    </div>
-
-</aside>
+    <aside
+        class="sidebar"
+        id="sidebar">
 
 
-<main class="main">
+        <div class="brand">
 
-    <header class="top">
+            <img
+                src="../assets/images/logo/logo.png"
+                alt="Chemistry Point">
 
-        <div class="left">
+            <div>
 
-            <button class="mobilebtn" id="sideBtn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+                <strong>
+                    Chemistry Point
+                </strong>
 
-            <h1 class="title">
-                Dashboard
-            </h1>
-
-        </div>
-
-
-        <div class="right">
-
-            <button class="theme" id="theme">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-
-            <div class="user">
-
-                <div class="avatar">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-
-                <span class="email" id="email">
-                    Checking...
+                <span>
+                    ADMIN PANEL
                 </span>
 
             </div>
 
         </div>
 
-    </header>
 
+        <nav class="nav">
 
-    <div class="content">
+            <a
+                href="dashboard.html"
+                class="active">
 
-        <section class="welcome">
+                <i class="fa-solid fa-gauge-high"></i>
 
-            <h1>
-                Welcome back,
-                <span>Admin</span> 👋
-            </h1>
+                Dashboard
 
-            <p>
-                यहाँ से Chemistry Point की website का content manage किया जा सकेगा।
-            </p>
+            </a>
 
-        </section>
-
-
-        <section class="stats">
-
-            <div class="stat">
-
-                <div class="icon">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-
-                <div>
-
-                    <div class="label">
-                        Total Videos
-                    </div>
-
-                    <div class="value" id="videosCount">
-                        —
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <div>
-
-                    <div class="label">
-                        Total Chapters
-                    </div>
-
-                    <div class="value" id="chaptersCount">
-                        —
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="icon">
-                    <i class="fa-solid fa-circle-question"></i>
-                </div>
-
-                <div>
-
-                    <div class="label">
-                        Total Quizzes
-                    </div>
-
-                    <div class="value" id="quizzesCount">
-                        —
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-
-                <div>
-
-                    <div class="label">
-                        Total Students
-                    </div>
-
-                    <div class="value" id="studentsCount">
-                        —
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <h2 class="heading">
-            Quick Actions
-        </h2>
-
-
-        <section class="quick">
 
             <a href="videos.html">
 
                 <i class="fa-solid fa-video"></i>
 
-                <h3>
-                    Manage Videos
-                </h3>
-
-                <p>
-                    Add, edit and delete YouTube videos.
-                </p>
+                Videos
 
             </a>
 
 
             <a href="objectives.html">
 
-                <i class="fa-solid fa-file-pdf"></i>
+                <i class="fa-solid fa-book-open"></i>
 
-                <h3>
-                    Manage Objectives
-                </h3>
-
-                <p>
-                    Manage chapters and Google Drive PDFs.
-                </p>
+                Objectives
 
             </a>
 
@@ -761,13 +1333,7 @@ body.light-mode{
 
                 <i class="fa-solid fa-circle-question"></i>
 
-                <h3>
-                    Manage Quizzes
-                </h3>
-
-                <p>
-                    Create and manage online quizzes.
-                </p>
+                Quizzes
 
             </a>
 
@@ -776,576 +1342,1218 @@ body.light-mode{
 
                 <i class="fa-solid fa-list-check"></i>
 
-                <h3>
-                    Manage Questions
-                </h3>
-
-                <p>
-                    Add and edit quiz questions.
-                </p>
+                Questions
 
             </a>
 
-        </section>
+
+            <a href="students.html">
+
+                <i class="fa-solid fa-users"></i>
+
+                Students
+
+            </a>
 
 
-        <h2 class="heading">
-            System Status
-        </h2>
+            <a href="notices.html">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+                Notices
+
+            </a>
 
 
-        <section class="status">
+            <a href="settings.html">
 
-            <div class="row">
+                <i class="fa-solid fa-gear"></i>
 
-                <div class="name">
-                    <i class="fa-solid fa-user-lock"></i>
-                    Firebase Authentication
-                </div>
+                Settings
 
-                <span class="badge">
-                    Connected
-                </span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidefoot">
+
+            <button
+                class="logout"
+                id="logout">
+
+                <i
+                    class="fa-solid fa-right-from-bracket">
+                </i>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="top">
+
+
+            <div class="left">
+
+                <button
+                    class="mobilebtn"
+                    id="sideBtn">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <h1 class="title">
+                    Dashboard
+                </h1>
 
             </div>
 
 
-            <div class="row">
+            <div class="right">
 
-                <div class="name">
-                    <i class="fa-solid fa-database"></i>
-                    Realtime Database
+
+                <button
+                    class="theme"
+                    id="theme"
+                    aria-label="Toggle theme">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+
+                <div class="user">
+
+                    <div class="avatar">
+
+                        <i
+                            class="fa-solid fa-user-shield">
+                        </i>
+
+                    </div>
+
+
+                    <span
+                        class="email"
+                        id="email">
+
+                        Checking...
+
+                    </span>
+
                 </div>
-
-                <span
-                    class="badge loading"
-                    id="dbStatus">
-                    Checking...
-                </span>
 
             </div>
 
+        </header>
 
-            <div class="row">
 
-                <div class="name">
-                    <i class="fa-solid fa-file-arrow-down"></i>
-                    PDF Storage
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <!-- =====================================
+                 WELCOME
+            ====================================== -->
+
+            <section class="welcome">
+
+                <h1>
+
+                    Welcome back,
+
+                    <span>
+                        Admin
+                    </span>
+
+                    👋
+
+                </h1>
+
+
+                <p>
+
+                    यहाँ से Chemistry Point की
+                    website का content manage किया जा सकेगा।
+
+                </p>
+
+            </section>
+
+
+            <!-- =====================================
+                 MAIN STATS
+            ====================================== -->
+
+            <section class="stats">
+
+
+                <div class="stat">
+
+                    <div class="icon">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="label">
+                            Total Videos
+                        </div>
+
+                        <div
+                            class="value"
+                            id="videosCount">
+
+                            —
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <span class="badge">
-                    Google Drive Links
-                </span>
 
-            </div>
+                <div class="stat">
+
+                    <div class="icon">
+
+                        <i
+                            class="fa-solid fa-book-open">
+                        </i>
+
+                    </div>
 
 
-            <div class="row">
+                    <div>
 
-                <div class="name">
-                    <i class="fa-solid fa-code"></i>
-                    Developer
+                        <div class="label">
+                            Total Chapters
+                        </div>
+
+                        <div
+                            class="value"
+                            id="chaptersCount">
+
+                            —
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <span class="badge">
-                    Code With Piyush
-                </span>
 
-            </div>
+                <div class="stat">
 
-        </section>
+                    <div class="icon">
 
-    </div>
+                        <i
+                            class="fa-solid fa-circle-question">
+                        </i>
 
-</main>
+                    </div>
 
 
-<script type="module">
+                    <div>
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+                        <div class="label">
+                            Total Quizzes
+                        </div>
 
-import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+                        <div
+                            class="value"
+                            id="quizzesCount">
 
-import {
-    getDatabase,
-    ref,
-    get,
-    onValue
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+                            —
 
+                        </div>
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+                    </div>
 
-const firebaseConfig = {
+                </div>
 
-    apiKey:
-        "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
 
-    authDomain:
-        "chemistry-point-9a41b.firebaseapp.com",
+                <div class="stat">
 
-    projectId:
-        "chemistry-point-9a41b",
+                    <div class="icon">
 
-    storageBucket:
-        "chemistry-point-9a41b.firebasestorage.app",
+                        <i
+                            class="fa-solid fa-users">
+                        </i>
 
-    messagingSenderId:
-        "791007663942",
+                    </div>
 
-    appId:
-        "1:791007663942:web:693c008e475a2e74357747"
 
-};
+                    <div>
 
+                        <div class="label">
+                            Total Students
+                        </div>
 
-const app =
-    initializeApp(firebaseConfig);
+                        <div
+                            class="value"
+                            id="studentsCount">
 
+                            —
 
-const auth =
-    getAuth(app);
+                        </div>
 
+                    </div>
 
-const db =
-    getDatabase(
-        app,
-        "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
-    );
+                </div>
 
 
-/* =========================
-   ELEMENTS
-========================= */
+            </section>
 
-const email =
-    document.getElementById("email");
 
-const dbStatus =
-    document.getElementById("dbStatus");
+            <!-- =====================================
+                 QUICK ACTIONS
+            ====================================== -->
 
-const videosCount =
-    document.getElementById("videosCount");
+            <h2 class="heading">
+                Quick Actions
+            </h2>
 
-const chaptersCount =
-    document.getElementById("chaptersCount");
 
-const quizzesCount =
-    document.getElementById("quizzesCount");
+            <section class="quick">
 
-const studentsCount =
-    document.getElementById("studentsCount");
 
+                <a href="videos.html">
 
-/* =========================
-   ADMIN VERIFY
-========================= */
+                    <i
+                        class="fa-solid fa-video">
+                    </i>
 
-async function verifyAdmin(user){
+                    <h3>
+                        Manage Videos
+                    </h3>
 
-    const snapshot =
-        await get(
-            ref(
-                db,
-                `admins/${user.uid}`
-            )
-        );
+                    <p>
+                        Add, edit and delete
+                        YouTube videos.
+                    </p>
 
+                </a>
 
-    if(!snapshot.exists()){
 
-        throw new Error("NOT_ADMIN");
+                <a href="objectives.html">
 
-    }
+                    <i
+                        class="fa-solid fa-file-pdf">
+                    </i>
 
+                    <h3>
+                        Manage Objectives
+                    </h3>
 
-    const data =
-        snapshot.val();
+                    <p>
+                        Manage chapters and
+                        Google Drive PDFs.
+                    </p>
 
+                </a>
 
-    if(
-        data.role !== "admin" ||
-        data.active !== true
-    ){
 
-        throw new Error("NOT_ADMIN");
+                <a href="quizzes.html">
 
-    }
+                    <i
+                        class="fa-solid fa-circle-question">
+                    </i>
 
-}
+                    <h3>
+                        Manage Quizzes
+                    </h3>
 
+                    <p>
+                        Create and manage
+                        online quizzes.
+                    </p>
 
-/* =========================
-   NORMAL COUNT
-========================= */
+                </a>
 
-async function count(path){
 
-    const snapshot =
-        await get(
-            ref(db,path)
-        );
+                <a href="questions.html">
 
+                    <i
+                        class="fa-solid fa-list-check">
+                    </i>
 
-    if(
-        !snapshot.exists()
-    ){
+                    <h3>
+                        Manage Questions
+                    </h3>
 
-        return 0;
+                    <p>
+                        Add and edit quiz
+                        questions.
+                    </p>
 
-    }
+                </a>
 
 
-    const data =
-        snapshot.val();
+            </section>
 
 
-    if(
-        !data ||
-        typeof data !== "object"
-    ){
+            <!-- =====================================
+                 AUTO DATABASE OVERVIEW
+            ====================================== -->
 
-        return 0;
+            <section class="database-section">
 
-    }
 
+                <div class="database-header">
 
-    return Object.keys(data).length;
+                    <h2 class="heading">
 
-}
+                        Live Database Overview
 
+                    </h2>
 
-/* =========================
-   LIVE VIDEO COUNT
-========================= */
 
-function listenVideos(){
+                    <span
+                        class="live-indicator">
 
-    const videosRef =
-        ref(db,"videos");
+                        <span class="live-dot"></span>
 
+                        LIVE
 
-    onValue(
-        videosRef,
+                    </span>
 
-        (snapshot)=>{
+                </div>
+
+
+                <div
+                    class="database-grid"
+                    id="databaseGrid">
+
+                    <div class="database-empty">
+
+                        Loading database...
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================================
+                 SYSTEM STATUS
+            ====================================== -->
+
+            <h2 class="heading">
+
+                System Status
+
+            </h2>
+
+
+            <section class="status">
+
+
+                <div class="row">
+
+                    <div class="name">
+
+                        <i
+                            class="fa-solid fa-user-lock">
+                        </i>
+
+                        Firebase Authentication
+
+                    </div>
+
+
+                    <span class="badge">
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="name">
+
+                        <i
+                            class="fa-solid fa-database">
+                        </i>
+
+                        Realtime Database
+
+                    </div>
+
+
+                    <span
+                        class="badge loading"
+                        id="dbStatus">
+
+                        Checking...
+
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="name">
+
+                        <i
+                            class="fa-solid fa-file-arrow-down">
+                        </i>
+
+                        PDF Storage
+
+                    </div>
+
+
+                    <span class="badge">
+
+                        Google Drive Links
+
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="name">
+
+                        <i
+                            class="fa-solid fa-code">
+                        </i>
+
+                        Developer
+
+                    </div>
+
+
+                    <span class="badge">
+
+                        Code With Piyush
+
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         FIREBASE + DASHBOARD JS
+    ========================================== -->
+
+    <script type="module">
+
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            get
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+        /* =========================================
+           FIREBASE CONFIG
+        ========================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+            authDomain:
+                "chemistry-point-9a41b.firebaseapp.com",
+
+            projectId:
+                "chemistry-point-9a41b",
+
+            storageBucket:
+                "chemistry-point-9a41b.firebasestorage.app",
+
+            messagingSenderId:
+                "791007663942",
+
+            appId:
+                "1:791007663942:web:693c008e475a2e74357747"
+
+        };
+
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const auth =
+            getAuth(app);
+
+
+        const db =
+            getDatabase(
+                app,
+                "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+            );
+
+
+        /* =========================================
+           DOM
+        ========================================== */
+
+        const email =
+            document.getElementById("email");
+
+        const dbStatus =
+            document.getElementById("dbStatus");
+
+        const databaseGrid =
+            document.getElementById("databaseGrid");
+
+
+        /* =========================================
+           ADMIN VERIFY
+        ========================================== */
+
+        async function verifyAdmin(user) {
+
+            const snapshot =
+                await get(
+                    ref(
+                        db,
+                        `admins/${user.uid}`
+                    )
+                );
+
+
+            if (!snapshot.exists()) {
+
+                throw new Error("NOT_ADMIN");
+
+            }
+
 
             const data =
                 snapshot.val();
 
 
-            let totalVideos = 0;
+            if (
+                data.role !== "admin" ||
+                data.active === false
+            ) {
+
+                throw new Error("NOT_ADMIN");
+
+            }
+
+        }
 
 
-            if(
-                data &&
-                typeof data === "object"
-            ){
+        /* =========================================
+           ICON SYSTEM
+        ========================================== */
 
-                totalVideos =
-                    Object.keys(data).length;
+        function getIcon(key) {
+
+            const icons = {
+
+                videos:
+                    "fa-video",
+
+                chapters:
+                    "fa-book-open",
+
+                quizzes:
+                    "fa-circle-question",
+
+                questions:
+                    "fa-list-check",
+
+                students:
+                    "fa-users",
+
+                notices:
+                    "fa-bullhorn",
+
+                payments:
+                    "fa-credit-card",
+
+                results:
+                    "fa-chart-column",
+
+                admins:
+                    "fa-user-shield",
+
+                settings:
+                    "fa-gear",
+
+                users:
+                    "fa-users",
+
+                exams:
+                    "fa-file-circle-question",
+
+                answers:
+                    "fa-list-check",
+
+                certificates:
+                    "fa-certificate",
+
+                pdfs:
+                    "fa-file-pdf"
+
+            };
+
+
+            return icons[key] ||
+                "fa-database";
+
+        }
+
+
+        /* =========================================
+           FORMAT NAME
+        ========================================== */
+
+        function formatName(key) {
+
+            return key
+
+                .replace(/[-_]/g, " ")
+
+                .replace(
+                    /\b\w/g,
+                    char => char.toUpperCase()
+                );
+
+        }
+
+
+        /* =========================================
+           COUNT DATA
+        ========================================== */
+
+        function countNode(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return 0;
 
             }
 
 
-            videosCount.textContent =
-                totalVideos;
+            if (
+                typeof value !== "object"
+            ) {
+
+                return 1;
+
+            }
 
 
-            dbStatus.textContent =
-                "Connected";
-
-            dbStatus.className =
-                "badge";
-
-
-            console.log(
-                "Total Videos:",
-                totalVideos
-            );
-
-        },
-
-        (error)=>{
-
-            console.error(
-                "Videos listener error:",
-                error
-            );
-
-
-            videosCount.textContent =
-                "—";
-
-
-            dbStatus.textContent =
-                "Rules / Data check";
-
-            dbStatus.className =
-                "badge error";
+            return Object.keys(value).length;
 
         }
 
-    );
 
-}
+        /* =========================================
+           AUTO DATABASE DASHBOARD
+        ========================================== */
 
-
-/* =========================
-   LOAD OTHER DATA
-========================= */
-
-async function loadOtherCounts(){
-
-    try{
-
-        const [
-            chapters,
-            quizzes,
-            students
-        ] = await Promise.all([
-
-            count("chapters"),
-
-            count("quizzes"),
-
-            count("students")
-
-        ]);
+        function renderDatabase(data) {
 
 
-        chaptersCount.textContent =
-            chapters;
+            databaseGrid.innerHTML = "";
 
 
-        quizzesCount.textContent =
-            quizzes;
+            if (
+                !data ||
+                typeof data !== "object"
+            ) {
+
+                databaseGrid.innerHTML = `
+
+                    <div class="database-empty">
+
+                        Firebase में अभी कोई
+                        top-level data नहीं मिला।
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
 
 
-        studentsCount.textContent =
-            students;
+            const keys =
+                Object.keys(data);
 
 
-    }catch(error){
+            if (!keys.length) {
 
-        console.error(
-            "Other count error:",
-            error
+                databaseGrid.innerHTML = `
+
+                    <div class="database-empty">
+
+                        Firebase database खाली है।
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /*
+             * admins को overview में
+             * सबसे नीचे/छोटे रूप में दिखाने
+             * के लिए normal list में रखा गया है।
+             */
+
+            keys.sort(
+                (a,b) => {
+
+                    const priority = {
+
+                        videos: 1,
+
+                        chapters: 2,
+
+                        quizzes: 3,
+
+                        questions: 4,
+
+                        students: 5
+
+                    };
+
+
+                    return (
+                        (priority[a] || 99) -
+                        (priority[b] || 99)
+                    );
+
+                }
+            );
+
+
+            keys.forEach(key => {
+
+
+                const count =
+                    countNode(data[key]);
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "database-card";
+
+
+                card.innerHTML = `
+
+                    <div class="database-icon">
+
+                        <i
+                            class="fa-solid ${getIcon(key)}">
+                        </i>
+
+                    </div>
+
+                    <div class="database-name">
+
+                        ${formatName(key)}
+
+                    </div>
+
+                    <div class="database-count">
+
+                        ${count}
+
+                    </div>
+
+                    <div class="database-type">
+
+                        Firebase / ${key}
+
+                    </div>
+
+                `;
+
+
+                databaseGrid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =========================================
+           LIVE DATABASE LISTENER
+        ========================================== */
+
+        function startDatabaseListener() {
+
+
+            /*
+             * पूरा database admin के लिए live
+             * listen होगा।
+             *
+             * इसलिए नया top-level node add होते ही
+             * dashboard automatically update होगा।
+             */
+
+            const rootRef =
+                ref(db);
+
+
+            onValue(
+                rootRef,
+
+                snapshot => {
+
+                    const data =
+                        snapshot.val();
+
+
+                    renderDatabase(data);
+
+
+                    /* =================================
+                       MAIN FIXED STATS
+                    ================================= */
+
+                    const videos =
+                        data?.videos || null;
+
+                    const chapters =
+                        data?.chapters || null;
+
+                    const quizzes =
+                        data?.quizzes || null;
+
+                    const students =
+                        data?.students || null;
+
+
+                    document.getElementById(
+                        "videosCount"
+                    ).textContent =
+                        countNode(videos);
+
+
+                    document.getElementById(
+                        "chaptersCount"
+                    ).textContent =
+                        countNode(chapters);
+
+
+                    document.getElementById(
+                        "quizzesCount"
+                    ).textContent =
+                        countNode(quizzes);
+
+
+                    document.getElementById(
+                        "studentsCount"
+                    ).textContent =
+                        countNode(students);
+
+
+                    /* =================================
+                       DATABASE STATUS
+                    ================================= */
+
+                    dbStatus.textContent =
+                        "Connected";
+
+
+                    dbStatus.className =
+                        "badge";
+
+                },
+
+                error => {
+
+                    console.error(
+                        "Database error:",
+                        error
+                    );
+
+
+                    dbStatus.textContent =
+                        "Read Error";
+
+
+                    dbStatus.className =
+                        "badge error";
+
+
+                    databaseGrid.innerHTML = `
+
+                        <div class="database-empty">
+
+                            Database read permission
+                            check करें।
+
+                            <br><br>
+
+                            ${error.message || ""}
+
+                        </div>
+
+                    `;
+
+                }
+
+            );
+
+        }
+
+
+        /* =========================================
+           AUTH STATE
+        ========================================== */
+
+        onAuthStateChanged(
+            auth,
+
+            async user => {
+
+
+                if (!user) {
+
+                    location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                email.textContent =
+                    user.email || "Admin";
+
+
+                try {
+
+                    await verifyAdmin(user);
+
+
+                    startDatabaseListener();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    await signOut(auth);
+
+
+                    location.href =
+                        "login.html";
+
+                }
+
+            }
+
         );
 
 
-        chaptersCount.textContent =
-            "—";
+        /* =========================================
+           LOGOUT
+        ========================================== */
 
-        quizzesCount.textContent =
-            "—";
+        document
+            .getElementById("logout")
+            .onclick = async () => {
 
-        studentsCount.textContent =
-            "—";
+                await signOut(auth);
 
-    }
+                location.href =
+                    "login.html";
 
-}
-
-
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(
-    auth,
-
-    async (user)=>{
-
-        if(!user){
-
-            location.href =
-                "login.html";
-
-            return;
-
-        }
+            };
 
 
-        email.textContent =
-            user.email || "Admin";
+        /* =========================================
+           MOBILE SIDEBAR
+        ========================================== */
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const overlay =
+            document.getElementById("overlay");
 
 
-        try{
+        document
+            .getElementById("sideBtn")
+            .onclick = () => {
 
-            await verifyAdmin(user);
+                sidebar.classList.toggle(
+                    "show"
+                );
 
+                overlay.classList.toggle(
+                    "show"
+                );
 
-            /*
-             * Video count becomes
-             * LIVE from Firebase.
-             */
-
-            listenVideos();
-
-
-            /*
-             * Other dashboard
-             * counts.
-             */
-
-            await loadOtherCounts();
+            };
 
 
-        }catch(error){
+        overlay.onclick = () => {
 
-            console.error(
-                error
+            sidebar.classList.remove(
+                "show"
             );
 
-
-            await signOut(auth);
-
-            location.href =
-                "login.html";
-
-        }
-
-    }
-
-);
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-document
-    .getElementById("logout")
-    .onclick = async()=>{
-
-        try{
-
-            await signOut(auth);
-
-            location.href =
-                "login.html";
-
-        }catch(error){
-
-            console.error(
-                error
+            overlay.classList.remove(
+                "show"
             );
-
-        }
-
-    };
-
-
-/* =========================
-   MOBILE SIDEBAR
-========================= */
-
-const sidebar =
-    document.getElementById("sidebar");
-
-const overlay =
-    document.getElementById("overlay");
-
-const sideBtn =
-    document.getElementById("sideBtn");
-
-
-sideBtn.onclick = ()=>{
-
-    sidebar.classList.toggle("show");
-
-    overlay.classList.toggle("show");
-
-};
-
-
-overlay.onclick = ()=>{
-
-    sidebar.classList.remove("show");
-
-    overlay.classList.remove("show");
-
-};
-
-
-document
-    .querySelectorAll(".nav a")
-    .forEach(a=>{
-
-        a.onclick = ()=>{
-
-            sidebar.classList.remove("show");
-
-            overlay.classList.remove("show");
 
         };
 
-    });
+
+        document
+            .querySelectorAll(".nav a")
+            .forEach(link => {
+
+                link.onclick = () => {
+
+                    sidebar.classList.remove(
+                        "show"
+                    );
+
+                    overlay.classList.remove(
+                        "show"
+                    );
+
+                };
+
+            });
 
 
-/* =========================
-   THEME
-========================= */
+        /* =========================================
+           THEME
+        ========================================== */
 
-const theme =
-    document.getElementById("theme");
-
-
-function applyTheme(themeName){
-
-    document.body.classList.toggle(
-        "light-mode",
-        themeName === "light"
-    );
+        const theme =
+            document.getElementById("theme");
 
 
-    theme.innerHTML =
-        themeName === "light"
-
-        ? '<i class="fa-solid fa-sun"></i>'
-
-        : '<i class="fa-solid fa-moon"></i>';
-
-}
+        function applyTheme(type) {
 
 
-applyTheme(
-    localStorage.getItem(
-        "chemistryPointTheme"
-    ) || "dark"
-);
+            document.body.classList.toggle(
+                "light-mode",
+                type === "light"
+            );
 
 
-theme.onclick = ()=>{
+            theme.innerHTML =
+                type === "light"
 
-    const nextTheme =
-        document.body.classList.contains(
-            "light-mode"
-        )
-        ? "dark"
-        : "light";
+                ? '<i class="fa-solid fa-sun"></i>'
 
+                : '<i class="fa-solid fa-moon"></i>';
 
-    localStorage.setItem(
-        "chemistryPointTheme",
-        nextTheme
-    );
+        }
 
 
-    applyTheme(nextTheme);
+        applyTheme(
+            localStorage.getItem(
+                "chemistryPointTheme"
+            ) || "dark"
+        );
 
-};
 
-</script>
+        theme.onclick = () => {
+
+
+            const newTheme =
+                document.body.classList.contains(
+                    "light-mode"
+                )
+
+                ? "dark"
+
+                : "light";
+
+
+            localStorage.setItem(
+                "chemistryPointTheme",
+                newTheme
+            );
+
+
+            applyTheme(newTheme);
+
+        };
+
+    </script>
+
 
 </body>
+
 </html>
