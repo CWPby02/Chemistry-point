@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Objectives Manager | Chemistry Point</title>
+    <meta name="author" content="Code With Piyush">
+
+    <link rel="icon" href="../assets/images/logo/logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #d99a16;
+            --primary-light: #f3bd45;
+            --primary-dark: #a86f00;
+
+            --bg: #08090b;
+            --card: #111318;
+            --card-2: #171a20;
+            --input: #0d0f13;
+
+            --text: #ffffff;
+            --muted: #a7abb3;
+            --muted-2: #777d87;
+
+            --border: rgba(255,255,255,.08);
+            --danger: #ef4444;
+            --success: #22c55e;
+
+            --shadow: 0 15px 45px rgba(0,0,0,.25);
+            --radius: 16px;
+        }
+
+        body.light-mode {
+            --bg: #f5f6f8;
+            --card: #ffffff;
+            --card-2: #f8f9fb;
+            --input: #ffffff;
+
+            --text: #17191c;
+            --muted: #626873;
+            --muted-2: #858b95;
+
+            --border: rgba(0,0,0,.09);
+            --shadow: 0 12px 35px rgba(0,0,0,.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Poppins", sans-serif;
+            transition: background .25s ease, color .25s ease;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================== */
+
+        .admin-layout {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================== */
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+
+            background: var(--card);
+            border-right: 1px solid var(--border);
+
+            display: flex;
+            flex-direction: column;
+
+            transition: transform .3s ease;
+        }
+
+        .sidebar-top {
+            padding: 22px 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .brand-text h2 {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .sidebar-nav {
+            padding: 18px 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-label {
+            padding: 0 12px;
+            margin: 8px 0 10px;
+            color: var(--muted-2);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 13px;
+            margin-bottom: 5px;
+
+            color: var(--muted);
+            border-radius: 11px;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            transition: .2s ease;
+        }
+
+        .nav-link i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: var(--card-2);
+        }
+
+        .nav-link.active {
+            color: #17191c;
+            background: linear-gradient(
+                135deg,
+                var(--primary-light),
+                var(--primary)
+            );
+            font-weight: 700;
+        }
+
+        .sidebar-bottom {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            color: #17191c;
+            background: linear-gradient(
+                135deg,
+                var(--primary-light),
+                var(--primary)
+            );
+        }
+
+        .admin-user strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .admin-user small {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: 1px solid rgba(239,68,68,.25);
+            background: rgba(239,68,68,.08);
+            color: #ef7777;
+
+            padding: 10px;
+            border-radius: 9px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239,68,68,.15);
+        }
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .main-content {
+            width: calc(100% - 260px);
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            padding: 0 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+
+            position: sticky;
+            top: 0;
+            z-index: 500;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card-2);
+            color: var(--text);
+        }
+
+        .page-title h1 {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 39px;
+            height: 39px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--card-2);
+            color: var(--text);
+
+            display: grid;
+            place-items: center;
+
+            transition: .2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary-light);
+            border-color: rgba(217,154,22,.35);
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page-content {
+            padding: 28px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            display: grid;
+            place-items: center;
+
+            color: #17191c;
+            background: linear-gradient(
+                135deg,
+                var(--primary-light),
+                var(--primary)
+            );
+        }
+
+        .stat-card h3 {
+            font-size: 21px;
+            line-height: 1;
+        }
+
+        .stat-card p {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================== */
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted-2);
+            font-size: 13px;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 44px;
+
+            padding: 0 14px 0 38px;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--card);
+            color: var(--text);
+
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: rgba(217,154,22,.55);
+        }
+
+        .primary-btn {
+            min-height: 44px;
+
+            padding: 0 17px;
+
+            border: none;
+            border-radius: 11px;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary-light),
+                var(--primary)
+            );
+
+            color: #17191c;
+            font-size: 12px;
+            font-weight: 700;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            box-shadow: 0 7px 20px rgba(217,154,22,.15);
+        }
+
+        .primary-btn:hover {
+            filter: brightness(1.05);
+        }
+
+        /* =========================
+           FORM CARD
+        ========================== */
+
+        .form-card {
+            display: none;
+
+            margin-bottom: 22px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            padding: 22px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .form-card.show {
+            display: block;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .form-header h2 {
+            font-size: 16px;
+        }
+
+        .form-header p {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .close-form-btn {
+            width: 34px;
+            height: 34px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--card-2);
+            color: var(--muted);
+        }
+
+        .close-form-btn:hover {
+            color: var(--text);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .form-group label span {
+            color: var(--danger);
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 44px;
+
+            padding: 0 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--input);
+            color: var(--text);
+
+            outline: none;
+            font-size: 12px;
+        }
+
+        .form-group input:focus {
+            border-color: rgba(217,154,22,.6);
+        }
+
+        .form-help {
+            margin-top: 6px;
+            color: var(--muted-2);
+            font-size: 10px;
+        }
+
+        .pdf-section-title {
+            grid-column: 1 / -1;
+
+            padding-top: 4px;
+            padding-bottom: 2px;
+
+            color: var(--primary-light);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 9px;
+
+            margin-top: 20px;
+        }
+
+        .secondary-btn {
+            min-height: 42px;
+
+            padding: 0 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--card-2);
+            color: var(--text);
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .secondary-btn:hover {
+            border-color: rgba(217,154,22,.35);
+        }
+
+        /* =========================
+           TABLE
+        ========================== */
+
+        .table-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 17px 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-header h2 {
+            font-size: 14px;
+        }
+
+        .table-header span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 13px 15px;
+
+            background: var(--card-2);
+            color: var(--muted);
+
+            text-align: left;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--text);
+            font-size: 11px;
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(217,154,22,.025);
+        }
+
+        .chapter-name {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .chapter-icon {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: rgba(217,154,22,.12);
+            color: var(--primary-light);
+        }
+
+        .chapter-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .chapter-info small {
+            display: block;
+            margin-top: 3px;
+
+            color: var(--muted-2);
+            font-size: 9px;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            background: rgba(34,197,94,.08);
+            border: 1px solid rgba(34,197,94,.18);
+
+            color: #4ade80;
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .pdf-link:hover {
+            background: rgba(34,197,94,.14);
+        }
+
+        .pdf-missing {
+            color: var(--muted-2);
+            font-size: 10px;
+        }
+
+        .action-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+            border: 1px solid var(--border);
+
+            background: var(--card-2);
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .action-btn:hover {
+            color: var(--text);
+            border-color: rgba(217,154,22,.4);
+        }
+
+        .action-btn.delete:hover {
+            color: #f87171;
+            border-color: rgba(239,68,68,.3);
+            background: rgba(239,68,68,.08);
+        }
+
+        /* =========================
+           EMPTY / LOADING
+        ========================== */
+
+        .empty-state {
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        .empty-state i {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 13px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 15px;
+
+            background: rgba(217,154,22,.1);
+            color: var(--primary-light);
+
+            font-size: 22px;
+        }
+
+        .empty-state h3 {
+            font-size: 14px;
+        }
+
+        .empty-state p {
+            max-width: 380px;
+            margin: 6px auto 0;
+
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .loading {
+            padding: 45px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .loading i {
+            margin-right: 6px;
+            color: var(--primary-light);
+        }
+
+        /* =========================
+           TOAST
+        ========================== */
+
+        .toast-container {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 3000;
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 280px;
+            max-width: 360px;
+
+            padding: 13px 15px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            box-shadow: var(--shadow);
+
+            animation: toastIn .25s ease;
+        }
+
+        .toast i {
+            font-size: 15px;
+        }
+
+        .toast.success i {
+            color: var(--success);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        .toast span {
+            color: var(--text);
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           OVERLAY
+        ========================== */
+
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+
+            background: rgba(0,0,0,.55);
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 1000px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: grid;
+                place-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page-content {
+                padding: 20px 15px;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .toolbar .primary-btn {
+                width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .pdf-section-title {
+                grid-column: auto;
+            }
+
+            .form-card {
+                padding: 17px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .page-title h1 {
+                font-size: 16px;
+            }
+
+            .page-title p {
+                display: none;
+            }
+
+            .topbar-actions .icon-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .toast-container {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .toast {
+                min-width: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-top">
+
+            <a href="dashboard.html" class="brand">
+                <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
+
+                <div class="brand-text">
+                    <h2>Chemistry Point</h2>
+                    <span>Admin Panel</span>
+                </div>
+            </a>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-label">Main</div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="videos.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Videos</span>
+            </a>
+
+            <a href="objectives.html" class="nav-link active">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Objectives</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Quiz</span>
+            </a>
+
+            <div class="nav-label">Management</div>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-book"></i>
+                <span>Chapters</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="admin-user">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small id="adminEmail">Checking...</small>
+                </div>
+            </div>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="page-title">
+                    <h1>Objectives Manager</h1>
+                    <p>Manage chapter-wise objective PDFs</p>
+                </div>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="icon-btn" id="themeBtn" title="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+
+        <section class="page-content">
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalChapters">0</h3>
+                        <p>Total Chapters</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="totalPdfs">0</h3>
+                        <p>Total PDF Links</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="completeChapters">0</h3>
+                        <p>Complete Chapters</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOOLBAR -->
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search chapter..."
+                    >
+
+                </div>
+
+                <button class="primary-btn" id="addChapterBtn">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Chapter
+                </button>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <div class="form-card" id="formCard">
+
+                <div class="form-header">
+
+                    <div>
+                        <h2 id="formTitle">Add New Chapter</h2>
+                        <p>Add chapter details and Google Drive PDF links.</p>
+                    </div>
+
+                    <button class="close-form-btn" id="closeFormBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <form id="chapterForm">
+
+                    <div class="form-grid">
+
+                        <!-- CHAPTER -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Chapter Name <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="chapterName"
+                                placeholder="Example: Solid State"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Chapter Slug <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="chapterSlug"
+                                placeholder="Example: solid-state"
+                                required
+                            >
+
+                            <div class="form-help">
+                                Use lowercase letters and hyphens only.
+                            </div>
+
+                        </div>
+
+
+                        <!-- PDF TITLE -->
+
+                        <div class="pdf-section-title">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            V.V.I Objectives
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Google Drive PDF Link
+                            </label>
+
+                            <input
+                                type="url"
+                                id="vviPdf"
+                                placeholder="https://drive.google.com/..."
+                            >
+
+                            <div class="form-help">
+                                Paste the shareable Google Drive PDF link.
+                            </div>
+
+                        </div>
+
+
+                        <!-- PYQ -->
+
+                        <div class="pdf-section-title">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            PYQ Objectives
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Google Drive PDF Link
+                            </label>
+
+                            <input
+                                type="url"
+                                id="pyqPdf"
+                                placeholder="https://drive.google.com/..."
+                            >
+
+                        </div>
+
+
+                        <!-- ALL -->
+
+                        <div class="pdf-section-title">
+                            <i class="fa-solid fa-layer-group"></i>
+                            All Objectives
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Google Drive PDF Link
+                            </label>
+
+                            <input
+                                type="url"
+                                id="allPdf"
+                                placeholder="https://drive.google.com/..."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="cancelBtn"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                            id="saveBtn"
+                        >
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save Chapter
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-card">
+
+                <div class="table-header">
+
+                    <div>
+                        <h2>All Chapters</h2>
+                        <span id="chapterCountText">0 chapters</span>
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Chapter</th>
+                                <th>V.V.I PDF</th>
+                                <th>PYQ PDF</th>
+                                <th>All PDF</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="chaptersTableBody">
+
+                            <tr>
+                                <td colspan="6">
+
+                                    <div class="loading">
+                                        <i class="fa-solid fa-spinner fa-spin"></i>
+                                        Loading chapters...
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+<!-- =========================
+     FIREBASE
+========================== -->
+
+<script type="module">
+
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+    import {
+        getAuth,
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    import {
+        getDatabase,
+        ref,
+        push,
+        set,
+        update,
+        remove,
+        onValue
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+    /* =========================
+       FIREBASE CONFIG
+    ========================== */
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+        authDomain: "chemistry-point-9a41b.firebaseapp.com",
+        projectId: "chemistry-point-9a41b",
+        storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+        messagingSenderId: "791007663942",
+        appId: "1:791007663942:web:693c008e475a2e74357747"
+    };
+
+
+    const DATABASE_URL =
+        "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/";
+
+
+    const FIRST_ADMIN_UID =
+        "swWYszc7mMWQVJrWFFmiNBIV3al2";
+
+
+    /* =========================
+       INITIALIZE
+    ========================== */
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getDatabase(
+        app,
+        DATABASE_URL
+    );
+
+
+    /* =========================
+       ELEMENTS
+    ========================== */
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const sidebarOverlay =
+        document.getElementById("sidebarOverlay");
+
+    const mobileMenuBtn =
+        document.getElementById("mobileMenuBtn");
+
+    const themeBtn =
+        document.getElementById("themeBtn");
+
+    const logoutBtn =
+        document.getElementById("logoutBtn");
+
+    const adminEmail =
+        document.getElementById("adminEmail");
+
+    const formCard =
+        document.getElementById("formCard");
+
+    const formTitle =
+        document.getElementById("formTitle");
+
+    const chapterForm =
+        document.getElementById("chapterForm");
+
+    const addChapterBtn =
+        document.getElementById("addChapterBtn");
+
+    const closeFormBtn =
+        document.getElementById("closeFormBtn");
+
+    const cancelBtn =
+        document.getElementById("cancelBtn");
+
+    const saveBtn =
+        document.getElementById("saveBtn");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const chaptersTableBody =
+        document.getElementById("chaptersTableBody");
+
+    const totalChapters =
+        document.getElementById("totalChapters");
+
+    const totalPdfs =
+        document.getElementById("totalPdfs");
+
+    const completeChapters =
+        document.getElementById("completeChapters");
+
+    const chapterCountText =
+        document.getElementById("chapterCountText");
+
+
+    /* =========================
+       FORM ELEMENTS
+    ========================== */
+
+    const chapterName =
+        document.getElementById("chapterName");
+
+    const chapterSlug =
+        document.getElementById("chapterSlug");
+
+    const vviPdf =
+        document.getElementById("vviPdf");
+
+    const pyqPdf =
+        document.getElementById("pyqPdf");
+
+    const allPdf =
+        document.getElementById("allPdf");
+
+
+    /* =========================
+       STATE
+    ========================== */
+
+    let chapters = [];
+
+    let editingChapterId = null;
+
+    let currentAdmin = null;
+
+
+    /* =========================
+       THEME
+    ========================== */
+
+    function applyTheme() {
+
+        const savedTheme =
+            localStorage.getItem("chemistryPointTheme");
+
+        if (savedTheme === "light") {
+
+            document.body.classList.add("light-mode");
+
+            themeBtn.innerHTML =
+                '<i class="fa-solid fa-sun"></i>';
+
+        } else {
+
+            document.body.classList.remove("light-mode");
+
+            themeBtn.innerHTML =
+                '<i class="fa-solid fa-moon"></i>';
+        }
+    }
+
+
+    applyTheme();
+
+
+    themeBtn.addEventListener("click", () => {
+
+        const isLight =
+            document.body.classList.toggle("light-mode");
+
+        localStorage.setItem(
+            "chemistryPointTheme",
+            isLight ? "light" : "dark"
+        );
+
+        themeBtn.innerHTML = isLight
+            ? '<i class="fa-solid fa-sun"></i>'
+            : '<i class="fa-solid fa-moon"></i>';
+
+    });
+
+
+    /* =========================
+       MOBILE SIDEBAR
+    ========================== */
+
+    function openSidebar() {
+
+        sidebar.classList.add("open");
+
+        sidebarOverlay.classList.add("show");
+
+    }
+
+
+    function closeSidebar() {
+
+        sidebar.classList.remove("open");
+
+        sidebarOverlay.classList.remove("show");
+
+    }
+
+
+    mobileMenuBtn.addEventListener(
+        "click",
+        openSidebar
+    );
+
+
+    sidebarOverlay.addEventListener(
+        "click",
+        closeSidebar
+    );
+
+
+    document
+        .querySelectorAll(".sidebar .nav-link")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                closeSidebar
+            );
+
+        });
+
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    function showToast(
+        message,
+        type = "success"
+    ) {
+
+        const toast =
+            document.createElement("div");
+
+        toast.className =
+            `toast ${type}`;
+
+        const icon =
+            type === "success"
+                ? "fa-circle-check"
+                : "fa-circle-exclamation";
+
+        toast.innerHTML = `
+            <i class="fa-solid ${icon}"></i>
+            <span>${escapeHtml(message)}</span>
+        `;
+
+        document
+            .getElementById("toastContainer")
+            .appendChild(toast);
+
+
+        setTimeout(() => {
+
+            toast.remove();
+
+        }, 3500);
+
+    }
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================== */
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       AUTH + ADMIN CHECK
+    ========================== */
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+            if (!user) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            currentAdmin = user;
+
+            adminEmail.textContent =
+                user.email || "Admin";
+
+
+            try {
+
+                const adminRef =
+                    ref(db, `admins/${user.uid}`);
+
+
+                onValue(
+                    adminRef,
+                    snapshot => {
+
+                        if (!snapshot.exists()) {
+
+                            showToast(
+                                "Admin access denied.",
+                                "error"
+                            );
+
+                            setTimeout(() => {
+
+                                signOut(auth);
+
+                            }, 1200);
+
+                            return;
+                        }
+
+
+                        const data =
+                            snapshot.val();
+
+
+                        if (
+                            data.role !== "admin" ||
+                            data.active !== true
+                        ) {
+
+                            showToast(
+                                "Admin account is inactive.",
+                                "error"
+                            );
+
+                            setTimeout(() => {
+
+                                signOut(auth);
+
+                            }, 1200);
+
+                            return;
+                        }
+
+
+                        loadChapters();
+
+                    },
+                    error => {
+
+                        console.error(error);
+
+                        showToast(
+                            "Unable to verify admin access.",
+                            "error"
+                        );
+
+                    }
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                showToast(
+                    "Admin verification failed.",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       LOAD CHAPTERS
+    ========================== */
+
+    function loadChapters() {
+
+        const chaptersRef =
+            ref(db, "chapters");
+
+
+        onValue(
+            chaptersRef,
+            snapshot => {
+
+                const data =
+                    snapshot.val();
+
+
+                chapters = [];
+
+
+                if (data) {
+
+                    Object.entries(data)
+                        .forEach(
+                            ([id, chapter]) => {
+
+                                chapters.push({
+                                    id,
+                                    ...chapter
+                                });
+
+                            }
+                        );
+
+                }
+
+
+                chapters.sort(
+                    (a, b) =>
+                        (b.updatedAt || b.createdAt || 0) -
+                        (a.updatedAt || a.createdAt || 0)
+                );
+
+
+                updateStats();
+
+                renderChapters();
+
+            },
+            error => {
+
+                console.error(error);
+
+                chaptersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <h3>Unable to load chapters</h3>
+                                <p>
+                                    Please check your Firebase Realtime Database rules.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+
+                showToast(
+                    "Failed to load chapters.",
+                    "error"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================
+       STATS
+    ========================== */
+
+    function updateStats() {
+
+        const chapterTotal =
+            chapters.length;
+
+
+        let pdfTotal = 0;
+
+        let completeTotal = 0;
+
+
+        chapters.forEach(chapter => {
+
+            const vvi =
+                String(chapter.vviPdf || "").trim();
+
+            const pyq =
+                String(chapter.pyqPdf || "").trim();
+
+            const all =
+                String(chapter.allPdf || "").trim();
+
+
+            if (vvi) pdfTotal++;
+
+            if (pyq) pdfTotal++;
+
+            if (all) pdfTotal++;
+
+
+            if (vvi && pyq && all) {
+
+                completeTotal++;
+
+            }
+
+        });
+
+
+        totalChapters.textContent =
+            chapterTotal;
+
+        totalPdfs.textContent =
+            pdfTotal;
+
+        completeChapters.textContent =
+            completeTotal;
+
+        chapterCountText.textContent =
+            `${chapterTotal} ${
+                chapterTotal === 1
+                    ? "chapter"
+                    : "chapters"
+            }`;
+
+    }
+
+
+    /* =========================
+       RENDER CHAPTERS
+    ========================== */
+
+    function renderChapters() {
+
+        const query =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const filtered =
+            chapters.filter(chapter => {
+
+                const name =
+                    String(
+                        chapter.name || ""
+                    ).toLowerCase();
+
+                const slug =
+                    String(
+                        chapter.slug || ""
+                    ).toLowerCase();
+
+                return (
+                    name.includes(query) ||
+                    slug.includes(query)
+                );
+
+            });
+
+
+        if (!filtered.length) {
+
+            chaptersTableBody.innerHTML = `
+                <tr>
+                    <td colspan="6">
+
+                        <div class="empty-state">
+
+                            <i class="fa-solid fa-book-open"></i>
+
+                            <h3>
+                                ${
+                                    query
+                                        ? "No chapter found"
+                                        : "No chapters added yet"
+                                }
+                            </h3>
+
+                            <p>
+                                ${
+                                    query
+                                        ? "Try another search keyword."
+                                        : "Click Add Chapter to create your first chapter."
+                                }
+                            </p>
+
+                        </div>
+
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        chaptersTableBody.innerHTML =
+            filtered.map(
+                chapter => createChapterRow(chapter)
+            ).join("");
+
+
+        attachRowEvents();
+
+    }
+
+
+    /* =========================
+       CREATE TABLE ROW
+    ========================== */
+
+    function createChapterRow(chapter) {
+
+        const updated =
+            formatDate(
+                chapter.updatedAt ||
+                chapter.createdAt
+            );
+
+
+        return `
+            <tr>
+
+                <td>
+
+                    <div class="chapter-name">
+
+                        <div class="chapter-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <div class="chapter-info">
+
+                            <strong>
+                                ${escapeHtml(chapter.name)}
+                            </strong>
+
+                            <small>
+                                ${escapeHtml(chapter.slug)}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+                    ${pdfCell(chapter.vviPdf)}
+                </td>
+
+
+                <td>
+                    ${pdfCell(chapter.pyqPdf)}
+                </td>
+
+
+                <td>
+                    ${pdfCell(chapter.allPdf)}
+                </td>
+
+
+                <td>
+                    <span style="color:var(--muted);font-size:10px;">
+                        ${updated}
+                    </span>
+                </td>
+
+
+                <td>
+
+                    <div class="action-group">
+
+                        <button
+                            class="action-btn edit"
+                            data-id="${chapter.id}"
+                            title="Edit"
+                        >
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+
+                        <button
+                            class="action-btn delete"
+                            data-id="${chapter.id}"
+                            title="Delete"
+                        >
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        `;
+
+    }
+
+
+    /* =========================
+       PDF CELL
+    ========================== */
+
+    function pdfCell(url) {
+
+        if (!url) {
+
+            return `
+                <span class="pdf-missing">
+                    Not added
+                </span>
+            `;
+
+        }
+
+
+        return `
+            <a
+                href="${escapeHtml(url)}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="pdf-link"
+            >
+                <i class="fa-solid fa-file-pdf"></i>
+                View PDF
+            </a>
+        `;
+
+    }
+
+
+    /* =========================
+       ROW EVENTS
+    ========================== */
+
+    function attachRowEvents() {
+
+        document
+            .querySelectorAll(".edit")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const id =
+                            button.dataset.id;
+
+                        editChapter(id);
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(".delete")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const id =
+                            button.dataset.id;
+
+                        deleteChapter(id);
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =========================
+       OPEN FORM
+    ========================== */
+
+    function openForm() {
+
+        formCard.classList.add("show");
+
+        setTimeout(() => {
+
+            formCard.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 50);
+
+    }
+
+
+    /* =========================
+       RESET FORM
+    ========================== */
+
+    function resetForm() {
+
+        chapterForm.reset();
+
+        editingChapterId = null;
+
+        formTitle.textContent =
+            "Add New Chapter";
+
+        saveBtn.innerHTML =
+            '<i class="fa-solid fa-floppy-disk"></i> Save Chapter';
+
+    }
+
+
+    /* =========================
+       ADD BUTTON
+    ========================== */
+
+    addChapterBtn.addEventListener(
+        "click",
+        () => {
+
+            resetForm();
+
+            openForm();
+
+            chapterName.focus();
+
+        }
+    );
+
+
+    /* =========================
+       CLOSE FORM
+    ========================== */
+
+    closeFormBtn.addEventListener(
+        "click",
+        () => {
+
+            formCard.classList.remove("show");
+
+            resetForm();
+
+        }
+    );
+
+
+    cancelBtn.addEventListener(
+        "click",
+        () => {
+
+            formCard.classList.remove("show");
+
+            resetForm();
+
+        }
+    );
+
+
+    /* =========================
+       AUTO SLUG
+    ========================== */
+
+    chapterName.addEventListener(
+        "input",
+        () => {
+
+            if (editingChapterId) return;
+
+            chapterSlug.value =
+                createSlug(
+                    chapterName.value
+                );
+
+        }
+    );
+
+
+    function createSlug(text) {
+
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+    }
+
+
+    /* =========================
+       EDIT CHAPTER
+    ========================== */
+
+    function editChapter(id) {
+
+        const chapter =
+            chapters.find(
+                item => item.id === id
+            );
+
+
+        if (!chapter) {
+
+            showToast(
+                "Chapter not found.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        editingChapterId = id;
+
+
+        chapterName.value =
+            chapter.name || "";
+
+        chapterSlug.value =
+            chapter.slug || "";
+
+        vviPdf.value =
+            chapter.vviPdf || "";
+
+        pyqPdf.value =
+            chapter.pyqPdf || "";
+
+        allPdf.value =
+            chapter.allPdf || "";
+
+
+        formTitle.textContent =
+            "Edit Chapter";
+
+
+        saveBtn.innerHTML =
+            '<i class="fa-solid fa-pen"></i> Update Chapter';
+
+
+        openForm();
+
+
+        setTimeout(() => {
+
+            chapterName.focus();
+
+        }, 150);
+
+    }
+
+
+    /* =========================
+       SAVE / UPDATE
+    ========================== */
+
+    chapterForm.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            if (!currentAdmin) {
+
+                showToast(
+                    "Admin session not found.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const name =
+                chapterName.value.trim();
+
+            const slug =
+                chapterSlug.value.trim().toLowerCase();
+
+            const vvi =
+                vviPdf.value.trim();
+
+            const pyq =
+                pyqPdf.value.trim();
+
+            const all =
+                allPdf.value.trim();
+
+
+            if (!name || !slug) {
+
+                showToast(
+                    "Chapter name and slug are required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+
+                showToast(
+                    "Slug format is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                vvi &&
+                !isValidUrl(vvi)
+            ) {
+
+                showToast(
+                    "V.V.I PDF link is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                pyq &&
+                !isValidUrl(pyq)
+            ) {
+
+                showToast(
+                    "PYQ PDF link is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                all &&
+                !isValidUrl(all)
+            ) {
+
+                showToast(
+                    "All Objectives PDF link is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* Prevent duplicate slug */
+
+            const duplicate =
+                chapters.find(
+                    chapter =>
+                        chapter.slug === slug &&
+                        chapter.id !== editingChapterId
+                );
+
+
+            if (duplicate) {
+
+                showToast(
+                    "This chapter slug already exists.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            saveBtn.disabled = true;
+
+            saveBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+
+            try {
+
+                const now =
+                    Date.now();
+
+
+                const chapterData = {
+
+                    name,
+
+                    slug,
+
+                    vviPdf: vvi,
+
+                    pyqPdf: pyq,
+
+                    allPdf: all,
+
+                    updatedAt: now
+
+                };
+
+
+                if (editingChapterId) {
+
+                    await update(
+                        ref(
+                            db,
+                            `chapters/${editingChapterId}`
+                        ),
+                        chapterData
+                    );
+
+
+                    showToast(
+                        "Chapter updated successfully."
+                    );
+
+                } else {
+
+                    const newChapterRef =
+                        push(
+                            ref(db, "chapters")
+                        );
+
+
+                    await set(
+                        newChapterRef,
+                        {
+                            ...chapterData,
+                            createdAt: now
+                        }
+                    );
+
+
+                    showToast(
+                        "Chapter added successfully."
+                    );
+
+                }
+
+
+                formCard.classList.remove("show");
+
+                resetForm();
+
+            } catch (error) {
+
+                console.error(error);
+
+                if (
+                    error.code ===
+                    "PERMISSION_DENIED"
+                ) {
+
+                    showToast(
+                        "Permission denied. Check Firebase rules.",
+                        "error"
+                    );
+
+                } else {
+
+                    showToast(
+                        error.message ||
+                        "Failed to save chapter.",
+                        "error"
+                    );
+
+                }
+
+            } finally {
+
+                saveBtn.disabled = false;
+
+                if (editingChapterId) {
+
+                    saveBtn.innerHTML =
+                        '<i class="fa-solid fa-pen"></i> Update Chapter';
+
+                } else {
+
+                    saveBtn.innerHTML =
+                        '<i class="fa-solid fa-floppy-disk"></i> Save Chapter';
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       DELETE CHAPTER
+    ========================== */
+
+    async function deleteChapter(id) {
+
+        const chapter =
+            chapters.find(
+                item => item.id === id
+            );
+
+
+        if (!chapter) return;
+
+
+        const confirmed =
+            confirm(
+                `क्या आप "${chapter.name}" chapter delete करना चाहते हैं?\n\nइससे उसके तीनों PDF links भी हट जाएंगे।`
+            );
+
+
+        if (!confirmed) return;
+
+
+        try {
+
+            await remove(
+                ref(
+                    db,
+                    `chapters/${id}`
+                )
+            );
+
+
+            showToast(
+                "Chapter deleted successfully."
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            if (
+                error.code ===
+                "PERMISSION_DENIED"
+            ) {
+
+                showToast(
+                    "Permission denied. Check Firebase rules.",
+                    "error"
+                );
+
+            } else {
+
+                showToast(
+                    error.message ||
+                    "Failed to delete chapter.",
+                    "error"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       URL VALIDATION
+    ========================== */
+
+    function isValidUrl(value) {
+
+        try {
+
+            const url =
+                new URL(value);
+
+            return (
+                url.protocol === "http:" ||
+                url.protocol === "https:"
+            );
+
+        } catch {
+
+            return false;
+
+        }
+
+    }
+
+
+    /* =========================
+       DATE FORMAT
+    ========================== */
+
+    function formatDate(timestamp) {
+
+        if (!timestamp) return "—";
+
+
+        const date =
+            new Date(timestamp);
+
+
+        if (Number.isNaN(date.getTime())) {
+            return "—";
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================== */
+
+    searchInput.addEventListener(
+        "input",
+        renderChapters
+    );
+
+
+    /* =========================
+       LOGOUT
+    ========================== */
+
+    logoutBtn.addEventListener(
+        "click",
+        async () => {
+
+            const confirmed =
+                confirm(
+                    "क्या आप logout करना चाहते हैं?"
+                );
+
+
+            if (!confirmed) return;
+
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href =
+                    "login.html";
+
+            } catch (error) {
+
+                console.error(error);
+
+                showToast(
+                    "Logout failed.",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
