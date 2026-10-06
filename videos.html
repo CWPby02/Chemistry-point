@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -15,7 +16,9 @@
 
     <title>Videos | Chemistry Point</title>
 
+
     <!-- Google Font -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -23,7 +26,7 @@
 
     <link
         rel="preconnect"
-        href="https://fonts.gstatic.com"
+        href="https://fonts.googleapis.com"
         crossorigin
     >
 
@@ -32,13 +35,17 @@
         rel="stylesheet"
     >
 
+
     <!-- Font Awesome -->
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
+
     <!-- Website CSS -->
+
     <link
         rel="stylesheet"
         href="assets/css/root.css"
@@ -54,7 +61,11 @@
         href="assets/css/responsive.css"
     >
 
-    <!-- Page Specific CSS -->
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
     <style>
 
         /* =====================================================
@@ -80,14 +91,8 @@
         }
 
         .videos-page-header h1 {
-            font-size: clamp(
-                34px,
-                5vw,
-                54px
-            );
-
+            font-size: clamp(34px, 5vw, 54px);
             line-height: 1.15;
-
             font-weight: var(--fw-extrabold);
         }
 
@@ -97,69 +102,48 @@
 
         .videos-page-header p {
             max-width: 680px;
-
             margin-top: 15px;
-
             color: var(--text-secondary);
-
             font-family: var(--font-secondary);
-
             font-size: var(--fs-md);
-
             line-height: 1.8;
         }
 
 
-        /* ---------- Search / Filter ---------- */
+        /* ---------- Search ---------- */
 
         .videos-toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             gap: 20px;
-
             margin-bottom: 35px;
         }
 
         .video-search {
             position: relative;
-
             width: min(420px, 100%);
         }
 
         .video-search i {
             position: absolute;
-
             top: 50%;
             left: 16px;
-
             transform: translateY(-50%);
-
             color: var(--text-muted);
-
             font-size: 14px;
         }
 
         .video-search input {
             width: 100%;
-
             min-height: 48px;
-
             padding: 12px 18px 12px 44px;
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-full);
-
             outline: none;
-
             background: var(--bg-card);
-
             color: var(--text-primary);
-
             font-size: var(--fs-sm);
-
             transition:
                 border-color var(--transition-normal),
                 box-shadow var(--transition-normal);
@@ -171,15 +155,12 @@
 
         .video-search input:focus {
             border-color: var(--border-gold);
-
             box-shadow: var(--shadow-gold);
         }
 
         .video-count {
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
             font-size: var(--fs-sm);
         }
 
@@ -188,34 +169,25 @@
         }
 
 
-        /* ---------- Category Buttons ---------- */
+        /* ---------- Filters ---------- */
 
         .video-filters {
             display: flex;
             flex-wrap: wrap;
-
             gap: 9px;
-
             margin-bottom: 35px;
         }
 
         .video-filter {
             min-height: 38px;
-
             padding: 8px 15px;
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-full);
-
             background: var(--bg-card);
-
             color: var(--text-secondary);
-
             font-size: 12px;
-
             font-weight: var(--fw-medium);
-
+            cursor: pointer;
             transition:
                 color var(--transition-normal),
                 border-color var(--transition-normal),
@@ -225,9 +197,7 @@
         .video-filter:hover,
         .video-filter.active {
             color: #111;
-
             border-color: var(--primary);
-
             background: var(--gold-gradient);
         }
 
@@ -236,10 +206,8 @@
 
         .videos-page-grid {
             display: grid;
-
             grid-template-columns:
                 repeat(3, minmax(0, 1fr));
-
             gap: 22px;
         }
 
@@ -248,13 +216,9 @@
 
         .videos-page-card {
             overflow: hidden;
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-lg);
-
             background: var(--bg-card);
-
             transition:
                 transform var(--transition-normal),
                 border-color var(--transition-normal),
@@ -263,9 +227,7 @@
 
         .videos-page-card:hover {
             transform: translateY(-6px);
-
             border-color: var(--border-gold);
-
             box-shadow: var(--shadow-md);
         }
 
@@ -274,11 +236,8 @@
 
         .videos-page-thumbnail {
             position: relative;
-
             aspect-ratio: 16 / 9;
-
             overflow: hidden;
-
             background:
                 radial-gradient(
                     circle at center,
@@ -286,6 +245,20 @@
                     transparent 45%
                 ),
                 #101216;
+            cursor: pointer;
+        }
+
+        .videos-page-thumbnail img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform .35s ease;
+        }
+
+        .videos-page-card:hover
+        .videos-page-thumbnail img {
+            transform: scale(1.04);
         }
 
         .videos-page-thumbnail::after {
@@ -298,20 +271,20 @@
             background:
                 linear-gradient(
                     to top,
-                    rgba(0, 0, 0, 0.45),
-                    transparent 55%
+                    rgba(0, 0, 0, 0.60),
+                    transparent 60%
                 );
 
             pointer-events: none;
         }
 
-        .videos-page-thumbnail i {
+        .videos-page-thumbnail .play-button {
             position: absolute;
 
             top: 50%;
             left: 50%;
 
-            z-index: 2;
+            z-index: 3;
 
             width: 58px;
             height: 58px;
@@ -324,13 +297,24 @@
 
             border-radius: 50%;
 
-            background: rgba(217, 154, 22, 0.90);
+            background: rgba(217, 154, 22, 0.92);
 
             color: #111;
 
             font-size: 18px;
 
             box-shadow: var(--shadow-gold);
+
+            transition:
+                transform .25s ease,
+                background .25s ease;
+        }
+
+        .videos-page-card:hover
+        .play-button {
+            transform:
+                translate(-50%, -50%)
+                scale(1.08);
         }
 
         .videos-page-tag {
@@ -339,7 +323,7 @@
             top: 12px;
             left: 12px;
 
-            z-index: 3;
+            z-index: 4;
 
             padding: 5px 9px;
 
@@ -365,21 +349,15 @@
 
         .videos-page-info h3 {
             font-size: 16px;
-
             line-height: 1.45;
-
             font-weight: var(--fw-bold);
         }
 
         .videos-page-info p {
             margin-top: 8px;
-
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
             font-size: 12px;
-
             line-height: 1.6;
         }
 
@@ -391,7 +369,6 @@
             gap: 10px;
 
             margin-top: 15px;
-
             padding-top: 13px;
 
             border-top: 1px solid var(--border);
@@ -403,9 +380,7 @@
 
         .videos-page-meta span {
             display: inline-flex;
-
             align-items: center;
-
             gap: 6px;
         }
 
@@ -414,10 +389,62 @@
         }
 
 
-        /* ---------- Empty State ---------- */
+        /* ---------- Loading ---------- */
+
+        .videos-loading {
+            grid-column: 1 / -1;
+
+            padding: 70px 20px;
+
+            text-align: center;
+        }
+
+        .videos-loading-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(217, 154, 22, 0.09);
+
+            border:
+                1px solid var(--border-gold);
+
+            color: var(--primary-light);
+
+            font-size: 22px;
+        }
+
+        .videos-loading-icon i {
+            animation: videoSpin 1s linear infinite;
+        }
+
+        @keyframes videoSpin {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* ---------- Empty ---------- */
 
         .videos-empty {
             display: none;
+
+            grid-column: 1 / -1;
 
             padding: 70px 20px;
 
@@ -446,9 +473,11 @@
 
             border-radius: 50%;
 
-            background: rgba(217, 154, 22, 0.09);
+            background:
+                rgba(217, 154, 22, 0.09);
 
-            border: 1px solid var(--border-gold);
+            border:
+                1px solid var(--border-gold);
 
             color: var(--primary-light);
 
@@ -457,25 +486,179 @@
 
         .videos-empty h2 {
             font-size: 22px;
-
             font-weight: var(--fw-bold);
         }
 
         .videos-empty p {
             max-width: 500px;
-
             margin: 8px auto 0;
-
             color: var(--text-muted);
-
             font-size: 13px;
-
             line-height: 1.7;
         }
 
 
+        /* ---------- Error ---------- */
+
+        .videos-error {
+            display: none;
+
+            grid-column: 1 / -1;
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            border:
+                1px solid rgba(220, 53, 69, .2);
+
+            border-radius: var(--radius-lg);
+
+            background:
+                rgba(220, 53, 69, .05);
+        }
+
+        .videos-error.show {
+            display: block;
+        }
+
+        .videos-error i {
+            color: #ff8994;
+            font-size: 30px;
+            margin-bottom: 14px;
+        }
+
+        .videos-error h2 {
+            font-size: 20px;
+        }
+
+        .videos-error p {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+
         /* =====================================================
-           PAGE RESPONSIVE
+           VIDEO MODAL
+        ===================================================== */
+
+        .video-modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, .88);
+        }
+
+        .video-modal.show {
+            display: flex;
+        }
+
+        .video-modal-box {
+            width: min(1000px, 100%);
+
+            background: #0e1013;
+
+            border:
+                1px solid rgba(217, 154, 22, .25);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,.5);
+        }
+
+        .video-modal-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 14px 17px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .video-modal-title {
+            color: #fff;
+
+            font-family: Poppins;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+        }
+
+        .video-modal-close {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,.05);
+
+            color: #fff;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .video-modal-close:hover {
+            background: rgba(217,154,22,.15);
+            color: #f3bd45;
+        }
+
+        .video-frame-wrap {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            background: #000;
+        }
+
+        .video-frame-wrap iframe {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border: 0;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
         ===================================================== */
 
         @media (max-width: 900px) {
@@ -504,7 +687,6 @@
 
             .videos-page-header p {
                 font-size: 13px;
-
                 line-height: 1.75;
             }
 
@@ -528,7 +710,6 @@
 
             .videos-page-grid {
                 grid-template-columns: 1fr;
-
                 gap: 16px;
             }
 
@@ -536,11 +717,24 @@
                 padding: 16px;
             }
 
+            .video-modal {
+                padding: 10px;
+            }
+
+            .video-modal-header {
+                padding: 11px;
+            }
+
+            .video-modal-title {
+                font-size: 13px;
+            }
+
         }
 
     </style>
 
 </head>
+
 
 <body>
 
@@ -708,7 +902,7 @@
             </div>
 
 
-            <!-- Search Toolbar -->
+            <!-- Search -->
 
             <div class="videos-toolbar">
 
@@ -728,7 +922,11 @@
                 <div class="video-count">
 
                     Showing
-                    <strong id="videoCount">6</strong>
+
+                    <strong id="videoCount">
+                        0
+                    </strong>
+
                     videos
 
                 </div>
@@ -793,325 +991,127 @@
                 id="videosGrid"
             >
 
+                <!-- Loading -->
 
-                <!-- Video 1 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="solid-state"
-                    data-title="Solid State Introduction"
+                <div
+                    class="videos-loading"
+                    id="videosLoading"
                 >
 
-                    <div class="videos-page-thumbnail">
+                    <div class="videos-loading-icon">
 
-                        <span class="videos-page-tag">
-                            Solid State
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
+                        <i class="fa-solid fa-spinner"></i>
 
                     </div>
 
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Solid State — Introduction & Basic Concepts
-                        </h3>
-
-                        <p>
-                            Chapter की शुरुआत और important concepts को
-                            आसान तरीके से समझें।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                Lecture 01
-                            </span>
-
-                            <span>
-                                <i class="fa-regular fa-clock"></i>
-                                Chemistry
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Video 2 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="solid-state"
-                    data-title="Solid State Important Questions"
-                >
-
-                    <div class="videos-page-thumbnail">
-
-                        <span class="videos-page-tag">
-                            Solid State
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Solid State — Important Questions
-                        </h3>
-
-                        <p>
-                            परीक्षा के लिए important questions और
-                            concepts की practice।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                Lecture 02
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-book"></i>
-                                Exam Special
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Video 3 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="solutions"
-                    data-title="Solutions Chapter Introduction"
-                >
-
-                    <div class="videos-page-thumbnail">
-
-                        <span class="videos-page-tag">
-                            Solutions
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Solutions — Chapter Introduction
-                        </h3>
-
-                        <p>
-                            Solutions chapter के basic concepts और
-                            important definitions।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                Lecture 01
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-book"></i>
-                                Chemistry
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Video 4 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="electrochemistry"
-                    data-title="Electrochemistry Basic Concepts"
-                >
-
-                    <div class="videos-page-thumbnail">
-
-                        <span class="videos-page-tag">
-                            Electrochemistry
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Electrochemistry — Basic Concepts
-                        </h3>
-
-                        <p>
-                            Electrochemistry के fundamental concepts
-                            और formulas को समझें।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                Lecture 01
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-flask"></i>
-                                Chemistry
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Video 5 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="chemical-kinetics"
-                    data-title="Chemical Kinetics Introduction"
-                >
-
-                    <div class="videos-page-thumbnail">
-
-                        <span class="videos-page-tag">
-                            Chemical Kinetics
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Chemical Kinetics — Introduction
-                        </h3>
-
-                        <p>
-                            Reaction rate और chemical kinetics के
-                            basic concepts।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                Lecture 01
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-book"></i>
-                                Chemistry
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Video 6 -->
-
-                <article
-                    class="videos-page-card"
-                    data-category="solid-state"
-                    data-title="Solid State PYQ Discussion"
-                >
-
-                    <div class="videos-page-thumbnail">
-
-                        <span class="videos-page-tag">
-                            PYQ
-                        </span>
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <div class="videos-page-info">
-
-                        <h3>
-                            Solid State — Previous Year Questions
-                        </h3>
-
-                        <p>
-                            Previous Year Questions के important
-                            concepts और discussion।
-                        </p>
-
-                        <div class="videos-page-meta">
-
-                            <span>
-                                <i class="fa-solid fa-play"></i>
-                                PYQ
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-graduation-cap"></i>
-                                Exam Special
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-            </div>
-
-
-            <!-- Empty State -->
-
-            <div
-                class="videos-empty"
-                id="videosEmpty"
-            >
-
-                <div class="videos-empty-icon">
-
-                    <i class="fa-solid fa-video-slash"></i>
+                    <p>
+                        Videos loading...
+                    </p>
 
                 </div>
 
-                <h2>
-                    No Videos Found
-                </h2>
 
-                <p>
-                    आपकी search या selected chapter के लिए अभी
-                    कोई video available नहीं है।
-                </p>
+                <!-- Empty -->
+
+                <div
+                    class="videos-empty"
+                    id="videosEmpty"
+                >
+
+                    <div class="videos-empty-icon">
+
+                        <i class="fa-solid fa-video-slash"></i>
+
+                    </div>
+
+                    <h2>
+                        No Videos Found
+                    </h2>
+
+                    <p>
+                        आपकी search या selected chapter के लिए अभी
+                        कोई video available नहीं है।
+                    </p>
+
+                </div>
+
+
+                <!-- Error -->
+
+                <div
+                    class="videos-error"
+                    id="videosError"
+                >
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <h2>
+                        Videos Load नहीं हो पाए
+                    </h2>
+
+                    <p>
+                        Firebase database connection या rules check करें।
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
     </main>
+
+
+    <!-- =====================================================
+         VIDEO MODAL
+    ===================================================== -->
+
+    <div
+        class="video-modal"
+        id="videoModal"
+    >
+
+        <div class="video-modal-box">
+
+
+            <div class="video-modal-header">
+
+                <div
+                    class="video-modal-title"
+                    id="videoModalTitle"
+                >
+                    Chemistry Video
+                </div>
+
+                <button
+                    type="button"
+                    class="video-modal-close"
+                    id="videoModalClose"
+                    aria-label="Close video"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="video-frame-wrap">
+
+                <iframe
+                    id="videoFrame"
+                    src=""
+                    title="Chemistry Video Player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                ></iframe>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
     <!-- =====================================================
@@ -1122,8 +1122,6 @@
 
         <div class="container footer-grid">
 
-
-            <!-- Brand -->
 
             <div class="footer-brand">
 
@@ -1169,8 +1167,6 @@
             </div>
 
 
-            <!-- Quick Links -->
-
             <div class="footer-column">
 
                 <h4>
@@ -1196,8 +1192,6 @@
             </div>
 
 
-            <!-- Resources -->
-
             <div class="footer-column">
 
                 <h4>
@@ -1218,8 +1212,6 @@
 
             </div>
 
-
-            <!-- Platform -->
 
             <div class="footer-column">
 
@@ -1264,65 +1256,422 @@
 
 
     <!-- =====================================================
-         JAVASCRIPT
+         FIREBASE + JAVASCRIPT
     ===================================================== -->
 
-    <script>
+    <script type="module">
 
-        /* ---------- Mobile Menu ---------- */
+        /* =====================================================
+           FIREBASE
+        ===================================================== */
 
-        const menuBtn =
-            document.getElementById("menuBtn");
+        import {
+            initializeApp
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-        const mobileNav =
-            document.getElementById("mobileNav");
+
+        import {
+            getDatabase,
+            ref,
+            onValue
+        } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-        menuBtn.addEventListener("click", () => {
+        const firebaseConfig = {
 
-            const isOpen =
-                mobileNav.classList.toggle("show");
+            apiKey:
+                "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
 
-            menuBtn.setAttribute(
-                "aria-expanded",
-                isOpen
+            authDomain:
+                "chemistry-point-9a41b.firebaseapp.com",
+
+            projectId:
+                "chemistry-point-9a41b",
+
+            storageBucket:
+                "chemistry-point-9a41b.firebasestorage.app",
+
+            messagingSenderId:
+                "791007663942",
+
+            appId:
+                "1:791007663942:web:693c008e475a2e74357747"
+
+        };
+
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const db =
+            getDatabase(
+                app,
+                "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
             );
 
-            menuBtn.innerHTML = isOpen
-                ? '<i class="fa-solid fa-xmark"></i>'
-                : '<i class="fa-solid fa-bars"></i>';
 
-        });
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const videosGrid =
+            document.getElementById(
+                "videosGrid"
+            );
 
 
-        /* ---------- Video Search + Filter ---------- */
+        const videosLoading =
+            document.getElementById(
+                "videosLoading"
+            );
+
+
+        const videosEmpty =
+            document.getElementById(
+                "videosEmpty"
+            );
+
+
+        const videosError =
+            document.getElementById(
+                "videosError"
+            );
+
+
+        const videoCount =
+            document.getElementById(
+                "videoCount"
+            );
+
 
         const searchInput =
-            document.getElementById("videoSearch");
-
-        const videoCards =
-            Array.from(
-                document.querySelectorAll(
-                    ".videos-page-card"
-                )
+            document.getElementById(
+                "videoSearch"
             );
+
 
         const filterButtons =
             document.querySelectorAll(
                 ".video-filter"
             );
 
-        const videoCount =
-            document.getElementById("videoCount");
 
-        const videosEmpty =
-            document.getElementById("videosEmpty");
-
+        let allVideos = [];
 
         let activeFilter = "all";
 
 
-        function filterVideos() {
+        /* =====================================================
+           CATEGORY DETECTOR
+           
+           Admin videos currently save:
+           title, youtubeUrl, videoId,
+           thumbnail, embedUrl, etc.
+
+           इसलिए category title से detect
+           की जा रही है.
+        ===================================================== */
+
+        function detectCategory(video){
+
+            const text =
+                `${video.title || ""} ${video.youtubeUrl || ""}`
+                .toLowerCase();
+
+
+            if(
+                text.includes("solid state") ||
+                text.includes("solid-state") ||
+                text.includes("solidstate")
+            ){
+
+                return "solid-state";
+
+            }
+
+
+            if(
+                text.includes("solution") ||
+                text.includes("solutions")
+            ){
+
+                return "solutions";
+
+            }
+
+
+            if(
+                text.includes("electrochemistry") ||
+                text.includes("electro chemistry")
+            ){
+
+                return "electrochemistry";
+
+            }
+
+
+            if(
+                text.includes("chemical kinetics") ||
+                text.includes("chemical-kinetics") ||
+                text.includes("kinetics")
+            ){
+
+                return "chemical-kinetics";
+
+            }
+
+
+            return "all";
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(value){
+
+            if(value === undefined || value === null){
+
+                return "";
+
+            }
+
+
+            return String(value)
+
+                .replace(/&/g, "&amp;")
+
+                .replace(/</g, "&lt;")
+
+                .replace(/>/g, "&gt;")
+
+                .replace(/"/g, "&quot;")
+
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =====================================================
+           CREATE VIDEO CARD
+        ===================================================== */
+
+        function createVideoCard(video){
+
+            const title =
+                video.title ||
+                "Chemistry Lecture";
+
+
+            const thumbnail =
+                video.thumbnail ||
+                (
+                    video.videoId
+                    ? `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`
+                    : ""
+                );
+
+
+            const embedUrl =
+                video.embedUrl ||
+                (
+                    video.videoId
+                    ? `https://www.youtube.com/embed/${video.videoId}`
+                    : ""
+                );
+
+
+            const category =
+                detectCategory(video);
+
+
+            const categoryLabel =
+                category === "solid-state"
+                    ? "Solid State"
+
+                : category === "solutions"
+                    ? "Solutions"
+
+                : category === "electrochemistry"
+                    ? "Electrochemistry"
+
+                : category === "chemical-kinetics"
+                    ? "Chemical Kinetics"
+
+                : "Chemistry";
+
+
+            const card =
+                document.createElement("article");
+
+
+            card.className =
+                "videos-page-card";
+
+
+            card.dataset.category =
+                category;
+
+
+            card.dataset.title =
+                title.toLowerCase();
+
+
+            card.dataset.embed =
+                embedUrl;
+
+
+            card.dataset.videoTitle =
+                title;
+
+
+            card.innerHTML = `
+
+                <div
+                    class="videos-page-thumbnail"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Play ${escapeHTML(title)}"
+                >
+
+                    ${
+                        thumbnail
+                        ?
+                        `
+                        <img
+                            src="${escapeHTML(thumbnail)}"
+                            alt="${escapeHTML(title)}"
+                            loading="lazy"
+                        >
+                        `
+                        :
+                        `
+                        <div
+                            style="
+                                width:100%;
+                                height:100%;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#d99a16;
+                                font-size:40px;
+                            "
+                        >
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        `
+                    }
+
+
+                    <span class="videos-page-tag">
+                        ${escapeHTML(categoryLabel)}
+                    </span>
+
+
+                    <span class="play-button">
+
+                        <i class="fa-solid fa-play"></i>
+
+                    </span>
+
+                </div>
+
+
+                <div class="videos-page-info">
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+
+                    <p>
+                        Chemistry Point पर
+                        exam-focused chemistry lecture.
+                    </p>
+
+
+                    <div class="videos-page-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-play"></i>
+
+                            Watch Lecture
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-brands fa-youtube"></i>
+
+                            YouTube
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const thumbnailBox =
+                card.querySelector(
+                    ".videos-page-thumbnail"
+                );
+
+
+            thumbnailBox.addEventListener(
+                "click",
+                () => {
+
+                    openVideo(
+                        embedUrl,
+                        title
+                    );
+
+                }
+            );
+
+
+            thumbnailBox.addEventListener(
+                "keydown",
+                (event) => {
+
+                    if(
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ){
+
+                        event.preventDefault();
+
+                        openVideo(
+                            embedUrl,
+                            title
+                        );
+
+                    }
+
+                }
+            );
+
+
+            return card;
+
+        }
+
+
+        /* =====================================================
+           RENDER VIDEOS
+        ===================================================== */
+
+        function renderVideos(){
 
             const searchText =
                 searchInput.value
@@ -1330,41 +1679,61 @@
                     .toLowerCase();
 
 
-            let visibleCount = 0;
+            videosGrid
+                .querySelectorAll(
+                    ".videos-page-card"
+                )
+                .forEach(card => card.remove());
 
 
-            videoCards.forEach(card => {
+            let visibleVideos = 0;
+
+
+            allVideos.forEach(video => {
 
                 const category =
-                    card.dataset.category
-                        .toLowerCase();
+                    detectCategory(video);
+
 
                 const title =
-                    card.dataset.title
-                        .toLowerCase();
+                    (
+                        video.title ||
+                        ""
+                    ).toLowerCase();
+
+
+                const url =
+                    (
+                        video.youtubeUrl ||
+                        ""
+                    ).toLowerCase();
+
 
                 const matchesFilter =
                     activeFilter === "all" ||
                     category === activeFilter;
 
+
                 const matchesSearch =
                     !searchText ||
                     title.includes(searchText) ||
+                    url.includes(searchText) ||
                     category.includes(searchText);
 
 
-                if (
+                if(
                     matchesFilter &&
                     matchesSearch
-                ) {
+                ){
 
-                    card.style.display = "";
+                    const card =
+                        createVideoCard(video);
 
-                    visibleCount++;
 
-                } else {
+                    videosGrid.appendChild(card);
 
-                    card.style.display = "none";
+
+                    visibleVideos++;
 
                 }
 
@@ -1372,27 +1741,126 @@
 
 
             videoCount.textContent =
-                visibleCount;
+                visibleVideos;
 
 
-            if (visibleCount === 0) {
-
-                videosEmpty.classList.add("show");
-
-            } else {
-
-                videosEmpty.classList.remove("show");
-
-            }
+            videosEmpty.classList.toggle(
+                "show",
+                visibleVideos === 0
+            );
 
         }
 
 
-        searchInput.addEventListener(
-            "input",
-            filterVideos
+        /* =====================================================
+           FIREBASE LIVE VIDEOS
+        ===================================================== */
+
+        const videosRef =
+            ref(db, "videos");
+
+
+        onValue(
+
+            videosRef,
+
+            (snapshot) => {
+
+                videosLoading.style.display =
+                    "none";
+
+
+                videosError.classList.remove(
+                    "show"
+                );
+
+
+                const data =
+                    snapshot.val();
+
+
+                allVideos = [];
+
+
+                if(
+                    data &&
+                    typeof data === "object"
+                ){
+
+                    allVideos =
+                        Object.entries(data)
+
+                        .map(
+                            ([id, video]) => ({
+
+                                id,
+
+                                ...video
+
+                            })
+                        )
+
+                        .sort(
+                            (a,b) =>
+                                (
+                                    b.createdAt || 0
+                                )
+                                -
+                                (
+                                    a.createdAt || 0
+                                )
+                        );
+
+                }
+
+
+                renderVideos();
+
+            },
+
+            (error) => {
+
+                console.error(
+                    "Firebase videos error:",
+                    error
+                );
+
+
+                videosLoading.style.display =
+                    "none";
+
+
+                videosEmpty.classList.remove(
+                    "show"
+                );
+
+
+                videosError.classList.add(
+                    "show"
+                );
+
+
+                videoCount.textContent =
+                    "0";
+
+            }
+
         );
 
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        searchInput.addEventListener(
+            "input",
+            renderVideos
+        );
+
+
+        /* =====================================================
+           FILTERS
+        ===================================================== */
 
         filterButtons.forEach(button => {
 
@@ -1418,12 +1886,240 @@
                         button.dataset.filter;
 
 
-                    filterVideos();
+                    renderVideos();
 
                 }
             );
 
         });
+
+
+        /* =====================================================
+           VIDEO MODAL
+        ===================================================== */
+
+        const videoModal =
+            document.getElementById(
+                "videoModal"
+            );
+
+
+        const videoFrame =
+            document.getElementById(
+                "videoFrame"
+            );
+
+
+        const videoModalTitle =
+            document.getElementById(
+                "videoModalTitle"
+            );
+
+
+        const videoModalClose =
+            document.getElementById(
+                "videoModalClose"
+            );
+
+
+        function openVideo(
+            embedUrl,
+            title
+        ){
+
+            if(!embedUrl){
+
+                return;
+
+            }
+
+
+            videoModalTitle.textContent =
+                title ||
+                "Chemistry Video";
+
+
+            videoFrame.src =
+                embedUrl +
+                (
+                    embedUrl.includes("?")
+                    ? "&autoplay=1"
+                    : "?autoplay=1"
+                );
+
+
+            videoModal.classList.add(
+                "show"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeVideo(){
+
+            videoModal.classList.remove(
+                "show"
+            );
+
+
+            videoFrame.src =
+                "";
+
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        videoModalClose.addEventListener(
+            "click",
+            closeVideo
+        );
+
+
+        videoModal.addEventListener(
+            "click",
+            (event) => {
+
+                if(
+                    event.target ===
+                    videoModal
+                ){
+
+                    closeVideo();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if(
+                    event.key === "Escape" &&
+                    videoModal.classList.contains(
+                        "show"
+                    )
+                ){
+
+                    closeVideo();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        const menuBtn =
+            document.getElementById(
+                "menuBtn"
+            );
+
+
+        const mobileNav =
+            document.getElementById(
+                "mobileNav"
+            );
+
+
+        menuBtn.addEventListener(
+            "click",
+            () => {
+
+                const isOpen =
+                    mobileNav.classList.toggle(
+                        "show"
+                    );
+
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                );
+
+
+                const icon =
+                    menuBtn.querySelector("i");
+
+
+                if(isOpen){
+
+                    icon.classList.remove(
+                        "fa-bars"
+                    );
+
+                    icon.classList.add(
+                        "fa-xmark"
+                    );
+
+                }else{
+
+                    icon.classList.remove(
+                        "fa-xmark"
+                    );
+
+                    icon.classList.add(
+                        "fa-bars"
+                    );
+
+                }
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".mobile-nav a"
+            )
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        mobileNav.classList.remove(
+                            "show"
+                        );
+
+
+                        menuBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+
+                        const icon =
+                            menuBtn.querySelector(
+                                "i"
+                            );
+
+
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
+
+
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+                    }
+                );
+
+            });
 
     </script>
 
