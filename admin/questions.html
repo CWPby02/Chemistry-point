@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Questions | Chemistry Point Admin</title>
+
+    <meta name="author" content="Code With Piyush">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+        :root {
+            --primary: #d99a16;
+            --primary-light: #f3bd45;
+            --primary-dark: #a86f00;
+
+            --bg: #08090b;
+            --surface: #0e1013;
+            --card: #13161a;
+            --card-2: #191c21;
+
+            --text: #ffffff;
+            --muted: #b7bbc2;
+            --muted-2: #858a93;
+
+            --border: rgba(217,154,22,.20);
+
+            --danger: #ef476f;
+            --success: #22c55e;
+
+            --radius: 16px;
+        }
+
+        body.light {
+            --bg: #f5f6f8;
+            --surface: #ffffff;
+            --card: #ffffff;
+            --card-2: #f0f1f3;
+
+            --text: #17191c;
+            --muted: #5f646d;
+            --muted-2: #777c85;
+
+            --border: rgba(217,154,22,.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", "Inter", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 270px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: .3s ease;
+        }
+
+        .sidebar-top {
+            padding: 25px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand img {
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .brand-title {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+            color: var(--primary-light);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            padding: 25px 15px;
+            overflow-y: auto;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 18px;
+            margin-bottom: 8px;
+            color: var(--muted);
+            border-radius: 15px;
+            font-weight: 600;
+            transition: .25s ease;
+        }
+
+        .sidebar-menu a i {
+            width: 25px;
+            text-align: center;
+            font-size: 19px;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary-light);
+            background: rgba(217,154,22,.08);
+        }
+
+        .sidebar-menu a.active {
+            color: var(--primary-light);
+            background: rgba(217,154,22,.14);
+        }
+
+        .logout-area {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(239,71,111,.35);
+            background: rgba(239,71,111,.08);
+            color: #ff8ca6;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 270px;
+            min-height: 100vh;
+            padding: 25px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .page-title p {
+            color: var(--muted);
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 13px;
+            font-size: 18px;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            background: rgba(217,154,22,.12);
+            color: var(--primary-light);
+            border-radius: 14px;
+            font-size: 21px;
+        }
+
+        .stat-info span {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .stat-info strong {
+            display: block;
+            margin-top: 3px;
+            font-size: 25px;
+        }
+
+        /* =========================
+           PANEL
+        ========================= */
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .panel-header h2 {
+            font-size: 18px;
+        }
+
+        .panel-body {
+            padding: 20px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group label span {
+            color: var(--primary-light);
+        }
+
+        .form-control {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            outline: none;
+            border-radius: 12px;
+            padding: 13px 14px;
+            font-size: 14px;
+        }
+
+        textarea.form-control {
+            min-height: 115px;
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217,154,22,.08);
+        }
+
+        select.form-control option {
+            background: #13161a;
+            color: #fff;
+        }
+
+        .option-box {
+            display: grid;
+            grid-template-columns: 65px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .option-label {
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            background: rgba(217,154,22,.08);
+            border-radius: 11px;
+            color: var(--primary-light);
+            font-weight: 800;
+        }
+
+        .correct-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .correct-option {
+            position: relative;
+        }
+
+        .correct-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .correct-option label {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            color: var(--muted);
+            background: var(--surface);
+            cursor: pointer;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .correct-option input:checked + label {
+            background: rgba(34,197,94,.12);
+            border-color: rgba(34,197,94,.5);
+            color: #4ade80;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 11px;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: #17191c;
+        }
+
+        .btn-secondary {
+            background: var(--card-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-danger {
+            background: rgba(239,71,111,.1);
+            border: 1px solid rgba(239,71,111,.3);
+            color: #ff8ca6;
+        }
+
+        /* =========================
+           FILTER
+        ========================= */
+
+        .filters {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted-2);
+        }
+
+        .search-box input {
+            padding-left: 42px;
+        }
+
+        /* =========================
+           QUESTIONS
+        ========================= */
+
+        .question-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .question-card {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .question-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .question-number {
+            color: var(--primary-light);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .question-text {
+            margin-top: 7px;
+            line-height: 1.65;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .question-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 12px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 9px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(217,154,22,.1);
+            color: var(--primary-light);
+        }
+
+        .badge.success {
+            background: rgba(34,197,94,.1);
+            color: #4ade80;
+        }
+
+        .options-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: 15px;
+        }
+
+        .preview-option {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .preview-option.correct {
+            border-color: rgba(34,197,94,.45);
+            background: rgba(34,197,94,.08);
+            color: #4ade80;
+        }
+
+        .question-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 15px;
+        }
+
+        .small-btn {
+            border: 1px solid var(--border);
+            background: var(--card-2);
+            color: var(--text);
+            border-radius: 9px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .small-btn.edit {
+            color: var(--primary-light);
+        }
+
+        .small-btn.delete {
+            color: #ff8ca6;
+            border-color: rgba(239,71,111,.25);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 45px 20px;
+            color: var(--muted);
+        }
+
+        .empty i {
+            font-size: 40px;
+            color: var(--muted-2);
+            margin-bottom: 12px;
+        }
+
+        .empty p {
+            font-size: 14px;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: rgba(8,9,11,.78);
+            backdrop-filter: blur(7px);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .loader-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px 35px;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 35px;
+            height: 35px;
+            border: 3px solid rgba(217,154,22,.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        .overlay {
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: inline-grid;
+                place-items: center;
+            }
+
+            .overlay.show {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,.6);
+                z-index: 900;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .main {
+                padding: 17px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .page-title h1 {
+                font-size: 23px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .options-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .correct-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .question-top {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .panel-header,
+            .panel-body {
+                padding: 15px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .option-box {
+                grid-template-columns: 48px 1fr;
+            }
+
+            .brand img {
+                width: 52px;
+                height: 52px;
+            }
+
+            .brand-title {
+                font-size: 18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-top">
+
+            <a href="dashboard.html" class="brand">
+
+                <img src="../assets/images/logo/logo.png"
+                     alt="Chemistry Point">
+
+                <div>
+                    <div class="brand-title">Chemistry Point</div>
+                    <div class="brand-subtitle">ADMIN PANEL</div>
+                </div>
+
+            </a>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="videos.html">
+                <i class="fa-solid fa-video"></i>
+                <span>Videos</span>
+            </a>
+
+            <a href="objectives.html">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Objectives</span>
+            </a>
+
+            <a href="quizzes.html">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Quizzes</span>
+            </a>
+
+            <a href="questions.html" class="active">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Questions</span>
+            </a>
+
+            <a href="students.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="notices.html">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Notices</span>
+            </a>
+
+            <a href="settings.html">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="logout-area">
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div class="page-title">
+
+                <h1>Questions</h1>
+
+                <p>
+                    Quiz के questions add, edit और manage करें
+                </p>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <button class="icon-btn" id="themeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             STATS
+        ========================= -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+
+                <div class="stat-info">
+                    <span>Total Questions</span>
+                    <strong id="totalQuestions">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+
+                <div class="stat-info">
+                    <span>Total Quizzes</span>
+                    <strong id="totalQuizzes">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div class="stat-info">
+                    <span>Correct Answers</span>
+                    <strong id="totalCorrect">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ADD QUESTION
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2 id="formTitle">
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Question
+                </h2>
+
+            </div>
+
+            <div class="panel-body">
+
+                <form id="questionForm">
+
+                    <div class="form-grid">
+
+                        <!-- QUIZ -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Select Quiz <span>*</span>
+                            </label>
+
+                            <select
+                                class="form-control"
+                                id="quizSelect"
+                                required>
+
+                                <option value="">
+                                    -- Select Quiz --
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MARKS -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Marks
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="marks"
+                                value="1"
+                                min="1"
+                                max="100">
+
+                        </div>
+
+
+                        <!-- QUESTION -->
+
+                        <div class="form-group full">
+
+                            <label>
+                                Question <span>*</span>
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="questionText"
+                                placeholder="Question यहाँ लिखें..."
+                                required></textarea>
+
+                        </div>
+
+
+                        <!-- OPTION A -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Option A <span>*</span>
+                            </label>
+
+                            <div class="option-box">
+
+                                <div class="option-label">A</div>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="optionA"
+                                    placeholder="Option A"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPTION B -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Option B <span>*</span>
+                            </label>
+
+                            <div class="option-box">
+
+                                <div class="option-label">B</div>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="optionB"
+                                    placeholder="Option B"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPTION C -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Option C <span>*</span>
+                            </label>
+
+                            <div class="option-box">
+
+                                <div class="option-label">C</div>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="optionC"
+                                    placeholder="Option C"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPTION D -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Option D <span>*</span>
+                            </label>
+
+                            <div class="option-box">
+
+                                <div class="option-label">D</div>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="optionD"
+                                    placeholder="Option D"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CORRECT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Correct Answer <span>*</span>
+                            </label>
+
+                            <div class="correct-options">
+
+                                <div class="correct-option">
+
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        id="correctA"
+                                        value="a"
+                                        checked>
+
+                                    <label for="correctA">A</label>
+
+                                </div>
+
+
+                                <div class="correct-option">
+
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        id="correctB"
+                                        value="b">
+
+                                    <label for="correctB">B</label>
+
+                                </div>
+
+
+                                <div class="correct-option">
+
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        id="correctC"
+                                        value="c">
+
+                                    <label for="correctC">C</label>
+
+                                </div>
+
+
+                                <div class="correct-option">
+
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        id="correctD"
+                                        value="d">
+
+                                    <label for="correctD">D</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- EXPLANATION -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Explanation
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="explanation"
+                                placeholder="Answer की explanation (optional)..."></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="saveBtn">
+
+                            <i class="fa-solid fa-plus"></i>
+                            Add Question
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="cancelBtn"
+                            style="display:none;">
+
+                            Cancel Edit
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             QUESTION LIST
+        ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    <i class="fa-solid fa-list"></i>
+                    All Questions
+                </h2>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="filters">
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-search"></i>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="searchInput"
+                            placeholder="Question search करें...">
+
+                    </div>
+
+
+                    <select
+                        class="form-control"
+                        id="filterQuiz">
+
+                        <option value="">
+                            All Quizzes
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="question-list" id="questionList">
+
+                    <div class="empty">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        <p>Questions load हो रहे हैं...</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         LOADING
+    ========================= -->
+
+    <div class="loading" id="loading">
+
+        <div class="loader-box">
+
+            <div class="spinner"></div>
+
+            <p id="loadingText">
+                Please wait...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FIREBASE
+    ========================= -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+        import {
+            getDatabase,
+            ref,
+            get,
+            push,
+            set,
+            update,
+            remove,
+            onValue
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+            authDomain:
+                "chemistry-point-9a41b.firebaseapp.com",
+
+            projectId:
+                "chemistry-point-9a41b",
+
+            storageBucket:
+                "chemistry-point-9a41b.firebasestorage.app",
+
+            messagingSenderId:
+                "791007663942",
+
+            appId:
+                "1:791007663942:web:693c008e475a2e74357747"
+
+        };
+
+
+        const DATABASE_URL =
+            "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/";
+
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        const db = getDatabase(app, DATABASE_URL);
+
+
+        /* =========================
+           DOM
+        ========================= */
+
+        const form =
+            document.getElementById("questionForm");
+
+        const quizSelect =
+            document.getElementById("quizSelect");
+
+        const filterQuiz =
+            document.getElementById("filterQuiz");
+
+        const questionList =
+            document.getElementById("questionList");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const saveBtn =
+            document.getElementById("saveBtn");
+
+        const cancelBtn =
+            document.getElementById("cancelBtn");
+
+        const formTitle =
+            document.getElementById("formTitle");
+
+        const loading =
+            document.getElementById("loading");
+
+        const loadingText =
+            document.getElementById("loadingText");
+
+
+        let quizzes = {};
+
+        let questions = {};
+
+        let editingQuestionId = null;
+
+
+        /* =========================
+           HELPERS
+        ========================= */
+
+        function showLoading(text = "Please wait...") {
+
+            loadingText.textContent = text;
+
+            loading.classList.add("show");
+
+        }
+
+
+        function hideLoading() {
+
+            loading.classList.remove("show");
+
+        }
+
+
+        function escapeHTML(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        function getQuizTitle(quiz) {
+
+            if (!quiz) return "Untitled Quiz";
+
+            return (
+                quiz.title ||
+                quiz.name ||
+                quiz.quizTitle ||
+                quiz.examName ||
+                "Untitled Quiz"
+            );
+
+        }
+
+
+        function getQuizChapter(quiz) {
+
+            if (!quiz) return "";
+
+            return (
+                quiz.chapter ||
+                quiz.chapterName ||
+                ""
+            );
+
+        }
+
+
+        /* =========================
+           ADMIN CHECK
+        ========================= */
+
+        async function verifyAdmin(user) {
+
+            const adminRef =
+                ref(db, `admins/${user.uid}`);
+
+            const snapshot =
+                await get(adminRef);
+
+            if (!snapshot.exists()) {
+                throw new Error(
+                    "Admin authorization नहीं मिली।"
+                );
+            }
+
+            const admin =
+                snapshot.val();
+
+            if (
+                admin.role !== "admin" ||
+                admin.active !== true
+            ) {
+
+                throw new Error(
+                    "Admin account inactive है।"
+                );
+
+            }
+
+            return true;
+
+        }
+
+
+        /* =========================
+           LOAD QUIZZES
+        ========================= */
+
+        function loadQuizzes() {
+
+            onValue(
+                ref(db, "quizzes"),
+                snapshot => {
+
+                    quizzes =
+                        snapshot.exists()
+                            ? snapshot.val()
+                            : {};
+
+                    renderQuizSelects();
+
+                    updateStats();
+
+                    renderQuestions();
+
+                },
+                error => {
+
+                    console.error(error);
+
+                    quizSelect.innerHTML =
+                        `<option value="">
+                            Quizzes load नहीं हुए
+                        </option>`;
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           QUIZ SELECTS
+        ========================= */
+
+        function renderQuizSelects() {
+
+            const currentQuiz =
+                quizSelect.value;
+
+            const currentFilter =
+                filterQuiz.value;
+
+
+            quizSelect.innerHTML =
+                `<option value="">
+                    -- Select Quiz --
+                </option>`;
+
+            filterQuiz.innerHTML =
+                `<option value="">
+                    All Quizzes
+                </option>`;
+
+
+            Object.entries(quizzes).forEach(
+                ([id, quiz]) => {
+
+                    const title =
+                        getQuizTitle(quiz);
+
+                    const chapter =
+                        getQuizChapter(quiz);
+
+                    const label =
+                        chapter
+                            ? `${title} — ${chapter}`
+                            : title;
+
+
+                    quizSelect.innerHTML +=
+                        `<option value="${escapeHTML(id)}">
+                            ${escapeHTML(label)}
+                        </option>`;
+
+
+                    filterQuiz.innerHTML +=
+                        `<option value="${escapeHTML(id)}">
+                            ${escapeHTML(label)}
+                        </option>`;
+
+                }
+            );
+
+
+            if (currentQuiz) {
+                quizSelect.value = currentQuiz;
+            }
+
+            if (currentFilter) {
+                filterQuiz.value = currentFilter;
+            }
+
+        }
+
+
+        /* =========================
+           LOAD QUESTIONS
+        ========================= */
+
+        function loadQuestions() {
+
+            onValue(
+                ref(db, "questions"),
+                snapshot => {
+
+                    questions =
+                        snapshot.exists()
+                            ? snapshot.val()
+                            : {};
+
+                    updateStats();
+
+                    renderQuestions();
+
+                    hideLoading();
+
+                },
+                error => {
+
+                    console.error(error);
+
+                    questionList.innerHTML = `
+                        <div class="empty">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Questions load नहीं हो सके।</p>
+                        </div>
+                    `;
+
+                    hideLoading();
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        function updateStats() {
+
+            const questionArray =
+                Object.values(questions);
+
+
+            document.getElementById(
+                "totalQuestions"
+            ).textContent =
+                questionArray.length;
+
+
+            document.getElementById(
+                "totalQuizzes"
+            ).textContent =
+                Object.keys(quizzes).length;
+
+
+            document.getElementById(
+                "totalCorrect"
+            ).textContent =
+                questionArray.filter(
+                    q => q.answer
+                ).length;
+
+        }
+
+
+        /* =========================
+           RENDER QUESTIONS
+        ========================= */
+
+        function renderQuestions() {
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const selectedQuiz =
+                filterQuiz.value;
+
+
+            let entries =
+                Object.entries(questions);
+
+
+            entries = entries.filter(
+                ([id, q]) => {
+
+                    const text =
+                        String(
+                            q.question ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const quizTitle =
+                        String(
+                            q.quizTitle ||
+                            getQuizTitle(
+                                quizzes[q.quizId]
+                            ) ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const chapter =
+                        String(
+                            q.chapter ||
+                            getQuizChapter(
+                                quizzes[q.quizId]
+                            ) ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const matchesSearch =
+                        !search ||
+                        text.includes(search) ||
+                        quizTitle.includes(search) ||
+                        chapter.includes(search);
+
+
+                    const matchesQuiz =
+                        !selectedQuiz ||
+                        q.quizId === selectedQuiz;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesQuiz
+                    );
+
+                }
+            );
+
+
+            entries.sort(
+                (a, b) => {
+
+                    const orderA =
+                        Number(a[1].order || 0);
+
+                    const orderB =
+                        Number(b[1].order || 0);
+
+                    return orderA - orderB;
+
+                }
+            );
+
+
+            if (!entries.length) {
+
+                questionList.innerHTML = `
+                    <div class="empty">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <p>
+                            अभी कोई question नहीं मिला।
+                        </p>
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            questionList.innerHTML = "";
+
+
+            entries.forEach(
+                ([id, q], index) => {
+
+                    const quiz =
+                        quizzes[q.quizId] || {};
+
+                    const quizTitle =
+                        q.quizTitle ||
+                        getQuizTitle(quiz);
+
+                    const chapter =
+                        q.chapter ||
+                        getQuizChapter(quiz);
+
+
+                    const correct =
+                        String(
+                            q.answer || "a"
+                        ).toLowerCase();
+
+
+                    const options = {
+
+                        a: q.options?.a || "",
+
+                        b: q.options?.b || "",
+
+                        c: q.options?.c || "",
+
+                        d: q.options?.d || ""
+
+                    };
+
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "question-card";
+
+
+                    card.innerHTML = `
+
+                        <div class="question-top">
+
+                            <div>
+
+                                <div class="question-number">
+                                    Question ${index + 1}
+                                </div>
+
+                                <div class="question-text">
+                                    ${escapeHTML(q.question)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="question-meta">
+
+                            <span class="badge">
+                                <i class="fa-solid fa-circle-question"></i>
+                                ${escapeHTML(quizTitle)}
+                            </span>
+
+                            ${
+                                chapter
+                                ? `
+                                    <span class="badge">
+                                        <i class="fa-solid fa-book"></i>
+                                        ${escapeHTML(chapter)}
+                                    </span>
+                                `
+                                : ""
+                            }
+
+                            <span class="badge success">
+                                <i class="fa-solid fa-star"></i>
+                                ${escapeHTML(q.marks || 1)} Mark
+                            </span>
+
+                            <span class="badge success">
+                                <i class="fa-solid fa-check"></i>
+                                Correct: ${correct.toUpperCase()}
+                            </span>
+
+                        </div>
+
+
+                        <div class="options-preview">
+
+                            <div class="preview-option ${correct === "a" ? "correct" : ""}">
+                                <strong>A.</strong>
+                                ${escapeHTML(options.a)}
+                            </div>
+
+                            <div class="preview-option ${correct === "b" ? "correct" : ""}">
+                                <strong>B.</strong>
+                                ${escapeHTML(options.b)}
+                            </div>
+
+                            <div class="preview-option ${correct === "c" ? "correct" : ""}">
+                                <strong>C.</strong>
+                                ${escapeHTML(options.c)}
+                            </div>
+
+                            <div class="preview-option ${correct === "d" ? "correct" : ""}">
+                                <strong>D.</strong>
+                                ${escapeHTML(options.d)}
+                            </div>
+
+                        </div>
+
+
+                        ${
+                            q.explanation
+                            ? `
+                                <div class="question-meta">
+
+                                    <span class="badge">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                        Explanation Added
+                                    </span>
+
+                                </div>
+                            `
+                            : ""
+                        }
+
+
+                        <div class="question-actions">
+
+                            <button
+                                class="small-btn edit"
+                                data-edit="${id}">
+
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+
+                            </button>
+
+
+                            <button
+                                class="small-btn delete"
+                                data-delete="${id}">
+
+                                <i class="fa-solid fa-trash"></i>
+                                Delete
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    questionList.appendChild(card);
+
+                }
+            );
+
+
+            document
+                .querySelectorAll("[data-edit]")
+                .forEach(btn => {
+
+                    btn.addEventListener(
+                        "click",
+                        () => {
+
+                            editQuestion(
+                                btn.dataset.edit
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            document
+                .querySelectorAll("[data-delete]")
+                .forEach(btn => {
+
+                    btn.addEventListener(
+                        "click",
+                        () => {
+
+                            deleteQuestion(
+                                btn.dataset.delete
+                            );
+
+                        }
+                    );
+
+                });
+
+        }
+
+
+        /* =========================
+           ADD / UPDATE QUESTION
+        ========================= */
+
+        form.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const quizId =
+                    quizSelect.value.trim();
+
+                const question =
+                    document
+                        .getElementById("questionText")
+                        .value.trim();
+
+
+                const optionA =
+                    document
+                        .getElementById("optionA")
+                        .value.trim();
+
+
+                const optionB =
+                    document
+                        .getElementById("optionB")
+                        .value.trim();
+
+
+                const optionC =
+                    document
+                        .getElementById("optionC")
+                        .value.trim();
+
+
+                const optionD =
+                    document
+                        .getElementById("optionD")
+                        .value.trim();
+
+
+                const explanation =
+                    document
+                        .getElementById("explanation")
+                        .value.trim();
+
+
+                const marks =
+                    Number(
+                        document
+                            .getElementById("marks")
+                            .value || 1
+                    );
+
+
+                const answer =
+                    document
+                        .querySelector(
+                            'input[name="correctAnswer"]:checked'
+                        )
+                        ?.value;
+
+
+                if (!quizId) {
+
+                    alert("Please quiz select करें।");
+
+                    return;
+
+                }
+
+
+                if (!question) {
+
+                    alert("Question लिखें।");
+
+                    return;
+
+                }
+
+
+                if (
+                    !optionA ||
+                    !optionB ||
+                    !optionC ||
+                    !optionD
+                ) {
+
+                    alert(
+                        "चारों options भरना जरूरी है।"
+                    );
+
+                    return;
+
+                }
+
+
+                if (!answer) {
+
+                    alert(
+                        "Correct answer select करें।"
+                    );
+
+                    return;
+
+                }
+
+
+                const quiz =
+                    quizzes[quizId] || {};
+
+
+                const quizTitle =
+                    getQuizTitle(quiz);
+
+
+                const chapter =
+                    getQuizChapter(quiz);
+
+
+                const questionData = {
+
+                    quizId,
+
+                    quizTitle,
+
+                    chapter,
+
+                    question,
+
+                    options: {
+
+                        a: optionA,
+                        b: optionB,
+                        c: optionC,
+                        d: optionD
+
+                    },
+
+                    answer,
+
+                    explanation,
+
+                    marks,
+
+                    status: "active",
+
+                    updatedAt: Date.now()
+
+                };
+
+
+                try {
+
+                    showLoading(
+                        editingQuestionId
+                            ? "Question update हो रहा है..."
+                            : "Question save हो रहा है..."
+                    );
+
+
+                    if (editingQuestionId) {
+
+                        await update(
+                            ref(
+                                db,
+                                `questions/${editingQuestionId}`
+                            ),
+                            questionData
+                        );
+
+                        alert(
+                            "Question successfully update हो गया।"
+                        );
+
+                    } else {
+
+                        const newRef =
+                            push(
+                                ref(db, "questions")
+                            );
+
+
+                        questionData.createdAt =
+                            Date.now();
+
+
+                        questionData.order =
+                            Object.keys(
+                                questions
+                            ).length + 1;
+
+
+                        await set(
+                            newRef,
+                            questionData
+                        );
+
+
+                        alert(
+                            "Question successfully add हो गया।"
+                        );
+
+                    }
+
+
+                    resetForm();
+
+                    hideLoading();
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    hideLoading();
+
+                    alert(
+                        "Question save नहीं हुआ: " +
+                        error.message
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           EDIT
+        ========================= */
+
+        function editQuestion(id) {
+
+            const q =
+                questions[id];
+
+
+            if (!q) return;
+
+
+            editingQuestionId = id;
+
+
+            quizSelect.value =
+                q.quizId || "";
+
+
+            document
+                .getElementById("questionText")
+                .value =
+                q.question || "";
+
+
+            document
+                .getElementById("optionA")
+                .value =
+                q.options?.a || "";
+
+
+            document
+                .getElementById("optionB")
+                .value =
+                q.options?.b || "";
+
+
+            document
+                .getElementById("optionC")
+                .value =
+                q.options?.c || "";
+
+
+            document
+                .getElementById("optionD")
+                .value =
+                q.options?.d || "";
+
+
+            document
+                .getElementById("explanation")
+                .value =
+                q.explanation || "";
+
+
+            document
+                .getElementById("marks")
+                .value =
+                q.marks || 1;
+
+
+            const correct =
+                String(
+                    q.answer || "a"
+                ).toLowerCase();
+
+
+            const radio =
+                document.querySelector(
+                    `input[name="correctAnswer"][value="${correct}"]`
+                );
+
+
+            if (radio) {
+                radio.checked = true;
+            }
+
+
+            formTitle.innerHTML =
+                `<i class="fa-solid fa-pen"></i>
+                 Edit Question`;
+
+
+            saveBtn.innerHTML =
+                `<i class="fa-solid fa-save"></i>
+                 Update Question`;
+
+
+            cancelBtn.style.display =
+                "inline-block";
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           DELETE
+        ========================= */
+
+        async function deleteQuestion(id) {
+
+            const q =
+                questions[id];
+
+
+            if (!q) return;
+
+
+            const confirmed =
+                confirm(
+                    "क्या आप इस question को delete करना चाहते हैं?"
+                );
+
+
+            if (!confirmed) return;
+
+
+            try {
+
+                showLoading(
+                    "Question delete हो रहा है..."
+                );
+
+
+                await remove(
+                    ref(
+                        db,
+                        `questions/${id}`
+                    )
+                );
+
+
+                hideLoading();
+
+
+                alert(
+                    "Question delete हो गया।"
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                hideLoading();
+
+                alert(
+                    "Delete नहीं हुआ: " +
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           RESET FORM
+        ========================= */
+
+        function resetForm() {
+
+            editingQuestionId = null;
+
+            form.reset();
+
+
+            document
+                .getElementById("marks")
+                .value = 1;
+
+
+            document
+                .getElementById("correctA")
+                .checked = true;
+
+
+            formTitle.innerHTML =
+                `<i class="fa-solid fa-plus"></i>
+                 Add New Question`;
+
+
+            saveBtn.innerHTML =
+                `<i class="fa-solid fa-plus"></i>
+                 Add Question`;
+
+
+            cancelBtn.style.display =
+                "none";
+
+        }
+
+
+        cancelBtn.addEventListener(
+            "click",
+            resetForm
+        );
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        searchInput.addEventListener(
+            "input",
+            renderQuestions
+        );
+
+
+        filterQuiz.addEventListener(
+            "change",
+            renderQuestions
+        );
+
+
+        /* =========================
+           THEME
+        ========================= */
+
+        const themeBtn =
+            document.getElementById("themeBtn");
+
+
+        function applyTheme() {
+
+            const theme =
+                localStorage.getItem(
+                    "admin-theme"
+                ) || "dark";
+
+
+            document.body.classList.toggle(
+                "light",
+                theme === "light"
+            );
+
+
+            const icon =
+                themeBtn.querySelector("i");
+
+
+            if (theme === "light") {
+
+                icon.className =
+                    "fa-solid fa-sun";
+
+            } else {
+
+                icon.className =
+                    "fa-solid fa-moon";
+
+            }
+
+        }
+
+
+        themeBtn.addEventListener(
+            "click",
+            () => {
+
+                const isLight =
+                    document.body.classList.contains(
+                        "light"
+                    );
+
+
+                localStorage.setItem(
+                    "admin-theme",
+                    isLight
+                        ? "dark"
+                        : "light"
+                );
+
+
+                applyTheme();
+
+            }
+        );
+
+
+        applyTheme();
+
+
+        /* =========================
+           MOBILE SIDEBAR
+        ========================= */
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const overlay =
+            document.getElementById("overlay");
+
+        const mobileMenuBtn =
+            document.getElementById("mobileMenuBtn");
+
+
+        function openSidebar() {
+
+            sidebar.classList.add("open");
+
+            overlay.classList.add("show");
+
+        }
+
+
+        function closeSidebar() {
+
+            sidebar.classList.remove("open");
+
+            overlay.classList.remove("show");
+
+        }
+
+
+        mobileMenuBtn.addEventListener(
+            "click",
+            openSidebar
+        );
+
+
+        overlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+
+        document
+            .querySelectorAll(".sidebar-menu a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+
+            });
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    const confirmed =
+                        confirm(
+                            "क्या आप logout करना चाहते हैं?"
+                        );
+
+
+                    if (!confirmed) return;
+
+
+                    await signOut(auth);
+
+
+                    window.location.href =
+                        "login.html";
+
+                }
+            );
+
+
+        /* =========================
+           AUTH
+        ========================= */
+
+        onAuthStateChanged(
+            auth,
+            async user => {
+
+                if (!user) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                try {
+
+                    showLoading(
+                        "Admin verify हो रहा है..."
+                    );
+
+
+                    await verifyAdmin(user);
+
+
+                    loadQuizzes();
+
+                    loadQuestions();
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert(
+                        error.message
+                    );
+
+                    await signOut(auth);
+
+                    window.location.href =
+                        "login.html";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
