@@ -10,6 +10,7 @@
     <title>Quiz | Chemistry Point</title>
 
 
+
     <!-- Google Fonts -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,12 +25,14 @@
     >
 
 
+
     <!-- Font Awesome -->
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
+
 
 
     <!-- Main CSS -->
@@ -39,6 +42,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <link rel="stylesheet" href="../assets/css/responsive.css">
+
 
 
     <style>
@@ -56,6 +60,7 @@
             max-width: 1000px;
             margin: auto;
         }
+
 
 
         /* =========================================
@@ -89,6 +94,7 @@
 
             font-size: 14px;
         }
+
 
 
         /* =========================================
@@ -128,6 +134,7 @@
         }
 
 
+
         /* =========================================
            PROGRESS
         ========================================== */
@@ -158,6 +165,7 @@
 
             transition: width .25s ease;
         }
+
 
 
         /* =========================================
@@ -225,6 +233,7 @@
 
             line-height: 1.6;
         }
+
 
 
         /* =========================================
@@ -306,6 +315,7 @@
         }
 
 
+
         /* =========================================
            BUTTONS
         ========================================== */
@@ -373,6 +383,7 @@
         .quiz-btn:hover:not(:disabled) {
             transform: translateY(-1px);
         }
+
 
 
         /* =========================================
@@ -456,6 +467,7 @@
         }
 
 
+
         /* =========================================
            LOADING / ERROR
         ========================================== */
@@ -481,6 +493,7 @@
 
             font-size: 14px;
         }
+
 
 
         .quiz-error {
@@ -518,6 +531,7 @@
 
             line-height: 1.6;
         }
+
 
 
         /* =========================================
@@ -568,6 +582,7 @@
         }
 
 
+
         @media (max-width: 480px) {
 
             .quiz-head {
@@ -604,7 +619,9 @@
 </head>
 
 
+
 <body>
+
 
 
 <!-- =========================================
@@ -627,6 +644,7 @@
             </span>
 
         </a>
+
 
 
         <nav class="main-nav">
@@ -658,6 +676,7 @@
         </nav>
 
 
+
         <button
             class="menu-btn"
             id="menuBtn"
@@ -671,6 +690,7 @@
     </div>
 
 
+
     <div class="mobile-nav" id="mobileNav">
 
         <a href="../index.html">
@@ -682,6 +702,7 @@
         </a>
 
 
+
         <a href="../videos.html">
 
             <i class="fa-solid fa-play"></i>
@@ -689,6 +710,7 @@
             Videos
 
         </a>
+
 
 
         <a href="../objectives.html">
@@ -700,6 +722,7 @@
         </a>
 
 
+
         <a href="../quiz.html" class="active">
 
             <i class="fa-solid fa-circle-question"></i>
@@ -709,6 +732,7 @@
         </a>
 
 
+
         <a href="../about.html">
 
             <i class="fa-solid fa-user"></i>
@@ -716,6 +740,7 @@
             About
 
         </a>
+
 
 
         <a href="../contact.html">
@@ -732,6 +757,8 @@
 
 
 
+
+
 <!-- =========================================
      QUIZ
 ========================================= -->
@@ -739,6 +766,7 @@
 <main class="quiz-page">
 
     <div class="container quiz-wrap">
+
 
 
         <!-- QUIZ HEADER -->
@@ -758,6 +786,7 @@
             </div>
 
 
+
             <div class="quiz-timer">
 
                 <span>
@@ -773,6 +802,7 @@
         </div>
 
 
+
         <!-- PROGRESS -->
 
         <div class="quiz-progress">
@@ -785,9 +815,11 @@
         </div>
 
 
+
         <!-- QUESTION CARD -->
 
         <section class="quiz-card-main" id="quizCard">
+
 
 
             <div class="quiz-loading" id="loadingBox">
@@ -799,6 +831,7 @@
                 </p>
 
             </div>
+
 
 
             <div
@@ -818,6 +851,7 @@
                         </span>
 
 
+
                         <span id="questionCount">
                             Question 1 of 1
                         </span>
@@ -827,16 +861,19 @@
                 </div>
 
 
+
                 <h2
                     class="question-text"
                     id="questionText"
                 ></h2>
 
 
+
                 <div
                     class="options"
                     id="options"
                 ></div>
+
 
 
                 <!-- ACTION BUTTONS -->
@@ -856,6 +893,7 @@
                     </button>
 
 
+
                     <button
                         type="button"
                         class="quiz-btn quiz-btn-next"
@@ -867,6 +905,7 @@
                         <i class="fa-solid fa-arrow-right"></i>
 
                     </button>
+
 
 
                     <button
@@ -884,6 +923,7 @@
                 </div>
 
             </div>
+
 
 
             <div
@@ -907,6 +947,7 @@
         </section>
 
 
+
         <!-- QUESTION NUMBERS -->
 
         <section
@@ -926,11 +967,13 @@
                 </span>
 
 
+
                 <span id="answeredCount">
                     0 / 0 Answered
                 </span>
 
             </div>
+
 
 
             <div
@@ -939,6 +982,7 @@
             ></div>
 
         </section>
+
 
 
         <p class="quiz-note" id="quizNote">
@@ -950,6 +994,8 @@
     </div>
 
 </main>
+
+
 
 
 
@@ -981,6 +1027,8 @@
 
 
 
+
+
 <!-- =========================================
      FIREBASE + QUIZ SCRIPT
 ========================================= -->
@@ -1002,10 +1050,11 @@
     } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
+
     const firebaseConfig = {
 
         apiKey:
-            "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+            "AIzaSyB6YafK6HpL3q692b20ECPvXu78rUfByU",
 
         authDomain:
             "chemistry-point-9a41b.firebaseapp.com",
@@ -1025,8 +1074,10 @@
     };
 
 
+
     const app =
         initializeApp(firebaseConfig);
+
 
 
     const db =
@@ -1034,6 +1085,8 @@
             app,
             "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
         );
+
+
 
 
 
@@ -1048,12 +1101,14 @@
         document.getElementById("mobileNav");
 
 
+
     menuBtn.addEventListener("click", () => {
 
         mobileNav.classList.toggle("show");
 
         const icon =
             menuBtn.querySelector("i");
+
 
 
         if (
@@ -1083,6 +1138,7 @@
     });
 
 
+
     document
         .querySelectorAll(".mobile-nav a")
         .forEach(link => {
@@ -1094,8 +1150,10 @@
                 );
 
 
+
                 const icon =
                     menuBtn.querySelector("i");
+
 
 
                 icon.classList.remove(
@@ -1109,6 +1167,8 @@
             });
 
         });
+
+
 
 
 
@@ -1169,11 +1229,22 @@
 
 
 
+
+
     /* =========================================
        URL DATA
-       
-       Example:
+
+       Supported:
+
        student/quiz.html?quizId=QUIZ_ID
+
+       OR
+
+       student/quiz.html?chapter=solid-state&type=normal
+
+       OR
+
+       student/quiz.html?type=pyq
     ========================================== */
 
     const urlParams =
@@ -1182,12 +1253,21 @@
         );
 
 
+
     const quizId =
         urlParams.get("quizId");
 
 
+
     const chapter =
         urlParams.get("chapter");
+
+
+
+    const quizType =
+        urlParams.get("type");
+
+
 
 
 
@@ -1206,6 +1286,521 @@
     let timerInterval;
 
     let totalSeconds = 30 * 60;
+
+    let loadedQuizData = null;
+
+
+
+
+
+    /* =========================================
+       FIND QUIZ DATA
+    ========================================== */
+
+    async function loadQuizData() {
+
+        try {
+
+            /*
+                If quizId is available,
+                directly read:
+
+                quizzes/{quizId}
+            */
+
+            if (quizId) {
+
+                const quizSnapshot =
+                    await get(
+                        ref(
+                            db,
+                            `quizzes/${quizId}`
+                        )
+                    );
+
+
+
+                if (
+                    quizSnapshot.exists()
+                ) {
+
+                    loadedQuizData =
+                        quizSnapshot.val();
+
+                    return;
+
+                }
+
+            }
+
+
+
+            /*
+                If quizId is not available,
+                read complete quizzes node.
+
+                This supports the existing
+                chapter/type links also.
+            */
+
+            const quizzesSnapshot =
+                await get(
+                    ref(
+                        db,
+                        "quizzes"
+                    )
+                );
+
+
+
+            if (
+                !quizzesSnapshot.exists()
+            ) {
+
+                return;
+
+            }
+
+
+
+            const quizzesData =
+                quizzesSnapshot.val();
+
+
+
+            const entries =
+                Object.entries(
+                    quizzesData
+                );
+
+
+
+            /*
+                Try to find exact matching quiz
+                using chapter and type.
+            */
+
+            let matchingQuiz = null;
+
+
+
+            entries.forEach(
+                ([id, quiz]) => {
+
+                    if (
+                        !quiz ||
+                        matchingQuiz
+                    ) {
+
+                        return;
+
+                    }
+
+
+
+                    const quizChapter =
+                        String(
+                            quiz.chapter ||
+                            quiz.chapterSlug ||
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+
+                    const quizTypeValue =
+                        String(
+                            quiz.type ||
+                            quiz.quizType ||
+                            quiz.category ||
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+
+                    const requestedChapter =
+                        String(
+                            chapter || ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+
+                    const requestedType =
+                        String(
+                            quizType || ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+
+                    const chapterMatches =
+                        requestedChapter &&
+                        (
+                            quizChapter ===
+                            requestedChapter
+                        );
+
+
+
+                    const typeMatches =
+                        requestedType &&
+                        (
+                            quizTypeValue ===
+                            requestedType
+                        );
+
+
+
+                    /*
+                        Exact chapter + type
+                    */
+
+                    if (
+                        chapterMatches &&
+                        typeMatches
+                    ) {
+
+                        matchingQuiz = {
+                            id: id,
+                            data: quiz
+                        };
+
+                        return;
+
+                    }
+
+
+
+                    /*
+                        Chapter only fallback
+                    */
+
+                    if (
+                        chapterMatches &&
+                        !matchingQuiz
+                    ) {
+
+                        matchingQuiz = {
+                            id: id,
+                            data: quiz
+                        };
+
+                    }
+
+                }
+            );
+
+
+
+            /*
+                Type only fallback
+
+                Useful for:
+
+                ?type=pyq
+            */
+
+            if (
+                !matchingQuiz &&
+                quizType
+            ) {
+
+                entries.forEach(
+                    ([id, quiz]) => {
+
+                        if (
+                            matchingQuiz ||
+                            !quiz
+                        ) {
+
+                            return;
+
+                        }
+
+
+
+                        const quizTypeValue =
+                            String(
+                                quiz.type ||
+                                quiz.quizType ||
+                                quiz.category ||
+                                ""
+                            )
+                            .trim()
+                            .toLowerCase();
+
+
+
+                        if (
+                            quizTypeValue ===
+                            String(
+                                quizType
+                            )
+                            .trim()
+                            .toLowerCase()
+                        ) {
+
+                            matchingQuiz = {
+                                id: id,
+                                data: quiz
+                            };
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+
+            if (
+                matchingQuiz
+            ) {
+
+                loadedQuizData =
+                    matchingQuiz.data;
+
+
+
+                /*
+                    Keep quiz ID available
+                    for result/answer data.
+                */
+
+                if (!quizId) {
+
+                    loadedQuizData._quizId =
+                        matchingQuiz.id;
+
+                }
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Quiz metadata loading error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+
+
+    /* =========================================
+       GET QUIZ DURATION
+    ========================================== */
+
+    function getQuizDurationInSeconds() {
+
+        /*
+            Admin duration can be stored
+            using different common field names.
+
+            Primary:
+            duration
+
+            Fallback:
+            durationMinutes
+            timeLimit
+            time
+            minutes
+        */
+
+        if (!loadedQuizData) {
+
+            return 30 * 60;
+
+        }
+
+
+
+        const possibleValues = [
+
+            loadedQuizData.duration,
+
+            loadedQuizData.durationMinutes,
+
+            loadedQuizData.timeLimit,
+
+            loadedQuizData.time,
+
+            loadedQuizData.minutes
+
+        ];
+
+
+
+        let durationValue = null;
+
+
+
+        for (
+            const value
+            of possibleValues
+        ) {
+
+            if (
+                value !== undefined &&
+                value !== null &&
+                value !== ""
+            ) {
+
+                durationValue =
+                    value;
+
+                break;
+
+            }
+
+        }
+
+
+
+        if (
+            durationValue === null
+        ) {
+
+            return 30 * 60;
+
+        }
+
+
+
+        /*
+            Handle string values such as:
+
+            "30"
+            "30 minutes"
+            "30 Minutes"
+            "01:30"
+        */
+
+        if (
+            typeof durationValue ===
+            "string"
+        ) {
+
+            const clean =
+                durationValue
+                    .trim()
+                    .toLowerCase();
+
+
+
+            /*
+                HH:MM format
+            */
+
+            if (
+                clean.includes(":")
+            ) {
+
+                const parts =
+                    clean.split(":");
+
+
+
+                const first =
+                    Number(parts[0]);
+
+                const second =
+                    Number(parts[1]);
+
+
+
+                if (
+                    Number.isFinite(first) &&
+                    Number.isFinite(second)
+                ) {
+
+                    return (
+                        first * 60 +
+                        second
+                    );
+
+                }
+
+            }
+
+
+
+            /*
+                Extract first number
+
+                Example:
+                "30 minutes"
+                -> 30
+            */
+
+            const match =
+                clean.match(
+                    /(\d+(?:\.\d+)?)/
+                );
+
+
+
+            if (match) {
+
+                durationValue =
+                    Number(match[1]);
+
+            }
+
+        }
+
+
+
+        const numericDuration =
+            Number(
+                durationValue
+            );
+
+
+
+        if (
+            !Number.isFinite(
+                numericDuration
+            ) ||
+            numericDuration <= 0
+        ) {
+
+            return 30 * 60;
+
+        }
+
+
+
+        /*
+            Admin duration is assumed
+            to be in MINUTES.
+
+            Therefore:
+
+            30 -> 1800 seconds
+            60 -> 3600 seconds
+        */
+
+        return Math.round(
+            numericDuration * 60
+        );
+
+    }
+
+
 
 
 
@@ -1230,6 +1825,18 @@
                 "none";
 
 
+
+            /*
+                First load quiz metadata.
+
+                This is important because
+                duration comes from Admin Quiz.
+            */
+
+            await loadQuizData();
+
+
+
             /*
                 Read complete questions node.
 
@@ -1251,11 +1858,17 @@
 
             const snapshot =
                 await get(
-                    ref(db, "questions")
+                    ref(
+                        db,
+                        "questions"
+                    )
                 );
 
 
-            if (!snapshot.exists()) {
+
+            if (
+                !snapshot.exists()
+            ) {
 
                 showError(
                     "Firebase में अभी कोई question उपलब्ध नहीं है।"
@@ -1266,19 +1879,25 @@
             }
 
 
+
             const data =
                 snapshot.val();
 
 
+
             let loadedQuestions = [];
+
 
 
             Object.entries(data).forEach(
                 ([id, item]) => {
 
                     if (!item) {
+
                         return;
+
                     }
+
 
 
                     /*
@@ -1295,6 +1914,7 @@
                     }
 
 
+
                     /*
                         If quizId is provided,
                         match only that quiz.
@@ -1303,8 +1923,12 @@
                     if (quizId) {
 
                         if (
-                            String(item.quizId)
-                            !== String(quizId)
+                            String(
+                                item.quizId
+                            )
+                            !== String(
+                                quizId
+                            )
                         ) {
 
                             return;
@@ -1312,6 +1936,7 @@
                         }
 
                     }
+
 
 
                     /*
@@ -1324,9 +1949,12 @@
                         if (
                             String(
                                 item.chapter || ""
-                            ).toLowerCase()
-                            !== String(chapter)
-                                .toLowerCase()
+                            )
+                            .toLowerCase()
+                            !== String(
+                                chapter
+                            )
+                            .toLowerCase()
                         ) {
 
                             return;
@@ -1336,8 +1964,48 @@
                     }
 
 
+
+                    /*
+                        If only type is provided
+                        and quiz metadata has quizId,
+                        use matching quiz.
+                    */
+
+                    if (
+                        !quizId &&
+                        !chapter &&
+                        loadedQuizData
+                    ) {
+
+                        const metadataQuizId =
+                            loadedQuizData._quizId ||
+                            loadedQuizData.quizId ||
+                            loadedQuizData.id ||
+                            "";
+
+
+
+                        if (
+                            metadataQuizId &&
+                            String(
+                                item.quizId || ""
+                            )
+                            !== String(
+                                metadataQuizId
+                            )
+                        ) {
+
+                            return;
+
+                        }
+
+                    }
+
+
+
                     const options =
                         item.options || {};
+
 
 
                     /*
@@ -1352,7 +2020,6 @@
                         }
                     */
 
-
                     const optionArray = [
 
                         options.a ?? "",
@@ -1366,10 +2033,14 @@
                     ];
 
 
+
                     /*
                         Firebase answer may be:
+
                         0 / 1 / 2 / 3
+
                         OR
+
                         a / b / c / d
                     */
 
@@ -1377,8 +2048,10 @@
                         item.answer;
 
 
+
                     if (
-                        typeof answer === "string"
+                        typeof answer ===
+                        "string"
                     ) {
 
                         const cleanAnswer =
@@ -1387,50 +2060,70 @@
                                 .toLowerCase();
 
 
+
                         if (
-                            cleanAnswer === "a"
+                            cleanAnswer ===
+                            "a"
                         ) {
+
                             answer = 0;
+
                         }
 
                         else if (
-                            cleanAnswer === "b"
+                            cleanAnswer ===
+                            "b"
                         ) {
+
                             answer = 1;
+
                         }
 
                         else if (
-                            cleanAnswer === "c"
+                            cleanAnswer ===
+                            "c"
                         ) {
+
                             answer = 2;
+
                         }
 
                         else if (
-                            cleanAnswer === "d"
+                            cleanAnswer ===
+                            "d"
                         ) {
+
                             answer = 3;
+
                         }
 
                         else if (
                             !isNaN(
-                                Number(cleanAnswer)
+                                Number(
+                                    cleanAnswer
+                                )
                             )
                         ) {
 
                             answer =
-                                Number(cleanAnswer);
+                                Number(
+                                    cleanAnswer
+                                );
 
                         }
 
                     }
 
 
+
                     loadedQuestions.push({
 
-                        id: id,
+                        id:
+                            id,
 
                         question:
-                            item.question || "",
+                            item.question ||
+                            "",
 
                         options:
                             optionArray,
@@ -1439,27 +2132,36 @@
                             Number(answer),
 
                         explanation:
-                            item.explanation || "",
+                            item.explanation ||
+                            "",
 
                         marks:
-                            Number(item.marks) || 1,
+                            Number(
+                                item.marks
+                            ) || 1,
 
                         order:
-                            Number(item.order) || 0,
+                            Number(
+                                item.order
+                            ) || 0,
 
                         quizId:
-                            item.quizId || "",
+                            item.quizId ||
+                            "",
 
                         quizTitle:
-                            item.quizTitle || "",
+                            item.quizTitle ||
+                            "",
 
                         chapter:
-                            item.chapter || ""
+                            item.chapter ||
+                            ""
 
                     });
 
                 }
             );
+
 
 
             /*
@@ -1472,8 +2174,10 @@
             );
 
 
+
             questions =
                 loadedQuestions;
+
 
 
             if (
@@ -1509,6 +2213,7 @@
             }
 
 
+
             /*
                 Prepare answer array
             */
@@ -1519,6 +2224,7 @@
                 ).fill(null);
 
 
+
             /*
                 Update quiz title
             */
@@ -1527,7 +2233,22 @@
                 questions[0];
 
 
+
             if (
+                loadedQuizData &&
+                (
+                    loadedQuizData.title ||
+                    loadedQuizData.name
+                )
+            ) {
+
+                quizTitle.textContent =
+                    loadedQuizData.title ||
+                    loadedQuizData.name;
+
+            }
+
+            else if (
                 firstQuestion.quizTitle
             ) {
 
@@ -1553,12 +2274,48 @@
             }
 
 
+
+            /*
+                Quiz duration
+
+                This is now loaded
+                from Admin quiz data.
+            */
+
+            const durationSeconds =
+                getQuizDurationInSeconds();
+
+
+
+            loadedQuizData =
+                loadedQuizData ||
+                {};
+
+
+
+            loadedQuizData._durationSeconds =
+                durationSeconds;
+
+
+
+            const durationMinutes =
+                Math.max(
+                    1,
+                    Math.ceil(
+                        durationSeconds / 60
+                    )
+                );
+
+
+
             quizSubtitle.textContent =
-                `${questions.length} Questions • Chapter Wise Practice Test`;
+                `${questions.length} Questions • ${durationMinutes} Minutes • Chapter Wise Practice Test`;
+
 
 
             quizNote.textContent =
                 "Questions Firebase database से load किए गए हैं।";
+
 
 
             /*
@@ -1573,6 +2330,7 @@
 
             questionNav.style.display =
                 "block";
+
 
 
             renderQuestion();
@@ -1591,6 +2349,7 @@
             );
 
 
+
             showError(
                 "Questions load नहीं हो पाए। Firebase Rules और Database connection check करें।"
             );
@@ -1598,6 +2357,8 @@
         }
 
     }
+
+
 
 
 
@@ -1639,6 +2400,8 @@
 
 
 
+
+
     /* =========================================
        RENDER QUESTION
     ========================================== */
@@ -1648,28 +2411,36 @@
         if (
             questions.length === 0
         ) {
+
             return;
+
         }
+
 
 
         const item =
             questions[currentQuestion];
 
 
+
         questionText.textContent =
             item.question;
+
 
 
         questionCount.textContent =
             `Question ${currentQuestion + 1} of ${questions.length}`;
 
 
+
         progressBar.style.width =
             `${((currentQuestion + 1) / questions.length) * 100}%`;
 
 
+
         optionsBox.innerHTML =
             "";
+
 
 
         item.options.forEach(
@@ -1681,8 +2452,10 @@
                     );
 
 
+
                 wrapper.className =
                     "option";
+
 
 
                 const input =
@@ -1691,20 +2464,25 @@
                     );
 
 
+
                 input.type =
                     "radio";
+
 
 
                 input.name =
                     "quizOption";
 
 
+
                 input.id =
                     `option-${currentQuestion}-${index}`;
 
 
+
                 input.value =
                     index;
+
 
 
                 if (
@@ -1719,6 +2497,7 @@
                 }
 
 
+
                 input.addEventListener(
                     "change",
                     () => {
@@ -1726,6 +2505,7 @@
                         selectedAnswers[
                             currentQuestion
                         ] = index;
+
 
 
                         updateQuestionNumbers();
@@ -1736,14 +2516,17 @@
                 );
 
 
+
                 const label =
                     document.createElement(
                         "label"
                     );
 
 
+
                 label.htmlFor =
                     `option-${currentQuestion}-${index}`;
+
 
 
                 const letter =
@@ -1752,8 +2535,10 @@
                     );
 
 
+
                 letter.className =
                     "option-letter";
+
 
 
                 letter.textContent =
@@ -1762,14 +2547,17 @@
                     );
 
 
+
                 const text =
                     document.createElement(
                         "span"
                     );
 
 
+
                 text.textContent =
                     option;
+
 
 
                 label.appendChild(
@@ -1777,9 +2565,11 @@
                 );
 
 
+
                 label.appendChild(
                     text
                 );
+
 
 
                 wrapper.appendChild(
@@ -1787,9 +2577,11 @@
                 );
 
 
+
                 wrapper.appendChild(
                     label
                 );
+
 
 
                 optionsBox.appendChild(
@@ -1800,8 +2592,10 @@
         );
 
 
+
         prevBtn.disabled =
             currentQuestion === 0;
+
 
 
         nextBtn.disabled =
@@ -1809,9 +2603,12 @@
             questions.length - 1;
 
 
+
         updateQuestionNumbers();
 
     }
+
+
 
 
 
@@ -1825,6 +2622,7 @@
             "";
 
 
+
         questions.forEach(
             (_, index) => {
 
@@ -1834,16 +2632,20 @@
                     );
 
 
+
                 button.type =
                     "button";
+
 
 
                 button.className =
                     "question-number-btn";
 
 
+
                 button.textContent =
                     index + 1;
+
 
 
                 if (
@@ -1855,6 +2657,7 @@
                     );
 
                 }
+
 
 
                 if (
@@ -1869,6 +2672,7 @@
                 }
 
 
+
                 button.addEventListener(
                     "click",
                     () => {
@@ -1877,10 +2681,12 @@
                             index;
 
 
+
                         renderQuestion();
 
                     }
                 );
+
 
 
                 questionNumbers.appendChild(
@@ -1891,6 +2697,8 @@
         );
 
     }
+
+
 
 
 
@@ -1907,10 +2715,13 @@
             ).length;
 
 
+
         answeredCount.textContent =
             `${count} / ${questions.length} Answered`;
 
     }
+
+
 
 
 
@@ -1934,6 +2745,8 @@
 
         }
     );
+
+
 
 
 
@@ -1961,6 +2774,146 @@
 
 
 
+
+
+    /* =========================================
+       SAVE ANSWER DATA
+    ========================================== */
+
+    function saveAnswerData(
+        score,
+        total,
+        wrong,
+        unattempted,
+        percentage,
+        answered
+    ) {
+
+        try {
+
+            /*
+                Save complete quiz information
+                in sessionStorage.
+
+                This allows answers.html
+                to work without creating
+                another Firebase result node.
+            */
+
+            const answerData = {
+
+                quizId:
+                    quizId ||
+                    (loadedQuizData
+                        ? (
+                            loadedQuizData._quizId ||
+                            loadedQuizData.quizId ||
+                            loadedQuizData.id ||
+                            ""
+                        )
+                        : ""),
+
+                quizTitle:
+                    quizTitle.textContent ||
+                    "Chemistry Quiz",
+
+                chapter:
+                    chapter ||
+                    (
+                        questions[0]
+                            ? questions[0].chapter
+                            : ""
+                    ),
+
+                total:
+                    total,
+
+                score:
+                    score,
+
+                wrong:
+                    wrong,
+
+                unattempted:
+                    unattempted,
+
+                answered:
+                    answered,
+
+                percentage:
+                    percentage,
+
+                submittedAt:
+                    new Date().toISOString(),
+
+                questions:
+                    questions.map(
+                        (
+                            question,
+                            index
+                        ) => {
+
+                            return {
+
+                                id:
+                                    question.id,
+
+                                question:
+                                    question.question,
+
+                                options:
+                                    question.options,
+
+                                correctAnswer:
+                                    question.answer,
+
+                                selectedAnswer:
+                                    selectedAnswers[
+                                        index
+                                    ],
+
+                                explanation:
+                                    question.explanation,
+
+                                marks:
+                                    question.marks,
+
+                                order:
+                                    question.order
+
+                            };
+
+                        }
+                    )
+
+            };
+
+
+
+            sessionStorage.setItem(
+                "chemistryPointQuizResult",
+                JSON.stringify(
+                    answerData
+                )
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Answer data save error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+
+
     /* =========================================
        SUBMIT QUIZ
     ========================================== */
@@ -1969,16 +2922,24 @@
         autoSubmit = false
     ) {
 
-        if (quizSubmitted) {
+        if (
+            quizSubmitted
+        ) {
+
             return;
+
         }
+
 
 
         if (
             questions.length === 0
         ) {
+
             return;
+
         }
+
 
 
         const answered =
@@ -1988,11 +2949,14 @@
             ).length;
 
 
+
         /*
             Manual submit confirmation
         */
 
-        if (!autoSubmit) {
+        if (
+            !autoSubmit
+        ) {
 
             const confirmed =
                 confirm(
@@ -2000,11 +2964,17 @@
                 );
 
 
-            if (!confirmed) {
+
+            if (
+                !confirmed
+            ) {
+
                 return;
+
             }
 
         }
+
 
 
         /*
@@ -2014,8 +2984,12 @@
         let score = 0;
 
 
+
         questions.forEach(
-            (question, index) => {
+            (
+                question,
+                index
+            ) => {
 
                 if (
                     selectedAnswers[index]
@@ -2030,6 +3004,7 @@
         );
 
 
+
         /*
             Result data
         */
@@ -2038,9 +3013,14 @@
             questions.length;
 
 
+
         const wrong =
             selectedAnswers.reduce(
-                (count, answer, index) => {
+                (
+                    count,
+                    answer,
+                    index
+                ) => {
 
                     if (
                         answer !== null &&
@@ -2059,20 +3039,47 @@
             );
 
 
+
         const unattempted =
             total - answered;
+
 
 
         const percentage =
             total > 0
                 ? Math.round(
-                    (score / total) * 100
+                    (
+                        score /
+                        total
+                    ) * 100
                 )
                 : 0;
 
 
+
+        /*
+            IMPORTANT:
+
+            Save questions and answers
+            before redirecting.
+
+            answers.html will read this.
+        */
+
+        saveAnswerData(
+            score,
+            total,
+            wrong,
+            unattempted,
+            percentage,
+            answered
+        );
+
+
+
         quizSubmitted =
             true;
+
 
 
         clearInterval(
@@ -2080,12 +3087,16 @@
         );
 
 
+
         /*
             Send result data
             to result.html
+
+            quizId is also added
+            when available.
         */
 
-        const resultUrl =
+        let resultUrl =
             `result.html?score=${score}` +
             `&total=${total}` +
             `&wrong=${wrong}` +
@@ -2093,10 +3104,41 @@
             `&percentage=${percentage}`;
 
 
+
+        const finalQuizId =
+            quizId ||
+            (
+                loadedQuizData
+                    ? (
+                        loadedQuizData._quizId ||
+                        loadedQuizData.quizId ||
+                        loadedQuizData.id ||
+                        ""
+                    )
+                    : ""
+            );
+
+
+
+        if (
+            finalQuizId
+        ) {
+
+            resultUrl +=
+                `&quizId=${encodeURIComponent(
+                    finalQuizId
+                )}`;
+
+        }
+
+
+
         window.location.href =
             resultUrl;
 
     }
+
+
 
 
 
@@ -2115,6 +3157,8 @@
 
 
 
+
+
     /* =========================================
        TIMER
     ========================================== */
@@ -2126,11 +3170,25 @@
         );
 
 
+
+        /*
+            IMPORTANT FIX
+
+            Timer now comes from
+            Admin Quiz duration.
+
+            No more fixed:
+
+            30 * 60
+        */
+
         totalSeconds =
-            30 * 60;
+            getQuizDurationInSeconds();
+
 
 
         updateTimer();
+
 
 
         timerInterval =
@@ -2143,6 +3201,8 @@
 
 
 
+
+
     function updateTimer() {
 
         const minutes =
@@ -2151,8 +3211,10 @@
             );
 
 
+
         const seconds =
             totalSeconds % 60;
+
 
 
         const timer =
@@ -2161,8 +3223,20 @@
             );
 
 
+
         timer.textContent =
-            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+            `${String(
+                minutes
+            ).padStart(
+                2,
+                "0"
+            )}:${String(
+                seconds
+            ).padStart(
+                2,
+                "0"
+            )}`;
+
 
 
         if (
@@ -2174,7 +3248,9 @@
             );
 
 
+
             submitQuiz(true);
+
 
 
             return;
@@ -2182,9 +3258,12 @@
         }
 
 
+
         totalSeconds--;
 
     }
+
+
 
 
 
@@ -2199,6 +3278,8 @@
 
 
 
+
+
     /* =========================================
        START
     ========================================== */
@@ -2206,6 +3287,7 @@
     loadQuestions();
 
 </script>
+
 
 
 </body>
