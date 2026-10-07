@@ -1,0 +1,3626 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Quiz Management | Chemistry Point Admin</title>
+
+  <meta
+    name="description"
+    content="Chemistry Point Admin Quiz Management"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/css/root.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../assets/css/responsive.css"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+
+  <style>
+
+    /* =========================================
+       ADMIN QUIZ PAGE
+    ========================================== */
+
+    :root {
+      --admin-bg: #08090b;
+      --admin-card: #111418;
+      --admin-card-2: #15181d;
+      --admin-border: rgba(255,255,255,.08);
+      --admin-text: #ffffff;
+      --admin-muted: #8e949d;
+      --gold: #d99a16;
+      --gold-light: #f3bd45;
+      --green: #5fe29a;
+      --red: #ff747e;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      background: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: Inter, sans-serif;
+    }
+
+
+    /* =========================================
+       LAYOUT
+    ========================================== */
+
+    .admin-layout {
+      min-height: 100vh;
+    }
+
+
+    .main {
+      min-height: 100vh;
+      margin-left: 255px;
+      background: var(--admin-bg);
+    }
+
+
+    .content {
+      padding: 25px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+
+    /* =========================================
+       TOP BAR
+    ========================================== */
+
+    .top {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      border-bottom: 1px solid var(--admin-border);
+      background: rgba(8,9,11,.92);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      backdrop-filter: blur(15px);
+    }
+
+
+    .left,
+    .right,
+    .user {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .left {
+      gap: 12px;
+    }
+
+
+    .right {
+      gap: 16px;
+    }
+
+
+    .title {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+
+    .mobilebtn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      background: var(--admin-card);
+      color: var(--admin-text);
+      cursor: pointer;
+    }
+
+
+    .theme {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      background: var(--admin-card);
+      color: var(--gold-light);
+      cursor: pointer;
+    }
+
+
+    .user {
+      gap: 9px;
+    }
+
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(217,154,22,.12);
+      border: 1px solid rgba(217,154,22,.25);
+      color: var(--gold-light);
+    }
+
+
+    .email {
+      max-width: 220px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: var(--admin-muted);
+      font-size: 13px;
+    }
+
+
+    /* =========================================
+       SIDEBAR
+    ========================================== */
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 255px;
+      display: flex;
+      flex-direction: column;
+      background: #0d0f12;
+      border-right: 1px solid var(--admin-border);
+      z-index: 1000;
+    }
+
+
+    .brand {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 18px;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+
+    .brand div {
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .brand strong {
+      font-family: Poppins, sans-serif;
+      font-size: 15px;
+    }
+
+
+    .brand span {
+      margin-top: 2px;
+      color: var(--gold-light);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+    }
+
+
+    .nav {
+      flex: 1;
+      padding: 15px 12px;
+      overflow-y: auto;
+    }
+
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 45px;
+      margin-bottom: 5px;
+      padding: 0 13px;
+      border-radius: 10px;
+      color: #a9afb8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+
+    .nav a i {
+      width: 18px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+
+    .nav a:hover {
+      color: #fff;
+      background: rgba(255,255,255,.04);
+    }
+
+
+    .nav a.active {
+      color: #111;
+      background: linear-gradient(
+        135deg,
+        var(--gold-light),
+        var(--gold)
+      );
+    }
+
+
+    .sidefoot {
+      padding: 13px;
+      border-top: 1px solid var(--admin-border);
+    }
+
+
+    .logout {
+      width: 100%;
+      min-height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      background: transparent;
+      color: #a9afb8;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+
+    .logout:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,.16);
+    }
+
+
+    /* =========================================
+       PAGE HEADER
+    ========================================== */
+
+    .page-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+
+    .page-head h1 {
+      margin: 0 0 6px;
+      font-family: Poppins, sans-serif;
+      font-size: 25px;
+    }
+
+
+    .page-head p {
+      margin: 0;
+      color: var(--admin-muted);
+      font-size: 13px;
+    }
+
+
+    .add-btn {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 17px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--gold-light);
+      color: #111;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+
+    .add-btn:hover {
+      background: var(--gold);
+    }
+
+
+    /* =========================================
+       STATS
+    ========================================== */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 17px;
+      border: 1px solid var(--admin-border);
+      border-radius: 15px;
+      background: var(--admin-card);
+    }
+
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(217,154,22,.10);
+      color: var(--gold-light);
+    }
+
+
+    .stat-info span {
+      display: block;
+      color: var(--admin-muted);
+      font-size: 11px;
+    }
+
+
+    .stat-info strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 21px;
+    }
+
+
+    /* =========================================
+       FILTER BAR
+    ========================================== */
+
+    .filter-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 13px;
+      border: 1px solid var(--admin-border);
+      border-radius: 14px;
+      background: var(--admin-card);
+    }
+
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+
+    .search-box i {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #747b85;
+      font-size: 13px;
+    }
+
+
+    .search-box input,
+    .filter-select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--admin-border);
+      border-radius: 9px;
+      outline: none;
+      background: var(--admin-card-2);
+      color: var(--admin-text);
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+
+    .search-box input {
+      padding: 0 13px 0 38px;
+    }
+
+
+    .filter-select {
+      width: 180px;
+      padding: 0 12px;
+    }
+
+
+    .search-box input:focus,
+    .filter-select:focus {
+      border-color: rgba(217,154,22,.55);
+    }
+
+
+    /* =========================================
+       TABLE
+    ========================================== */
+
+    .table-card {
+      overflow: hidden;
+      border: 1px solid var(--admin-border);
+      border-radius: 15px;
+      background: var(--admin-card);
+    }
+
+
+    .table-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+
+    .table-top h2 {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      font-size: 15px;
+    }
+
+
+    .table-top span {
+      color: var(--admin-muted);
+      font-size: 11px;
+    }
+
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+
+    th {
+      padding: 13px 15px;
+      text-align: left;
+      color: #7f8690;
+      background: rgba(255,255,255,.015);
+      border-bottom: 1px solid var(--admin-border);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid var(--admin-border);
+      color: #dce0e5;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+
+    tbody tr:hover {
+      background: rgba(255,255,255,.018);
+    }
+
+
+    .quiz-name {
+      max-width: 230px;
+    }
+
+
+    .quiz-name strong {
+      display: block;
+      color: #fff;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+
+    .quiz-name span {
+      color: #727984;
+      font-size: 10px;
+    }
+
+
+    .type-badge,
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+
+    .type-badge {
+      color: var(--gold-light);
+      background: rgba(217,154,22,.09);
+      border: 1px solid rgba(217,154,22,.18);
+    }
+
+
+    .status-badge.active {
+      color: #6ee7a3;
+      background: rgba(25,135,84,.10);
+      border: 1px solid rgba(25,135,84,.18);
+    }
+
+
+    .status-badge.inactive {
+      color: #ff8994;
+      background: rgba(220,53,69,.08);
+      border: 1px solid rgba(220,53,69,.16);
+    }
+
+
+    .action-group {
+      display: flex;
+      gap: 7px;
+    }
+
+
+    .action-btn {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      background: transparent;
+      color: #9aa0a9;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+
+    .action-btn:hover {
+      color: var(--gold-light);
+      border-color: rgba(217,154,22,.4);
+      background: rgba(217,154,22,.06);
+    }
+
+
+    .action-btn.delete:hover {
+      color: #ff8994;
+      border-color: rgba(220,53,69,.35);
+      background: rgba(220,53,69,.06);
+    }
+
+
+    /* =========================================
+       EMPTY / LOADING
+    ========================================== */
+
+    .empty {
+      padding: 55px 20px;
+      text-align: center;
+      color: var(--admin-muted);
+    }
+
+
+    .empty i {
+      display: block;
+      margin-bottom: 13px;
+      color: #555c66;
+      font-size: 32px;
+    }
+
+
+    .empty strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #d5d9df;
+      font-size: 13px;
+    }
+
+
+    .empty span {
+      font-size: 11px;
+    }
+
+
+    /* =========================================
+       MODAL
+    ========================================== */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.70);
+      z-index: 5000;
+      backdrop-filter: blur(5px);
+    }
+
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+
+    .modal {
+      width: 100%;
+      max-width: 650px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      border: 1px solid var(--admin-border);
+      border-radius: 18px;
+      background: #111418;
+      box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    }
+
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--admin-border);
+      position: sticky;
+      top: 0;
+      background: #111418;
+      z-index: 2;
+    }
+
+
+    .modal-head h2 {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      font-size: 17px;
+    }
+
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      background: transparent;
+      color: #9ca2aa;
+      cursor: pointer;
+    }
+
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+
+    .modal-body {
+      padding: 20px;
+    }
+
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+
+    .form-group label {
+      color: #cbd0d7;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .form-group label span {
+      color: #ff8994;
+    }
+
+
+    .form-control {
+      width: 100%;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid var(--admin-border);
+      border-radius: 9px;
+      outline: none;
+      background: #15181d;
+      color: #fff;
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+
+    textarea.form-control {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+
+    .form-control:focus {
+      border-color: rgba(217,154,22,.55);
+    }
+
+
+    .form-help {
+      color: #717781;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+
+    .toggle-row {
+      min-height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      border: 1px solid var(--admin-border);
+      border-radius: 9px;
+      background: #15181d;
+    }
+
+
+    .toggle-text {
+      color: #cbd0d7;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    .switch {
+      position: relative;
+      width: 42px;
+      height: 23px;
+    }
+
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 30px;
+      background: #353a42;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: 3px;
+      top: 3px;
+      border-radius: 50%;
+      background: #fff;
+      transition: .2s;
+    }
+
+
+    .switch input:checked + .slider {
+      background: var(--gold);
+    }
+
+
+    .switch input:checked + .slider::before {
+      transform: translateX(19px);
+    }
+
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--admin-border);
+    }
+
+
+    .btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 15px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+
+    .btn-cancel {
+      border: 1px solid var(--admin-border);
+      background: transparent;
+      color: #aab0b8;
+    }
+
+
+    .btn-save {
+      border: 1px solid var(--gold-light);
+      background: var(--gold-light);
+      color: #111;
+    }
+
+
+    .btn-save:hover {
+      background: var(--gold);
+    }
+
+
+    .btn-save:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+
+    /* =========================================
+       TOAST
+    ========================================== */
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      min-width: 270px;
+      max-width: 380px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--admin-border);
+      border-radius: 11px;
+      background: #171a1f;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+      transform: translateY(120px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 7000;
+      font-size: 11px;
+    }
+
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+
+    .toast.success i {
+      color: var(--green);
+    }
+
+
+    .toast.error i {
+      color: var(--red);
+    }
+
+
+    /* =========================================
+       LIGHT MODE
+    ========================================== */
+
+    body.light-mode {
+      --admin-bg: #f5f6f8;
+      --admin-card: #ffffff;
+      --admin-card-2: #f7f7f8;
+      --admin-border: #e3e5e8;
+      --admin-text: #17191c;
+      --admin-muted: #6e747d;
+    }
+
+
+    body.light-mode .sidebar {
+      background: #ffffff;
+    }
+
+
+    body.light-mode .top {
+      background: rgba(255,255,255,.92);
+    }
+
+
+    body.light-mode .nav a {
+      color: #666c75;
+    }
+
+
+    body.light-mode .nav a:hover {
+      color: #17191c;
+      background: #f3f4f5;
+    }
+
+
+    body.light-mode .nav a.active {
+      color: #111;
+    }
+
+
+    body.light-mode th {
+      background: #fafafa;
+    }
+
+
+    body.light-mode td {
+      color: #343940;
+    }
+
+
+    body.light-mode .quiz-name strong {
+      color: #17191c;
+    }
+
+
+    body.light-mode .modal,
+    body.light-mode .modal-head {
+      background: #fff;
+    }
+
+
+    body.light-mode .form-control,
+    body.light-mode .toggle-row {
+      background: #f7f7f8;
+      color: #17191c;
+    }
+
+
+    body.light-mode .form-group label {
+      color: #343940;
+    }
+
+
+    body.light-mode .toast {
+      background: #fff;
+      color: #17191c;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 1100px) {
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+
+    @media (max-width: 900px) {
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: .25s ease;
+      }
+
+
+      .sidebar.show {
+        transform: translateX(0);
+      }
+
+
+      .main {
+        margin-left: 0;
+      }
+
+
+      .mobilebtn {
+        display: block;
+      }
+
+
+      .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.55);
+        z-index: 900;
+      }
+
+
+      .overlay.show {
+        display: block;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .content {
+        padding: 17px;
+      }
+
+
+      .page-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+      .add-btn {
+        width: 100%;
+      }
+
+
+      .filter-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+
+      .filter-select {
+        width: 100%;
+      }
+
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .top {
+        height: 68px;
+        padding: 0 15px;
+      }
+
+
+      .content {
+        padding: 15px;
+      }
+
+
+      .title {
+        font-size: 17px;
+      }
+
+
+      .email {
+        display: none;
+      }
+
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+
+      .stat {
+        padding: 13px;
+      }
+
+
+      .stat-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+
+      .stat-info strong {
+        font-size: 18px;
+      }
+
+
+      .page-head h1 {
+        font-size: 21px;
+      }
+
+
+      .modal-overlay {
+        padding: 10px;
+      }
+
+
+      .modal {
+        max-height: calc(100vh - 20px);
+      }
+
+
+      .modal-body {
+        padding: 16px;
+      }
+
+
+      .modal-footer {
+        padding: 13px 16px;
+      }
+
+    }
+
+
+    @media (max-width: 400px) {
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+
+      .modal-footer {
+        flex-direction: column;
+      }
+
+
+      .modal-footer .btn {
+        width: 100%;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       OVERLAY
+  ========================================== -->
+
+  <div
+    class="overlay"
+    id="overlay">
+  </div>
+
+
+  <!-- =========================================
+       SIDEBAR
+  ========================================== -->
+
+  <aside
+    class="sidebar"
+    id="sidebar">
+
+
+    <div class="brand">
+
+      <img
+        src="../assets/images/logo/logo.png"
+        alt="Chemistry Point">
+
+      <div>
+
+        <strong>
+          Chemistry Point
+        </strong>
+
+        <span>
+          ADMIN PANEL
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="dashboard.html">
+
+        <i class="fa-solid fa-gauge-high"></i>
+
+        Dashboard
+
+      </a>
+
+
+      <a href="videos.html">
+
+        <i class="fa-solid fa-video"></i>
+
+        Videos
+
+      </a>
+
+
+      <a href="objectives.html">
+
+        <i class="fa-solid fa-book-open"></i>
+
+        Objectives
+
+      </a>
+
+
+      <a
+        href="quizzes.html"
+        class="active">
+
+        <i class="fa-solid fa-circle-question"></i>
+
+        Quizzes
+
+      </a>
+
+
+      <a href="questions.html">
+
+        <i class="fa-solid fa-list-check"></i>
+
+        Questions
+
+      </a>
+
+
+      <a href="students.html">
+
+        <i class="fa-solid fa-users"></i>
+
+        Students
+
+      </a>
+
+
+      <a href="notices.html">
+
+        <i class="fa-solid fa-bullhorn"></i>
+
+        Notices
+
+      </a>
+
+
+      <a href="settings.html">
+
+        <i class="fa-solid fa-gear"></i>
+
+        Settings
+
+      </a>
+
+    </nav>
+
+
+    <div class="sidefoot">
+
+      <button
+        class="logout"
+        id="logout">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Logout
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="top">
+
+      <div class="left">
+
+        <button
+          class="mobilebtn"
+          id="sideBtn">
+
+          <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <h1 class="title">
+          Quiz Management
+        </h1>
+
+      </div>
+
+
+      <div class="right">
+
+        <button
+          class="theme"
+          id="theme">
+
+          <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+
+        <div class="user">
+
+          <div class="avatar">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+          </div>
+
+          <span
+            class="email"
+            id="email">
+
+            Checking...
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+
+      <!-- PAGE HEADER -->
+
+      <section class="page-head">
+
+        <div>
+
+          <h1>
+            Quiz Management
+          </h1>
+
+          <p>
+            अपने platform के quizzes create, edit और manage करें।
+          </p>
+
+        </div>
+
+
+        <button
+          class="add-btn"
+          id="addQuizBtn">
+
+          <i class="fa-solid fa-plus"></i>
+
+          Add New Quiz
+
+        </button>
+
+      </section>
+
+
+      <!-- STATS -->
+
+      <section class="stats">
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Total Quizzes
+            </span>
+
+            <strong id="totalQuizzes">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Active Quizzes
+            </span>
+
+            <strong id="activeQuizzes">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+
+            <i class="fa-solid fa-lock"></i>
+
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Protected Quizzes
+            </span>
+
+            <strong id="protectedQuizzes">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+
+            <i class="fa-solid fa-clock"></i>
+
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Avg. Duration
+            </span>
+
+            <strong id="averageDuration">
+              0m
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FILTER -->
+
+      <section class="filter-card">
+
+
+        <div class="search-box">
+
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search quiz by title or chapter...">
+
+        </div>
+
+
+        <select
+          class="filter-select"
+          id="typeFilter">
+
+          <option value="all">
+            All Quiz Types
+          </option>
+
+          <option value="pyq">
+            PYQ
+          </option>
+
+          <option value="chapter">
+            Chapter-wise
+          </option>
+
+          <option value="normal">
+            Normal
+          </option>
+
+        </select>
+
+
+        <select
+          class="filter-select"
+          id="statusFilter">
+
+          <option value="all">
+            All Status
+          </option>
+
+          <option value="active">
+            Active
+          </option>
+
+          <option value="inactive">
+            Inactive
+          </option>
+
+        </select>
+
+      </section>
+
+
+      <!-- TABLE -->
+
+      <section class="table-card">
+
+
+        <div class="table-top">
+
+          <h2>
+            All Quizzes
+          </h2>
+
+          <span id="resultCount">
+            Loading...
+          </span>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Quiz
+                </th>
+
+                <th>
+                  Type
+                </th>
+
+                <th>
+                  Chapter
+                </th>
+
+                <th>
+                  Questions
+                </th>
+
+                <th>
+                  Duration
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="quizTableBody">
+
+              <tr>
+
+                <td
+                  colspan="7"
+                  class="empty">
+
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+
+                  <strong>
+                    Quizzes load हो रहे हैं...
+                  </strong>
+
+                  <span>
+                    Firebase से data लिया जा रहा है।
+                  </span>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================
+       QUIZ MODAL
+  ========================================== -->
+
+  <div
+    class="modal-overlay"
+    id="quizModal">
+
+
+    <div class="modal">
+
+
+      <div class="modal-head">
+
+        <h2 id="modalTitle">
+          Add New Quiz
+        </h2>
+
+
+        <button
+          class="close-btn"
+          id="closeModal">
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+
+      <form id="quizForm">
+
+
+        <div class="modal-body">
+
+
+          <div class="form-grid">
+
+
+            <!-- TITLE -->
+
+            <div class="form-group full">
+
+              <label>
+                Quiz Title <span>*</span>
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                id="quizTitle"
+                placeholder="Example: Solid State PYQ Quiz"
+                required>
+
+            </div>
+
+
+            <!-- TYPE -->
+
+            <div class="form-group">
+
+              <label>
+                Quiz Type <span>*</span>
+              </label>
+
+              <select
+                class="form-control"
+                id="quizType"
+                required>
+
+                <option value="">
+                  Select Type
+                </option>
+
+                <option value="pyq">
+                  PYQ
+                </option>
+
+                <option value="chapter">
+                  Chapter-wise
+                </option>
+
+                <option value="normal">
+                  Normal
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- CHAPTER -->
+
+            <div class="form-group">
+
+              <label>
+                Chapter
+              </label>
+
+              <select
+                class="form-control"
+                id="quizChapter">
+
+                <option value="">
+                  Select Chapter
+                </option>
+
+              </select>
+
+              <small class="form-help">
+                Chapters Firebase के <b>chapters</b> node से आएंगे।
+              </small>
+
+            </div>
+
+
+            <!-- DURATION -->
+
+            <div class="form-group">
+
+              <label>
+                Duration (Minutes) <span>*</span>
+              </label>
+
+              <input
+                type="number"
+                class="form-control"
+                id="quizDuration"
+                min="1"
+                max="300"
+                value="30"
+                required>
+
+            </div>
+
+
+            <!-- QUESTION COUNT -->
+
+            <div class="form-group">
+
+              <label>
+                Questions Count
+              </label>
+
+              <input
+                type="number"
+                class="form-control"
+                id="questionCount"
+                min="0"
+                value="0">
+
+              <small class="form-help">
+                Questions बाद में Questions Management से add होंगे।
+              </small>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group full">
+
+              <label>
+                Quiz Password
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                id="quizPassword"
+                placeholder="Optional">
+
+              <small class="form-help">
+                अगर password नहीं चाहिए तो खाली छोड़ सकते हैं।
+              </small>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group full">
+
+              <label>
+                Quiz Description
+              </label>
+
+              <textarea
+                class="form-control"
+                id="quizDescription"
+                placeholder="Quiz के बारे में short description..."></textarea>
+
+            </div>
+
+
+            <!-- ACTIVE -->
+
+            <div class="form-group full">
+
+              <label>
+                Quiz Status
+              </label>
+
+
+              <div class="toggle-row">
+
+                <span class="toggle-text">
+                  Quiz को students के लिए active रखें
+                </span>
+
+
+                <label class="switch">
+
+                  <input
+                    type="checkbox"
+                    id="quizActive"
+                    checked>
+
+                  <span class="slider"></span>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="btn btn-cancel"
+            id="cancelModal">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-save"
+            id="saveQuizBtn">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save Quiz
+
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       TOAST
+  ========================================== -->
+
+  <div
+    class="toast"
+    id="toast">
+
+    <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage">
+      Done
+    </span>
+
+  </div>
+
+
+  <!-- =========================================
+       FIREBASE
+  ========================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+    import {
+      getDatabase,
+      ref,
+      get,
+      set,
+      push,
+      update,
+      remove,
+      onValue
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================== */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+      authDomain:
+        "chemistry-point-9a41b.firebaseapp.com",
+
+      projectId:
+        "chemistry-point-9a41b",
+
+      storageBucket:
+        "chemistry-point-9a41b.firebasestorage.app",
+
+      messagingSenderId:
+        "791007663942",
+
+      appId:
+        "1:791007663942:web:693c008e475a2e74357747"
+
+    };
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getDatabase(
+        app,
+        "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+      );
+
+
+    /* =========================================
+       ADMIN UID
+    ========================================== */
+
+    const FIRST_ADMIN_UID =
+      "swWYszc7mMWQVJrWFFmiNBIV3al2";
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
+    const email =
+      document.getElementById("email");
+
+    const tableBody =
+      document.getElementById("quizTableBody");
+
+    const resultCount =
+      document.getElementById("resultCount");
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    const typeFilter =
+      document.getElementById("typeFilter");
+
+    const statusFilter =
+      document.getElementById("statusFilter");
+
+    const quizModal =
+      document.getElementById("quizModal");
+
+    const quizForm =
+      document.getElementById("quizForm");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+    const quizTitle =
+      document.getElementById("quizTitle");
+
+    const quizType =
+      document.getElementById("quizType");
+
+    const quizChapter =
+      document.getElementById("quizChapter");
+
+    const quizDuration =
+      document.getElementById("quizDuration");
+
+    const questionCount =
+      document.getElementById("questionCount");
+
+    const quizPassword =
+      document.getElementById("quizPassword");
+
+    const quizDescription =
+      document.getElementById("quizDescription");
+
+    const quizActive =
+      document.getElementById("quizActive");
+
+    const saveQuizBtn =
+      document.getElementById("saveQuizBtn");
+
+
+    let quizzes = {};
+
+    let chapters = {};
+
+    let editingQuizId = null;
+
+
+    /* =========================================
+       VERIFY ADMIN
+    ========================================== */
+
+    async function verifyAdmin(user) {
+
+      const adminRef =
+        ref(
+          db,
+          `admins/${user.uid}`
+        );
+
+
+      const snapshot =
+        await get(adminRef);
+
+
+      if (!snapshot.exists()) {
+        throw new Error("NOT_ADMIN");
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      if (
+        data.role !== "admin" ||
+        data.active === false
+      ) {
+
+        throw new Error("NOT_ADMIN");
+
+      }
+
+    }
+
+
+    /* =========================================
+       AUTH STATE
+    ========================================== */
+
+    onAuthStateChanged(
+      auth,
+      async user => {
+
+        if (!user) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        email.textContent =
+          user.email || "Admin";
+
+
+        try {
+
+          await verifyAdmin(user);
+
+          loadChapters();
+
+          loadQuizzes();
+
+        } catch (error) {
+
+          console.error(error);
+
+          await signOut(auth);
+
+          window.location.href =
+            "login.html";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       LOAD CHAPTERS
+    ========================================== */
+
+    function loadChapters() {
+
+      const chaptersRef =
+        ref(db, "chapters");
+
+
+      onValue(
+
+        chaptersRef,
+
+        snapshot => {
+
+          chapters =
+            snapshot.val() || {};
+
+
+          renderChapterOptions();
+
+        },
+
+        error => {
+
+          console.error(
+            "Chapter load error:",
+            error
+          );
+
+        }
+
+      );
+
+    }
+
+
+    /* =========================================
+       CHAPTER OPTIONS
+    ========================================== */
+
+    function renderChapterOptions() {
+
+      const currentValue =
+        quizChapter.value;
+
+
+      quizChapter.innerHTML = `
+
+        <option value="">
+          Select Chapter
+        </option>
+
+      `;
+
+
+      const list =
+        Object.entries(chapters)
+          .sort((a, b) => {
+
+            const nameA =
+              String(a[1]?.name || "")
+                .toLowerCase();
+
+            const nameB =
+              String(b[1]?.name || "")
+                .toLowerCase();
+
+            return nameA.localeCompare(nameB);
+
+          });
+
+
+      list.forEach(
+        ([id, chapter]) => {
+
+          if (!chapter) {
+            return;
+          }
+
+
+          const option =
+            document.createElement("option");
+
+
+          option.value =
+            chapter.slug || id;
+
+
+          option.dataset.id =
+            id;
+
+
+          option.textContent =
+            chapter.name ||
+            chapter.slug ||
+            id;
+
+
+          quizChapter.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      if (currentValue) {
+
+        quizChapter.value =
+          currentValue;
+
+      }
+
+    }
+
+
+    /* =========================================
+       LOAD QUIZZES
+    ========================================== */
+
+    function loadQuizzes() {
+
+      const quizzesRef =
+        ref(db, "quizzes");
+
+
+      onValue(
+
+        quizzesRef,
+
+        snapshot => {
+
+          quizzes =
+            snapshot.val() || {};
+
+
+          renderStats();
+
+          renderTable();
+
+        },
+
+        error => {
+
+          console.error(
+            "Quiz load error:",
+            error
+          );
+
+
+          tableBody.innerHTML = `
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="empty">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <strong>
+                  Quiz data load नहीं हो पाया
+                </strong>
+
+                <span>
+                  Firebase Rules check करें।
+                </span>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+
+      );
+
+    }
+
+
+    /* =========================================
+       QUIZ TYPE LABEL
+    ========================================== */
+
+    function getTypeLabel(type) {
+
+      const labels = {
+
+        pyq: "PYQ",
+
+        chapter: "Chapter-wise",
+
+        normal: "Normal"
+
+      };
+
+
+      return labels[type] ||
+        "Normal";
+
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================== */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================================
+       GET CHAPTER NAME
+    ========================================== */
+
+    function getChapterName(slug) {
+
+      if (!slug) {
+        return "—";
+      }
+
+
+      const found =
+        Object.values(chapters)
+          .find(chapter => {
+
+            if (!chapter) {
+              return false;
+            }
+
+
+            return String(
+              chapter.slug || ""
+            ).toLowerCase() ===
+              String(slug)
+                .toLowerCase();
+
+          });
+
+
+      return found?.name ||
+        slug;
+
+    }
+
+
+    /* =========================================
+       RENDER STATS
+    ========================================== */
+
+    function renderStats() {
+
+      const list =
+        Object.values(quizzes)
+          .filter(Boolean);
+
+
+      const total =
+        list.length;
+
+
+      const active =
+        list.filter(
+          quiz =>
+            quiz.active !== false
+        ).length;
+
+
+      const protectedCount =
+        list.filter(
+          quiz =>
+            String(
+              quiz.password || ""
+            ).trim() !== ""
+        ).length;
+
+
+      const durations =
+        list
+          .map(
+            quiz =>
+              Number(
+                quiz.duration || 0
+              )
+          )
+          .filter(
+            duration =>
+              duration > 0
+          );
+
+
+      const average =
+        durations.length
+          ? Math.round(
+              durations.reduce(
+                (sum, value) =>
+                  sum + value,
+                0
+              ) / durations.length
+            )
+          : 0;
+
+
+      document.getElementById(
+        "totalQuizzes"
+      ).textContent =
+        total;
+
+
+      document.getElementById(
+        "activeQuizzes"
+      ).textContent =
+        active;
+
+
+      document.getElementById(
+        "protectedQuizzes"
+      ).textContent =
+        protectedCount;
+
+
+      document.getElementById(
+        "averageDuration"
+      ).textContent =
+        `${average}m`;
+
+    }
+
+
+    /* =========================================
+       FILTER QUIZZES
+    ========================================== */
+
+    function getFilteredQuizzes() {
+
+      const search =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+
+      const type =
+        typeFilter.value;
+
+
+      const status =
+        statusFilter.value;
+
+
+      return Object.entries(quizzes)
+        .filter(
+          ([id, quiz]) => {
+
+            if (!quiz) {
+              return false;
+            }
+
+
+            const title =
+              String(
+                quiz.title || ""
+              ).toLowerCase();
+
+
+            const chapter =
+              String(
+                quiz.chapter || ""
+              ).toLowerCase();
+
+
+            const description =
+              String(
+                quiz.description || ""
+              ).toLowerCase();
+
+
+            const matchesSearch =
+              !search ||
+              title.includes(search) ||
+              chapter.includes(search) ||
+              description.includes(search);
+
+
+            const matchesType =
+              type === "all" ||
+              quiz.type === type;
+
+
+            const isActive =
+              quiz.active !== false;
+
+
+            const matchesStatus =
+              status === "all" ||
+              (
+                status === "active" &&
+                isActive
+              ) ||
+              (
+                status === "inactive" &&
+                !isActive
+              );
+
+
+            return (
+              matchesSearch &&
+              matchesType &&
+              matchesStatus
+            );
+
+          }
+        )
+        .sort(
+          (a, b) => {
+
+            const timeA =
+              Number(
+                a[1]?.updatedAt ||
+                a[1]?.createdAt ||
+                0
+              );
+
+
+            const timeB =
+              Number(
+                b[1]?.updatedAt ||
+                b[1]?.createdAt ||
+                0
+              );
+
+
+            return timeB - timeA;
+
+          }
+        );
+
+    }
+
+
+    /* =========================================
+       RENDER TABLE
+    ========================================== */
+
+    function renderTable() {
+
+      const list =
+        getFilteredQuizzes();
+
+
+      resultCount.textContent =
+        `${list.length} quiz${list.length === 1 ? "" : "zes"}`;
+
+
+      if (!list.length) {
+
+        tableBody.innerHTML = `
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty">
+
+              <i class="fa-solid fa-circle-question"></i>
+
+              <strong>
+                कोई quiz नहीं मिला
+              </strong>
+
+              <span>
+                नया quiz add करें या search/filter बदलें।
+              </span>
+
+            </td>
+
+          </tr>
+
+        `;
+
+        return;
+
+      }
+
+
+      tableBody.innerHTML = "";
+
+
+      list.forEach(
+        ([id, quiz]) => {
+
+          const row =
+            document.createElement("tr");
+
+
+          const active =
+            quiz.active !== false;
+
+
+          const chapterName =
+            getChapterName(
+              quiz.chapter
+            );
+
+
+          row.innerHTML = `
+
+            <td>
+
+              <div class="quiz-name">
+
+                <strong>
+                  ${escapeHtml(
+                    quiz.title ||
+                    "Untitled Quiz"
+                  )}
+                </strong>
+
+                <span>
+                  ${
+                    quiz.description
+                      ? escapeHtml(
+                          quiz.description
+                        )
+                      : "No description"
+                  }
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <span class="type-badge">
+
+                ${escapeHtml(
+                  getTypeLabel(
+                    quiz.type
+                  )
+                )}
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                chapterName
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${Number(
+                quiz.questionCount || 0
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${Number(
+                quiz.duration || 0
+              )} min
+
+            </td>
+
+
+            <td>
+
+              <span
+                class="status-badge ${
+                  active
+                    ? "active"
+                    : "inactive"
+                }">
+
+                ${
+                  active
+                    ? "Active"
+                    : "Inactive"
+                }
+
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <div class="action-group">
+
+                <button
+                  class="action-btn edit"
+                  data-id="${id}"
+                  title="Edit">
+
+                  <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+
+                <button
+                  class="action-btn delete"
+                  data-id="${id}"
+                  title="Delete">
+
+                  <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          `;
+
+
+          tableBody.appendChild(row);
+
+        }
+      );
+
+
+      document
+        .querySelectorAll(".action-btn.edit")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              editQuiz(
+                button.dataset.id
+              );
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(".action-btn.delete")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              deleteQuiz(
+                button.dataset.id
+              );
+
+            }
+          );
+
+        });
+
+    }
+
+
+    /* =========================================
+       OPEN MODAL
+    ========================================== */
+
+    function openModal() {
+
+      quizModal.classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================== */
+
+    function closeModal() {
+
+      quizModal.classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+      quizForm.reset();
+
+      quizActive.checked =
+        true;
+
+      quizDuration.value =
+        30;
+
+      questionCount.value =
+        0;
+
+      editingQuizId =
+        null;
+
+
+      modalTitle.textContent =
+        "Add New Quiz";
+
+
+      saveQuizBtn.innerHTML = `
+        <i class="fa-solid fa-floppy-disk"></i>
+        Save Quiz
+      `;
+
+    }
+
+
+    /* =========================================
+       ADD QUIZ
+    ========================================== */
+
+    document
+      .getElementById("addQuizBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          closeModal();
+
+          openModal();
+
+        }
+      );
+
+
+    /* =========================================
+       EDIT QUIZ
+    ========================================== */
+
+    function editQuiz(id) {
+
+      const quiz =
+        quizzes[id];
+
+
+      if (!quiz) {
+        return;
+      }
+
+
+      editingQuizId =
+        id;
+
+
+      modalTitle.textContent =
+        "Edit Quiz";
+
+
+      quizTitle.value =
+        quiz.title || "";
+
+
+      quizType.value =
+        quiz.type || "";
+
+
+      quizChapter.value =
+        quiz.chapter || "";
+
+
+      quizDuration.value =
+        quiz.duration || 30;
+
+
+      questionCount.value =
+        quiz.questionCount || 0;
+
+
+      quizPassword.value =
+        quiz.password || "";
+
+
+      quizDescription.value =
+        quiz.description || "";
+
+
+      quizActive.checked =
+        quiz.active !== false;
+
+
+      saveQuizBtn.innerHTML = `
+        <i class="fa-solid fa-pen-to-square"></i>
+        Update Quiz
+      `;
+
+
+      openModal();
+
+    }
+
+
+    /* =========================================
+       SAVE / UPDATE QUIZ
+    ========================================== */
+
+    quizForm.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+
+        const title =
+          quizTitle.value.trim();
+
+
+        const type =
+          quizType.value;
+
+
+        const chapter =
+          quizChapter.value;
+
+
+        const duration =
+          Number(
+            quizDuration.value
+          );
+
+
+        const questionCountValue =
+          Number(
+            questionCount.value || 0
+          );
+
+
+        const password =
+          quizPassword.value.trim();
+
+
+        const description =
+          quizDescription.value.trim();
+
+
+        const active =
+          quizActive.checked;
+
+
+        if (!title) {
+
+          showToast(
+            "Quiz title भरें।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (!type) {
+
+          showToast(
+            "Quiz type select करें।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          !duration ||
+          duration < 1
+        ) {
+
+          showToast(
+            "Valid duration डालें।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          questionCountValue < 0
+        ) {
+
+          showToast(
+            "Questions count valid रखें।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        saveQuizBtn.disabled =
+          true;
+
+
+        saveQuizBtn.innerHTML = `
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          Saving...
+        `;
+
+
+        try {
+
+          const now =
+            Date.now();
+
+
+          const quizData = {
+
+            title,
+
+            type,
+
+            chapter:
+              chapter || "",
+
+            duration,
+
+            questionCount:
+              questionCountValue,
+
+            password,
+
+            description,
+
+            active,
+
+            updatedAt:
+              now
+
+          };
+
+
+          if (editingQuizId) {
+
+            await update(
+              ref(
+                db,
+                `quizzes/${editingQuizId}`
+              ),
+              quizData
+            );
+
+
+            showToast(
+              "Quiz successfully update हो गया।",
+              "success"
+            );
+
+          } else {
+
+            const newQuizRef =
+              push(
+                ref(db, "quizzes")
+              );
+
+
+            await set(
+              newQuizRef,
+              {
+                ...quizData,
+
+                createdAt:
+                  now
+
+              }
+            );
+
+
+            showToast(
+              "Quiz successfully add हो गया।",
+              "success"
+            );
+
+          }
+
+
+          closeModal();
+
+        } catch (error) {
+
+          console.error(
+            "Save quiz error:",
+            error
+          );
+
+
+          showToast(
+            "Quiz save नहीं हो पाया। Firebase Rules check करें।",
+            "error"
+          );
+
+        } finally {
+
+          saveQuizBtn.disabled =
+            false;
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       DELETE QUIZ
+    ========================================== */
+
+    async function deleteQuiz(id) {
+
+      const quiz =
+        quizzes[id];
+
+
+      if (!quiz) {
+        return;
+      }
+
+
+      const confirmed =
+        confirm(
+          `क्या आप "${quiz.title || "इस quiz"}" को delete करना चाहते हैं?\n\nइस action को वापस नहीं किया जा सकता।`
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      try {
+
+        await remove(
+          ref(
+            db,
+            `quizzes/${id}`
+          )
+        );
+
+
+        showToast(
+          "Quiz delete हो गया।",
+          "success"
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Delete quiz error:",
+          error
+        );
+
+
+        showToast(
+          "Quiz delete नहीं हो पाया।",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================
+       MODAL CONTROLS
+    ========================================== */
+
+    document
+      .getElementById("closeModal")
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+
+    document
+      .getElementById("cancelModal")
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+
+    quizModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          quizModal
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       FILTER EVENTS
+    ========================================== */
+
+    searchInput.addEventListener(
+      "input",
+      renderTable
+    );
+
+
+    typeFilter.addEventListener(
+      "change",
+      renderTable
+    );
+
+
+    statusFilter.addEventListener(
+      "change",
+      renderTable
+    );
+
+
+    /* =========================================
+       LOGOUT
+    ========================================== */
+
+    document
+      .getElementById("logout")
+      .addEventListener(
+        "click",
+        async () => {
+
+          await signOut(auth);
+
+          window.location.href =
+            "login.html";
+
+        }
+      );
+
+
+    /* =========================================
+       SIDEBAR
+    ========================================== */
+
+    const sidebar =
+      document.getElementById(
+        "sidebar"
+      );
+
+
+    const overlay =
+      document.getElementById(
+        "overlay"
+      );
+
+
+    document
+      .getElementById("sideBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          sidebar.classList.toggle(
+            "show"
+          );
+
+          overlay.classList.toggle(
+            "show"
+          );
+
+        }
+      );
+
+
+    overlay.addEventListener(
+      "click",
+      () => {
+
+        sidebar.classList.remove(
+          "show"
+        );
+
+        overlay.classList.remove(
+          "show"
+        );
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".nav a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            sidebar.classList.remove(
+              "show"
+            );
+
+            overlay.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =========================================
+       THEME
+    ========================================== */
+
+    const theme =
+      document.getElementById(
+        "theme"
+      );
+
+
+    function applyTheme(value) {
+
+      document.body.classList.toggle(
+        "light-mode",
+        value === "light"
+      );
+
+
+      theme.innerHTML =
+        value === "light"
+
+          ? '<i class="fa-solid fa-sun"></i>'
+
+          : '<i class="fa-solid fa-moon"></i>';
+
+    }
+
+
+    applyTheme(
+      localStorage.getItem(
+        "chemistryPointTheme"
+      ) || "dark"
+    );
+
+
+    theme.addEventListener(
+      "click",
+      () => {
+
+        const nextTheme =
+          document.body.classList.contains(
+            "light-mode"
+          )
+            ? "dark"
+            : "light";
+
+
+        localStorage.setItem(
+          "chemistryPointTheme",
+          nextTheme
+        );
+
+
+        applyTheme(
+          nextTheme
+        );
+
+      }
+    );
+
+
+    /* =========================================
+       TOAST
+    ========================================== */
+
+    let toastTimer;
+
+
+    function showToast(
+      message,
+      type = "success"
+    ) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      const icon =
+        document.getElementById(
+          "toastIcon"
+        );
+
+
+      const text =
+        document.getElementById(
+          "toastMessage"
+        );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toast.className =
+        `toast ${type} show`;
+
+
+      icon.className =
+        type === "success"
+
+          ? "fa-solid fa-circle-check"
+
+          : "fa-solid fa-circle-exclamation";
+
+
+      text.textContent =
+        message;
+
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3200
+        );
+
+    }
+
+  </script>
+
+</body>
+</html>
