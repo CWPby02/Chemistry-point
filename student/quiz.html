@@ -145,7 +145,7 @@
         }
 
         .quiz-progress-bar {
-            width: 20%;
+            width: 0%;
 
             height: 100%;
 
@@ -457,6 +457,70 @@
 
 
         /* =========================================
+           LOADING / ERROR
+        ========================================== */
+
+        .quiz-loading {
+            padding: 55px 20px;
+
+            text-align: center;
+
+            color: #b7bbc2;
+        }
+
+        .quiz-loading i {
+            font-size: 28px;
+
+            color: var(--primary, #d99a16);
+
+            margin-bottom: 14px;
+        }
+
+        .quiz-loading p {
+            margin: 0;
+
+            font-size: 14px;
+        }
+
+
+        .quiz-error {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,.02);
+        }
+
+        .quiz-error i {
+            font-size: 30px;
+
+            color: var(--primary, #d99a16);
+
+            margin-bottom: 12px;
+        }
+
+        .quiz-error h3 {
+            margin: 0 0 8px;
+
+            font-family: "Poppins", sans-serif;
+        }
+
+        .quiz-error p {
+            margin: 0;
+
+            color: #858a93;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
            MOBILE
         ========================================== */
 
@@ -594,8 +658,6 @@
         </nav>
 
 
-        <!-- SAME AS INDEX.HTML -->
-
         <button
             class="menu-btn"
             id="menuBtn"
@@ -608,8 +670,6 @@
 
     </div>
 
-
-    <!-- SAME AS INDEX.HTML -->
 
     <div class="mobile-nav" id="mobileNav">
 
@@ -672,7 +732,6 @@
 
 
 
-
 <!-- =========================================
      QUIZ
 ========================================= -->
@@ -689,11 +748,11 @@
             <div class="quiz-head-info">
 
                 <h1 id="quizTitle">
-                    Solid State Quiz
+                    Quiz Loading...
                 </h1>
 
                 <p id="quizSubtitle">
-                    Chapter Wise Practice Test
+                    Firebase से questions load हो रहे हैं...
                 </p>
 
             </div>
@@ -728,82 +787,120 @@
 
         <!-- QUESTION CARD -->
 
-        <section class="quiz-card-main">
+        <section class="quiz-card-main" id="quizCard">
 
 
-            <div class="question-top">
+            <div class="quiz-loading" id="loadingBox">
 
-                <div class="question-number">
+                <i class="fa-solid fa-spinner fa-spin"></i>
 
-                    <span class="question-mark">
+                <p>
+                    Firebase से questions load हो रहे हैं...
+                </p>
 
-                        <i class="fa-solid fa-question"></i>
-
-                    </span>
+            </div>
 
 
-                    <span id="questionCount">
-                        Question 1 of 5
-                    </span>
+            <div
+                class="question-content"
+                id="questionContent"
+                style="display:none;"
+            >
+
+                <div class="question-top">
+
+                    <div class="question-number">
+
+                        <span class="question-mark">
+
+                            <i class="fa-solid fa-question"></i>
+
+                        </span>
+
+
+                        <span id="questionCount">
+                            Question 1 of 1
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h2
+                    class="question-text"
+                    id="questionText"
+                ></h2>
+
+
+                <div
+                    class="options"
+                    id="options"
+                ></div>
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="quiz-actions">
+
+                    <button
+                        type="button"
+                        class="quiz-btn quiz-btn-prev"
+                        id="prevBtn"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="quiz-btn quiz-btn-next"
+                        id="nextBtn"
+                    >
+
+                        Next
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="quiz-btn quiz-btn-submit"
+                        id="submitBtn"
+                    >
+
+                        Submit Quiz
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </button>
 
                 </div>
 
             </div>
 
 
-            <h2
-                class="question-text"
-                id="questionText"
-            ></h2>
-
-
             <div
-                class="options"
-                id="options"
-            ></div>
+                class="quiz-error"
+                id="errorBox"
+                style="display:none;"
+            >
 
+                <i class="fa-solid fa-circle-exclamation"></i>
 
-            <!-- ACTION BUTTONS -->
+                <h3>
+                    Questions नहीं मिले
+                </h3>
 
-            <div class="quiz-actions">
-
-                <button
-                    type="button"
-                    class="quiz-btn quiz-btn-prev"
-                    id="prevBtn"
-                >
-
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    Previous
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="quiz-btn quiz-btn-next"
-                    id="nextBtn"
-                >
-
-                    Next
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="quiz-btn quiz-btn-submit"
-                    id="submitBtn"
-                >
-
-                    Submit Quiz
-
-                    <i class="fa-solid fa-check"></i>
-
-                </button>
+                <p id="errorMessage">
+                    इस quiz के लिए अभी कोई active question उपलब्ध नहीं है।
+                </p>
 
             </div>
 
@@ -812,7 +909,11 @@
 
         <!-- QUESTION NUMBERS -->
 
-        <section class="question-nav">
+        <section
+            class="question-nav"
+            id="questionNav"
+            style="display:none;"
+        >
 
             <div class="question-nav-title">
 
@@ -826,7 +927,7 @@
 
 
                 <span id="answeredCount">
-                    0 / 5 Answered
+                    0 / 0 Answered
                 </span>
 
             </div>
@@ -840,17 +941,15 @@
         </section>
 
 
-        <p class="quiz-note">
+        <p class="quiz-note" id="quizNote">
 
-            Demo questions अभी frontend testing के लिए हैं।
-            Firebase और real question database बाद में connect किया जाएगा।
+            Questions Firebase database से load किए जा रहे हैं।
 
         </p>
 
     </div>
 
 </main>
-
 
 
 
@@ -882,72 +981,94 @@
 
 
 
+<!-- =========================================
+     FIREBASE + QUIZ SCRIPT
+========================================= -->
 
-<script>
+<script type="module">
 
+    /* =========================================
+       FIREBASE
+    ========================================== */
 
-/* =========================================
-   MOBILE MENU
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-   EXACT INDEX STYLE
-========================================= */
-
-const menuBtn =
-    document.getElementById("menuBtn");
-
-const mobileNav =
-    document.getElementById("mobileNav");
-
-
-menuBtn.addEventListener("click", () => {
-
-    mobileNav.classList.toggle("show");
-
-    const icon =
-        menuBtn.querySelector("i");
+    import {
+        getDatabase,
+        ref,
+        get
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-    if (
-        mobileNav.classList.contains("show")
-    ) {
+    const firebaseConfig = {
 
-        icon.classList.remove(
-            "fa-bars"
+        apiKey:
+            "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+
+        authDomain:
+            "chemistry-point-9a41b.firebaseapp.com",
+
+        projectId:
+            "chemistry-point-9a41b",
+
+        storageBucket:
+            "chemistry-point-9a41b.firebasestorage.app",
+
+        messagingSenderId:
+            "791007663942",
+
+        appId:
+            "1:791007663942:web:693c008e475a2e74357747"
+
+    };
+
+
+    const app =
+        initializeApp(firebaseConfig);
+
+
+    const db =
+        getDatabase(
+            app,
+            "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
         );
 
-        icon.classList.add(
-            "fa-xmark"
-        );
-
-    } else {
-
-        icon.classList.remove(
-            "fa-xmark"
-        );
-
-        icon.classList.add(
-            "fa-bars"
-        );
-
-    }
-
-});
 
 
-document
-    .querySelectorAll(".mobile-nav a")
-    .forEach(link => {
+    /* =========================================
+       MOBILE MENU
+    ========================================== */
 
-        link.addEventListener("click", () => {
+    const menuBtn =
+        document.getElementById("menuBtn");
 
-            mobileNav.classList.remove(
-                "show"
+    const mobileNav =
+        document.getElementById("mobileNav");
+
+
+    menuBtn.addEventListener("click", () => {
+
+        mobileNav.classList.toggle("show");
+
+        const icon =
+            menuBtn.querySelector("i");
+
+
+        if (
+            mobileNav.classList.contains("show")
+        ) {
+
+            icon.classList.remove(
+                "fa-bars"
             );
 
+            icon.classList.add(
+                "fa-xmark"
+            );
 
-            const icon =
-                menuBtn.querySelector("i");
-
+        } else {
 
             icon.classList.remove(
                 "fa-xmark"
@@ -957,562 +1078,857 @@ document
                 "fa-bars"
             );
 
-        });
+        }
 
     });
 
 
+    document
+        .querySelectorAll(".mobile-nav a")
+        .forEach(link => {
 
-/* =========================================
-   DEMO QUESTIONS
+            link.addEventListener("click", () => {
 
-   Backend later
-========================================= */
-
-const questions = [
-
-    {
-        question:
-            "Solid State में constituent particles किस प्रकार व्यवस्थित होते हैं?",
-
-        options: [
-
-            "अनियमित रूप से",
-
-            "निश्चित एवं नियमित रूप से",
-
-            "केवल गैस के रूप में",
-
-            "केवल द्रव के रूप में"
-
-        ],
-
-        answer: 1
-    },
-
-
-    {
-        question:
-            "क्रिस्टलीय ठोस का melting point सामान्यतः कैसा होता है?",
-
-        options: [
-
-            "निश्चित",
-
-            "बहुत अनिश्चित",
-
-            "हमेशा 0°C",
-
-            "हमेशा 100°C"
-
-        ],
-
-        answer: 0
-    },
-
-
-    {
-        question:
-            "किस प्रकार के ठोस में particles का long-range order होता है?",
-
-        options: [
-
-            "Amorphous solid",
-
-            "Crystalline solid",
-
-            "Gas",
-
-            "Liquid"
-
-        ],
-
-        answer: 1
-    },
-
-
-    {
-        question:
-            "Unit cell क्या दर्शाता है?",
-
-        options: [
-
-            "Crystal का smallest repeating unit",
-
-            "एक गैस molecule",
-
-            "एक liquid particle",
-
-            "केवल surface area"
-
-        ],
-
-        answer: 0
-    },
-
-
-    {
-        question:
-            "BCC unit cell में कुल effective atoms कितने होते हैं?",
-
-        options: [
-
-            "1",
-
-            "2",
-
-            "3",
-
-            "4"
-
-        ],
-
-        answer: 1
-    }
-
-];
-
-
-
-/* =========================================
-   VARIABLES
-========================================= */
-
-let currentQuestion = 0;
-
-let selectedAnswers =
-    new Array(
-        questions.length
-    ).fill(null);
-
-
-
-const questionText =
-    document.getElementById(
-        "questionText"
-    );
-
-
-const optionsBox =
-    document.getElementById(
-        "options"
-    );
-
-
-const questionCount =
-    document.getElementById(
-        "questionCount"
-    );
-
-
-const progressBar =
-    document.getElementById(
-        "progressBar"
-    );
-
-
-const questionNumbers =
-    document.getElementById(
-        "questionNumbers"
-    );
-
-
-const answeredCount =
-    document.getElementById(
-        "answeredCount"
-    );
-
-
-const prevBtn =
-    document.getElementById(
-        "prevBtn"
-    );
-
-
-const nextBtn =
-    document.getElementById(
-        "nextBtn"
-    );
-
-
-const submitBtn =
-    document.getElementById(
-        "submitBtn"
-    );
-
-
-
-/* =========================================
-   RENDER QUESTION
-========================================= */
-
-function renderQuestion() {
-
-    const item =
-        questions[currentQuestion];
-
-
-    questionText.textContent =
-        item.question;
-
-
-    questionCount.textContent =
-        `Question ${currentQuestion + 1} of ${questions.length}`;
-
-
-    progressBar.style.width =
-        `${((currentQuestion + 1) / questions.length) * 100}%`;
-
-
-    optionsBox.innerHTML = "";
-
-
-    item.options.forEach(
-        (option, index) => {
-
-            const wrapper =
-                document.createElement(
-                    "div"
+                mobileNav.classList.remove(
+                    "show"
                 );
 
 
-            wrapper.className =
-                "option";
+                const icon =
+                    menuBtn.querySelector("i");
 
 
-            const input =
-                document.createElement(
-                    "input"
+                icon.classList.remove(
+                    "fa-xmark"
+                );
+
+                icon.classList.add(
+                    "fa-bars"
+                );
+
+            });
+
+        });
+
+
+
+    /* =========================================
+       DOM ELEMENTS
+    ========================================== */
+
+    const quizTitle =
+        document.getElementById("quizTitle");
+
+    const quizSubtitle =
+        document.getElementById("quizSubtitle");
+
+    const questionText =
+        document.getElementById("questionText");
+
+    const optionsBox =
+        document.getElementById("options");
+
+    const questionCount =
+        document.getElementById("questionCount");
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const questionNumbers =
+        document.getElementById("questionNumbers");
+
+    const answeredCount =
+        document.getElementById("answeredCount");
+
+    const prevBtn =
+        document.getElementById("prevBtn");
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+    const loadingBox =
+        document.getElementById("loadingBox");
+
+    const questionContent =
+        document.getElementById("questionContent");
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const questionNav =
+        document.getElementById("questionNav");
+
+    const quizNote =
+        document.getElementById("quizNote");
+
+
+
+    /* =========================================
+       URL DATA
+       
+       Example:
+       student/quiz.html?quizId=QUIZ_ID
+    ========================================== */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const quizId =
+        urlParams.get("quizId");
+
+
+    const chapter =
+        urlParams.get("chapter");
+
+
+
+    /* =========================================
+       VARIABLES
+    ========================================== */
+
+    let questions = [];
+
+    let currentQuestion = 0;
+
+    let selectedAnswers = [];
+
+    let quizSubmitted = false;
+
+    let timerInterval;
+
+    let totalSeconds = 30 * 60;
+
+
+
+    /* =========================================
+       LOAD QUESTIONS
+    ========================================== */
+
+    async function loadQuestions() {
+
+        try {
+
+            loadingBox.style.display =
+                "block";
+
+            questionContent.style.display =
+                "none";
+
+            errorBox.style.display =
+                "none";
+
+            questionNav.style.display =
+                "none";
+
+
+            /*
+                Read complete questions node.
+
+                Firebase structure:
+
+                questions/
+                    questionId/
+                        quizId
+                        quizTitle
+                        chapter
+                        question
+                        options
+                        answer
+                        explanation
+                        marks
+                        status
+                        order
+            */
+
+            const snapshot =
+                await get(
+                    ref(db, "questions")
                 );
 
 
-            input.type =
-                "radio";
+            if (!snapshot.exists()) {
 
+                showError(
+                    "Firebase में अभी कोई question उपलब्ध नहीं है।"
+                );
 
-            input.name =
-                "quizOption";
-
-
-            input.id =
-                `option-${index}`;
-
-
-            input.value =
-                index;
-
-
-            if (
-                selectedAnswers[
-                    currentQuestion
-                ] === index
-            ) {
-
-                input.checked =
-                    true;
+                return;
 
             }
 
 
-            input.addEventListener(
-                "change",
-                () => {
-
-                    selectedAnswers[
-                        currentQuestion
-                    ] = index;
+            const data =
+                snapshot.val();
 
 
-                    updateQuestionNumbers();
+            let loadedQuestions = [];
 
-                    updateAnsweredCount();
+
+            Object.entries(data).forEach(
+                ([id, item]) => {
+
+                    if (!item) {
+                        return;
+                    }
+
+
+                    /*
+                        Only active questions
+                    */
+
+                    if (
+                        item.status &&
+                        item.status !== "active"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                        If quizId is provided,
+                        match only that quiz.
+                    */
+
+                    if (quizId) {
+
+                        if (
+                            String(item.quizId)
+                            !== String(quizId)
+                        ) {
+
+                            return;
+
+                        }
+
+                    }
+
+
+                    /*
+                        If no quizId but chapter
+                        is provided, match chapter.
+                    */
+
+                    else if (chapter) {
+
+                        if (
+                            String(
+                                item.chapter || ""
+                            ).toLowerCase()
+                            !== String(chapter)
+                                .toLowerCase()
+                        ) {
+
+                            return;
+
+                        }
+
+                    }
+
+
+                    const options =
+                        item.options || {};
+
+
+                    /*
+                        Support Firebase object:
+
+                        options:
+                        {
+                            a: "...",
+                            b: "...",
+                            c: "...",
+                            d: "..."
+                        }
+                    */
+
+
+                    const optionArray = [
+
+                        options.a ?? "",
+
+                        options.b ?? "",
+
+                        options.c ?? "",
+
+                        options.d ?? ""
+
+                    ];
+
+
+                    /*
+                        Firebase answer may be:
+                        0 / 1 / 2 / 3
+                        OR
+                        a / b / c / d
+                    */
+
+                    let answer =
+                        item.answer;
+
+
+                    if (
+                        typeof answer === "string"
+                    ) {
+
+                        const cleanAnswer =
+                            answer
+                                .trim()
+                                .toLowerCase();
+
+
+                        if (
+                            cleanAnswer === "a"
+                        ) {
+                            answer = 0;
+                        }
+
+                        else if (
+                            cleanAnswer === "b"
+                        ) {
+                            answer = 1;
+                        }
+
+                        else if (
+                            cleanAnswer === "c"
+                        ) {
+                            answer = 2;
+                        }
+
+                        else if (
+                            cleanAnswer === "d"
+                        ) {
+                            answer = 3;
+                        }
+
+                        else if (
+                            !isNaN(
+                                Number(cleanAnswer)
+                            )
+                        ) {
+
+                            answer =
+                                Number(cleanAnswer);
+
+                        }
+
+                    }
+
+
+                    loadedQuestions.push({
+
+                        id: id,
+
+                        question:
+                            item.question || "",
+
+                        options:
+                            optionArray,
+
+                        answer:
+                            Number(answer),
+
+                        explanation:
+                            item.explanation || "",
+
+                        marks:
+                            Number(item.marks) || 1,
+
+                        order:
+                            Number(item.order) || 0,
+
+                        quizId:
+                            item.quizId || "",
+
+                        quizTitle:
+                            item.quizTitle || "",
+
+                        chapter:
+                            item.chapter || ""
+
+                    });
 
                 }
             );
 
 
-            const label =
-                document.createElement(
-                    "label"
-                );
+            /*
+                Sort questions by order
+            */
 
-
-            label.htmlFor =
-                `option-${index}`;
-
-
-            const letter =
-                document.createElement(
-                    "span"
-                );
-
-
-            letter.className =
-                "option-letter";
-
-
-            letter.textContent =
-                String.fromCharCode(
-                    65 + index
-                );
-
-
-            const text =
-                document.createElement(
-                    "span"
-                );
-
-
-            text.textContent =
-                option;
-
-
-            label.appendChild(
-                letter
+            loadedQuestions.sort(
+                (a, b) =>
+                    a.order - b.order
             );
 
 
-            label.appendChild(
-                text
-            );
-
-
-            wrapper.appendChild(
-                input
-            );
-
-
-            wrapper.appendChild(
-                label
-            );
-
-
-            optionsBox.appendChild(
-                wrapper
-            );
-
-        }
-    );
-
-
-    prevBtn.disabled =
-        currentQuestion === 0;
-
-
-    nextBtn.disabled =
-        currentQuestion ===
-        questions.length - 1;
-
-
-    updateQuestionNumbers();
-
-}
-
-
-
-/* =========================================
-   QUESTION NUMBERS
-========================================= */
-
-function updateQuestionNumbers() {
-
-    questionNumbers.innerHTML =
-        "";
-
-
-    questions.forEach(
-        (_, index) => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type =
-                "button";
-
-
-            button.className =
-                "question-number-btn";
-
-
-            button.textContent =
-                index + 1;
+            questions =
+                loadedQuestions;
 
 
             if (
-                index === currentQuestion
+                questions.length === 0
             ) {
 
-                button.classList.add(
-                    "current"
-                );
+                if (quizId) {
 
-            }
-
-
-            if (
-                selectedAnswers[index]
-                !== null
-            ) {
-
-                button.classList.add(
-                    "answered"
-                );
-
-            }
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    currentQuestion =
-                        index;
-
-
-                    renderQuestion();
+                    showError(
+                        "इस Quiz ID के लिए कोई active question नहीं मिला।"
+                    );
 
                 }
-            );
+
+                else if (chapter) {
+
+                    showError(
+                        "इस chapter के लिए कोई active question नहीं मिला।"
+                    );
+
+                }
+
+                else {
+
+                    showError(
+                        "Firebase में कोई active question उपलब्ध नहीं है।"
+                    );
+
+                }
+
+                return;
+
+            }
 
 
-            questionNumbers.appendChild(
-                button
-            );
+            /*
+                Prepare answer array
+            */
 
-        }
-    );
-
-}
-
-
-
-/* =========================================
-   ANSWER COUNT
-========================================= */
-
-function updateAnsweredCount() {
-
-    const count =
-        selectedAnswers.filter(
-            answer =>
-                answer !== null
-        ).length;
+            selectedAnswers =
+                new Array(
+                    questions.length
+                ).fill(null);
 
 
-    answeredCount.textContent =
-        `${count} / ${questions.length} Answered`;
+            /*
+                Update quiz title
+            */
 
-}
+            const firstQuestion =
+                questions[0];
 
 
+            if (
+                firstQuestion.quizTitle
+            ) {
 
-/* =========================================
-   PREVIOUS
-========================================= */
+                quizTitle.textContent =
+                    firstQuestion.quizTitle;
 
-prevBtn.addEventListener(
-    "click",
-    () => {
+            }
 
-        if (
-            currentQuestion > 0
-        ) {
+            else if (
+                firstQuestion.chapter
+            ) {
 
-            currentQuestion--;
+                quizTitle.textContent =
+                    `${firstQuestion.chapter} Quiz`;
+
+            }
+
+            else {
+
+                quizTitle.textContent =
+                    "Chemistry Quiz";
+
+            }
+
+
+            quizSubtitle.textContent =
+                `${questions.length} Questions • Chapter Wise Practice Test`;
+
+
+            quizNote.textContent =
+                "Questions Firebase database से load किए गए हैं।";
+
+
+            /*
+                Show quiz
+            */
+
+            loadingBox.style.display =
+                "none";
+
+            questionContent.style.display =
+                "block";
+
+            questionNav.style.display =
+                "block";
+
 
             renderQuestion();
 
-        }
+            updateAnsweredCount();
 
-    }
-);
-
-
-
-/* =========================================
-   NEXT
-========================================= */
-
-nextBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            currentQuestion <
-            questions.length - 1
-        ) {
-
-            currentQuestion++;
-
-            renderQuestion();
+            startTimer();
 
         }
 
-    }
-);
+        catch (error) {
 
-
-
-/* =========================================
-   SUBMIT QUIZ
-========================================= */
-
-let quizSubmitted = false;
-
-
-function submitQuiz(autoSubmit = false) {
-
-    /* Prevent double submission */
-
-    if (quizSubmitted) {
-        return;
-    }
-
-
-    const answered =
-        selectedAnswers.filter(
-            answer =>
-                answer !== null
-        ).length;
-
-
-    /*
-       Manual submit पर confirmation.
-       Timer खत्म होने पर confirmation नहीं।
-    */
-
-    if (!autoSubmit) {
-
-        const confirmed =
-            confirm(
-                `आपने ${answered} / ${questions.length} questions answer किए हैं।\n\nक्या आप Quiz submit करना चाहते हैं?`
+            console.error(
+                "Question loading error:",
+                error
             );
 
 
-        if (!confirmed) {
+            showError(
+                "Questions load नहीं हो पाए। Firebase Rules और Database connection check करें।"
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       SHOW ERROR
+    ========================================== */
+
+    function showError(message) {
+
+        loadingBox.style.display =
+            "none";
+
+        questionContent.style.display =
+            "none";
+
+        questionNav.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+        errorMessage.textContent =
+            message;
+
+        quizTitle.textContent =
+            "Quiz";
+
+        quizSubtitle.textContent =
+            "Question loading failed";
+
+        progressBar.style.width =
+            "0%";
+
+        clearInterval(
+            timerInterval
+        );
+
+    }
+
+
+
+    /* =========================================
+       RENDER QUESTION
+    ========================================== */
+
+    function renderQuestion() {
+
+        if (
+            questions.length === 0
+        ) {
             return;
         }
 
+
+        const item =
+            questions[currentQuestion];
+
+
+        questionText.textContent =
+            item.question;
+
+
+        questionCount.textContent =
+            `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+        progressBar.style.width =
+            `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+
+        optionsBox.innerHTML =
+            "";
+
+
+        item.options.forEach(
+            (option, index) => {
+
+                const wrapper =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                wrapper.className =
+                    "option";
+
+
+                const input =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                input.type =
+                    "radio";
+
+
+                input.name =
+                    "quizOption";
+
+
+                input.id =
+                    `option-${currentQuestion}-${index}`;
+
+
+                input.value =
+                    index;
+
+
+                if (
+                    selectedAnswers[
+                        currentQuestion
+                    ] === index
+                ) {
+
+                    input.checked =
+                        true;
+
+                }
+
+
+                input.addEventListener(
+                    "change",
+                    () => {
+
+                        selectedAnswers[
+                            currentQuestion
+                        ] = index;
+
+
+                        updateQuestionNumbers();
+
+                        updateAnsweredCount();
+
+                    }
+                );
+
+
+                const label =
+                    document.createElement(
+                        "label"
+                    );
+
+
+                label.htmlFor =
+                    `option-${currentQuestion}-${index}`;
+
+
+                const letter =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                letter.className =
+                    "option-letter";
+
+
+                letter.textContent =
+                    String.fromCharCode(
+                        65 + index
+                    );
+
+
+                const text =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                text.textContent =
+                    option;
+
+
+                label.appendChild(
+                    letter
+                );
+
+
+                label.appendChild(
+                    text
+                );
+
+
+                wrapper.appendChild(
+                    input
+                );
+
+
+                wrapper.appendChild(
+                    label
+                );
+
+
+                optionsBox.appendChild(
+                    wrapper
+                );
+
+            }
+        );
+
+
+        prevBtn.disabled =
+            currentQuestion === 0;
+
+
+        nextBtn.disabled =
+            currentQuestion ===
+            questions.length - 1;
+
+
+        updateQuestionNumbers();
+
     }
 
 
-    /* Calculate score */
 
-    let score = 0;
+    /* =========================================
+       QUESTION NUMBERS
+    ========================================== */
+
+    function updateQuestionNumbers() {
+
+        questionNumbers.innerHTML =
+            "";
 
 
-    questions.forEach(
-        (question, index) => {
+        questions.forEach(
+            (_, index) => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type =
+                    "button";
+
+
+                button.className =
+                    "question-number-btn";
+
+
+                button.textContent =
+                    index + 1;
+
+
+                if (
+                    index === currentQuestion
+                ) {
+
+                    button.classList.add(
+                        "current"
+                    );
+
+                }
+
+
+                if (
+                    selectedAnswers[index]
+                    !== null
+                ) {
+
+                    button.classList.add(
+                        "answered"
+                    );
+
+                }
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        currentQuestion =
+                            index;
+
+
+                        renderQuestion();
+
+                    }
+                );
+
+
+                questionNumbers.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       ANSWER COUNT
+    ========================================== */
+
+    function updateAnsweredCount() {
+
+        const count =
+            selectedAnswers.filter(
+                answer =>
+                    answer !== null
+            ).length;
+
+
+        answeredCount.textContent =
+            `${count} / ${questions.length} Answered`;
+
+    }
+
+
+
+    /* =========================================
+       PREVIOUS
+    ========================================== */
+
+    prevBtn.addEventListener(
+        "click",
+        () => {
 
             if (
-                selectedAnswers[index]
-                === question.answer
+                currentQuestion > 0
             ) {
 
-                score++;
+                currentQuestion--;
+
+                renderQuestion();
 
             }
 
@@ -1520,166 +1936,274 @@ function submitQuiz(autoSubmit = false) {
     );
 
 
-    /* Calculate result */
 
-    const total =
-        questions.length;
+    /* =========================================
+       NEXT
+    ========================================== */
 
+    nextBtn.addEventListener(
+        "click",
+        () => {
 
-    const wrong =
-        answered - score;
+            if (
+                currentQuestion <
+                questions.length - 1
+            ) {
 
+                currentQuestion++;
 
-    const unattempted =
-        total - answered;
+                renderQuestion();
 
+            }
 
-    const percentage =
-        Math.round(
-            (score / total) * 100
-        );
-
-
-    /* Stop multiple submit */
-
-    quizSubmitted = true;
-
-
-    /* Stop timer */
-
-    clearInterval(
-        timerInterval
+        }
     );
 
 
-    /*
-       Send result data to result.html
 
-       score       = correct answers
-       total       = total questions
-       wrong       = wrong answers
-       unattempted = unanswered questions
-       percentage  = percentage
-    */
+    /* =========================================
+       SUBMIT QUIZ
+    ========================================== */
 
-    const resultUrl =
-        `result.html?score=${score}` +
-        `&total=${total}` +
-        `&wrong=${wrong}` +
-        `&unattempted=${unattempted}` +
-        `&percentage=${percentage}`;
-
-
-    /*
-       Small delay gives browser time
-       to finish current action.
-    */
-
-    window.location.href =
-        resultUrl;
-
-}
-
-
-/* Submit button */
-
-submitBtn.addEventListener(
-    "click",
-    () => {
-
-        submitQuiz(false);
-
-    }
-);
-
-
-
-/* =========================================
-   TIMER
-========================================= */
-
-let totalSeconds =
-    30 * 60;
-
-
-const timer =
-    document.getElementById(
-        "timer"
-    );
-
-
-let timerInterval;
-
-
-function updateTimer() {
-
-    const minutes =
-        Math.floor(
-            totalSeconds / 60
-        );
-
-
-    const seconds =
-        totalSeconds % 60;
-
-
-    timer.textContent =
-        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-
-    /*
-       Time finished
-    */
-
-    if (
-        totalSeconds <= 0
+    function submitQuiz(
+        autoSubmit = false
     ) {
+
+        if (quizSubmitted) {
+            return;
+        }
+
+
+        if (
+            questions.length === 0
+        ) {
+            return;
+        }
+
+
+        const answered =
+            selectedAnswers.filter(
+                answer =>
+                    answer !== null
+            ).length;
+
+
+        /*
+            Manual submit confirmation
+        */
+
+        if (!autoSubmit) {
+
+            const confirmed =
+                confirm(
+                    `आपने ${answered} / ${questions.length} questions answer किए हैं।\n\nक्या आप Quiz submit करना चाहते हैं?`
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+        }
+
+
+        /*
+            Calculate score
+        */
+
+        let score = 0;
+
+
+        questions.forEach(
+            (question, index) => {
+
+                if (
+                    selectedAnswers[index]
+                    === question.answer
+                ) {
+
+                    score++;
+
+                }
+
+            }
+        );
+
+
+        /*
+            Result data
+        */
+
+        const total =
+            questions.length;
+
+
+        const wrong =
+            selectedAnswers.reduce(
+                (count, answer, index) => {
+
+                    if (
+                        answer !== null &&
+                        answer !==
+                        questions[index].answer
+                    ) {
+
+                        return count + 1;
+
+                    }
+
+                    return count;
+
+                },
+                0
+            );
+
+
+        const unattempted =
+            total - answered;
+
+
+        const percentage =
+            total > 0
+                ? Math.round(
+                    (score / total) * 100
+                )
+                : 0;
+
+
+        quizSubmitted =
+            true;
+
 
         clearInterval(
             timerInterval
         );
 
 
-        submitQuiz(true);
+        /*
+            Send result data
+            to result.html
+        */
+
+        const resultUrl =
+            `result.html?score=${score}` +
+            `&total=${total}` +
+            `&wrong=${wrong}` +
+            `&unattempted=${unattempted}` +
+            `&percentage=${percentage}`;
 
 
-        return;
+        window.location.href =
+            resultUrl;
 
     }
 
 
-    totalSeconds--;
 
-}
+    /* =========================================
+       SUBMIT BUTTON
+    ========================================== */
 
+    submitBtn.addEventListener(
+        "click",
+        () => {
 
-/* Start timer */
+            submitQuiz(false);
 
-updateTimer();
-
-
-timerInterval =
-    setInterval(
-        updateTimer,
-        1000
+        }
     );
 
 
 
-/* =========================================
-   INITIALIZE
-========================================= */
+    /* =========================================
+       TIMER
+    ========================================== */
 
-document.getElementById(
-    "year"
-).textContent =
-    new Date().getFullYear();
+    function startTimer() {
 
-
-renderQuestion();
+        clearInterval(
+            timerInterval
+        );
 
 
-updateAnsweredCount();
+        totalSeconds =
+            30 * 60;
+
+
+        updateTimer();
+
+
+        timerInterval =
+            setInterval(
+                updateTimer,
+                1000
+            );
+
+    }
+
+
+
+    function updateTimer() {
+
+        const minutes =
+            Math.floor(
+                totalSeconds / 60
+            );
+
+
+        const seconds =
+            totalSeconds % 60;
+
+
+        const timer =
+            document.getElementById(
+                "timer"
+            );
+
+
+        timer.textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+
+        if (
+            totalSeconds <= 0
+        ) {
+
+            clearInterval(
+                timerInterval
+            );
+
+
+            submitQuiz(true);
+
+
+            return;
+
+        }
+
+
+        totalSeconds--;
+
+    }
+
+
+
+    /* =========================================
+       YEAR
+    ========================================== */
+
+    document.getElementById(
+        "year"
+    ).textContent =
+        new Date().getFullYear();
+
+
+
+    /* =========================================
+       START
+    ========================================== */
+
+    loadQuestions();
 
 </script>
 
