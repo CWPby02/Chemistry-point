@@ -1,34 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Quiz | Chemistry Point</title>
-
-    <meta name="description"
-        content="Chemistry Point Quiz - Bihar Board Chemistry PYQ and Chapter Wise Online Quiz">
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/css/root.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quiz | Chemistry Point</title>
+<meta content="Chemistry Point Quiz - Bihar Board Chemistry PYQ and Chapter Wise Online Quiz" name="description"/>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+<!-- Global CSS -->
+<link href="assets/css/root.css" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<link href="assets/css/responsive.css" rel="stylesheet"/>
+<style>
 
         /* =========================================
            QUIZ PAGE
@@ -883,6 +871,13 @@
         }
 
 
+        
+        .quiz-loading { grid-column: 1 / -1; min-height: 180px; display:flex; align-items:center; justify-content:center; gap:10px; color:var(--text-muted); border:1px dashed var(--border); border-radius:18px; background:var(--dark-card); font-size:13px; }
+        .quiz-loading i { color:var(--primary-light); }
+        .quiz-firebase-error { grid-column:1 / -1; padding:30px 20px; text-align:center; border:1px dashed var(--border); border-radius:18px; background:var(--dark-card); color:var(--text-muted); }
+        .quiz-firebase-error i { display:block; font-size:30px; color:var(--primary-light); margin-bottom:10px; }
+        .quiz-firebase-error strong { display:block; color:var(--white); margin-bottom:6px; }
+
         /* =========================================
            MOBILE MENU SOLID BACKGROUND FIX
         ========================================= */
@@ -993,1464 +988,384 @@
         }
 
     </style>
-
 </head>
-
-
 <body>
-
-
-    <!-- =========================================
+<!-- =========================================
          HEADER
     ========================================== -->
-
-    <header class="site-header">
-
-        <div class="container nav-container">
-
-            <!-- Brand -->
-
-            <a href="index.html" class="brand">
-
-                <img
-                    src="assets/images/logo/logo.png"
-                    alt="Chemistry Point Logo">
-
-                <div class="brand-text">
-
-                    <strong>
+<header class="site-header">
+<div class="container nav-container">
+<!-- Brand -->
+<a class="brand" href="index.html">
+<img alt="Chemistry Point Logo" src="assets/images/logo/logo.png"/>
+<div class="brand-text">
+<strong>
                         Chemistry Point
                     </strong>
-
-                    <span>
+<span>
                         By Pardeep Sir
                     </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- Desktop Navigation -->
-
-            <nav class="main-nav">
-
-                <a href="index.html">
+</div>
+</a>
+<!-- Desktop Navigation -->
+<nav class="main-nav">
+<a href="index.html">
                     Home
                 </a>
-
-                <a href="videos.html">
+<a href="videos.html">
                     Videos
                 </a>
-
-                <a href="objectives.html">
+<a href="objectives.html">
                     Objectives
                 </a>
-
-                <a href="quiz.html"
-                   class="active">
+<a class="active" href="quiz.html">
                     Quiz
                 </a>
-
-                <a href="about.html">
+<a href="about.html">
                     About
                 </a>
-
-                <a href="contact.html">
+<a href="contact.html">
                     Contact
                 </a>
-
-
-                <!-- Desktop Theme -->
-
-                <button
-                    class="theme-toggle desktop-theme-toggle"
-                    id="themeToggle"
-                    type="button"
-                    aria-label="Toggle theme">
-
-                    <i class="fa-solid fa-moon"></i>
-
-                </button>
-
-            </nav>
-
-
-            <!-- Mobile Actions -->
-
-            <div class="mobile-actions">
-
-                <!-- Mobile Theme -->
-
-                <button
-                    class="theme-toggle mobile-theme-toggle"
-                    id="mobileThemeToggle"
-                    type="button"
-                    aria-label="Toggle theme">
-
-                    <i class="fa-solid fa-moon"></i>
-
-                </button>
-
-
-                <!-- Mobile Menu -->
-
-                <button
-                    class="menu-btn"
-                    id="menuBtn"
-                    type="button"
-                    aria-label="Open menu"
-                    aria-expanded="false">
-
-                    <i class="fa-solid fa-bars"></i>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- Mobile Navigation -->
-
-        <div
-            class="mobile-nav"
-            id="mobileNav">
-
-            <a href="index.html">
+<!-- Desktop Theme -->
+<button aria-label="Toggle theme" class="theme-toggle desktop-theme-toggle" id="themeToggle" type="button">
+<i class="fa-solid fa-moon"></i>
+</button>
+</nav>
+<!-- Mobile Actions -->
+<div class="mobile-actions">
+<!-- Mobile Theme -->
+<button aria-label="Toggle theme" class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" type="button">
+<i class="fa-solid fa-moon"></i>
+</button>
+<!-- Mobile Menu -->
+<button aria-expanded="false" aria-label="Open menu" class="menu-btn" id="menuBtn" type="button">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Navigation -->
+<div class="mobile-nav" id="mobileNav">
+<a href="index.html">
                 Home
             </a>
-
-            <a href="videos.html">
+<a href="videos.html">
                 Videos
             </a>
-
-            <a href="objectives.html">
+<a href="objectives.html">
                 Objectives
             </a>
-
-            <a href="quiz.html"
-               class="active">
+<a class="active" href="quiz.html">
                 Quiz
             </a>
-
-            <a href="about.html">
+<a href="about.html">
                 About
             </a>
-
-            <a href="contact.html">
+<a href="contact.html">
                 Contact
             </a>
-
-        </div>
-
-    </header>
-
-
-
-    <!-- =========================================
+</div>
+</header>
+<!-- =========================================
          QUIZ PAGE
     ========================================== -->
-
-    <main class="quiz-page">
-
-
-        <!-- Hero -->
-
-        <section class="quiz-page-hero">
-
-            <div class="quiz-hero-content">
-
-                <div class="quiz-badge">
-
-                    <i class="fa-solid fa-circle-question"></i>
+<main class="quiz-page">
+<!-- Hero -->
+<section class="quiz-page-hero">
+<div class="quiz-hero-content">
+<div class="quiz-badge">
+<i class="fa-solid fa-circle-question"></i>
 
                     Online Practice
 
                 </div>
-
-
-                <h1>
+<h1>
 
                     Test Your
                     <span>
                         Chemistry Knowledge
                     </span>
-
-                </h1>
-
-
-                <p>
+</h1>
+<p>
 
                     Bihar Board Chemistry की तैयारी को मजबूत
                     बनाने के लिए PYQ और Chapter Wise Online
                     Quiz attempt करें।
 
                 </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================
+</div>
+</section>
+<!-- =====================================
              QUIZ MAIN
         ====================================== -->
-
-        <section class="quiz-main">
-
-            <div class="quiz-container">
-
-
-                <!-- Search -->
-
-                <div class="quiz-tools">
-
-                    <div class="quiz-search">
-
-                        <i
-                            class="fa-solid fa-magnifying-glass">
-                        </i>
-
-                        <input
-                            type="text"
-                            id="quizSearch"
-                            placeholder="Search quiz or chapter...">
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- =================================
+<section class="quiz-main">
+<div class="quiz-container">
+<!-- Search -->
+<div class="quiz-tools">
+<div class="quiz-search">
+<i class="fa-solid fa-magnifying-glass">
+</i>
+<input id="quizSearch" placeholder="Search quiz or chapter..." type="text"/>
+</div>
+</div>
+<!-- =================================
                      PYQ QUIZ
                 ================================== -->
-
-                <section class="quiz-section">
-
-
-                    <div class="quiz-section-heading">
-
-                        <div>
-
-                            <div class="quiz-section-title">
-
-                                <div class="quiz-section-title-icon">
-
-                                    <i
-                                        class="fa-solid fa-clock-rotate-left">
-                                    </i>
-
-                                </div>
-
-
-                                <div>
-
-                                    <h2>
+<section class="quiz-section">
+<div class="quiz-section-heading">
+<div>
+<div class="quiz-section-title">
+<div class="quiz-section-title-icon">
+<i class="fa-solid fa-clock-rotate-left">
+</i>
+</div>
+<div>
+<h2>
                                         PYQ Quiz
                                     </h2>
-
-                                    <p>
+<p>
                                         Previous Year Questions
                                         based practice
                                     </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div
-                        class="quiz-grid"
-                        id="pyqQuizGrid">
-
-
-                        <!-- PYQ 1 -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="bihar board chemistry pyq 2026">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-file-lines">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    PYQ
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Bihar Board Chemistry PYQ
-                            </h3>
-
-
-                            <p>
-                                Previous year chemistry
-                                objective questions का
-                                practice test.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-
-                                </span>
-
-
-                                <span>
-
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?type=pyq"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- PYQ 2 -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="solid state pyq quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-atom">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    PYQ
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Solid State PYQ
-                            </h3>
-
-
-                            <p>
-                                Solid State chapter के
-                                previous year questions
-                                का practice test.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    25 Questions
-
-                                </span>
-
-
-                                <span>
-
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    25 Minutes
-
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=solid-state&type=pyq"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- PYQ 3 -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="solutions pyq quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-flask">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    PYQ
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Solutions PYQ
-                            </h3>
-
-
-                            <p>
-                                Solutions chapter के
-                                important PYQ questions
-                                को solve करें।
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    25 Questions
-
-                                </span>
-
-
-                                <span>
-
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    25 Minutes
-
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=solutions&type=pyq"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- =================================
+</div>
+</div>
+</div>
+</div>
+<div class="quiz-grid" id="pyqQuizGrid"><div class="quiz-loading" data-loading="true"><i class="fa-solid fa-spinner fa-spin"></i><span>Quizzes load हो रहे हैं...</span></div></div>
+</section>
+<!-- =================================
                      CHAPTER WISE QUIZ
                 ================================== -->
-
-                <section class="quiz-section">
-
-
-                    <div class="quiz-section-heading">
-
-                        <div class="quiz-section-title">
-
-                            <div class="quiz-section-title-icon">
-
-                                <i
-                                    class="fa-solid fa-book-open">
-                                </i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h2>
+<section class="quiz-section">
+<div class="quiz-section-heading">
+<div class="quiz-section-title">
+<div class="quiz-section-title-icon">
+<i class="fa-solid fa-book-open">
+</i>
+</div>
+<div>
+<h2>
                                     Chapter Wise Quiz
                                 </h2>
-
-                                <p>
+<p>
                                     Chapter के अनुसार
                                     online practice test
                                 </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div
-                        class="quiz-grid"
-                        id="chapterQuizGrid">
-
-
-                        <!-- Solid State -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="solid state chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-cubes">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Solid State
-                            </h3>
-
-
-                            <p>
-                                Solid State chapter के
-                                objective questions का
-                                online quiz.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=solid-state&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- Solutions -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="solutions chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-vial">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Solutions
-                            </h3>
-
-
-                            <p>
-                                Solutions chapter के
-                                important questions का
-                                online practice test.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=solutions&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- Electrochemistry -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="electrochemistry chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-bolt">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Electrochemistry
-                            </h3>
-
-
-                            <p>
-                                Electrochemistry chapter
-                                का complete objective
-                                practice quiz.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=electrochemistry&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- Chemical Kinetics -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="chemical kinetics chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-gauge-high">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Chemical Kinetics
-                            </h3>
-
-
-                            <p>
-                                Chemical Kinetics के
-                                selected objective
-                                questions का test.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=chemical-kinetics&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- Surface Chemistry -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="surface chemistry chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-layer-group">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                Surface Chemistry
-                            </h3>
-
-
-                            <p>
-                                Surface Chemistry chapter
-                                का practice objective
-                                quiz.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=surface-chemistry&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-
-
-                        <!-- D & F Block -->
-
-                        <article
-                            class="quiz-card"
-                            data-search="d and f block chapter quiz">
-
-                            <div class="quiz-card-top">
-
-                                <div class="quiz-card-icon">
-
-                                    <i
-                                        class="fa-solid fa-atom">
-                                    </i>
-
-                                </div>
-
-                                <span class="quiz-tag">
-                                    Chapter
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-                                D &amp; F Block
-                            </h3>
-
-
-                            <p>
-                                D &amp; F Block chapter के
-                                important objective
-                                questions का quiz.
-                            </p>
-
-
-                            <div class="quiz-meta">
-
-                                <span>
-                                    <i
-                                        class="fa-solid fa-list">
-                                    </i>
-
-                                    30 Questions
-                                </span>
-
-
-                                <span>
-                                    <i
-                                        class="fa-regular fa-clock">
-                                    </i>
-
-                                    30 Minutes
-                                </span>
-
-                            </div>
-
-
-                            <a
-                                href="student/quiz.html?chapter=d-and-f-block&type=normal"
-                                class="quiz-start-btn">
-
-                                Start Quiz
-
-                                <i
-                                    class="fa-solid fa-arrow-right">
-                                </i>
-
-                            </a>
-
-                        </article>
-
-                    </div>
-
-
-
-                    <!-- Empty -->
-
-                    <div
-                        class="quiz-empty"
-                        id="quizEmpty">
-
-                        <i
-                            class="fa-solid fa-magnifying-glass">
-                        </i>
-
-                        <h3>
+</div>
+</div>
+</div>
+<div class="quiz-grid" id="chapterQuizGrid"><div class="quiz-loading" data-loading="true"><i class="fa-solid fa-spinner fa-spin"></i><span>Quizzes load हो रहे हैं...</span></div></div>
+<!-- Empty -->
+<div class="quiz-empty" id="quizEmpty">
+<i class="fa-solid fa-magnifying-glass">
+</i>
+<h3>
                             Quiz नहीं मिला
                         </h3>
-
-                        <p>
+<p>
                             Search करके किसी दूसरे quiz
                             या chapter को try करें।
                         </p>
-
-                    </div>
-
-                </section>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================================
+</div>
+</section>
+</div>
+</section>
+</main>
+<!-- =========================================
          FOOTER
     ========================================== -->
-
-    <footer class="site-footer">
-
-        <div class="container footer-grid">
-
-
-            <div class="footer-brand">
-
-                <a
-                    href="index.html"
-                    class="brand">
-
-                    <img
-                        src="assets/images/logo/logo.png"
-                        alt="Chemistry Point Logo">
-
-                    <div class="brand-text">
-
-                        <strong>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="brand" href="index.html">
+<img alt="Chemistry Point Logo" src="assets/images/logo/logo.png"/>
+<div class="brand-text">
+<strong>
                             Chemistry Point
                         </strong>
-
-                        <span>
+<span>
                             By Pardeep Sir
                         </span>
-
-                    </div>
-
-                </a>
-
-
-                <p>
+</div>
+</a>
+<p>
 
                     Bihar Board Chemistry की बेहतर तैयारी
                     के लिए quality study materials,
                     videos और quizzes।
 
                 </p>
-
-
-                <div class="social-links">
-
-                    <a
-                        href="#"
-                        aria-label="YouTube">
-
-                        <i
-                            class="fa-brands fa-youtube">
-                        </i>
-
-                    </a>
-
-
-                    <a
-                        href="#"
-                        aria-label="Instagram">
-
-                        <i
-                            class="fa-brands fa-instagram">
-                        </i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="footer-column">
-
-                <h4>
+<div class="social-links">
+<a aria-label="YouTube" href="#">
+<i class="fa-brands fa-youtube">
+</i>
+</a>
+<a aria-label="Instagram" href="#">
+<i class="fa-brands fa-instagram">
+</i>
+</a>
+</div>
+</div>
+<div class="footer-column">
+<h4>
                     Quick Links
                 </h4>
-
-                <a href="index.html">
+<a href="index.html">
                     Home
                 </a>
-
-                <a href="videos.html">
+<a href="videos.html">
                     Videos
                 </a>
-
-                <a href="objectives.html">
+<a href="objectives.html">
                     Objectives
                 </a>
-
-                <a href="quiz.html">
+<a href="quiz.html">
                     Quiz
                 </a>
-
-            </div>
-
-
-
-            <div class="footer-column">
-
-                <h4>
+</div>
+<div class="footer-column">
+<h4>
                     Important
                 </h4>
-
-                <a href="about.html">
+<a href="about.html">
                     About Us
                 </a>
-
-                <a href="contact.html">
+<a href="contact.html">
                     Contact
                 </a>
-
-                <a href="objectives.html">
+<a href="objectives.html">
                     Study Material
                 </a>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="footer-bottom">
-
-            <div class="container">
-
-                <p>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="container">
+<p>
                     © 2026 Chemistry Point.
                     All Rights Reserved.
                 </p>
-
-                <p>
+<p>
                     Designed &amp; Developed by
                     <strong>
                         Code With Piyush
                     </strong>
-                </p>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =========================================
+</p>
+</div>
+</div>
+</footer>
+<!-- =========================================
          JAVASCRIPT
     ========================================== -->
 
-    <script>
+<script type="module">import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
+const firebaseConfig = {
+    apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+    authDomain: "chemistry-point-9a41b.firebaseapp.com",
+    projectId: "chemistry-point-9a41b",
+    storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+    messagingSenderId: "791007663942",
+    appId: "1:791007663942:web:693c008e475a2e74357747"
+};
+const DB_URL = "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/";
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app, DB_URL);
+const pyqGrid = document.getElementById("pyqQuizGrid");
+const chapterGrid = document.getElementById("chapterQuizGrid");
+const emptyBox = document.getElementById("quizEmpty");
+const searchInput = document.getElementById("quizSearch");
+let allQuizzes = [];
+let questionCounts = {};
 
-        /* =========================================
-           MOBILE MENU
-        ========================================== */
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const menuBtn = document.getElementById("menuBtn");
-            const mobileNav = document.getElementById("mobileNav");
-
-            if (!menuBtn || !mobileNav) return;
-
-            const icon = menuBtn.querySelector("i");
-            const mobileLinks = mobileNav.querySelectorAll("a");
-
-            function openMenu() {
-                mobileNav.classList.add("show");
-                
-                if (icon) {
-                    icon.classList.remove("fa-bars");
-                    icon.classList.add("fa-xmark");
-                }
-
-                menuBtn.setAttribute("aria-expanded", "true");
-                menuBtn.setAttribute("aria-label", "Close menu");
-            }
-
-            function closeMenu() {
-                mobileNav.classList.remove("show");
-                
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-
-                menuBtn.setAttribute("aria-expanded", "false");
-                menuBtn.setAttribute("aria-label", "Open menu");
-            }
-
-            function toggleMenu(event) {
-                if (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                const isOpen = mobileNav.classList.contains("show");
-
-                if (isOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            }
-
-            menuBtn.addEventListener("click", toggleMenu);
-
-            mobileLinks.forEach(function (link) {
-                link.addEventListener("click", function () {
-                    closeMenu();
-                });
-            });
-
-            window.addEventListener("resize", function () {
-                if (window.innerWidth > 900) {
-                    closeMenu();
-                }
-            });
-
-            closeMenu();
+function esc(v) {
+    return String(v ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+function titleOf(q) { return String(q.title ?? q.name ?? q.quizTitle ?? "Chemistry Quiz").trim(); }
+function chapterOf(q) { return String(q.chapter ?? q.chapterName ?? q.chapterSlug ?? "").trim(); }
+function typeOf(q) {
+    const raw = String(q.type ?? q.quizType ?? q.category ?? q.quizCategory ?? "").toLowerCase().trim();
+    if (raw.includes("pyq") || raw.includes("previous")) return "pyq";
+    if (raw.includes("chapter") || raw === "normal" || raw === "chapter-wise" || raw === "chapterwise") return "chapter";
+    const t = titleOf(q).toLowerCase();
+    return (t.includes("pyq") || t.includes("previous year")) ? "pyq" : "chapter";
+}
+function durationOf(q) {
+    const n = Number(q.duration ?? q.durationMinutes ?? q.timeLimit ?? q.time ?? q.minutes);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+}
+function countOf(q) {
+    const n = Number(q.totalQuestions ?? q.questionCount ?? q.questionsCount ?? q.totalQuestion ?? q.numberOfQuestions);
+    return Number.isFinite(n) && n >= 0 ? n : (questionCounts[String(q.__id)] || 0);
+}
+function durationText(n) {
+    if (!n) return "Duration not set";
+    if (n >= 60 && n % 60 === 0) { const h=n/60; return `${h} ${h===1?"Hour":"Hours"}`; }
+    return `${n} ${n===1?"Minute":"Minutes"}`;
+}
+function descriptionOf(q,type) {
+    if (q.description) return String(q.description);
+    const c=chapterOf(q);
+    if(type==="pyq") return c ? `${c} chapter के previous year questions का practice test.` : "Previous year chemistry objective questions का practice test.";
+    return c ? `${c} chapter के objective questions का online practice quiz.` : "Chemistry objective questions का online practice quiz.";
+}
+function iconOf(type,chapter) {
+    if(type==="pyq") return "fa-solid fa-clock-rotate-left";
+    const c=chapter.toLowerCase();
+    if(c.includes("electro")) return "fa-solid fa-bolt";
+    if(c.includes("kinetic")) return "fa-solid fa-gauge-high";
+    if(c.includes("solution")) return "fa-solid fa-vial";
+    if(c.includes("surface")) return "fa-solid fa-layer-group";
+    if(c.includes("solid")) return "fa-solid fa-cubes";
+    return "fa-solid fa-atom";
+}
+function card(q) {
+    const type=typeOf(q), title=titleOf(q), chapter=chapterOf(q), count=countOf(q), duration=durationOf(q);
+    return `<article class="quiz-card" data-search="${esc([title,chapter,descriptionOf(q,type),type].join(" ").toLowerCase())}">
+        <div class="quiz-card-top"><div class="quiz-card-icon"><i class="${iconOf(type,chapter)}"></i></div><span class="quiz-tag">${type==="pyq"?"PYQ":"Chapter"}</span></div>
+        <h3>${esc(title)}</h3><p>${esc(descriptionOf(q,type))}</p>
+        <div class="quiz-meta"><span><i class="fa-solid fa-list"></i>${count} ${count===1?"Question":"Questions"}</span><span><i class="fa-regular fa-clock"></i>${esc(durationText(duration))}</span></div>
+        <a href="student/quiz.html?quizId=${encodeURIComponent(q.__id)}" class="quiz-start-btn">Start Quiz <i class="fa-solid fa-arrow-right"></i></a>
+    </article>`;
+}
+function render() {
+    const query=(searchInput?.value||"").toLowerCase().trim();
+    const filtered=allQuizzes.filter(q=>!query || [titleOf(q),chapterOf(q),descriptionOf(q,typeOf(q)),typeOf(q)].join(" ").toLowerCase().includes(query));
+    const pyq=filtered.filter(q=>typeOf(q)==="pyq"), chapter=filtered.filter(q=>typeOf(q)==="chapter");
+    pyqGrid.innerHTML=pyq.length?pyq.map(card).join(""): `<div class="quiz-firebase-error"><i class="fa-solid fa-circle-question"></i><strong>PYQ Quiz नहीं मिला</strong><span>अभी कोई active PYQ quiz उपलब्ध नहीं है।</span></div>`;
+    chapterGrid.innerHTML=chapter.length?chapter.map(card).join(""): `<div class="quiz-firebase-error"><i class="fa-solid fa-book-open"></i><strong>Chapter Wise Quiz नहीं मिला</strong><span>अभी कोई active chapter-wise quiz उपलब्ध नहीं है।</span></div>`;
+    if(emptyBox) emptyBox.style.display=query && !filtered.length ? "block":"none";
+}
+async function loadQuestionCounts() {
+    try {
+        const s=await get(ref(db,"questions"));
+        if(!s.exists()) return {};
+        const out={};
+        Object.values(s.val()||{}).forEach(q=>{
+            if(!q || (q.status && q.status!=="active")) return;
+            const id=String(q.quizId||""); if(!id) return;
+            out[id]=(out[id]||0)+1;
         });
-
-
-        /* =========================================
-           DARK / LIGHT MODE
-        ========================================== */
-
-        const themeButtons =
-            document.querySelectorAll(
-                ".theme-toggle"
-            );
-
-
-        function updateThemeIcon() {
-
-            const isLight =
-                document.body.classList.contains(
-                    "light-mode"
-                );
-
-
-            themeButtons.forEach(
-                function (button) {
-
-                    const icon =
-                        button.querySelector("i");
-
-
-                    if (!icon) {
-                        return;
-                    }
-
-
-                    if (isLight) {
-
-                        icon.classList.remove(
-                            "fa-moon"
-                        );
-
-                        icon.classList.add(
-                            "fa-sun"
-                        );
-
-                    } else {
-
-                        icon.classList.remove(
-                            "fa-sun"
-                        );
-
-                        icon.classList.add(
-                            "fa-moon"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        function toggleTheme() {
-
-            document.body.classList.toggle(
-                "light-mode"
-            );
-
-
-            const currentTheme =
-                document.body.classList.contains(
-                    "light-mode"
-                )
-                    ? "light"
-                    : "dark";
-
-
-            localStorage.setItem(
-                "chemistryPointTheme",
-                currentTheme
-            );
-
-
-            updateThemeIcon();
-
-        }
-
-
-        /* Add event to both buttons */
-
-        themeButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    toggleTheme
-                );
-
-            }
-        );
-
-
-        /* Load saved theme */
-
-        const savedTheme =
-            localStorage.getItem(
-                "chemistryPointTheme"
-            );
-
-
-        if (savedTheme === "light") {
-
-            document.body.classList.add(
-                "light-mode"
-            );
-
-        }
-
-
-        updateThemeIcon();
-
-
-
-        /* =========================================
-           QUIZ SEARCH
-        ========================================== */
-
-        const searchInput =
-            document.getElementById(
-                "quizSearch"
-            );
-
-
-        const quizCards =
-            document.querySelectorAll(
-                ".quiz-card"
-            );
-
-
-        const quizEmpty =
-            document.getElementById(
-                "quizEmpty"
-            );
-
-
-        if (searchInput) {
-
-            searchInput.addEventListener(
-                "input",
-                function () {
-
-                    const searchValue =
-                        this.value
-                            .toLowerCase()
-                            .trim();
-
-
-                    let visibleCards = 0;
-
-
-                    quizCards.forEach(
-                        function (card) {
-
-                            const searchText =
-                                (
-                                    card.dataset.search ||
-                                    ""
-                                )
-                                .toLowerCase();
-
-
-                            if (
-                                searchText.includes(
-                                    searchValue
-                                )
-                            ) {
-
-                                card.style.display =
-                                    "";
-
-                                visibleCards++;
-
-                            } else {
-
-                                card.style.display =
-                                    "none";
-
-                            }
-
-                        }
-                    );
-
-
-                    if (quizEmpty) {
-
-                        quizEmpty.style.display =
-                            visibleCards === 0
-                                ? "block"
-                                : "none";
-
-                    }
-
-                }
-            );
-
-        }
-
-
-    </script>
-
-</body>
+        return out;
+    } catch(e) { console.warn("Question count load failed",e); return {}; }
+}
+async function loadQuizzes() {
+    try {
+        const [quizSnap, counts]=await Promise.all([get(ref(db,"quizzes")),loadQuestionCounts()]);
+        questionCounts=counts;
+        if(!quizSnap.exists()){allQuizzes=[];render();return;}
+        allQuizzes=Object.entries(quizSnap.val()||{}).map(([id,q])=>({...q,__id:id})).filter(q=>{
+            const status=String(q.status ?? q.active ?? "active").toLowerCase();
+            return status!=="inactive" && status!=="false" && status!=="disabled";
+        });
+        allQuizzes.sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+        render();
+    } catch(e) {
+        console.error("Firebase quiz loading error",e);
+        const html=`<div class="quiz-firebase-error"><i class="fa-solid fa-database"></i><strong>Quiz load नहीं हो पाए।</strong><span>Firebase connection और Database Rules check करें।</span></div>`;
+        pyqGrid.innerHTML=html; chapterGrid.innerHTML=html;
+    }
+}
+searchInput?.addEventListener("input",render);
+loadQuizzes();</script></body>
 </html>
