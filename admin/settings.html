@@ -78,6 +78,7 @@
             <div class="field"><label for="teacherPhone">Pardeep Sir — Phone</label><input id="teacherPhone" name="teacherPhone" type="tel" placeholder="+91..." inputmode="tel"></div>
             <div class="field"><label for="teacherWhatsApp">Pardeep Sir — WhatsApp Number / Link</label><input id="teacherWhatsApp" name="teacherWhatsApp" placeholder="+91... या https://wa.me/..."></div>
             <div class="field"><label for="teacherInstagram">Pardeep Sir — Instagram URL</label><input id="teacherInstagram" name="teacherInstagram" type="url" placeholder="https://instagram.com/..."></div>
+            <div class="field"><label for="teacherYoutube">Pardeep Sir — YouTube URL</label><input id="teacherYoutube" name="teacherYoutube" type="url" placeholder="https://youtube.com/@..."></div>
             <div class="field"><label for="developerContactName">Developer Display Name</label><input id="developerContactName" name="developerContactName" value="Code With Piyush"></div>
             <div class="field"><label for="developerEmail">Piyush — Email</label><input id="developerEmail" name="developerEmail" type="email" placeholder="you@example.com"></div>
             <div class="field"><label for="developerInstagram">Piyush — Instagram URL</label><input id="developerInstagram" name="developerInstagram" type="url" placeholder="https://instagram.com/..."></div>
@@ -138,7 +139,7 @@
     }
     const generalFields = ["siteName","tagline","siteDescription","logoPath","teacherDisplayName","developerDisplayName","footerText","defaultTheme"];
     const aboutFields = ["aboutIntro","teacherName","teacherRole","teacherBio","teacherImage","developerName","developerRole","developerBio","developerImage","missionTitle","missionText"];
-    const contactFields = ["contactTeacherName","teacherPhone","teacherWhatsApp","teacherInstagram","developerContactName","developerEmail","developerInstagram","developerYoutube","contactEmail","otherSocial","contactNote"];
+    const contactFields = ["contactTeacherName","teacherPhone","teacherWhatsApp","teacherInstagram","teacherYoutube","developerContactName","developerEmail","developerInstagram","developerYoutube","contactEmail","otherSocial","contactNote"];
     async function loadSettings() {
       if (!authorized) return;
       showNotice("Firebase settings load हो रही हैं...", "info");
