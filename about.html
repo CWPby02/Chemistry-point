@@ -119,6 +119,9 @@
                     <div class="person-social" id="pardeepSocial">
                         <a href="#" data-social="pardeepYoutube" aria-label="Pardeep Sir YouTube" hidden><i class="fa-brands fa-youtube"></i></a>
                         <a href="#" data-social="pardeepInstagram" aria-label="Pardeep Sir Instagram" hidden><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" data-social="pardeepWhatsApp" aria-label="Pardeep Sir WhatsApp" hidden><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" data-social="pardeepEmail" aria-label="Pardeep Sir Email" hidden><i class="fa-solid fa-envelope"></i></a>
+                        <a href="#" data-social="pardeepOther" aria-label="Pardeep Sir other social link" hidden><i class="fa-solid fa-link"></i></a>
                     </div>
                 </article>
 
@@ -169,8 +172,10 @@
             <h3>Code With Piyush</h3>
             <p>Modern educational websites और digital learning experiences बनाने का प्रयास।</p>
             <div class="social-links">
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" id="footerYouTube" data-social="footerYouTube" aria-label="Pardeep Sir YouTube" hidden><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" id="footerInstagram" data-social="footerInstagram" aria-label="Pardeep Sir Instagram" hidden><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" id="footerWhatsApp" data-social="footerWhatsApp" aria-label="Pardeep Sir WhatsApp" hidden><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" id="footerEmail" aria-label="Pardeep Sir Email" hidden><i class="fa-solid fa-envelope"></i></a>
             </div>
         </div>
         <div class="footer-column"><h4>Quick Links</h4><a href="index.html">Home</a><a href="videos.html">Videos</a><a href="objectives.html">Objectives</a><a href="quiz.html">Quiz</a></div>
@@ -301,8 +306,29 @@ async function loadAboutContent() {
         );
 
         // Social links are stored in Settings > Contact where available.
+        // Pardeep Sir's links appear only in his own profile and the site footer.
         setSocial("pardeepYoutube", contact.teacherYoutube);
         setSocial("pardeepInstagram", contact.teacherInstagram);
+        setSocial("pardeepOther", contact.otherSocial);
+        const teacherWhatsApp = typeof contact.teacherWhatsApp === "string" ? contact.teacherWhatsApp.trim() : "";
+        const cleanWhatsApp = teacherWhatsApp.replace(/[\s()-]/g, "");
+        const teacherWhatsAppUrl = /^\+?\d{8,15}$/.test(cleanWhatsApp)
+            ? "https://wa.me/" + cleanWhatsApp.replace(/\D/g, "")
+            : teacherWhatsApp;
+        setSocial("pardeepWhatsApp", teacherWhatsAppUrl);
+        const teacherEmail = typeof contact.contactEmail === "string" ? contact.contactEmail.trim() : "";
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(teacherEmail)) {
+            const profileEmail = document.querySelector('[data-social="pardeepEmail"]');
+            profileEmail.href = "mailto:" + teacherEmail;
+            profileEmail.hidden = false;
+            const footerEmail = document.getElementById("footerEmail");
+            footerEmail.href = "mailto:" + teacherEmail;
+            footerEmail.hidden = false;
+        }
+        setSocial("footerYouTube", contact.teacherYoutube);
+        setSocial("footerInstagram", contact.teacherInstagram);
+        setSocial("footerWhatsApp", teacherWhatsAppUrl);
+        // Piyush's social links stay only in the Piyush profile.
         setSocial("piyushYoutube", contact.developerYoutube);
         setSocial("piyushInstagram", contact.developerInstagram);
 
