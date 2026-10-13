@@ -130,7 +130,7 @@
             <div style="max-width:1050px;margin:25px auto 0">
                 <div class="contact-form-card">
                     <h2>Send Us a Message</h2>
-                    <p>अपना message भेजें। Firebase में /siteContent/contact/messages पर message save होगा, यदि आपके Realtime Database rules अनुमति देते हैं।</p>
+                    <p>अपना message भेजें। Message Firebase के /contactMessages path पर save होगा, यदि Database Rules अनुमति देते हैं।</p>
                     <form id="contactForm">
                         <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" placeholder="Enter your name" maxlength="100" required></div>
                         <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="Enter your email" maxlength="200" required></div>
@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="contact-note"><i class="fa-solid fa-circle-info"></i><p>Contact details Firebase में उपलब्ध होने पर ही दिखाई देंगे। अपना वास्तविक phone number, email और social links Firebase के /siteContent/contact path में जोड़ें।</p></div>
+            <div class="contact-note"><i class="fa-solid fa-circle-info"></i><p>Contact details Firebase में उपलब्ध होने पर ही दिखाई देंगे। अपना phone, email और social links /siteContent/contact में जोड़ें। Messages अलग /contactMessages path में save होते हैं।</p></div>
         </div>
     </section>
 </main>
@@ -279,39 +279,73 @@ function setSocialCard(id, url) {
 async function loadContactData() {
     const status = document.getElementById("firebaseStatus");
     if (!window.firebase) {
-        status.textContent = "Firebase SDK load नहीं हुआ। Contact details उपलब्ध होने पर भी load नहीं हो पाएँगी।";
+        status.textContent = "Firebase SDK load नहीं हुआ। Default contact page दिखाई जा रही है।";
         return;
     }
     try {
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const snapshot = await db.ref("siteContent/contact").once("value");
-        const data = snapshot.val();
-        if (!data) {
-            status.textContent = "Firebase connected है, लेकिन /siteContent/contact में contact details अभी नहीं हैं।";
-            return;
+        const [generalSnap, aboutSnap, contactSnap] = await Promise.all([
+            db.ref("siteContent/general").once("value"),
+            db.ref("siteContent/about").once("value"),
+            db.ref("siteContent/contact").once("value")
+        ]);
+        const general = generalSnap.val() || {};
+        const about = aboutSnap.val() || {};
+        const contact = contactSnap.val() || {};
+
+        // Admin Settings fields are mapped here to the public Contact page.
+        setText("contactHeroText", contact.contactNote || contact.heroDescription || general.siteDescription);
+        setText("pardeepName", contact.contactTeacherName || about.teacherName || "Pardeep Sir");
+        setText("pardeepRole", about.teacherRole || "Chemistry Educator");
+        if (typeof about.teacherImage === "string" && about.teacherImage.trim()) {
+            const img = document.getElementById("pardeepImage");
+            img.src = about.teacherImage.trim();
+            img.onerror = () => { img.onerror = null; img.src = "assets/images/teachers/pardeep-sir.jpg"; };
         }
-        setText("contactHeroText", data.heroDescription);
-        setPersonContact("pardeep", data.pardeepSir);
-        setPersonContact("piyush", data.piyush);
-        const social = data.social || {};
-        setSocialCard("socialYouTube", social.youtube || (data.piyush && data.piyush.youtube));
-        setSocialCard("socialInstagram", social.instagram || (data.piyush && data.piyush.instagram));
-        setSocialCard("socialWhatsApp", social.whatsapp || (data.piyush && data.piyush.whatsapp));
-        const socialEmail = social.email || (data.piyush && data.piyush.email) || (data.pardeepSir && data.pardeepSir.email);
-        if (socialEmail && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(socialEmail)) {
+        setPhone("pardeep", contact.teacherPhone);
+        const teacherWhatsApp = typeof contact.teacherWhatsApp === "string" ? contact.teacherWhatsApp.trim() : "";
+        const whatsappClean = teacherWhatsApp.replace(/[\s()-]/g, "");
+        const teacherWhatsAppUrl = /^\+?\d{8,15}$/.test(whatsappClean)
+            ? "https://wa.me/" + whatsappClean.replace(/\D/g, "")
+            : teacherWhatsApp;
+        setExternalLink("pardeepWhatsAppLink", teacherWhatsAppUrl, "pardeepWhatsAppText", "Contact on WhatsApp");
+        setExternalLink("pardeepInstagramLink", contact.teacherInstagram, "pardeepInstagramText", "Pardeep Sir");
+        setEmail("pardeep", contact.contactEmail);
+
+        setText("piyushName", contact.developerContactName || about.developerName || general.developerDisplayName || "Code With Piyush");
+        setText("piyushRole", about.developerRole || "Website & Technology");
+        if (typeof about.developerImage === "string" && about.developerImage.trim()) {
+            const img = document.getElementById("piyushImage");
+            img.src = about.developerImage.trim();
+            img.onerror = () => { img.onerror = null; img.src = "assets/images/teachers/piyush.jpg"; };
+        }
+        setEmail("piyush", contact.developerEmail);
+        setExternalLink("piyushInstagramLink", contact.developerInstagram, "piyushInstagramText", "Code With Piyush");
+        setExternalLink("piyushYouTubeLink", contact.developerYoutube, "piyushYouTubeText", "Code With Piyush");
+
+        setSocialCard("socialYouTube", contact.developerYoutube);
+        setSocialCard("socialInstagram", contact.developerInstagram || contact.teacherInstagram);
+        setSocialCard("socialWhatsApp", teacherWhatsAppUrl);
+        const generalEmail = contact.contactEmail || contact.developerEmail;
+        if (generalEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(generalEmail.trim())) {
             const emailLink = document.getElementById("socialEmail");
-            emailLink.href = "mailto:" + socialEmail;
+            emailLink.href = "mailto:" + generalEmail.trim();
             emailLink.hidden = false;
         }
-        const footerYoutube = social.youtube || (data.piyush && data.piyush.youtube);
-        const footerInstagram = social.instagram || (data.piyush && data.piyush.instagram);
-        if (footerYoutube) setExternalLink("footerYouTube", footerYoutube);
-        if (footerInstagram) setExternalLink("footerInstagram", footerInstagram);
-        status.textContent = "Contact details Firebase Realtime Database se load karne ki koshish complete hui.";
+        if (contact.otherSocial) {
+            const other = document.getElementById("socialInstagram");
+            if (other.hidden) setExternalLink("socialInstagram", contact.otherSocial);
+        }
+        if (contact.developerYoutube) setExternalLink("footerYouTube", contact.developerYoutube);
+        if (contact.developerInstagram) setExternalLink("footerInstagram", contact.developerInstagram);
+
+        const note = document.querySelector(".contact-note p");
+        if (note && contact.contactNote) note.textContent = contact.contactNote;
+        status.textContent = "Contact page पर Admin Settings से उपलब्ध details load हो गई हैं।";
     } catch (error) {
         console.error("Contact Firebase read failed:", error);
-        status.textContent = "Firebase se contact details load nahi ho payi. Database URL, connection aur read rules check karein.";
+        status.textContent = "Firebase data load नहीं हुआ। Database URL और public read rules check करें।";
     }
 }
 
@@ -334,12 +368,12 @@ contactForm.addEventListener("submit", async (event) => {
             status: "new"
         };
         if (!payload.name || !payload.email || !payload.message) throw new Error("कृपया सभी fields भरें।");
-        await firebase.database().ref("siteContent/contact/messages").push(payload);
+        await firebase.database().ref("contactMessages").push(payload);
         formStatus.textContent = "आपका message successfully भेज दिया गया है।";
         contactForm.reset();
     } catch (error) {
         console.error("Contact message save failed:", error);
-        formStatus.textContent = "Message save नहीं हुआ। Firebase Database rules में /siteContent/contact/messages पर write permission और connection check करें।";
+        formStatus.textContent = "Message save नहीं हुआ। Firebase Rules में /contactMessages पर create permission और connection check करें।";
     } finally {
         contactSubmit.disabled = false;
         contactSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
