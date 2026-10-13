@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | Chemistry Point Admin</title>
+  <link rel="icon" href="../assets/images/logo/logo.png">
+  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    :root{--bg:#08090b;--card:#13161a;--card2:#0e1013;--border:rgba(217,154,22,.18);--text:#fff;--muted:#858a93;--gold:#d99a16;--gold2:#f3bd45;--sidebar:260px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;transition:background .25s,color .25s}body.light-mode{--bg:#f5f5f5;--card:#fff;--card2:#f8f8f8;--border:rgba(168,111,0,.18);--text:#17191c;--muted:#666}
+    .sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:var(--card);border-right:1px solid var(--border);z-index:1000;display:flex;flex-direction:column}.brand{height:76px;padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);flex-shrink:0}.brand img{width:44px;height:44px;object-fit:contain;border-radius:10px}.brand strong{font-family:Poppins,sans-serif;font-size:17px}.brand span{display:block;color:var(--gold2);font-size:10px;margin-top:2px;letter-spacing:.5px}.nav{padding:18px 12px;overflow-y:auto}.nav a{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);padding:12px 13px;border-radius:11px;margin-bottom:5px;font-size:13px;font-weight:600;transition:.2s}.nav a i{width:19px;text-align:center}.nav a:hover,.nav a.active{color:var(--gold2);background:rgba(217,154,22,.1)}.sidefoot{margin-top:auto;padding:15px;border-top:1px solid var(--border)}.logout{width:100%;border:1px solid rgba(220,53,69,.25);background:rgba(220,53,69,.07);color:#ff8994;border-radius:10px;padding:11px;cursor:pointer;font-family:inherit;font-weight:600}
+    .main{margin-left:var(--sidebar);min-height:100vh}.top{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:900}.left,.right{display:flex;align-items:center;gap:14px}.mobilebtn,.theme{border:1px solid var(--border);background:transparent;color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer}.mobilebtn{display:none}.theme{color:var(--gold2)}.title{font-family:Poppins,sans-serif;font-size:20px;margin:0}.user{display:flex;align-items:center;gap:10px;padding-left:12px;border-left:1px solid var(--border)}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(217,154,22,.12);color:var(--gold2)}.email{font-size:12px;color:var(--muted);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.content{padding:28px;max-width:1250px;margin:auto}.intro{border:1px solid var(--border);border-radius:18px;padding:23px;background:linear-gradient(135deg,rgba(217,154,22,.12),transparent 55%),var(--card);margin-bottom:22px}.intro h2{font:700 23px Poppins,sans-serif;margin:0 0 7px}.intro h2 span{color:var(--gold2)}.intro p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}.notice{display:none;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;line-height:1.5}.notice.show{display:block}.notice.success{color:#6ee7a3;background:rgba(25,135,84,.1);border:1px solid rgba(25,135,84,.25)}.notice.error{color:#ff8994;background:rgba(220,53,69,.08);border:1px solid rgba(220,53,69,.25)}.notice.info{color:var(--gold2);background:rgba(217,154,22,.08);border:1px solid var(--border)}
+    .settings-card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px;overflow:hidden}.section-head{display:flex;align-items:center;gap:12px;padding:19px 21px;border-bottom:1px solid var(--border)}.section-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:rgba(217,154,22,.11);color:var(--gold2);font-size:17px;flex-shrink:0}.section-head h3{font:600 16px Poppins,sans-serif;margin:0 0 3px}.section-head p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}.section-body{padding:21px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.field{min-width:0}.field.full{grid-column:1/-1}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:8px}.field label .optional{font-weight:400;color:var(--muted)}.field input,.field textarea,.field select{display:block;width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 13px;background:var(--card2);color:var(--text);font:13px Inter,sans-serif;outline:none;transition:border .2s}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}.field textarea{min-height:100px;resize:vertical;line-height:1.6}.field input::placeholder,.field textarea::placeholder{color:var(--muted);opacity:.8}.hint{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5}.actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;padding-top:5px}.btn{border:1px solid var(--border);border-radius:10px;padding:12px 16px;font:600 12px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-secondary{color:var(--text);background:var(--card)}.btn-primary{background:var(--gold);color:#17120a;border-color:var(--gold);min-width:150px}.btn:disabled{opacity:.65;cursor:wait}.savebar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 20px;border:1px solid var(--border);border-radius:14px;background:var(--card);margin-bottom:25px}.savebar p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}.savebar p strong{display:block;color:var(--text);font-size:13px;margin-bottom:3px}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:950}.overlay.show{display:block}.small-note{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+    @media(max-width:1100px){.content{padding:22px}}@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.show{transform:translateX(0)}.main{margin-left:0}.mobilebtn{display:block}.email{max-width:140px}}@media(max-width:600px){.top{padding:0 15px;height:68px}.content{padding:16px}.title{font-size:17px}.user{display:none}.intro{padding:18px}.intro h2{font-size:20px}.section-head{padding:16px}.section-body{padding:16px}.fields{grid-template-columns:1fr;gap:15px}.field.full{grid-column:auto}.savebar{align-items:stretch;flex-direction:column}.savebar .btn{width:100%}.actions{flex-direction:column-reverse}.actions .btn{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="../assets/images/logo/logo.png" alt="Chemistry Point"><div><strong>Chemistry Point</strong><span>ADMIN PANEL</span></div></div>
+    <nav class="nav">
+      <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
+      <a href="videos.html"><i class="fa-solid fa-video"></i>Videos</a>
+      <a href="objectives.html"><i class="fa-solid fa-book-open"></i>Objectives</a>
+      <a href="quizzes.html"><i class="fa-solid fa-circle-question"></i>Quizzes</a>
+      <a href="questions.html"><i class="fa-solid fa-list-check"></i>Questions</a>
+      <a href="students.html"><i class="fa-solid fa-users"></i>Students</a>
+      <a href="notices.html"><i class="fa-solid fa-bullhorn"></i>Notices</a>
+      <a href="settings.html" class="active"><i class="fa-solid fa-gear"></i>Settings</a>
+    </nav>
+    <div class="sidefoot"><button class="logout" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div>
+  </aside>
+  <main class="main">
+    <header class="top"><div class="left"><button class="mobilebtn" id="sideBtn" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button><h1 class="title">Settings</h1></div><div class="right"><button class="theme" id="theme" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button><div class="user"><div class="avatar"><i class="fa-solid fa-user-shield"></i></div><span class="email" id="email">Checking...</span></div></div></header>
+    <div class="content">
+      <section class="intro"><h2>Website <span>Settings</span> ⚙️</h2><p>यहाँ से Chemistry Point की general information, About page और Contact details manage करें। Save करने के बाद settings Firebase Realtime Database में store होंगी।</p></section>
+      <div class="notice info show" id="notice" role="status">Firebase settings load हो रही हैं...</div>
+      <form id="settingsForm">
+        <section class="settings-card">
+          <div class="section-head"><div class="section-icon"><i class="fa-solid fa-sliders"></i></div><div><h3>General Settings</h3><p>Website की basic identity और branding</p></div></div>
+          <div class="section-body"><div class="fields">
+            <div class="field"><label for="siteName">Website Name</label><input id="siteName" name="siteName" value="Chemistry Point" required></div>
+            <div class="field"><label for="tagline">Tagline</label><input id="tagline" name="tagline" placeholder="जैसे: Learn Chemistry Simply"></div>
+            <div class="field full"><label for="siteDescription">Website Description</label><textarea id="siteDescription" name="siteDescription" placeholder="Website के बारे में छोटी जानकारी"></textarea></div>
+            <div class="field"><label for="logoPath">Logo Path / URL</label><input id="logoPath" name="logoPath" value="assets/images/logo/logo.png" placeholder="assets/images/logo/logo.png"><div class="hint">Relative path public pages की location के अनुसार resolve होना चाहिए।</div></div>
+            <div class="field"><label for="teacherDisplayName">Teacher Display Name</label><input id="teacherDisplayName" name="teacherDisplayName" value="Pardeep Sir"></div>
+            <div class="field"><label for="developerDisplayName">Developer / Brand Name</label><input id="developerDisplayName" name="developerDisplayName" value="Code With Piyush"></div>
+            <div class="field"><label for="footerText">Footer Copyright Text</label><input id="footerText" name="footerText" value="© 2026 Code With Piyush"></div>
+          </div></div>
+        </section>
+        <section class="settings-card">
+          <div class="section-head"><div class="section-icon"><i class="fa-solid fa-book-open"></i></div><div><h3>About Page</h3><p>Teacher, developer, mission और introduction</p></div></div>
+          <div class="section-body"><div class="fields">
+            <div class="field full"><label for="aboutIntro">About Introduction</label><textarea id="aboutIntro" name="aboutIntro" placeholder="Chemistry Point का introduction"></textarea></div>
+            <div class="field"><label for="teacherName">Pardeep Sir — Name</label><input id="teacherName" name="teacherName" value="Pardeep Sir"></div>
+            <div class="field"><label for="teacherRole">Pardeep Sir — Role</label><input id="teacherRole" name="teacherRole" placeholder="Chemistry Educator"></div>
+            <div class="field full"><label for="teacherBio">Pardeep Sir — Bio</label><textarea id="teacherBio" name="teacherBio" placeholder="Teacher के बारे में जानकारी"></textarea></div>
+            <div class="field"><label for="teacherImage">Pardeep Sir — Image Path / URL</label><input id="teacherImage" name="teacherImage" value="assets/images/teachers/pardeep-sir.jpg"></div>
+            <div class="field"><label for="developerName">Developer — Name</label><input id="developerName" name="developerName" value="Piyush Kumar"></div>
+            <div class="field"><label for="developerRole">Developer — Role</label><input id="developerRole" name="developerRole" placeholder="Website Developer"></div>
+            <div class="field full"><label for="developerBio">Developer — Bio</label><textarea id="developerBio" name="developerBio" placeholder="Code With Piyush के बारे में जानकारी"></textarea></div>
+            <div class="field"><label for="developerImage">Developer — Image Path / URL</label><input id="developerImage" name="developerImage" value="assets/images/teachers/piyush.jpg"></div>
+            <div class="field"><label for="missionTitle">Mission Heading</label><input id="missionTitle" name="missionTitle" placeholder="Our Mission"></div>
+            <div class="field full"><label for="missionText">Mission / Learning Goals</label><textarea id="missionText" name="missionText" placeholder="Students के लिए platform का उद्देश्य"></textarea></div>
+          </div></div>
+        </section>
+        <section class="settings-card">
+          <div class="section-head"><div class="section-icon"><i class="fa-solid fa-address-card"></i></div><div><h3>Contact Details</h3><p>Contact page पर दिखने वाली contact information और social links</p></div></div>
+          <div class="section-body"><div class="fields">
+            <div class="field"><label for="contactTeacherName">Teacher Display Name</label><input id="contactTeacherName" name="contactTeacherName" value="Pardeep Sir"></div>
+            <div class="field"><label for="teacherPhone">Pardeep Sir — Phone</label><input id="teacherPhone" name="teacherPhone" type="tel" placeholder="+91..." inputmode="tel"></div>
+            <div class="field"><label for="teacherWhatsApp">Pardeep Sir — WhatsApp Number / Link</label><input id="teacherWhatsApp" name="teacherWhatsApp" placeholder="+91... या https://wa.me/..."></div>
+            <div class="field"><label for="teacherInstagram">Pardeep Sir — Instagram URL</label><input id="teacherInstagram" name="teacherInstagram" type="url" placeholder="https://instagram.com/..."></div>
+            <div class="field"><label for="developerContactName">Developer Display Name</label><input id="developerContactName" name="developerContactName" value="Code With Piyush"></div>
+            <div class="field"><label for="developerEmail">Piyush — Email</label><input id="developerEmail" name="developerEmail" type="email" placeholder="you@example.com"></div>
+            <div class="field"><label for="developerInstagram">Piyush — Instagram URL</label><input id="developerInstagram" name="developerInstagram" type="url" placeholder="https://instagram.com/..."></div>
+            <div class="field"><label for="developerYoutube">Piyush — YouTube URL</label><input id="developerYoutube" name="developerYoutube" type="url" placeholder="https://youtube.com/@..."></div>
+            <div class="field"><label for="contactEmail">General Contact Email <span class="optional">(optional)</span></label><input id="contactEmail" name="contactEmail" type="email" placeholder="contact@example.com"></div>
+            <div class="field"><label for="otherSocial">Other Social Link <span class="optional">(optional)</span></label><input id="otherSocial" name="otherSocial" type="url" placeholder="https://..."></div>
+            <div class="field full"><label for="contactNote">Contact Page Note</label><textarea id="contactNote" name="contactNote" placeholder="Students contact कब और कैसे करें"></textarea></div>
+          </div></div>
+        </section>
+        <section class="settings-card">
+          <div class="section-head"><div class="section-icon"><i class="fa-solid fa-circle-half-stroke"></i></div><div><h3>Theme Settings</h3><p>Dashboard की theme इस browser में याद रखी जाएगी</p></div></div>
+          <div class="section-body"><div class="fields"><div class="field"><label for="defaultTheme">Default Theme Preference</label><select id="defaultTheme" name="defaultTheme"><option value="dark">Dark Mode</option><option value="light">Light Mode</option></select><div class="hint">यह विकल्प इसी browser की local theme preference बदलता है; सभी visitors की theme को remotely force नहीं करता।</div></div></div></div>
+        </section>
+        <div class="savebar"><p><strong><i class="fa-solid fa-cloud-arrow-up"></i> Save Website Settings</strong>Settings `/siteContent/general`, `/siteContent/about` और `/siteContent/contact` में save होंगी।</p><button class="btn btn-primary" id="saveBtn" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button></div>
+        <div class="actions"><button class="btn btn-secondary" type="button" id="reloadBtn"><i class="fa-solid fa-rotate"></i> Reload Saved Data</button><button class="btn btn-secondary" type="button" id="resetBtn"><i class="fa-solid fa-rotate-left"></i> Reset Form</button></div>
+      </form>
+      <p class="small-note">Note: इस page से Firebase में data save होगा। Public About और Contact pages पर ये changes दिखाने के लिए उन pages का JavaScript भी इसी field structure को read करना चाहिए। Firebase Realtime Database Rules में केवल authenticated और authorized admins को write permission दें।</p>
+    </div>
+  </main>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+      authDomain: "chemistry-point-9a41b.firebaseapp.com",
+      projectId: "chemistry-point-9a41b",
+      storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+      messagingSenderId: "791007663942",
+      appId: "1:791007663942:web:693c008e475a2e74357747"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app, "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    const $ = id => document.getElementById(id);
+    const form = $("settingsForm"), notice = $("notice"), saveBtn = $("saveBtn");
+    let authorized = false, initialFormValues = {};
+
+    function showNotice(message, type = "info") {
+      notice.textContent = message;
+      notice.className = `notice show ${type}`;
+    }
+    function setFields(data) {
+      const all = { ...(data.general || {}), ...(data.about || {}), ...(data.contact || {}) };
+      for (const element of form.elements) {
+        if (!element.name || !(element.name in all)) continue;
+        const value = all[element.name];
+        if (value !== null && value !== undefined && typeof value !== "object") element.value = String(value);
+      }
+      if (data.general?.defaultTheme) $("defaultTheme").value = data.general.defaultTheme;
+      initialFormValues = Object.fromEntries([...form.elements].filter(el => el.name).map(el => [el.name, el.value]));
+    }
+    function getSection(names) {
+      const out = {};
+      for (const name of names) out[name] = $(name).value.trim();
+      return out;
+    }
+    const generalFields = ["siteName","tagline","siteDescription","logoPath","teacherDisplayName","developerDisplayName","footerText","defaultTheme"];
+    const aboutFields = ["aboutIntro","teacherName","teacherRole","teacherBio","teacherImage","developerName","developerRole","developerBio","developerImage","missionTitle","missionText"];
+    const contactFields = ["contactTeacherName","teacherPhone","teacherWhatsApp","teacherInstagram","developerContactName","developerEmail","developerInstagram","developerYoutube","contactEmail","otherSocial","contactNote"];
+    async function loadSettings() {
+      if (!authorized) return;
+      showNotice("Firebase settings load हो रही हैं...", "info");
+      try {
+        const snap = await get(ref(db, "siteContent"));
+        setFields(snap.exists() ? snap.val() : {});
+        showNotice(snap.exists() ? "Saved settings load हो गईं।" : "अभी saved settings नहीं मिलीं। अपनी details भरकर Save Settings दबाएँ।", "info");
+      } catch (error) {
+        console.error("Settings load error:", error);
+        showNotice(`Settings load नहीं हो सकीं: ${error.message}. Firebase Database Rules और connection जाँचें।`, "error");
+      }
+    }
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!authorized) return showNotice("Admin verification पूरी नहीं हुई। दोबारा login करें।", "error");
+      if (!form.reportValidity()) return;
+      const originalText = saveBtn.innerHTML;
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+      try {
+        const general = getSection(generalFields);
+        const about = getSection(aboutFields);
+        const contact = getSection(contactFields);
+        const updates = {};
+        for (const [key, value] of Object.entries(general)) updates[`siteContent/general/${key}`] = value;
+        for (const [key, value] of Object.entries(about)) updates[`siteContent/about/${key}`] = value;
+        for (const [key, value] of Object.entries(contact)) updates[`siteContent/contact/${key}`] = value;
+        updates[`siteContent/general/updatedAt`] = Date.now();
+        updates[`siteContent/general/updatedBy`] = auth.currentUser?.uid || "";
+        await update(ref(db), updates);
+        initialFormValues = Object.fromEntries([...form.elements].filter(el => el.name).map(el => [el.name, el.value]));
+        localStorage.setItem("chemistryPointTheme", general.defaultTheme || "dark");
+        applyTheme(general.defaultTheme || "dark");
+        showNotice("Settings Firebase Realtime Database में successfully save हो गईं। Public pages पर दिखाने के लिए उन्हें इन fields को read करना होगा।", "success");
+      } catch (error) {
+        console.error("Settings save error:", error);
+        showNotice(`Settings save नहीं हुईं: ${error.message}. Database Rules में admin write permission जाँचें।`, "error");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = originalText;
+      }
+    });
+    $("reloadBtn").addEventListener("click", loadSettings);
+    $("resetBtn").addEventListener("click", () => {
+      for (const element of form.elements) if (element.name && element.name in initialFormValues) element.value = initialFormValues[element.name];
+      showNotice("Form को आखिरी load/save की values पर वापस कर दिया गया है।", "info");
+    });
+    async function verifyAdmin(user) {
+      const snapshot = await get(ref(db, `admins/${user.uid}`));
+      if (!snapshot.exists()) throw new Error("NOT_ADMIN");
+      const data = snapshot.val();
+      if (data.role !== "admin" || data.active === false) throw new Error("NOT_ADMIN");
+    }
+    onAuthStateChanged(auth, async user => {
+      if (!user) { location.href = "login.html"; return; }
+      $("email").textContent = user.email || "Admin";
+      try {
+        await verifyAdmin(user);
+        authorized = true;
+        await loadSettings();
+      } catch (error) {
+        console.error("Admin verification failed:", error);
+        await signOut(auth);
+        location.href = "login.html";
+      }
+    });
+    $("logout").addEventListener("click", async () => { await signOut(auth); location.href = "login.html"; });
+    const sidebar = $("sidebar"), overlay = $("overlay");
+    $("sideBtn").addEventListener("click", () => { sidebar.classList.toggle("show"); overlay.classList.toggle("show"); });
+    overlay.addEventListener("click", () => { sidebar.classList.remove("show"); overlay.classList.remove("show"); });
+    document.querySelectorAll(".nav a").forEach(link => link.addEventListener("click", () => { sidebar.classList.remove("show"); overlay.classList.remove("show"); }));
+    const theme = $("theme");
+    function applyTheme(type) {
+      document.body.classList.toggle("light-mode", type === "light");
+      theme.innerHTML = type === "light" ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+      $("defaultTheme").value = type;
+    }
+    applyTheme(localStorage.getItem("chemistryPointTheme") || "dark");
+    theme.addEventListener("click", () => {
+      const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+      localStorage.setItem("chemistryPointTheme", next);
+      applyTheme(next);
+    });
+  </script>
+</body>
+</html>
