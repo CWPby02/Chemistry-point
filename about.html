@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -135,7 +135,7 @@
             </div>
 
             <div class="mission-section">
-                <div class="mission-heading"><span class="section-label">OUR PURPOSE</span><h2>What We Provide</h2></div>
+                <div class="mission-heading"><span class="section-label">OUR PURPOSE</span><h2 id="missionTitle">What We Provide</h2><p id="missionText" style="max-width:760px;margin:12px auto 0;color:var(--text-secondary);font-family:var(--font-secondary);font-size:13px;line-height:1.8"></p></div>
                 <div class="mission-grid">
                     <article class="mission-card"><div class="mission-icon"><i class="fa-solid fa-video"></i></div><h3>Educational Videos</h3><p>Chemistry से जुड़े educational videos को एक ही जगह आसानी से access करने की सुविधा।</p></article>
                     <article class="mission-card"><div class="mission-icon"><i class="fa-solid fa-book-open"></i></div><h3>Objectives</h3><p>Chapter-wise V.V.I, PYQ और All Objectives के माध्यम से focused practice।</p></article>
@@ -183,8 +183,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-/* Firebase setup: About page content is read from /siteContent/about.
-   If that path is empty or unavailable, the HTML fallback content remains visible. */
+/* Firebase setup: content is read from siteContent/general, siteContent/about,
+   and siteContent/contact. HTML fallback content remains visible on read errors. */
 const firebaseConfig = {
     apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
     authDomain: "chemistry-point-9a41b.firebaseapp.com",
@@ -221,59 +221,103 @@ applyTheme(initialTheme);
 themeToggle.addEventListener("click", () => applyTheme(document.body.getAttribute("data-theme") === "light" ? "dark" : "light"));
 
 function setText(id, value) {
-    if (typeof value === "string" && value.trim()) document.getElementById(id).textContent = value;
-}
-function setImage(id, value, fallback) {
-    if (typeof value === "string" && value.trim()) {
-        const img = document.getElementById(id);
-        img.src = value;
-        img.onerror = () => { img.onerror = null; img.src = fallback; };
+    const element = document.getElementById(id);
+    if (element && typeof value === "string" && value.trim()) {
+        element.textContent = value.trim();
     }
 }
+
+function setImage(id, value, fallback) {
+    const img = document.getElementById(id);
+    if (!img) return;
+
+    if (typeof value === "string" && value.trim()) {
+        img.onerror = () => {
+            img.onerror = null;
+            if (fallback) img.src = fallback;
+        };
+        img.src = value.trim();
+    }
+}
+
 function setSocial(key, value) {
     if (typeof value !== "string" || !/^https?:\/\//i.test(value.trim())) return;
+
     const link = document.querySelector('[data-social="' + key + '"]');
     if (!link) return;
+
     link.href = value.trim();
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.hidden = false;
 }
+
 async function loadAboutContent() {
     const status = document.getElementById("firebaseStatus");
+
     if (!window.firebase) {
         status.textContent = "Firebase SDK load नहीं हुआ — default About information दिखाई जा रही है।";
         return;
     }
+
     try {
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        const snapshot = await firebase.database().ref("siteContent/about").once("value");
-        const data = snapshot.val();
-        if (!data) {
-            status.textContent = "Default About information दिखाई जा रही है। Firebase में /siteContent/about data अभी मौजूद नहीं है।";
-            return;
-        }
-        setText("aboutHeroText", data.heroDescription);
-        setText("introTitle", data.introTitle);
-        setText("introText", data.introDescription);
-        setText("pardeepName", data.pardeepSir && data.pardeepSir.name);
-        setText("pardeepRole", data.pardeepSir && data.pardeepSir.role);
-        setText("pardeepBio", data.pardeepSir && data.pardeepSir.bio);
-        setImage("pardeepImage", data.pardeepSir && data.pardeepSir.image, "assets/images/teachers/pardeep-sir.jpg");
-        setSocial("pardeepYoutube", data.pardeepSir && data.pardeepSir.youtube);
-        setSocial("pardeepInstagram", data.pardeepSir && data.pardeepSir.instagram);
-        setText("piyushName", data.piyush && data.piyush.name);
-        setText("piyushRole", data.piyush && data.piyush.role);
-        setText("piyushBio", data.piyush && data.piyush.bio);
-        setImage("piyushImage", data.piyush && data.piyush.image, "assets/images/teachers/piyush.jpg");
-        setSocial("piyushYoutube", data.piyush && data.piyush.youtube);
-        setSocial("piyushInstagram", data.piyush && data.piyush.instagram);
-        setText("cwpBrand", data.cwpBrand);
-        setText("cwpText", data.cwpDescription);
-        status.textContent = "About information Firebase Realtime Database se load hui hai (jahan data available tha).";
+
+        const db = firebase.database();
+
+        // Admin Settings saves these three sections separately.
+        const [generalSnap, aboutSnap, contactSnap] = await Promise.all([
+            db.ref("siteContent/general").once("value"),
+            db.ref("siteContent/about").once("value"),
+            db.ref("siteContent/contact").once("value")
+        ]);
+
+        const general = generalSnap.val() || {};
+        const about = aboutSnap.val() || {};
+        const contact = contactSnap.val() || {};
+
+        setText("aboutHeroText", about.aboutIntro || about.heroDescription);
+        setText("introText", about.aboutIntro || about.introDescription);
+        setText("introTitle", about.introTitle || "Learning Made Simple");
+
+        // Teacher information
+        setText("pardeepName", about.teacherName || (about.pardeepSir && about.pardeepSir.name));
+        setText("pardeepRole", about.teacherRole || (about.pardeepSir && about.pardeepSir.role));
+        setText("pardeepBio", about.teacherBio || (about.pardeepSir && about.pardeepSir.bio));
+        setImage(
+            "pardeepImage",
+            about.teacherImage || (about.pardeepSir && about.pardeepSir.image),
+            "assets/images/teachers/pardeep-sir.jpg"
+        );
+
+        // Developer information
+        setText("piyushName", about.developerName || (about.piyush && about.piyush.name));
+        setText("piyushRole", about.developerRole || (about.piyush && about.piyush.role));
+        setText("piyushBio", about.developerBio || (about.piyush && about.piyush.bio));
+        setImage(
+            "piyushImage",
+            about.developerImage || (about.piyush && about.piyush.image),
+            "assets/images/teachers/piyush.jpg"
+        );
+
+        // Social links are stored in Settings > Contact where available.
+        setSocial("pardeepYoutube", about.pardeepYoutube || (about.pardeepSir && about.pardeepSir.youtube));
+        setSocial("pardeepInstagram", contact.teacherInstagram || about.pardeepInstagram || (about.pardeepSir && about.pardeepSir.instagram));
+        setSocial("piyushYoutube", contact.developerYoutube || about.piyushYoutube || (about.piyush && about.piyush.youtube));
+        setSocial("piyushInstagram", contact.developerInstagram || about.piyushInstagram || (about.piyush && about.piyush.instagram));
+
+        // Mission and Code With Piyush sections
+        setText("missionTitle", about.missionTitle);
+        setText("missionText", about.missionText);
+        setText("cwpBrand", general.developerDisplayName || "Code With Piyush");
+        setText("cwpText", about.developerBio || general.siteDescription || about.cwpDescription);
+
+        if (general.siteName) document.title = "About | " + general.siteName;
+
+        status.textContent = "About page ki settings Firebase se load ho gayi hain.";
     } catch (error) {
         console.error("About Firebase read failed:", error);
-        status.textContent = "Firebase se data load nahi hua. Default About information दिखाई जा रही है; database rules aur connection check karein.";
+        status.textContent = "Firebase data load nahi hua. Default About information दिखाई जा रही है।";
     }
 }
 loadAboutContent();
