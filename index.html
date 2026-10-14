@@ -1,390 +1,176 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Chemistry Point - Chemistry learning platform by Pardeep Sir. Videos, objectives, PYQs and quizzes.">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chemistry Point - Chemistry learning platform by Pardeep Sir. Videos, objectives, PYQs and quizzes.">
     <title>Chemistry Point | By Pardeep Sir</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- CSS -->
+    <!-- Existing CSS: unchanged -->
     <link rel="stylesheet" href="assets/css/root.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 
     <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
+<!-- HEADER -->
 <header class="site-header">
-
     <div class="container nav-container">
-
-        <!-- Logo -->
         <a href="index.html" class="brand">
-
-            <img src="assets/images/logo/logo.png"
-                 alt="Chemistry Point Logo">
-
+            <img src="assets/images/logo/logo.png" alt="Chemistry Point Logo">
             <div class="brand-text">
                 <strong>Chemistry Point</strong>
                 <span>By Pardeep Sir</span>
             </div>
-
         </a>
 
-
-        <!-- Desktop Navigation -->
         <nav class="main-nav">
-
-            <a href="index.html" class="active">
-                Home
-            </a>
-
-            <a href="videos.html">
-                Videos
-            </a>
-
-            <a href="objectives.html">
-                Objectives
-            </a>
-
-            <a href="quiz.html">
-                Quiz
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
+            <a href="index.html" class="active">Home</a>
+            <a href="videos.html">Videos</a>
+            <a href="objectives.html">Objectives</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
 
-
-        <!-- Mobile Menu Button -->
-        <button class="menu-btn"
-                id="menuBtn"
-                aria-label="Open Menu">
-
+        <button class="menu-btn" id="menuBtn" aria-label="Open Menu" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
-
         </button>
-
     </div>
 
-
-    <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-
-        <a href="index.html" class="active">
-            <i class="fa-solid fa-house"></i>
-            Home
-        </a>
-
-        <a href="videos.html">
-            <i class="fa-solid fa-play"></i>
-            Videos
-        </a>
-
-        <a href="objectives.html">
-            <i class="fa-solid fa-book-open"></i>
-            Objectives
-        </a>
-
-        <a href="quiz.html">
-            <i class="fa-solid fa-circle-question"></i>
-            Quiz
-        </a>
-
-        <a href="about.html">
-            <i class="fa-solid fa-user"></i>
-            About
-        </a>
-
-        <a href="contact.html">
-            <i class="fa-solid fa-envelope"></i>
-            Contact
-        </a>
-
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="videos.html"><i class="fa-solid fa-play"></i> Videos</a>
+        <a href="objectives.html"><i class="fa-solid fa-book-open"></i> Objectives</a>
+        <a href="quiz.html"><i class="fa-solid fa-circle-question"></i> Quiz</a>
+        <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
     </div>
-
 </header>
-
 
 <main>
 
-
-<!-- =====================================================
-     HERO SECTION
-===================================================== -->
-
+<!-- HERO SECTION -->
 <section class="hero-section">
-
     <div class="hero-bg-shape shape-one"></div>
     <div class="hero-bg-shape shape-two"></div>
 
     <div class="container hero-container">
-
-
-        <!-- Hero Content -->
         <div class="hero-content">
-
             <span class="hero-badge">
                 <i class="fa-solid fa-flask"></i>
                 Chemistry Learning Platform
             </span>
 
-
-            <h1>
+            <h1 id="homeHeroTitle">
                 Chemistry को समझो,
                 <span>सिर्फ याद मत करो।</span>
             </h1>
 
-
-            <p>
+            <p id="homeHeroDescription">
                 Chemistry Point पर पाएं Chemistry से जुड़े
                 वीडियो, महत्वपूर्ण Objectives, PYQs और
                 Chapter-wise Quizzes — एक ही जगह।
             </p>
 
-
             <div class="hero-buttons">
-
-                <a href="objectives.html"
-                   class="btn btn-primary">
-
+                <a href="objectives.html" class="btn btn-primary">
                     Explore Objectives
-
                     <i class="fa-solid fa-arrow-right"></i>
-
                 </a>
 
-
-                <a href="videos.html"
-                   class="btn btn-outline">
-
+                <a href="videos.html" class="btn btn-outline">
                     <i class="fa-solid fa-play"></i>
-
                     Watch Videos
-
                 </a>
-
             </div>
 
-
-            <!-- Small Stats -->
             <div class="hero-stats">
-
                 <div class="stat-item">
-
-                    <strong>100+</strong>
+                    <strong id="homeObjectiveCount">100+</strong>
                     <span>Objectives</span>
-
                 </div>
 
-
                 <div class="stat-item">
-
                     <strong>PYQ</strong>
                     <span>Questions</span>
-
                 </div>
-
 
                 <div class="stat-item">
-
                     <strong>Free</strong>
                     <span>Learning</span>
-
                 </div>
-
             </div>
-
         </div>
 
-
-        <!-- Hero Teacher -->
         <div class="hero-visual">
-
             <div class="teacher-glow"></div>
-
             <div class="teacher-card">
-
-                <img src="assets/images/teachers/pardeep-sir.jpg"
-                     alt="Pardeep Sir">
-
+                <img id="heroTeacherImage" src="assets/images/teachers/pardeep-sir.jpg" alt="Pardeep Sir">
                 <div class="teacher-card-info">
-
                     <span>Chemistry Educator</span>
-
-                    <h3>Pardeep Sir</h3>
-
+                    <h3 id="heroTeacherName">Pardeep Sir</h3>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     INTRODUCTION
-===================================================== -->
-
+<!-- INTRODUCTION -->
 <section class="intro-section">
-
     <div class="container">
-
         <div class="section-heading center">
-
-            <span class="section-label">
-                CHEMISTRY POINT
-            </span>
-
-            <h2>
-                Chemistry की तैयारी अब
-                <span>एक जगह</span>
-            </h2>
-
-            <p>
-                पढ़ाई को आसान, व्यवस्थित और exam-focused
-                बनाने के लिए Chemistry Point बनाया गया है।
-            </p>
-
+            <span class="section-label">CHEMISTRY POINT</span>
+            <h2>Chemistry की तैयारी अब <span>एक जगह</span></h2>
+            <p>पढ़ाई को आसान, व्यवस्थित और exam-focused बनाने के लिए Chemistry Point बनाया गया है।</p>
         </div>
-
 
         <div class="feature-grid">
-
-
-            <!-- Feature -->
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    <i class="fa-solid fa-video"></i>
-                </div>
-
+                <div class="feature-icon"><i class="fa-solid fa-video"></i></div>
                 <h3>Video Classes</h3>
-
-                <p>
-                    Chemistry के educational videos
-                    सीधे website पर देखें।
-                </p>
-
-                <a href="videos.html">
-                    Watch Videos
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-
+                <p>Chemistry के educational videos सीधे website पर देखें।</p>
+                <a href="videos.html">Watch Videos <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
-
-            <!-- Feature -->
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
+                <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
                 <h3>Objectives</h3>
-
-                <p>
-                    Chapter-wise V.V.I, PYQ और
-                    सभी महत्वपूर्ण objectives।
-                </p>
-
-                <a href="objectives.html">
-                    Explore Objectives
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-
+                <p>Chapter-wise V.V.I, PYQ और सभी महत्वपूर्ण objectives।</p>
+                <a href="objectives.html">Explore Objectives <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
-
-            <!-- Feature -->
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    <i class="fa-solid fa-clipboard-question"></i>
-                </div>
-
+                <div class="feature-icon"><i class="fa-solid fa-clipboard-question"></i></div>
                 <h3>Online Quiz</h3>
-
-                <p>
-                    PYQ Sets और chapter-wise quizzes
-                    से अपनी तैयारी check करें।
-                </p>
-
-                <a href="quiz.html">
-                    Start Quiz
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-
+                <p>PYQ Sets और chapter-wise quizzes से अपनी तैयारी check करें।</p>
+                <a href="quiz.html">Start Quiz <i class="fa-solid fa-arrow-right"></i></a>
             </div>
-
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     PARDEEP SIR SECTION
-===================================================== -->
-
+<!-- PARDEEP SIR SECTION -->
 <section class="teacher-section">
-
     <div class="container teacher-container">
-
-
         <div class="teacher-image-box">
-
             <div class="image-frame"></div>
-
-            <img src="assets/images/teachers/pardeep-sir.jpg"
-                 alt="Pardeep Sir">
-
+            <img id="teacherSectionImage" src="assets/images/teachers/pardeep-sir.jpg" alt="Pardeep Sir">
         </div>
 
-
         <div class="teacher-content">
-
-            <span class="section-label">
-                MEET YOUR EDUCATOR
-            </span>
-
-            <h2>
-                सीखिए Chemistry
-                <span>Pardeep Sir</span> के साथ
-            </h2>
+            <span class="section-label">MEET YOUR EDUCATOR</span>
+            <h2>सीखिए Chemistry <span id="teacherHeadingName">Pardeep Sir</span> के साथ</h2>
 
             <p>
                 Chemistry Point का उद्देश्य Chemistry को
@@ -398,615 +184,593 @@
                 एक organized platform पर मिलेंगे।
             </p>
 
-
             <div class="teacher-points">
-
-                <div>
-                    <i class="fa-solid fa-check"></i>
-                    Concept Focused Learning
-                </div>
-
-                <div>
-                    <i class="fa-solid fa-check"></i>
-                    Exam Oriented Questions
-                </div>
-
-                <div>
-                    <i class="fa-solid fa-check"></i>
-                    Chapter Wise Practice
-                </div>
-
+                <div><i class="fa-solid fa-check"></i> Concept Focused Learning</div>
+                <div><i class="fa-solid fa-check"></i> Exam Oriented Questions</div>
+                <div><i class="fa-solid fa-check"></i> Chapter Wise Practice</div>
             </div>
 
-
-            <a href="about.html"
-               class="btn btn-primary">
-
-                Know More
-
-                <i class="fa-solid fa-arrow-right"></i>
-
+            <a href="about.html" class="btn btn-primary">
+                Know More <i class="fa-solid fa-arrow-right"></i>
             </a>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     LATEST VIDEOS
-===================================================== -->
-
+<!-- LATEST VIDEOS -->
 <section class="videos-section">
-
     <div class="container">
-
-
         <div class="section-heading">
-
             <div>
-
-                <span class="section-label">
-                    WATCH & LEARN
-                </span>
-
-                <h2>
-                    Latest <span>Videos</span>
-                </h2>
-
+                <span class="section-label">WATCH & LEARN</span>
+                <h2>Latest <span>Videos</span></h2>
             </div>
 
-
-            <a href="videos.html"
-               class="view-all">
-
-                View All
-
-                <i class="fa-solid fa-arrow-right"></i>
-
+            <a href="videos.html" class="view-all">
+                View All <i class="fa-solid fa-arrow-right"></i>
             </a>
-
         </div>
-
-
-        <!-- Temporary video cards -->
-        <!-- Firebase connect hone ke baad
-             ye dynamically generate honge -->
 
         <div class="video-grid" id="latestVideos">
-
-
+            <!-- Existing fallback cards remain if Firebase has no valid videos -->
             <article class="video-card">
-
                 <div class="video-thumbnail">
-
-                    <div class="thumbnail-placeholder">
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <span class="video-tag">
-                        Chemistry
-                    </span>
-
+                    <div class="thumbnail-placeholder"><i class="fa-solid fa-play"></i></div>
+                    <span class="video-tag">Chemistry</span>
                 </div>
-
-
                 <div class="video-info">
-
-                    <h3>
-                        Chemistry Latest Class
-                    </h3>
-
-                    <p>
-                        Pardeep Sir • Chemistry Point
-                    </p>
-
+                    <h3>Chemistry Latest Class</h3>
+                    <p>Pardeep Sir • Chemistry Point</p>
                 </div>
-
             </article>
 
-
             <article class="video-card">
-
                 <div class="video-thumbnail">
-
-                    <div class="thumbnail-placeholder">
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <span class="video-tag">
-                        Important
-                    </span>
-
+                    <div class="thumbnail-placeholder"><i class="fa-solid fa-play"></i></div>
+                    <span class="video-tag">Important</span>
                 </div>
-
-
                 <div class="video-info">
-
-                    <h3>
-                        Important Chemistry Questions
-                    </h3>
-
-                    <p>
-                        Pardeep Sir • Chemistry Point
-                    </p>
-
+                    <h3>Important Chemistry Questions</h3>
+                    <p>Pardeep Sir • Chemistry Point</p>
                 </div>
-
             </article>
 
-
             <article class="video-card">
-
                 <div class="video-thumbnail">
-
-                    <div class="thumbnail-placeholder">
-
-                        <i class="fa-solid fa-play"></i>
-
-                    </div>
-
-                    <span class="video-tag">
-                        Class
-                    </span>
-
+                    <div class="thumbnail-placeholder"><i class="fa-solid fa-play"></i></div>
+                    <span class="video-tag">Class</span>
                 </div>
-
-
                 <div class="video-info">
-
-                    <h3>
-                        Chemistry Exam Preparation
-                    </h3>
-
-                    <p>
-                        Pardeep Sir • Chemistry Point
-                    </p>
-
+                    <h3>Chemistry Exam Preparation</h3>
+                    <p>Pardeep Sir • Chemistry Point</p>
                 </div>
-
             </article>
-
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     OBJECTIVES SECTION
-===================================================== -->
-
+<!-- OBJECTIVES SECTION -->
 <section class="objective-section">
-
     <div class="container">
-
-
         <div class="section-heading center">
-
-            <span class="section-label">
-                PRACTICE
-            </span>
-
-            <h2>
-                Chapter-wise <span>Objectives</span>
-            </h2>
-
-            <p>
-                अपने chapter को चुनें और V.V.I, PYQ तथा
-                All Objectives से practice करें।
-            </p>
-
+            <span class="section-label">PRACTICE</span>
+            <h2>Chapter-wise <span>Objectives</span></h2>
+            <p>अपने chapter को चुनें और V.V.I, PYQ तथा All Objectives से practice करें।</p>
         </div>
 
-
-        <div class="chapter-preview-grid">
-
-
-            <a href="student/chapter.html"
-               class="chapter-card">
-
-                <span class="chapter-number">
-                    01
-                </span>
-
+        <div class="chapter-preview-grid" id="homeChapters">
+            <!-- Existing fallback chapters -->
+            <a href="student/chapter.html" class="chapter-card">
+                <span class="chapter-number">01</span>
                 <div>
-
                     <h3>Solid State</h3>
-
-                    <p>
-                        V.V.I • PYQ • All Objectives
-                    </p>
-
+                    <p>V.V.I • PYQ • All Objectives</p>
                 </div>
-
                 <i class="fa-solid fa-arrow-right"></i>
-
             </a>
 
-
-            <a href="student/chapter.html"
-               class="chapter-card">
-
-                <span class="chapter-number">
-                    02
-                </span>
-
+            <a href="student/chapter.html" class="chapter-card">
+                <span class="chapter-number">02</span>
                 <div>
-
                     <h3>Solutions</h3>
-
-                    <p>
-                        V.V.I • PYQ • All Objectives
-                    </p>
-
+                    <p>V.V.I • PYQ • All Objectives</p>
                 </div>
-
                 <i class="fa-solid fa-arrow-right"></i>
-
             </a>
 
-
-            <a href="student/chapter.html"
-               class="chapter-card">
-
-                <span class="chapter-number">
-                    03
-                </span>
-
+            <a href="student/chapter.html" class="chapter-card">
+                <span class="chapter-number">03</span>
                 <div>
-
                     <h3>Electrochemistry</h3>
-
-                    <p>
-                        V.V.I • PYQ • All Objectives
-                    </p>
-
+                    <p>V.V.I • PYQ • All Objectives</p>
                 </div>
-
                 <i class="fa-solid fa-arrow-right"></i>
-
             </a>
 
-
-            <a href="objectives.html"
-               class="chapter-card more-card">
-
-                <span class="more-icon">
-                    <i class="fa-solid fa-plus"></i>
-                </span>
-
+            <a href="objectives.html" class="chapter-card more-card">
+                <span class="more-icon"><i class="fa-solid fa-plus"></i></span>
                 <div>
-
                     <h3>View All Chapters</h3>
-
-                    <p>
-                        Explore complete syllabus
-                    </p>
-
+                    <p>Explore complete syllabus</p>
                 </div>
-
                 <i class="fa-solid fa-arrow-right"></i>
-
             </a>
-
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     QUIZ CTA
-===================================================== -->
-
+<!-- QUIZ CTA -->
 <section class="quiz-cta-section">
-
     <div class="container">
-
         <div class="quiz-cta">
-
-
             <div class="quiz-cta-content">
-
-                <span class="section-label">
-                    TEST YOUR PREPARATION
-                </span>
-
-                <h2>
-                    तैयारी कितनी है?
-                    <span>Quiz देकर देखें!</span>
-                </h2>
-
-                <p>
-                    PYQ Sets और Chapter-wise quizzes के
-                    साथ अपनी Chemistry preparation को test करें।
-                </p>
-
-                <a href="quiz.html"
-                   class="btn btn-light">
-
-                    Explore Quiz
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
+                <span class="section-label">TEST YOUR PREPARATION</span>
+                <h2>तैयारी कितनी है? <span>Quiz देकर देखें!</span></h2>
+                <p>PYQ Sets और Chapter-wise quizzes के साथ अपनी Chemistry preparation को test करें।</p>
+                <a href="quiz.html" class="btn btn-light">
+                    Explore Quiz <i class="fa-solid fa-arrow-right"></i>
                 </a>
-
             </div>
-
 
             <div class="quiz-icon">
-
                 <i class="fa-solid fa-clipboard-check"></i>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     ABOUT PREVIEW
-===================================================== -->
-
+<!-- ABOUT PREVIEW -->
 <section class="about-preview">
-
     <div class="container">
-
-
         <div class="about-preview-content">
-
-            <span class="section-label">
-                ABOUT CHEMISTRY POINT
-            </span>
-
-            <h2>
-                पढ़ाई में <span>Discipline</span>,
-                Practice और Consistency
-            </h2>
-
-            <p>
-                Chemistry Point students को Chemistry
-                preparation के लिए एक simple और organized
-                digital platform देने के उद्देश्य से बनाया गया है।
-            </p>
-
-            <a href="about.html"
-               class="btn btn-primary">
-
-                About Us
-
-                <i class="fa-solid fa-arrow-right"></i>
-
+            <span class="section-label">ABOUT CHEMISTRY POINT</span>
+            <h2>पढ़ाई में <span>Discipline</span>, Practice और Consistency</h2>
+            <p>Chemistry Point students को Chemistry preparation के लिए एक simple और organized digital platform देने के उद्देश्य से बनाया गया है।</p>
+            <a href="about.html" class="btn btn-primary">
+                About Us <i class="fa-solid fa-arrow-right"></i>
             </a>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-     CONTACT CTA
-===================================================== -->
-
+<!-- CONTACT CTA -->
 <section class="contact-cta">
-
     <div class="container">
-
         <div class="contact-box">
-
             <div>
-
-                <span class="section-label">
-                    NEED HELP?
-                </span>
-
-                <h2>
-                    हमसे <span>Contact</span> करें
-                </h2>
-
-                <p>
-                    किसी भी जानकारी या सुझाव के लिए
-                    हमसे संपर्क कर सकते हैं।
-                </p>
-
+                <span class="section-label">NEED HELP?</span>
+                <h2>हमसे <span>Contact</span> करें</h2>
+                <p>किसी भी जानकारी या सुझाव के लिए हमसे संपर्क कर सकते हैं।</p>
             </div>
 
-
-            <a href="contact.html"
-               class="btn btn-primary">
-
-                Contact Us
-
-                <i class="fa-solid fa-arrow-right"></i>
-
+            <a href="contact.html" class="btn btn-primary">
+                Contact Us <i class="fa-solid fa-arrow-right"></i>
             </a>
-
         </div>
-
     </div>
-
 </section>
-
 
 </main>
 
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
+<!-- FOOTER -->
 <footer class="site-footer">
-
     <div class="container footer-grid">
-
-
         <div class="footer-brand">
-
-            <img src="assets/images/logo/logo.png"
-                 alt="Chemistry Point">
-
+            <img src="assets/images/logo/logo.png" alt="Chemistry Point">
             <h3>Chemistry Point</h3>
-
-            <p>
-                Chemistry सीखने और exam preparation
-                के लिए आपका learning platform।
-            </p>
-
+            <p>Chemistry सीखने और exam preparation के लिए आपका learning platform।</p>
 
             <div class="social-links">
-
-                <a href="#"
-                   aria-label="YouTube">
-
-                    <i class="fa-brands fa-youtube"></i>
-
-                </a>
-
-                <a href="#"
-                   aria-label="Instagram">
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                </a>
-
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
-
         </div>
 
-
         <div class="footer-column">
-
             <h4>Quick Links</h4>
-
             <a href="index.html">Home</a>
             <a href="videos.html">Videos</a>
             <a href="objectives.html">Objectives</a>
             <a href="quiz.html">Quiz</a>
-
         </div>
 
-
         <div class="footer-column">
-
             <h4>Information</h4>
-
             <a href="about.html">About Us</a>
             <a href="contact.html">Contact</a>
-
         </div>
-
 
         <div class="footer-column">
-
             <h4>Learning</h4>
-
-            <a href="objectives.html">
-                V.V.I Objectives
-            </a>
-
-            <a href="objectives.html">
-                PYQ Objectives
-            </a>
-
-            <a href="quiz.html">
-                Chapter Wise Quiz
-            </a>
-
+            <a href="objectives.html">V.V.I Objectives</a>
+            <a href="objectives.html">PYQ Objectives</a>
+            <a href="quiz.html">Chapter Wise Quiz</a>
         </div>
-
-
     </div>
-
 
     <div class="footer-bottom">
-
         <div class="container">
-
-            <p>
-                © 2026 Code With Piyush. All Rights Reserved.
-            </p>
-
-            <p>
-                Designed & Developed with ❤️
-            </p>
-
+            <p>© 2026 Code With Piyush. All Rights Reserved.</p>
+            <p>Designed &amp; Developed with ❤️</p>
         </div>
-
     </div>
-
 </footer>
 
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+<!-- Firebase SDK: Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
+/* =====================================================
+   EXISTING MOBILE MENU
+===================================================== */
+const menuBtn = document.getElementById("menuBtn");
+const mobileNav = document.getElementById("mobileNav");
 
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileNav = document.getElementById("mobileNav");
-
+if (menuBtn && mobileNav) {
     menuBtn.addEventListener("click", () => {
-
-        mobileNav.classList.toggle("show");
-
+        const isOpen = mobileNav.classList.toggle("show");
         const icon = menuBtn.querySelector("i");
 
-        if (mobileNav.classList.contains("show")) {
-
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
-
-        } else {
-
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-
+        if (icon) {
+            icon.classList.toggle("fa-bars", !isOpen);
+            icon.classList.toggle("fa-xmark", isOpen);
         }
 
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+        menuBtn.setAttribute("aria-label", isOpen ? "Close Menu" : "Open Menu");
     });
 
-
-    // Close mobile menu when link is clicked
-
-    document.querySelectorAll(".mobile-nav a").forEach(link => {
-
+    mobileNav.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
-
             mobileNav.classList.remove("show");
-
             const icon = menuBtn.querySelector("i");
 
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
+            if (icon) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            }
 
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open Menu");
         });
-
     });
+}
 
+/* =====================================================
+   FIREBASE CONNECTION
+   Existing project and database are used.
+   Homepage remains usable if Firebase fails.
+===================================================== */
+const firebaseConfig = {
+    apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+    authDomain: "chemistry-point-9a41b.firebaseapp.com",
+    databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "chemistry-point-9a41b",
+    storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+    messagingSenderId: "791007663942",
+    appId: "1:791007663942:web:693c008e475a2e74357747"
+};
+
+let homeDb = null;
+
+try {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    homeDb = firebase.database();
+} catch (error) {
+    console.error("Firebase initialization failed:", error);
+}
+
+/* Safely read a Firebase path without breaking the page. */
+async function readHomeData(path) {
+    if (!homeDb) return null;
+
+    try {
+        const snapshot = await homeDb.ref(path).once("value");
+        return snapshot.exists() ? snapshot.val() : null;
+    } catch (error) {
+        console.error("Firebase read failed at " + path + ":", error);
+        return null;
+    }
+}
+
+/* Escape database text before inserting it into HTML. */
+function escapeHomeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+/* Allow only normal web links. */
+function safeHomeURL(value) {
+    if (typeof value !== "string" || !value.trim()) return "";
+
+    try {
+        const url = new URL(value.trim(), window.location.href);
+
+        if (!["http:", "https:"].includes(url.protocol)) return "";
+        return url.href;
+    } catch {
+        return "";
+    }
+}
+
+/* Extract a YouTube video ID from a public URL or ID. */
+function getYouTubeId(value) {
+    if (typeof value !== "string") return "";
+
+    const input = value.trim();
+
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+
+    try {
+        const url = new URL(input);
+        let id = "";
+
+        if (url.hostname.includes("youtu.be")) {
+            id = url.pathname.split("/").filter(Boolean)[0] || "";
+        } else if (
+            url.hostname.includes("youtube.com") ||
+            url.hostname.includes("youtube-nocookie.com")
+        ) {
+            if (url.searchParams.get("v")) {
+                id = url.searchParams.get("v");
+            } else {
+                const parts = url.pathname.split("/").filter(Boolean);
+                const marker = parts.findIndex(part =>
+                    ["embed", "shorts", "live"].includes(part)
+                );
+                if (marker >= 0) id = parts[marker + 1] || "";
+            }
+        }
+
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : "";
+    } catch {
+        return "";
+    }
+}
+
+/* Convert Firebase object/list data to an array. */
+function toHomeArray(data) {
+    if (!data) return [];
+
+    if (Array.isArray(data)) {
+        return data.filter(item => item && typeof item === "object");
+    }
+
+    if (typeof data === "object") {
+        return Object.entries(data)
+            .filter(([, item]) => item && typeof item === "object")
+            .map(([key, item]) => ({ id: key, ...item }));
+    }
+
+    return [];
+}
+
+/* =====================================================
+   GENERAL WEBSITE SETTINGS
+   Reads /siteContent/general and /siteContent/about.
+   Only updates matching homepage fields.
+===================================================== */
+async function loadHomeSettings() {
+    const [general, about] = await Promise.all([
+        readHomeData("siteContent/general"),
+        readHomeData("siteContent/about")
+    ]);
+
+    if (general && typeof general === "object") {
+        const siteName = general.siteName;
+        const teacherName = general.teacherDisplayName;
+
+        if (siteName) {
+            document.title = `${siteName} | By ${teacherName || "Pardeep Sir"}`;
+        }
+
+        if (general.tagline) {
+            const badge = document.querySelector(".hero-badge");
+            if (badge) {
+                const icon = badge.querySelector("i");
+                badge.textContent = "";
+                if (icon) badge.appendChild(icon);
+                badge.appendChild(document.createTextNode(" " + general.tagline));
+            }
+        }
+    }
+
+    if (about && typeof about === "object") {
+        const teacherName = about.teacherName || general?.teacherDisplayName;
+        const teacherImage = safeHomeURL(about.teacherImage) || about.teacherImage;
+
+        if (teacherName) {
+            const heroName = document.getElementById("heroTeacherName");
+            const headingName = document.getElementById("teacherHeadingName");
+
+            if (heroName) heroName.textContent = teacherName;
+            if (headingName) headingName.textContent = teacherName;
+        }
+
+        if (typeof teacherImage === "string" && teacherImage.trim()) {
+            const heroImage = document.getElementById("heroTeacherImage");
+            const sectionImage = document.getElementById("teacherSectionImage");
+
+            if (heroImage) heroImage.src = teacherImage;
+            if (sectionImage) sectionImage.src = teacherImage;
+        }
+    }
+}
+
+/* =====================================================
+   LATEST VIDEOS
+   Reads /videos (same collection used by admin dashboard).
+   Common field names are supported.
+===================================================== */
+async function loadLatestHomeVideos() {
+    const container = document.getElementById("latestVideos");
+    if (!container) return;
+
+    const rawData = await readHomeData("videos");
+    const videos = toHomeArray(rawData)
+        .filter(video => video.active !== false && video.published !== false)
+        .map(video => {
+            const title =
+                video.title ||
+                video.videoTitle ||
+                video.name ||
+                video.videoName ||
+                "";
+
+            const videoURL =
+                video.youtubeUrl ||
+                video.youtubeURL ||
+                video.videoUrl ||
+                video.videoURL ||
+                video.url ||
+                video.link ||
+                video.youtubeLink ||
+                video.videoId ||
+                video.youtubeId ||
+                "";
+
+            const id = getYouTubeId(String(videoURL));
+            if (!title || !id) return null;
+
+            return {
+                title: String(title),
+                id,
+                category: String(video.category || video.tag || "Chemistry"),
+                teacher: String(video.teacher || "Pardeep Sir")
+            };
+        })
+        .filter(Boolean)
+        .reverse()
+        .slice(0, 3);
+
+    /* Preserve the original sample cards if no valid records exist. */
+    if (!videos.length) return;
+
+    container.innerHTML = videos.map(video => {
+        const title = escapeHomeHTML(video.title);
+        const category = escapeHomeHTML(video.category);
+        const teacher = escapeHomeHTML(video.teacher);
+        const thumbnail = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+        const videoPageURL = `videos.html`;
+
+        return `
+            <article class="video-card">
+                <a class="video-thumbnail"
+                   href="${videoPageURL}"
+                   aria-label="Watch ${title}">
+                    <img src="${thumbnail}"
+                         alt="${title}"
+                         loading="lazy"
+                         style="width:100%;height:100%;object-fit:cover;">
+                    <span class="video-tag">${category}</span>
+                    <span class="thumbnail-placeholder" aria-hidden="true">
+                        <i class="fa-solid fa-play"></i>
+                    </span>
+                </a>
+                <div class="video-info">
+                    <h3>${title}</h3>
+                    <p>${teacher} • Chemistry Point</p>
+                </div>
+            </article>
+        `;
+    }).join("");
+}
+
+/* =====================================================
+   CHAPTER PREVIEW
+   Reads /chapters (same collection used by admin dashboard).
+   If no chapters are available, original cards remain.
+===================================================== */
+async function loadHomeChapters() {
+    const container = document.getElementById("homeChapters");
+    if (!container) return;
+
+    const rawData = await readHomeData("chapters");
+    const chapters = toHomeArray(rawData)
+        .filter(chapter => chapter.active !== false && chapter.published !== false)
+        .map((chapter, index) => {
+            const title =
+                chapter.name ||
+                chapter.chapterName ||
+                chapter.title ||
+                chapter.chapter ||
+                "";
+
+            if (!title) return null;
+
+            return {
+                title: String(title),
+                number: String(chapter.number || chapter.chapterNumber || index + 1)
+                    .padStart(2, "0"),
+                url: safeHomeURL(chapter.url || chapter.pageUrl || ""),
+                slug: String(chapter.slug || chapter.id || ""),
+                order: Number(chapter.order ?? chapter.sortOrder ?? index)
+            };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.order - b.order)
+        .slice(0, 3);
+
+    /* Keep the existing fallback cards if Firebase has no chapters. */
+    if (!chapters.length) return;
+
+    const chapterCards = chapters.map(chapter => {
+        const title = escapeHomeHTML(chapter.title);
+        const number = escapeHomeHTML(chapter.number);
+
+        /*
+         * Preserve the existing chapter page destination unless the
+         * database explicitly provides a safe external URL.
+         */
+        const destination = chapter.url || "student/chapter.html";
+
+        return `
+            <a href="${escapeHomeHTML(destination)}" class="chapter-card">
+                <span class="chapter-number">${number}</span>
+                <div>
+                    <h3>${title}</h3>
+                    <p>V.V.I • PYQ • All Objectives</p>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        `;
+    }).join("");
+
+    const moreCard = `
+        <a href="objectives.html" class="chapter-card more-card">
+            <span class="more-icon"><i class="fa-solid fa-plus"></i></span>
+            <div>
+                <h3>View All Chapters</h3>
+                <p>Explore complete syllabus</p>
+            </div>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    `;
+
+    container.innerHTML = chapterCards + moreCard;
+}
+
+/* =====================================================
+   HOME PAGE STARTUP
+===================================================== */
+async function initializeHomePage() {
+    await Promise.allSettled([
+        loadHomeSettings(),
+        loadLatestHomeVideos(),
+        loadHomeChapters()
+    ]);
+}
+
+initializeHomePage();
 </script>
 
 </body>
