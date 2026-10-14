@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Notices | Chemistry Point</title>
+
+    <link rel="icon" href="../assets/images/logo/logo.png">
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #08090b;
+            --card: #13161a;
+            --card2: #0e1013;
+            --border: rgba(217,154,22,.18);
+            --text: #fff;
+            --muted: #858a93;
+            --gold: #d99a16;
+            --gold2: #f3bd45;
+            --sidebar: 260px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, sans-serif;
+        }
+
+        body.light-mode {
+            --bg: #f5f5f5;
+            --card: #fff;
+            --card2: #f8f8f8;
+            --border: rgba(168,111,0,.18);
+            --text: #17191c;
+            --muted: #666;
+        }
+
+        button, input, textarea, select { font: inherit; }
+        button { cursor: pointer; }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: var(--sidebar);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: transform .25s ease;
+        }
+
+        .brand {
+            min-height: 76px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .brand strong { font-family: Poppins, sans-serif; font-size: 17px; }
+        .brand span {
+            display: block;
+            color: var(--gold2);
+            font-size: 10px;
+            margin-top: 2px;
+            letter-spacing: .5px;
+        }
+
+        .nav { padding: 18px 12px; overflow-y: auto; }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--muted);
+            padding: 12px 13px;
+            border-radius: 11px;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav a i { width: 19px; text-align: center; }
+        .nav a:hover, .nav a.active {
+            color: var(--gold2);
+            background: rgba(217,154,22,.1);
+        }
+
+        .sidefoot { margin-top: auto; padding: 15px; border-top: 1px solid var(--border); }
+
+        .logout {
+            width: 100%;
+            border: 1px solid rgba(220,53,69,.25);
+            background: rgba(220,53,69,.07);
+            color: #ff8994;
+            border-radius: 10px;
+            padding: 11px;
+            font-weight: 600;
+        }
+
+        .main { margin-left: var(--sidebar); min-height: 100vh; }
+
+        .top {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            border-bottom: 1px solid var(--border);
+            background: var(--card);
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .left, .right, .user { display: flex; align-items: center; gap: 12px; }
+        .title { font: 600 20px Poppins, sans-serif; margin: 0; }
+
+        .mobilebtn, .theme {
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .mobilebtn { display: none; }
+        .theme { color: var(--gold2); }
+
+        .user { padding-left: 12px; border-left: 1px solid var(--border); }
+        .avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: grid; place-items: center;
+            background: rgba(217,154,22,.12); color: var(--gold2);
+        }
+
+        .email {
+            font-size: 12px; color: var(--muted);
+            max-width: 220px; overflow: hidden;
+            text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        .content { padding: 28px; }
+
+        .welcome {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(217,154,22,.12), transparent 65%), var(--card);
+            margin-bottom: 22px;
+        }
+
+        .welcome h1 { font: 700 24px Poppins, sans-serif; margin: 0 0 7px; }
+        .welcome h1 span { color: var(--gold2); }
+        .welcome p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .panel-heading h2 { font: 600 17px Poppins, sans-serif; margin: 0; }
+
+        .btn {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 11px 15px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--gold); color: #17130a; border-color: var(--gold); }
+        .btn-secondary { background: var(--card2); color: var(--text); }
+        .btn-danger { background: rgba(220,53,69,.09); color: #ff8994; border-color: rgba(220,53,69,.25); }
+        .btn:hover { filter: brightness(1.08); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field.full { grid-column: 1 / -1; }
+
+        .field label { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+        .field input, .field textarea, .field select {
+            width: 100%;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            color: var(--text);
+            outline: none;
+        }
+
+        .field input:focus, .field textarea:focus, .field select:focus {
+            border-color: var(--gold);
+        }
+
+        .field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
+        .field select option { background: var(--card); color: var(--text); }
+
+        .checkbox-row {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--muted); font-size: 12px;
+        }
+
+        .checkbox-row input { accent-color: var(--gold); width: 17px; height: 17px; }
+
+        .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+        .notice-list { display: grid; gap: 13px; }
+
+        .notice-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 17px;
+            background: var(--card2);
+        }
+
+        .notice-top {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 12px;
+        }
+
+        .notice-title {
+            font: 600 15px Poppins, sans-serif;
+            margin: 0 0 9px;
+            overflow-wrap: anywhere;
+        }
+
+        .notice-message {
+            font-size: 13px; line-height: 1.75;
+            color: var(--muted);
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            margin: 0 0 14px;
+        }
+
+        .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            border-radius: 30px; padding: 5px 9px;
+            font-size: 10px; font-weight: 700;
+            border: 1px solid var(--border);
+        }
+
+        .pill.type { color: var(--gold2); background: rgba(217,154,22,.08); }
+        .pill.published { color: #6ee7a3; background: rgba(25,135,84,.1); }
+        .pill.hidden { color: #ff8994; background: rgba(220,53,69,.08); }
+
+        .notice-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .notice-actions .btn { padding: 9px 11px; }
+
+        .empty {
+            text-align: center; padding: 35px 16px;
+            color: var(--muted); font-size: 13px;
+            border: 1px dashed var(--border); border-radius: 13px;
+            line-height: 1.7;
+        }
+
+        .status-line { font-size: 12px; color: var(--muted); margin: 0 0 15px; }
+        .status-line.error { color: #ff8994; }
+        .status-line.success { color: #6ee7a3; }
+
+        .overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.55); z-index: 950;
+        }
+        .overlay.show { display: block; }
+
+        @media(max-width: 900px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.show { transform: translateX(0); }
+            .main { margin-left: 0; }
+            .mobilebtn { display: block; }
+        }
+
+        @media(max-width: 600px) {
+            .top { height: 68px; padding: 0 15px; }
+            .content { padding: 16px; }
+            .title { font-size: 17px; }
+            .user { display: none; }
+            .welcome { padding: 19px; }
+            .welcome h1 { font-size: 20px; }
+            .panel { padding: 16px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .field.full { grid-column: auto; }
+            .notice-top { flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
+            <div>
+                <strong>Chemistry Point</strong>
+                <span>ADMIN PANEL</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+            <a href="videos.html"><i class="fa-solid fa-video"></i> Videos</a>
+            <a href="objectives.html"><i class="fa-solid fa-book-open"></i> Objectives</a>
+            <a href="quizzes.html"><i class="fa-solid fa-circle-question"></i> Quizzes</a>
+            <a href="questions.html"><i class="fa-solid fa-list-check"></i> Questions</a>
+            <a href="students.html"><i class="fa-solid fa-users"></i> Students</a>
+            <a href="notices.html" class="active"><i class="fa-solid fa-bullhorn"></i> Notices</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+        </nav>
+
+        <div class="sidefoot">
+            <button class="logout" id="logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="top">
+            <div class="left">
+                <button class="mobilebtn" id="sideBtn" aria-label="Open navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="title">Manage Notices</h1>
+            </div>
+
+            <div class="right">
+                <button class="theme" id="theme" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div class="user">
+                    <div class="avatar"><i class="fa-solid fa-user-shield"></i></div>
+                    <span class="email" id="email">Checking...</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <section class="welcome">
+                <h1>Notice <span>Manager</span> 📢</h1>
+                <p>Yahan se website ke announcements, exam updates aur important notices manage karo.</p>
+            </section>
+
+            <section class="panel" id="editorPanel">
+                <div class="panel-heading">
+                    <h2 id="formHeading"><i class="fa-solid fa-circle-plus"></i> Create New Notice</h2>
+                    <button class="btn btn-secondary" id="resetBtn" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Clear Form
+                    </button>
+                </div>
+
+                <p class="status-line" id="formStatus" aria-live="polite">Notice details bharo aur save karo.</p>
+
+                <form id="noticeForm">
+                    <div class="form-grid">
+                        <div class="field full">
+                            <label for="noticeTitle">Notice Title *</label>
+                            <input id="noticeTitle" maxlength="150" required placeholder="Example: Class 12 Exam Update">
+                        </div>
+
+                        <div class="field">
+                            <label for="noticeType">Notice Type</label>
+                            <select id="noticeType">
+                                <option value="General">General</option>
+                                <option value="Important">Important</option>
+                                <option value="Exam">Exam</option>
+                                <option value="Result">Result</option>
+                                <option value="Alert">Alert</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="noticeLink">Optional Link (URL)</label>
+                            <input id="noticeLink" type="url" placeholder="https://example.com">
+                        </div>
+
+                        <div class="field full">
+                            <label for="noticeMessage">Notice Message *</label>
+                            <textarea id="noticeMessage" maxlength="10000" required placeholder="Notice ki poori details yahan likho..."></textarea>
+                        </div>
+
+                        <div class="field full">
+                            <label class="checkbox-row" for="noticePublished">
+                                <input type="checkbox" id="noticePublished" checked>
+                                Publish notice (website par dikhayein)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="saveBtn" type="submit">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Save Notice
+                        </button>
+                        <button class="btn btn-secondary" id="cancelEditBtn" type="button" hidden>
+                            Cancel Edit
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2><i class="fa-solid fa-bullhorn"></i> All Notices</h2>
+                    <button class="btn btn-secondary" id="refreshBtn" type="button">
+                        <i class="fa-solid fa-rotate"></i> Refresh
+                    </button>
+                </div>
+
+                <p class="status-line" id="listStatus" aria-live="polite">Loading notices...</p>
+                <div class="notice-list" id="noticeList">
+                    <div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><br>Loading notices...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            push,
+            set,
+            update,
+            remove
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+            authDomain: "chemistry-point-9a41b.firebaseapp.com",
+            projectId: "chemistry-point-9a41b",
+            storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+            messagingSenderId: "791007663942",
+            appId: "1:791007663942:web:693c008e475a2e74357747"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(
+            app,
+            "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        );
+
+        const $ = id => document.getElementById(id);
+
+        const noticeForm = $("noticeForm");
+        const noticeList = $("noticeList");
+        const formStatus = $("formStatus");
+        const listStatus = $("listStatus");
+        const saveBtn = $("saveBtn");
+        const formHeading = $("formHeading");
+
+        let currentUser = null;
+        let editingId = null;
+        let noticeCache = {};
+        let unsubscribeNotices = null;
+
+        function setStatus(element, message, type = "") {
+            element.textContent = message;
+            element.className = "status-line" + (type ? " " + type : "");
+        }
+
+        function formatDate(timestamp) {
+            if (!timestamp) return "Date unavailable";
+            const date = new Date(timestamp);
+            if (Number.isNaN(date.getTime())) return "Date unavailable";
+            return date.toLocaleString("en-IN", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+        }
+
+        function formatType(type) {
+            const allowed = ["General", "Important", "Exam", "Result", "Alert"];
+            return allowed.includes(type) ? type : "General";
+        }
+
+        function safeExternalUrl(value) {
+            if (!value) return "";
+            try {
+                const url = new URL(value);
+                return ["https:", "http:"].includes(url.protocol) ? url.href : "";
+            } catch {
+                return "";
+            }
+        }
+
+        function createElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (text !== undefined) element.textContent = text;
+            return element;
+        }
+
+        function renderNotices(data) {
+            noticeList.replaceChildren();
+            noticeCache = data && typeof data === "object" ? data : {};
+
+            const entries = Object.entries(noticeCache)
+                .filter(([, notice]) => notice && typeof notice === "object")
+                .sort((a, b) => (Number(b[1].updatedAt || b[1].createdAt) || 0) -
+                                (Number(a[1].updatedAt || a[1].createdAt) || 0));
+
+            if (!entries.length) {
+                noticeList.appendChild(createElement(
+                    "div", "empty",
+                    "Abhi koi notice nahi hai. Upar se apna pehla notice add karo."
+                ));
+                setStatus(listStatus, "0 notices found.");
+                return;
+            }
+
+            setStatus(listStatus, `${entries.length} notice(s) found.`);
+
+            for (const [id, notice] of entries) {
+                const card = createElement("article", "notice-card");
+                const top = createElement("div", "notice-top");
+                const titleWrap = createElement("div");
+                const title = createElement("h3", "notice-title", notice.title || "Untitled notice");
+                const meta = createElement("div", "meta");
+
+                meta.append(
+                    createElement("span", "pill type", formatType(notice.type)),
+                    createElement(
+                        "span",
+                        `pill ${notice.published === true ? "published" : "hidden"}`,
+                        notice.published === true ? "Published" : "Unpublished"
+                    )
+                );
+
+                titleWrap.append(title, meta);
+                top.appendChild(titleWrap);
+
+                const message = createElement("p", "notice-message", notice.message || "");
+                const date = createElement(
+                    "div", "status-line",
+                    "Created: " + formatDate(notice.createdAt)
+                );
+
+                card.append(top, message);
+
+                const link = safeExternalUrl(notice.link);
+                if (link) {
+                    const linkRow = createElement("p", "status-line");
+                    const anchor = createElement("a", "", "Open notice link");
+                    anchor.href = link;
+                    anchor.target = "_blank";
+                    anchor.rel = "noopener noreferrer";
+                    anchor.style.color = "var(--gold2)";
+                    linkRow.appendChild(anchor);
+                    card.appendChild(linkRow);
+                }
+
+                card.appendChild(date);
+
+                const actions = createElement("div", "notice-actions");
+
+                const editBtn = createElement("button", "btn btn-secondary");
+                editBtn.type = "button";
+                editBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Edit';
+                editBtn.addEventListener("click", () => editNotice(id));
+
+                const toggleBtn = createElement("button", "btn btn-secondary");
+                toggleBtn.type = "button";
+                toggleBtn.innerHTML = notice.published === true
+                    ? '<i class="fa-solid fa-eye-slash"></i> Unpublish'
+                    : '<i class="fa-solid fa-eye"></i> Publish';
+                toggleBtn.addEventListener("click", () => togglePublished(id));
+
+                const deleteBtn = createElement("button", "btn btn-danger");
+                deleteBtn.type = "button";
+                deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
+                deleteBtn.addEventListener("click", () => deleteNotice(id));
+
+                actions.append(editBtn, toggleBtn, deleteBtn);
+                card.appendChild(actions);
+                noticeList.appendChild(card);
+            }
+        }
+
+        function resetForm() {
+            editingId = null;
+            noticeForm.reset();
+            $("noticePublished").checked = true;
+            $("noticeType").value = "General";
+            formHeading.innerHTML = '<i class="fa-solid fa-circle-plus"></i> Create New Notice';
+            saveBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Save Notice';
+            $("cancelEditBtn").hidden = true;
+            setStatus(formStatus, "Notice details bharo aur save karo.");
+        }
+
+        function editNotice(id) {
+            const notice = noticeCache[id];
+            if (!notice) return;
+
+            editingId = id;
+            $("noticeTitle").value = notice.title || "";
+            $("noticeType").value = formatType(notice.type);
+            $("noticeMessage").value = notice.message || "";
+            $("noticeLink").value = safeExternalUrl(notice.link);
+            $("noticePublished").checked = notice.published === true;
+
+            formHeading.innerHTML = '<i class="fa-solid fa-pen"></i> Edit Notice';
+            saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Update Notice';
+            $("cancelEditBtn").hidden = false;
+            setStatus(formStatus, "Editing mode: changes save karne ke liye Update Notice click karo.");
+            $("editorPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        async function togglePublished(id) {
+            if (!currentUser || !noticeCache[id]) return;
+
+            const newState = noticeCache[id].published !== true;
+
+            try {
+                await update(ref(db, `notices/${id}`), {
+                    published: newState,
+                    updatedAt: Date.now(),
+                    updatedBy: currentUser.uid
+                });
+                setStatus(
+                    listStatus,
+                    newState ? "Notice published." : "Notice unpublished.",
+                    "success"
+                );
+            } catch (error) {
+                console.error(error);
+                setStatus(listStatus, "Update failed: " + error.message, "error");
+            }
+        }
+
+        async function deleteNotice(id) {
+            if (!currentUser || !noticeCache[id]) return;
+
+            const title = noticeCache[id].title || "this notice";
+            if (!confirm(`"${title}" ko permanently delete karna hai?`)) return;
+
+            try {
+                await remove(ref(db, `notices/${id}`));
+                if (editingId === id) resetForm();
+                setStatus(listStatus, "Notice deleted successfully.", "success");
+            } catch (error) {
+                console.error(error);
+                setStatus(listStatus, "Delete failed: " + error.message, "error");
+            }
+        }
+
+        noticeForm.addEventListener("submit", async event => {
+            event.preventDefault();
+            if (!currentUser) return;
+
+            const title = $("noticeTitle").value.trim();
+            const message = $("noticeMessage").value.trim();
+            const type = formatType($("noticeType").value);
+            const rawLink = $("noticeLink").value.trim();
+            const link = safeExternalUrl(rawLink);
+
+            if (!title || !message) {
+                setStatus(formStatus, "Title aur message dono required hain.", "error");
+                return;
+            }
+
+            if (rawLink && !link) {
+                setStatus(formStatus, "Valid http/https URL enter karo.", "error");
+                return;
+            }
+
+            saveBtn.disabled = true;
+            setStatus(formStatus, "Saving notice...");
+
+            try {
+                const now = Date.now();
+                const payload = {
+                    title,
+                    message,
+                    type,
+                    link,
+                    published: $("noticePublished").checked,
+                    updatedAt: now,
+                    updatedBy: currentUser.uid
+                };
+
+                if (editingId) {
+                    const oldNotice = noticeCache[editingId] || {};
+                    payload.createdAt = oldNotice.createdAt || now;
+                    payload.createdBy = oldNotice.createdBy || currentUser.uid;
+
+                    await update(ref(db, `notices/${editingId}`), payload);
+                    setStatus(formStatus, "Notice updated successfully.", "success");
+                } else {
+                    payload.createdAt = now;
+                    payload.createdBy = currentUser.uid;
+
+                    const newNoticeRef = push(ref(db, "notices"));
+                    await set(newNoticeRef, payload);
+                    setStatus(formStatus, "Notice created successfully.", "success");
+                }
+
+                resetForm();
+            } catch (error) {
+                console.error(error);
+                setStatus(formStatus, "Save failed: " + error.message, "error");
+            } finally {
+                saveBtn.disabled = false;
+            }
+        });
+
+        $("resetBtn").addEventListener("click", resetForm);
+        $("cancelEditBtn").addEventListener("click", resetForm);
+
+        $("refreshBtn").addEventListener("click", () => {
+            setStatus(listStatus, "Live data listener active. Refreshing...");
+            // The Firebase listener automatically keeps the list updated.
+        });
+
+        async function verifyAdmin(user) {
+            const snapshot = await import("https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js")
+                .then(({ get }) => get(ref(db, `admins/${user.uid}`)));
+
+            if (!snapshot.exists()) throw new Error("NOT_ADMIN");
+
+            const data = snapshot.val();
+            if (data.role !== "admin" || data.active !== true) {
+                throw new Error("NOT_ADMIN");
+            }
+        }
+
+        onAuthStateChanged(auth, async user => {
+            if (!user) {
+                location.href = "login.html";
+                return;
+            }
+
+            $("email").textContent = user.email || "Admin";
+
+            try {
+                await verifyAdmin(user);
+                currentUser = user;
+
+                if (unsubscribeNotices) unsubscribeNotices();
+
+                unsubscribeNotices = onValue(
+                    ref(db, "notices"),
+                    snapshot => renderNotices(snapshot.val()),
+                    error => {
+                        console.error("Notices database error:", error);
+                        noticeList.replaceChildren(
+                            createElement(
+                                "div", "empty",
+                                "Notices load nahi ho sake. Firebase Rules aur database permission check karo. " +
+                                error.message
+                            )
+                        );
+                        setStatus(listStatus, "Database read error.", "error");
+                    }
+                );
+            } catch (error) {
+                console.error("Admin verification failed:", error);
+                await signOut(auth);
+                location.href = "login.html";
+            }
+        });
+
+        $("logout").addEventListener("click", async () => {
+            await signOut(auth);
+            location.href = "login.html";
+        });
+
+        const sidebar = $("sidebar");
+        const overlay = $("overlay");
+
+        $("sideBtn").addEventListener("click", () => {
+            sidebar.classList.toggle("show");
+            overlay.classList.toggle("show");
+        });
+
+        overlay.addEventListener("click", () => {
+            sidebar.classList.remove("show");
+            overlay.classList.remove("show");
+        });
+
+        document.querySelectorAll(".nav a").forEach(link => {
+            link.addEventListener("click", () => {
+                sidebar.classList.remove("show");
+                overlay.classList.remove("show");
+            });
+        });
+
+        const theme = $("theme");
+
+        function applyTheme(type) {
+            document.body.classList.toggle("light-mode", type === "light");
+            theme.innerHTML = type === "light"
+                ? '<i class="fa-solid fa-sun"></i>'
+                : '<i class="fa-solid fa-moon"></i>';
+        }
+
+        applyTheme(localStorage.getItem("chemistryPointTheme") || "dark");
+
+        theme.addEventListener("click", () => {
+            const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+            localStorage.setItem("chemistryPointTheme", next);
+            applyTheme(next);
+        });
+    </script>
+</body>
+</html>
