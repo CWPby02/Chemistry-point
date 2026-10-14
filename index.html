@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,214 +6,114 @@
     <meta name="description" content="Chemistry Point - Chemistry learning platform by Pardeep Sir. Videos, objectives, PYQs and quizzes.">
     <title>Chemistry Point | By Pardeep Sir</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Existing CSS -->
     <link rel="stylesheet" href="assets/css/root.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- HOME NOTICES: ADDITIVE CSS -->
+    <!-- Community Groups Section Styles -->
     <style>
-        .home-notices-section {
+        .community-section {
             padding: 65px 0;
-            background: var(--bg-secondary, #101114);
         }
 
-        .home-notices-section .notices-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 28px;
+        .community-box {
+            position: relative;
+            overflow: hidden;
+            padding: 35px;
+            border: 1px solid rgba(217,154,22,.22);
+            border-radius: 22px;
+            background: linear-gradient(
+                135deg,
+                rgba(217,154,22,.10),
+                transparent 65%
+            );
         }
 
-        .home-notices-section .notices-heading h2 {
-            margin: 8px 0;
-        }
-
-        .home-notices-section .notices-heading p {
-            margin-top: 10px;
-        }
-
-        .notices-live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 13px;
-            border: 1px solid rgba(34, 197, 94, .25);
-            border-radius: 30px;
-            color: #22c55e;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        .notices-live-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(34, 197, 94, .5);
-        }
-
-        .home-notices-list {
-            display: grid;
-            gap: 14px;
-        }
-
-        .home-notice-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            border: 1px solid var(--border-color, rgba(255,255,255,.1));
-            border-radius: 15px;
-            background: var(--card-bg, rgba(255,255,255,.035));
-            transition: border-color .2s ease, transform .2s ease;
-        }
-
-        .home-notice-card:hover {
-            border-color: rgba(212, 175, 55, .55);
-            transform: translateY(-2px);
-        }
-
-        .home-notice-icon {
-            flex: 0 0 42px;
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 12px;
-            background: rgba(212, 175, 55, .12);
-            color: #d4af37;
-            font-size: 17px;
-        }
-
-        .home-notice-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .home-notice-top {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .home-notice-title {
-            margin: 0;
-            color: var(--text-primary, #f5f5f5);
-            font-size: 16px;
-            font-weight: 700;
-            overflow-wrap: anywhere;
-        }
-
-        .home-notice-type {
-            padding: 4px 9px;
-            border-radius: 20px;
-            background: rgba(212, 175, 55, .12);
-            color: #d4af37;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .home-notice-type.important,
-        .home-notice-type.alert,
-        .home-notice-type.exam,
-        .home-notice-type.result {
-            background: rgba(245, 158, 11, .12);
-            color: #fbbf24;
-        }
-
-        .home-notice-message {
-            margin: 0;
-            color: var(--text-secondary, #b8b8b8);
-            font-size: 14px;
-            line-height: 1.7;
-            overflow-wrap: anywhere;
-            white-space: pre-wrap;
-        }
-
-        .home-notice-date {
-            display: block;
-            margin-top: 10px;
-            color: var(--text-secondary, #999);
-            font-size: 11px;
-        }
-
-        .home-notice-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 12px;
-            color: #d4af37;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .home-notice-link:hover {
-            text-decoration: underline;
-        }
-
-        .home-notice-loading,
-        .home-notice-empty,
-        .home-notice-error {
-            padding: 24px;
-            border: 1px solid var(--border-color, rgba(255,255,255,.1));
-            border-radius: 14px;
-            color: var(--text-secondary, #b8b8b8);
+        .community-heading {
             text-align: center;
+            max-width: 650px;
+            margin: 0 auto 28px;
         }
 
-        .home-notice-loading i,
-        .home-notice-empty i {
-            color: #d4af37;
+        .community-heading h2 {
+            margin: 10px 0;
         }
 
-        .home-notice-empty i {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 24px;
+        .community-heading p {
+            line-height: 1.8;
         }
 
-        @media (max-width: 600px) {
-            .home-notices-section {
-                padding: 45px 0;
+        .community-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .community-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            min-width: 220px;
+            max-width: 100%;
+            padding: 14px 22px;
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform .2s, opacity .2s;
+            overflow-wrap: anywhere;
+        }
+
+        .community-btn:hover {
+            transform: translateY(-3px);
+            opacity: .92;
+        }
+
+        .community-btn i {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .community-btn.whatsapp {
+            background: #168a50;
+        }
+
+        .community-btn.telegram {
+            background: #168ac0;
+        }
+
+        .community-section[hidden],
+        .community-btn[hidden] {
+            display: none !important;
+        }
+
+        @media(max-width:600px) {
+            .community-section {
+                padding: 40px 0;
             }
 
-            .home-notices-section .notices-heading {
-                align-items: flex-start;
+            .community-box {
+                padding: 23px 16px;
+                border-radius: 16px;
+            }
+
+            .community-buttons {
                 flex-direction: column;
-                gap: 12px;
             }
 
-            .home-notice-card {
-                gap: 11px;
-                padding: 15px;
-            }
-
-            .home-notice-icon {
-                flex-basis: 36px;
-                width: 36px;
-                height: 36px;
-            }
-
-            .home-notice-title {
-                font-size: 14px;
-            }
-
-            .home-notice-message {
-                font-size: 13px;
+            .community-btn {
+                width: 100%;
+                min-width: 0;
             }
         }
     </style>
@@ -325,32 +224,6 @@
     </div>
 </section>
 
-<!-- HOME PAGE NOTICES: NEW SECTION -->
-<section class="home-notices-section" id="homeNoticesSection">
-    <div class="container">
-        <div class="section-heading notices-heading">
-            <div>
-                <span class="section-label">LATEST UPDATES</span>
-                <h2>Notice <span>Board</span></h2>
-                <p>Important announcements aur exam updates yahan dekhein.</p>
-            </div>
-
-            <span class="notices-live-badge">
-                <span class="notices-live-dot"></span>
-                Live Updates
-            </span>
-        </div>
-
-        <div class="home-notices-list" id="homeNoticesList" aria-live="polite">
-            <div class="home-notice-loading">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                Notices load ho rahe hain...
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END HOME PAGE NOTICES -->
-
 <!-- INTRODUCTION -->
 <section class="intro-section">
     <div class="container">
@@ -437,7 +310,6 @@
         </div>
 
         <div class="video-grid" id="latestVideos">
-            <!-- Existing fallback cards remain if Firebase has no valid videos -->
             <article class="video-card">
                 <div class="video-thumbnail">
                     <div class="thumbnail-placeholder"><i class="fa-solid fa-play"></i></div>
@@ -484,7 +356,6 @@
         </div>
 
         <div class="chapter-preview-grid" id="homeChapters">
-            <!-- Existing fallback chapters -->
             <a href="student/chapter.html" class="chapter-card">
                 <span class="chapter-number">01</span>
                 <div>
@@ -558,6 +429,48 @@
     </div>
 </section>
 
+<!-- COMMUNITY GROUPS: LOADED FROM ADMIN SETTINGS -->
+<section class="community-section" id="communitySection" hidden>
+    <div class="container">
+        <div class="community-box">
+            <div class="community-heading">
+                <span class="section-label">STAY CONNECTED</span>
+                <h2>हमारे <span>Student Groups</span> से जुड़ें</h2>
+                <p>
+                    Chemistry updates, study information और announcements
+                    पाने के लिए हमारे student groups join करें।
+                </p>
+            </div>
+
+            <div class="community-buttons">
+                <a
+                    class="community-btn whatsapp"
+                    id="homeWhatsappGroup"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span id="homeWhatsappText">Join WhatsApp Group</span>
+                </a>
+
+                <a
+                    class="community-btn telegram"
+                    id="homeTelegramGroup"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                >
+                    <i class="fa-brands fa-telegram"></i>
+                    <span id="homeTelegramText">Join Telegram Group</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CONTACT CTA -->
 <section class="contact-cta">
     <div class="container">
@@ -586,19 +499,23 @@
             <p>Chemistry सीखने और exam preparation के लिए आपका learning platform।</p>
 
             <div class="social-links">
-                <a href="https://youtube.com/@thebestchemistrypointbypradeep"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   aria-label="Pardeep Sir YouTube Channel"
-                   title="YouTube">
+                <a
+                    href="https://youtube.com/@thebestchemistrypointbypradeep"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Pardeep Sir YouTube Channel"
+                    title="YouTube"
+                >
                     <i class="fa-brands fa-youtube"></i>
                 </a>
 
-                <a href="https://instagram.com/chemistry.point.pradeep.sir"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   aria-label="Pardeep Sir Instagram Profile"
-                   title="Instagram">
+                <a
+                    href="https://instagram.com/chemistry.point.pradeep.sir"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Pardeep Sir Instagram Profile"
+                    title="Instagram"
+                >
                     <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>
@@ -634,13 +551,13 @@
     </div>
 </footer>
 
-<!-- Firebase SDK: Realtime Database -->
+<!-- Firebase Realtime Database SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
 /* =====================================================
-   EXISTING MOBILE MENU
+   MOBILE MENU
 ===================================================== */
 const menuBtn = document.getElementById("menuBtn");
 const mobileNav = document.getElementById("mobileNav");
@@ -662,6 +579,7 @@ if (menuBtn && mobileNav) {
     mobileNav.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
             mobileNav.classList.remove("show");
+
             const icon = menuBtn.querySelector("i");
 
             if (icon) {
@@ -700,7 +618,7 @@ try {
     console.error("Firebase initialization failed:", error);
 }
 
-/* Safely read a Firebase path without breaking the page. */
+/* Safely read Firebase data. */
 async function readHomeData(path) {
     if (!homeDb) return null;
 
@@ -713,7 +631,7 @@ async function readHomeData(path) {
     }
 }
 
-/* Escape database text before inserting it into HTML. */
+/* Escape database values before inserting them into HTML. */
 function escapeHomeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
         "&": "&amp;",
@@ -724,7 +642,7 @@ function escapeHomeHTML(value) {
     })[character]);
 }
 
-/* Allow only normal web links. */
+/* Accept only valid HTTP/HTTPS links. */
 function safeHomeURL(value) {
     if (typeof value !== "string" || !value.trim()) return "";
 
@@ -732,13 +650,71 @@ function safeHomeURL(value) {
         const url = new URL(value.trim(), window.location.href);
 
         if (!["http:", "https:"].includes(url.protocol)) return "";
+
         return url.href;
     } catch {
         return "";
     }
 }
 
-/* Extract a YouTube video ID from a public URL or ID. */
+/* =====================================================
+   COMMUNITY GROUP BUTTONS
+   Reads the admin settings from:
+   /siteContent/general
+===================================================== */
+async function loadHomeCommunityGroups() {
+    const section = document.getElementById("communitySection");
+    const whatsappButton = document.getElementById("homeWhatsappGroup");
+    const telegramButton = document.getElementById("homeTelegramGroup");
+    const whatsappText = document.getElementById("homeWhatsappText");
+    const telegramText = document.getElementById("homeTelegramText");
+
+    if (!section || !whatsappButton || !telegramButton) return;
+
+    // Hide everything by default; show only configured groups.
+    section.hidden = true;
+    whatsappButton.hidden = true;
+    telegramButton.hidden = true;
+
+    const settings = await readHomeData("siteContent/general");
+
+    if (!settings || typeof settings !== "object") return;
+
+    const whatsappUrl = safeHomeURL(settings.whatsappGroupUrl);
+    const telegramUrl = safeHomeURL(settings.telegramGroupUrl);
+
+    const whatsappEnabled = settings.showWhatsappHome !== false;
+    const telegramEnabled = settings.showTelegramHome !== false;
+
+    if (whatsappUrl && whatsappEnabled) {
+        whatsappButton.href = whatsappUrl;
+        whatsappText.textContent =
+            typeof settings.whatsappGroupButtonText === "string" &&
+            settings.whatsappGroupButtonText.trim()
+                ? settings.whatsappGroupButtonText.trim()
+                : "Join WhatsApp Group";
+
+        whatsappButton.hidden = false;
+    }
+
+    if (telegramUrl && telegramEnabled) {
+        telegramButton.href = telegramUrl;
+        telegramText.textContent =
+            typeof settings.telegramGroupButtonText === "string" &&
+            settings.telegramGroupButtonText.trim()
+                ? settings.telegramGroupButtonText.trim()
+                : "Join Telegram Group";
+
+        telegramButton.hidden = false;
+    }
+
+    // Hide the entire section when both groups are unavailable or disabled.
+    section.hidden = whatsappButton.hidden && telegramButton.hidden;
+}
+
+/* =====================================================
+   YOUTUBE VIDEO ID HELPER
+===================================================== */
 function getYouTubeId(value) {
     if (typeof value !== "string") return "";
 
@@ -816,6 +792,7 @@ async function loadHomeSettings() {
                 badge.textContent = "";
 
                 if (icon) badge.appendChild(icon);
+
                 badge.appendChild(document.createTextNode(" " + general.tagline));
             }
         }
@@ -823,7 +800,7 @@ async function loadHomeSettings() {
 
     if (about && typeof about === "object") {
         const teacherName = about.teacherName || general?.teacherDisplayName;
-        const teacherImage = safeHomeURL(about.teacherImage) || about.teacherImage;
+        const teacherImage = about.teacherImage;
 
         if (teacherName) {
             const heroName = document.getElementById("heroTeacherName");
@@ -889,7 +866,7 @@ async function loadLatestHomeVideos() {
         .reverse()
         .slice(0, 3);
 
-    /* Preserve the original sample cards if no valid records exist. */
+    // Keep original fallback cards if no valid Firebase videos exist.
     if (!videos.length) return;
 
     container.innerHTML = videos.map(video => {
@@ -944,9 +921,9 @@ async function loadHomeChapters() {
 
             return {
                 title: String(title),
-                number: String(chapter.number || chapter.chapterNumber || index + 1)
-                    .padStart(2, "0"),
-                url: safeHomeURL(chapter.url || chapter.pageUrl || ""),
+                number: String(
+                    chapter.number || chapter.chapterNumber || index + 1
+                ).padStart(2, "0"),
                 order: Number(chapter.order ?? chapter.sortOrder ?? index)
             };
         })
@@ -954,16 +931,15 @@ async function loadHomeChapters() {
         .sort((a, b) => a.order - b.order)
         .slice(0, 3);
 
-    /* Keep original fallback cards if Firebase has no chapters. */
+    // Keep original fallback cards if Firebase has no chapters.
     if (!chapters.length) return;
 
     const chapterCards = chapters.map(chapter => {
         const title = escapeHomeHTML(chapter.title);
         const number = escapeHomeHTML(chapter.number);
-        const destination = chapter.url || "student/chapter.html";
 
         return `
-            <a href="${escapeHomeHTML(destination)}" class="chapter-card">
+            <a href="student/chapter.html" class="chapter-card">
                 <span class="chapter-number">${number}</span>
                 <div>
                     <h3>${title}</h3>
@@ -989,173 +965,18 @@ async function loadHomeChapters() {
 }
 
 /* =====================================================
-   HOME PAGE NOTICES
-   Reads /notices using Firebase's real-time listener.
-===================================================== */
-function loadHomeNotices() {
-    const container = document.getElementById("homeNoticesList");
-
-    if (!container) return;
-
-    if (!homeDb) {
-        container.textContent = "Notices abhi load nahi ho paaye.";
-        return;
-    }
-
-    function noticeDate(notice) {
-        const value = notice.updatedAt ?? notice.createdAt;
-
-        if (typeof value === "number" && Number.isFinite(value)) {
-            return value;
-        }
-
-        if (typeof value === "string") {
-            const parsed = Date.parse(value);
-            return Number.isFinite(parsed) ? parsed : 0;
-        }
-
-        return 0;
-    }
-
-    function formatNoticeDate(timestamp) {
-        if (!timestamp) return "";
-
-        try {
-            return new Date(timestamp).toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "short",
-                year: "numeric"
-            });
-        } catch {
-            return "";
-        }
-    }
-
-    function safeNoticeLink(value) {
-        if (typeof value !== "string" || !value.trim()) return "";
-
-        try {
-            const url = new URL(value.trim(), window.location.href);
-
-            if (!["http:", "https:"].includes(url.protocol)) return "";
-            return url.href;
-        } catch {
-            return "";
-        }
-    }
-
-    function getNoticeIcon(type) {
-        const icons = {
-            general: "fa-bullhorn",
-            important: "fa-circle-exclamation",
-            exam: "fa-file-pen",
-            result: "fa-square-poll-vertical",
-            alert: "fa-bell"
-        };
-
-        return icons[String(type || "general").toLowerCase()] || icons.general;
-    }
-
-    homeDb.ref("notices").on("value", snapshot => {
-        const data = snapshot.val();
-
-        const notices = data && typeof data === "object"
-            ? Object.entries(data)
-                .filter(([, notice]) =>
-                    notice &&
-                    typeof notice === "object" &&
-                    notice.published === true &&
-                    typeof notice.title === "string" &&
-                    notice.title.trim() &&
-                    typeof notice.message === "string" &&
-                    notice.message.trim()
-                )
-                .map(([id, notice]) => ({
-                    id,
-                    ...notice,
-                    sortDate: noticeDate(notice)
-                }))
-                .sort((a, b) => b.sortDate - a.sortDate)
-                .slice(0, 5)
-            : [];
-
-        if (!notices.length) {
-            container.innerHTML = `
-                <div class="home-notice-empty">
-                    <i class="fa-regular fa-bell-slash"></i>
-                    <p>Abhi koi published notice nahi hai.</p>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = notices.map(notice => {
-            const title = escapeHomeHTML(notice.title);
-            const message = escapeHomeHTML(notice.message);
-            const typeText = String(notice.type || "General");
-            const type = escapeHomeHTML(typeText);
-            const typeClass = typeText.toLowerCase().replace(/[^a-z0-9_-]/g, "");
-            const icon = getNoticeIcon(typeText);
-            const date = formatNoticeDate(notice.sortDate);
-            const link = safeNoticeLink(notice.link);
-
-            return `
-                <article class="home-notice-card">
-                    <div class="home-notice-icon" aria-hidden="true">
-                        <i class="fa-solid ${icon}"></i>
-                    </div>
-
-                    <div class="home-notice-content">
-                        <div class="home-notice-top">
-                            <h3 class="home-notice-title">${title}</h3>
-                            <span class="home-notice-type ${typeClass}">${type}</span>
-                        </div>
-
-                        <p class="home-notice-message">${message}</p>
-
-                        ${date ? `
-                            <span class="home-notice-date">
-                                <i class="fa-regular fa-calendar"></i>
-                                ${escapeHomeHTML(date)}
-                            </span>
-                        ` : ""}
-
-                        ${link ? `
-                            <a class="home-notice-link"
-                               href="${escapeHomeHTML(link)}"
-                               target="_blank"
-                               rel="noopener noreferrer">
-                                Read More
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-                        ` : ""}
-                    </div>
-                </article>
-            `;
-        }).join("");
-    }, error => {
-        console.error("Home notices load failed:", error);
-        container.innerHTML = `
-            <div class="home-notice-error">
-                Notices load nahi ho paaye. Database permissions check karein.
-            </div>
-        `;
-    });
-}
-
-/* =====================================================
-   HOME PAGE STARTUP
+   HOMEPAGE STARTUP
 ===================================================== */
 async function initializeHomePage() {
     await Promise.allSettled([
         loadHomeSettings(),
         loadLatestHomeVideos(),
-        loadHomeChapters()
+        loadHomeChapters(),
+        loadHomeCommunityGroups()
     ]);
 }
 
 initializeHomePage();
-loadHomeNotices();
 </script>
 
 </body>
