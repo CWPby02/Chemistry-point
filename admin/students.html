@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Students Management | Code With Piyush</title>
+
+  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --sm-bg: #0b0d12;
+      --sm-panel: #12151d;
+      --sm-panel2: #181c26;
+      --sm-border: #292e3b;
+      --sm-gold: #e9b949;
+      --sm-text: #f5f5f7;
+      --sm-muted: #a1a7b5;
+      --sm-green: #40d69a;
+      --sm-red: #ff7777;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--sm-bg);
+      color: var(--sm-text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    body.light-mode {
+      --sm-bg: #f4f6fa;
+      --sm-panel: #fff;
+      --sm-panel2: #f1f3f8;
+      --sm-border: #dce1eb;
+      --sm-text: #202535;
+      --sm-muted: #687084;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .sm-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sm-sidebar {
+      width: 245px;
+      flex-shrink: 0;
+      padding: 24px 16px;
+      background: var(--sm-panel);
+      border-right: 1px solid var(--sm-border);
+    }
+
+    .sm-brand {
+      padding: 0 10px 25px;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .sm-brand span { color: var(--sm-gold); }
+
+    .sm-nav-label {
+      padding: 14px 12px 8px;
+      color: var(--sm-muted);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .sm-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 0;
+      padding: 12px;
+      color: var(--sm-muted);
+      text-decoration: none;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .sm-nav a:hover,
+    .sm-nav a.active {
+      color: var(--sm-gold);
+      background: #e9b94912;
+    }
+
+    .sm-nav a i { width: 18px; text-align: center; }
+
+    .sm-main {
+      flex: 1;
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .sm-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .sm-topbar h1 {
+      margin: 0 0 6px;
+      font-size: clamp(23px, 3vw, 31px);
+    }
+
+    .sm-muted { color: var(--sm-muted); font-size: 13px; }
+
+    .sm-actions { display: flex; gap: 9px; flex-wrap: wrap; }
+
+    .sm-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--sm-border);
+      border-radius: 9px;
+      padding: 10px 14px;
+      color: var(--sm-text);
+      background: var(--sm-panel2);
+    }
+
+    .sm-btn.gold {
+      color: #16130b;
+      background: var(--sm-gold);
+      border-color: var(--sm-gold);
+      font-weight: 700;
+    }
+
+    .sm-btn.danger {
+      color: var(--sm-red);
+      border-color: #ff777744;
+    }
+
+    .sm-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .sm-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .sm-stat, .sm-panel {
+      border: 1px solid var(--sm-border);
+      background: var(--sm-panel);
+      border-radius: 14px;
+    }
+
+    .sm-stat { padding: 19px; }
+
+    .sm-stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--sm-muted);
+      font-size: 13px;
+    }
+
+    .sm-stat-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--sm-gold);
+      background: #e9b94914;
+    }
+
+    .sm-stat strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 29px;
+    }
+
+    .sm-panel { overflow: hidden; }
+
+    .sm-panel-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--sm-border);
+    }
+
+    .sm-panel-head h2 { margin: 0 0 6px; font-size: 18px; }
+
+    .sm-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .sm-input {
+      min-width: 0;
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--sm-border);
+      border-radius: 9px;
+      outline: none;
+      color: var(--sm-text);
+      background: var(--sm-bg);
+    }
+
+    .sm-input:focus { border-color: var(--sm-gold); }
+
+    .sm-search {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+
+    .sm-search i {
+      position: absolute;
+      top: 50%;
+      left: 13px;
+      transform: translateY(-50%);
+      color: var(--sm-muted);
+    }
+
+    .sm-search input { padding-left: 37px; }
+
+    .sm-filter { width: 170px; }
+
+    .sm-table-wrap { width: 100%; overflow-x: auto; }
+
+    .sm-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .sm-table th {
+      padding: 14px 17px;
+      color: var(--sm-muted);
+      background: var(--sm-panel2);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .sm-table td {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--sm-border);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .sm-table tbody tr:last-child td { border-bottom: 0; }
+    .sm-table tbody tr:hover { background: #e9b94908; }
+
+    .sm-person {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 180px;
+    }
+
+    .sm-avatar {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--sm-gold);
+      background: #e9b94918;
+      font-weight: 800;
+    }
+
+    .sm-person strong { display: block; margin-bottom: 4px; }
+    .sm-person small { color: var(--sm-muted); }
+
+    .sm-badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      background: #a1a7b51a;
+      color: var(--sm-muted);
+    }
+
+    .sm-badge.active { background: #40d69a19; color: var(--sm-green); }
+    .sm-badge.inactive { background: #ff77771a; color: var(--sm-red); }
+
+    .sm-row-actions { display: flex; gap: 6px; }
+
+    .sm-icon-btn {
+      width: 33px;
+      height: 33px;
+      border: 1px solid var(--sm-border);
+      border-radius: 8px;
+      background: var(--sm-panel2);
+      color: var(--sm-text);
+    }
+
+    .sm-icon-btn:hover { color: var(--sm-gold); }
+
+    .sm-empty {
+      padding: 44px 20px;
+      text-align: center;
+      color: var(--sm-muted);
+    }
+
+    .sm-empty i {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--sm-gold);
+      font-size: 30px;
+    }
+
+    .sm-footer {
+      padding: 20px 4px 0;
+      color: var(--sm-muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .sm-modal {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #000b;
+    }
+
+    .sm-modal.open { display: flex; }
+
+    .sm-dialog {
+      width: 100%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 22px;
+      border: 1px solid var(--sm-border);
+      border-radius: 16px;
+      background: var(--sm-panel);
+    }
+
+    .sm-dialog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sm-dialog-head h2 { margin: 0; font-size: 20px; }
+
+    .sm-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .sm-field label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--sm-muted);
+      font-size: 12px;
+    }
+
+    .sm-field.full { grid-column: 1 / -1; }
+
+    .sm-form-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .sm-toast {
+      position: fixed;
+      z-index: 1200;
+      right: 20px;
+      bottom: 20px;
+      max-width: calc(100% - 40px);
+      padding: 13px 17px;
+      border: 1px solid var(--sm-border);
+      border-radius: 10px;
+      color: var(--sm-text);
+      background: var(--sm-panel);
+      box-shadow: 0 8px 30px #0004;
+      display: none;
+    }
+
+    .sm-toast.show { display: block; }
+
+    .sm-toast.error { border-color: var(--sm-red); }
+
+    .sm-mobile-menu { display: none; }
+
+    @media (max-width: 900px) {
+      .sm-sidebar { width: 210px; }
+      .sm-main { padding: 20px; }
+      .sm-stats { gap: 10px; }
+      .sm-stat { padding: 14px; }
+    }
+
+    @media (max-width: 650px) {
+      .sm-layout { display: block; }
+      .sm-sidebar {
+        display: none;
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid var(--sm-border);
+      }
+      .sm-sidebar.open { display: block; }
+      .sm-main { padding: 17px 12px; }
+      .sm-topbar { align-items: flex-start; }
+      .sm-topbar h1 { font-size: 23px; }
+      .sm-mobile-menu { display: inline-flex; }
+      .sm-stats { grid-template-columns: 1fr; }
+      .sm-stat strong { font-size: 25px; }
+      .sm-panel-head { padding: 15px; }
+      .sm-filter { width: 100%; }
+      .sm-search { min-width: 100%; }
+      .sm-form-grid { grid-template-columns: 1fr; }
+      .sm-field.full { grid-column: auto; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="sm-layout">
+
+  <aside class="sm-sidebar" id="sidebar">
+    <div class="sm-brand">Code With <span>Piyush</span></div>
+
+    <nav class="sm-nav">
+      <div class="sm-nav-label">Main Menu</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="videos.html"><i class="fa-solid fa-video"></i> Videos</a>
+      <a href="objectives.html"><i class="fa-solid fa-file-pdf"></i> Objectives</a>
+      <a href="quizzes.html"><i class="fa-solid fa-circle-question"></i> Quizzes</a>
+      <a href="questions.html"><i class="fa-solid fa-list-check"></i> Questions</a>
+      <a href="notices.html"><i class="fa-solid fa-bullhorn"></i> Notices</a>
+      <a href="students.html" class="active"><i class="fa-solid fa-users"></i> Students</a>
+
+      <div class="sm-nav-label">Settings</div>
+      <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a href="../index.html"><i class="fa-solid fa-house"></i> View Website</a>
+      <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+  </aside>
+
+  <main class="sm-main">
+    <header class="sm-topbar">
+      <div>
+        <div class="sm-actions" style="margin-bottom:12px">
+          <button class="sm-btn sm-mobile-menu" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i> Menu
+          </button>
+        </div>
+        <h1>Students Management</h1>
+        <div class="sm-muted">Registered students aur unki details manage karo.</div>
+      </div>
+
+      <div class="sm-actions">
+        <button class="sm-btn" id="themeBtn" type="button" title="Toggle theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+        <button class="sm-btn gold" id="refreshBtn" type="button">
+          <i class="fa-solid fa-rotate"></i> Refresh
+        </button>
+      </div>
+    </header>
+
+    <section class="sm-stats">
+      <article class="sm-stat">
+        <div class="sm-stat-top">
+          Total Students
+          <span class="sm-stat-icon"><i class="fa-solid fa-users"></i></span>
+        </div>
+        <strong id="totalCount">—</strong>
+      </article>
+
+      <article class="sm-stat">
+        <div class="sm-stat-top">
+          Active Students
+          <span class="sm-stat-icon"><i class="fa-solid fa-user-check"></i></span>
+        </div>
+        <strong id="activeCount">—</strong>
+      </article>
+
+      <article class="sm-stat">
+        <div class="sm-stat-top">
+          Inactive / Other
+          <span class="sm-stat-icon"><i class="fa-solid fa-user-clock"></i></span>
+        </div>
+        <strong id="inactiveCount">—</strong>
+      </article>
+    </section>
+
+    <section class="sm-panel">
+      <div class="sm-panel-head">
+        <h2><i class="fa-solid fa-address-book" style="color:var(--sm-gold)"></i> Student Directory</h2>
+        <div class="sm-muted">Database mein saved student records yahan dikhte hain.</div>
+
+        <div class="sm-toolbar">
+          <div class="sm-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="sm-input" id="searchInput"
+                   type="search"
+                   placeholder="Name, email, phone ya student ID search karo">
+          </div>
+
+          <select class="sm-input sm-filter" id="statusFilter" aria-label="Filter students">
+            <option value="all">All Students</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive / Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sm-table-wrap">
+        <table class="sm-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Phone</th>
+              <th>Class</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="studentsTable">
+            <tr><td colspan="5">
+              <div class="sm-empty"><i class="fa-solid fa-spinner fa-spin"></i>Loading students...</div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="sm-footer">
+      © 2026 Code With Piyush · Built with ❤️
+    </div>
+  </main>
+</div>
+
+<!-- Student details / edit modal -->
+<div class="sm-modal" id="studentModal" role="dialog"
+     aria-modal="true" aria-labelledby="modalTitle">
+  <div class="sm-dialog">
+    <div class="sm-dialog-head">
+      <h2 id="modalTitle">Student Details</h2>
+      <button class="sm-icon-btn" id="closeModalBtn" type="button" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <form id="studentForm">
+      <input type="hidden" id="studentKey">
+
+      <div class="sm-form-grid">
+        <div class="sm-field">
+          <label for="studentName">Full Name</label>
+          <input class="sm-input" id="studentName" maxlength="120" required>
+        </div>
+
+        <div class="sm-field">
+          <label for="studentPhone">Phone</label>
+          <input class="sm-input" id="studentPhone" maxlength="30">
+        </div>
+
+        <div class="sm-field full">
+          <label for="studentEmail">Email</label>
+          <input class="sm-input" id="studentEmail" type="email" maxlength="200">
+        </div>
+
+        <div class="sm-field">
+          <label for="studentClass">Class</label>
+          <input class="sm-input" id="studentClass" maxlength="80">
+        </div>
+
+        <div class="sm-field">
+          <label for="studentStatus">Status</label>
+          <select class="sm-input" id="studentStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sm-form-actions">
+        <button class="sm-btn" id="cancelModalBtn" type="button">Cancel</button>
+        <button class="sm-btn gold" id="saveBtn" type="submit">
+          <i class="fa-solid fa-floppy-disk"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="sm-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+  import { initializeApp, getApps }
+    from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+  import {
+    getAuth, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+  import {
+    getDatabase, ref, get, onValue, update, remove
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+    authDomain: "chemistry-point-9a41b.firebaseapp.com",
+    databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "chemistry-point-9a41b",
+    storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+    messagingSenderId: "791007663942",
+    appId: "1:791007663942:web:693c008e475a2e74357747"
+  };
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  const $ = id => document.getElementById(id);
+
+  let students = [];
+  let currentAdmin = null;
+  let stopStudentsListener = null;
+  let toastTimer = null;
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char]));
+  }
+
+  function showToast(message, isError = false) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.classList.toggle("error", isError);
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 3500);
+  }
+
+  function normalizeText(value) {
+    return String(value ?? "").trim();
+  }
+
+  function getStudentName(student) {
+    return normalizeText(student.name || student.fullName || student.displayName)
+      || "Unnamed Student";
+  }
+
+  function getStudentEmail(student) {
+    return normalizeText(student.email || student.emailAddress);
+  }
+
+  function getStudentPhone(student) {
+    return normalizeText(student.phone || student.phoneNumber || student.mobile);
+  }
+
+  function getStudentClass(student) {
+    return normalizeText(student.className || student.class || student.standard || student.grade)
+      || "—";
+  }
+
+  function getStudentStatus(student) {
+    // Missing status is not assumed to mean active.
+    const status = normalizeText(student.status).toLowerCase();
+
+    if (student.active === true || status === "active") return "active";
+    if (student.active === false || status === "inactive") return "inactive";
+    return "other";
+  }
+
+  function renderStats() {
+    $("totalCount").textContent = students.length;
+
+    $("activeCount").textContent =
+      students.filter(item => getStudentStatus(item.data) === "active").length;
+
+    $("inactiveCount").textContent =
+      students.filter(item => getStudentStatus(item.data) !== "active").length;
+  }
+
+  function renderStudents() {
+    const query = normalizeText($("searchInput").value).toLowerCase();
+    const filter = $("statusFilter").value;
+
+    const filtered = students.filter(({ key, data }) => {
+      const searchable = [
+        key,
+        getStudentName(data),
+        getStudentEmail(data),
+        getStudentPhone(data),
+        getStudentClass(data)
+      ].join(" ").toLowerCase();
+
+      if (query && !searchable.includes(query)) return false;
+
+      const status = getStudentStatus(data);
+
+      if (filter === "active" && status !== "active") return false;
+      if (filter === "inactive" && status === "active") return false;
+
+      return true;
+    });
+
+    if (!filtered.length) {
+      $("studentsTable").innerHTML = `
+        <tr><td colspan="5">
+          <div class="sm-empty">
+            <i class="fa-solid fa-user-slash"></i>
+            <strong>No students found</strong>
+            <p>Search change karo ya database mein student records check karo.</p>
+          </div>
+        </td></tr>`;
+      return;
+    }
+
+    $("studentsTable").innerHTML = filtered.map(({ key, data }) => {
+      const name = getStudentName(data);
+      const email = getStudentEmail(data);
+      const phone = getStudentPhone(data);
+      const studentClass = getStudentClass(data);
+      const status = getStudentStatus(data);
+
+      const badgeClass = status === "active"
+        ? "active"
+        : status === "inactive" ? "inactive" : "";
+
+      const badgeText = status === "other"
+        ? "Not Set"
+        : status === "active" ? "Active" : "Inactive";
+
+      return `
+        <tr>
+          <td>
+            <div class="sm-person">
+              <div class="sm-avatar">${escapeHTML(name.charAt(0).toUpperCase())}</div>
+              <div>
+                <strong>${escapeHTML(name)}</strong>
+                <small>${escapeHTML(email || key)}</small>
+              </div>
+            </div>
+          </td>
+          <td>${escapeHTML(phone || "—")}</td>
+          <td>${escapeHTML(studentClass)}</td>
+          <td><span class="sm-badge ${badgeClass}">${badgeText}</span></td>
+          <td>
+            <div class="sm-row-actions">
+              <button class="sm-icon-btn" type="button"
+                      data-action="view" data-key="${escapeHTML(key)}"
+                      title="View / Edit" aria-label="View or edit ${escapeHTML(name)}">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="sm-icon-btn" type="button"
+                      data-action="delete" data-key="${escapeHTML(key)}"
+                      title="Delete database record" aria-label="Delete ${escapeHTML(name)}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>`;
+    }).join("");
+  }
+
+  function openStudent(key) {
+    const student = students.find(item => item.key === key);
+
+    if (!student) {
+      showToast("Student record nahi mila.", true);
+      return;
+    }
+
+    const data = student.data;
+
+    $("studentKey").value = key;
+    $("studentName").value = getStudentName(data) === "Unnamed Student"
+      ? "" : getStudentName(data);
+    $("studentEmail").value = getStudentEmail(data);
+    $("studentPhone").value = getStudentPhone(data);
+    $("studentClass").value = getStudentClass(data) === "—"
+      ? "" : getStudentClass(data);
+
+    const status = getStudentStatus(data);
+    $("studentStatus").value = status === "active" ? "active" : "inactive";
+
+    $("modalTitle").textContent = "Edit Student";
+    $("studentModal").classList.add("open");
+  }
+
+  function closeModal() {
+    $("studentModal").classList.remove("open");
+    $("studentForm").reset();
+    $("studentKey").value = "";
+  }
+
+  function getChangesFromForm(oldData) {
+    const name = normalizeText($("studentName").value);
+    const email = normalizeText($("studentEmail").value);
+    const phone = normalizeText($("studentPhone").value);
+    const studentClass = normalizeText($("studentClass").value);
+    const status = $("studentStatus").value;
+
+    // Update existing aliases if present; otherwise use standard field names.
+    const changes = {};
+
+    if ("name" in oldData || !("fullName" in oldData)) changes.name = name;
+    if ("fullName" in oldData) changes.fullName = name;
+    if ("displayName" in oldData) changes.displayName = name;
+
+    if ("emailAddress" in oldData && !("email" in oldData)) {
+      changes.emailAddress = email;
+    } else {
+      changes.email = email;
+    }
+
+    if ("phoneNumber" in oldData && !("phone" in oldData)) {
+      changes.phoneNumber = phone;
+    } else if ("mobile" in oldData && !("phone" in oldData)) {
+      changes.mobile = phone;
+    } else {
+      changes.phone = phone;
+    }
+
+    if ("className" in oldData || !("class" in oldData)) {
+      changes.className = studentClass;
+    }
+    if ("class" in oldData) changes.class = studentClass;
+    if ("standard" in oldData) changes.standard = studentClass;
+    if ("grade" in oldData) changes.grade = studentClass;
+
+    changes.status = status;
+    changes.active = status === "active";
+    changes.updatedAt = Date.now();
+    changes.updatedBy = currentAdmin.uid;
+
+    return changes;
+  }
+
+  async function saveStudent(event) {
+    event.preventDefault();
+
+    const key = $("studentKey").value;
+    const student = students.find(item => item.key === key);
+
+    if (!student) {
+      showToast("Student record nahi mila.", true);
+      return;
+    }
+
+    if (!normalizeText($("studentName").value)) {
+      showToast("Student ka naam enter karo.", true);
+      return;
+    }
+
+    const button = $("saveBtn");
+    button.disabled = true;
+
+    try {
+      const changes = getChangesFromForm(student.data);
+
+      await update(ref(db, `students/${key}`), changes);
+
+      closeModal();
+      showToast("Student details update ho gayi.");
+    } catch (error) {
+      console.error(error);
+      showToast("Update nahi hua. Firebase rules check karo.", true);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function deleteStudent(key) {
+    const student = students.find(item => item.key === key);
+    if (!student) return;
+
+    const name = getStudentName(student.data);
+
+    const confirmed = confirm(
+      `"${name}" ka database student record delete karna hai?\n\n` +
+      "Ye action undo nahi hoga. Firebase Authentication account delete nahi hoga."
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await remove(ref(db, `students/${key}`));
+      showToast("Database record delete ho gaya.");
+    } catch (error) {
+      console.error(error);
+      showToast("Delete nahi hua. Firebase rules check karo.", true);
+    }
+  }
+
+  function startStudentsListener() {
+    if (stopStudentsListener) stopStudentsListener();
+
+    stopStudentsListener = onValue(
+      ref(db, "students"),
+      snapshot => {
+        const value = snapshot.val() || {};
+
+        students = Object.entries(value)
+          .filter(([, data]) => data && typeof data === "object" && !Array.isArray(data))
+          .map(([key, data]) => ({ key, data }));
+
+        students.sort((a, b) =>
+          getStudentName(a.data).localeCompare(getStudentName(b.data))
+        );
+
+        renderStats();
+        renderStudents();
+      },
+      error => {
+        console.error("Students read error:", error);
+        $("studentsTable").innerHTML = `
+          <tr><td colspan="5">
+            <div class="sm-empty">
+              <i class="fa-solid fa-lock"></i>
+              <strong>Students load nahi ho paaye</strong>
+              <p>Firebase Rules mein /students read permission aur admin status check karo.</p>
+            </div>
+          </td></tr>`;
+
+        showToast("Database read permission check karo.", true);
+      }
+    );
+  }
+
+  async function verifyAdmin(user) {
+    if (!user) {
+      location.replace("login.html");
+      return false;
+    }
+
+    try {
+      const adminSnap = await get(ref(db, `admins/${user.uid}`));
+
+      if (!adminSnap.exists()) {
+        await signOut(auth);
+        location.replace("login.html");
+        return false;
+      }
+
+      const admin = adminSnap.val();
+
+      if (admin.role !== "admin" || admin.active !== true) {
+        await signOut(auth);
+        location.replace("login.html");
+        return false;
+      }
+
+      currentAdmin = user;
+      startStudentsListener();
+      return true;
+    } catch (error) {
+      console.error("Admin verification failed:", error);
+      showToast("Admin verification failed. Rules check karo.", true);
+      return false;
+    }
+  }
+
+  onAuthStateChanged(auth, user => {
+    if (!user) {
+      location.replace("login.html");
+      return;
+    }
+
+    verifyAdmin(user);
+  });
+
+  $("searchInput").addEventListener("input", renderStudents);
+  $("statusFilter").addEventListener("change", renderStudents);
+  $("studentForm").addEventListener("submit", saveStudent);
+  $("closeModalBtn").addEventListener("click", closeModal);
+  $("cancelModalBtn").addEventListener("click", closeModal);
+
+  $("studentModal").addEventListener("click", event => {
+    if (event.target === $("studentModal")) closeModal();
+  });
+
+  $("studentsTable").addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const key = button.dataset.key;
+    if (!key) return;
+
+    if (button.dataset.action === "view") openStudent(key);
+    if (button.dataset.action === "delete") deleteStudent(key);
+  });
+
+  $("refreshBtn").addEventListener("click", async () => {
+    $("refreshBtn").disabled = true;
+
+    try {
+      const snapshot = await get(ref(db, "students"));
+      const value = snapshot.val() || {};
+
+      students = Object.entries(value)
+        .filter(([, data]) => data && typeof data === "object" && !Array.isArray(data))
+        .map(([key, data]) => ({ key, data }));
+
+      students.sort((a, b) =>
+        getStudentName(a.data).localeCompare(getStudentName(b.data))
+      );
+
+      renderStats();
+      renderStudents();
+      showToast("Student list refresh ho gayi.");
+    } catch (error) {
+      console.error(error);
+      showToast("Refresh failed. Firebase Rules check karo.", true);
+    } finally {
+      $("refreshBtn").disabled = false;
+    }
+  });
+
+  $("logoutBtn").addEventListener("click", async event => {
+    event.preventDefault();
+
+    try {
+      if (stopStudentsListener) stopStudentsListener();
+      await signOut(auth);
+      location.replace("login.html");
+    } catch (error) {
+      console.error(error);
+      showToast("Logout failed.", true);
+    }
+  });
+
+  $("menuBtn").addEventListener("click", () => {
+    $("sidebar").classList.toggle("open");
+  });
+
+  $("themeBtn").addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    const light = document.body.classList.contains("light-mode");
+    $("themeBtn").innerHTML = light
+      ? '<i class="fa-solid fa-moon"></i>'
+      : '<i class="fa-solid fa-sun"></i>';
+  });
+</script>
+</body>
+</html>
