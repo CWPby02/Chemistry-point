@@ -47,7 +47,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -60,7 +59,6 @@
     }
 
     a { text-decoration: none; }
-
     button { font: inherit; }
 
     .site-header {
@@ -145,7 +143,6 @@
     }
 
     .theme-toggle { font-size: 11px; }
-
     .theme-toggle i { color: var(--gold); }
 
     .menu-btn {
@@ -161,7 +158,10 @@
       border-top: 1px solid var(--border);
     }
 
-    .mobile-nav.show { display: flex; flex-direction: column; }
+    .mobile-nav.show {
+      display: flex;
+      flex-direction: column;
+    }
 
     .mobile-nav a {
       display: flex;
@@ -174,12 +174,11 @@
     }
 
     .mobile-nav a:last-child { border-bottom: 0; }
-
     .mobile-nav a i { width: 18px; color: var(--gold); }
 
     .pdf-page {
       min-height: calc(100vh - 80px);
-      padding: 65px 0 65px;
+      padding: 65px 0;
       background:
         radial-gradient(ellipse at top, var(--gold-soft), transparent 55%),
         var(--bg);
@@ -511,10 +510,8 @@
 </head>
 
 <body>
-
   <header class="site-header">
     <div class="nav-container">
-
       <a href="../index.html" class="brand">
         <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
         <span class="brand-text">
@@ -556,7 +553,6 @@
 
   <main class="pdf-page">
     <div class="pdf-container">
-
       <section class="pdf-header">
         <div class="pdf-label">
           <i class="fa-solid fa-file-pdf"></i>
@@ -590,13 +586,11 @@
           Google Drive पर file sharing permissions भी सही होनी चाहिए।
         </p>
       </div>
-
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-grid">
-
       <div class="footer-brand">
         <a href="../index.html" class="brand">
           <img src="../assets/images/logo/logo.png" alt="Code With Piyush Logo">
@@ -625,7 +619,6 @@
         <a href="../contact.html">Contact</a>
         <a href="../objectives.html">Study Material</a>
       </div>
-
     </div>
 
     <div class="footer-bottom">
@@ -749,41 +742,73 @@
       return raw === "" || raw === null ? "12" : "";
     }
 
+    // Accept common Google Drive URL formats and extract the file ID.
     function getDriveId(url) {
-      if (!url) return null;
+      if (!url || typeof url !== "string") return null;
 
       try {
-        const parsed = new URL(String(url).trim());
+        const parsed = new URL(url.trim());
+        const host = parsed.hostname.toLowerCase();
 
         if (
-          parsed.hostname === "drive.google.com" ||
-          parsed.hostname.endsWith(".drive.google.com")
+          host !== "drive.google.com" &&
+          host !== "docs.google.com" &&
+          host !== "drive.usercontent.google.com"
         ) {
-          const match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
-          if (match) return match[1];
-
-          const id = parsed.searchParams.get("id");
-          if (id) return id;
+          return null;
         }
-      } catch {
-        return null;
+
+        // https://drive.google.com/file/d/FILE_ID/view
+        let match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
+        if (match) return match[1];
+
+        // https://drive.google.com/open?id=FILE_ID
+        // https://drive.google.com/uc?id=FILE_ID
+        const queryId = parsed.searchParams.get("id");
+        if (queryId) return queryId;
+
+        // Some Docs/Sheets-style links contain /document/d/FILE_ID/
+        match = parsed.pathname.match(
+          /\/(?:document|spreadsheets|presentation)\/d\/([^/]+)/
+        );
+
+        if (match) return match[1];
+      } catch (error) {
+        console.warn("Invalid PDF URL:", error);
       }
 
       return null;
     }
 
-    function getViewUrl(url) {
-      const id = getDriveId(url);
-      return id
-        ? `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`
-        : url;
+    function isSafeHttpUrl(url) {
+      try {
+        const parsed = new URL(url);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch {
+        return false;
+      }
     }
 
+    function getViewUrl(url) {
+      const id = getDriveId(url);
+
+      if (id) {
+        return `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+      }
+
+      return isSafeHttpUrl(url) ? url : "";
+    }
+
+    // Use Google's download endpoint for Drive files.
+    // Non-Drive links are opened directly; their server controls downloading.
     function getDownloadUrl(url) {
       const id = getDriveId(url);
-      return id
-        ? `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`
-        : url;
+
+      if (id) {
+        return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
+      }
+
+      return isSafeHttpUrl(url) ? url : "";
     }
 
     function getPdfUrl(item, type) {
@@ -791,34 +816,32 @@
 
       if (!config || !item || typeof item !== "object") return "";
 
-      for (const field of config.fields) {
-        const value = item[field];
+      const containers = [
+        item,
+        item.pdfs,
+        item.pdfLinks,
+        item.materials,
+        item.objectives
+      ];
 
-        if (typeof value === "string" && value.trim()) {
-          return value.trim();
-        }
+      for (const container of containers) {
+        if (!container || typeof container !== "object") continue;
 
-        if (value && typeof value === "object") {
-          const nestedUrl = value.url || value.link || value.pdfUrl;
-
-          if (typeof nestedUrl === "string" && nestedUrl.trim()) {
-            return nestedUrl.trim();
-          }
-        }
-      }
-
-      // Some schemas store links in a nested PDF object.
-      const nested = item.pdfs || item.pdfLinks || item.materials;
-
-      if (nested && typeof nested === "object") {
         for (const field of config.fields) {
-          const value = nested[field];
+          const value = container[field];
 
-          if (typeof value === "string" && value.trim()) return value.trim();
+          if (typeof value === "string" && value.trim()) {
+            const candidate = value.trim();
+            if (isSafeHttpUrl(candidate)) return candidate;
+          }
 
           if (value && typeof value === "object") {
             const nestedUrl = value.url || value.link || value.pdfUrl;
-            if (typeof nestedUrl === "string" && nestedUrl.trim()) {
+
+            if (
+              typeof nestedUrl === "string" &&
+              isSafeHttpUrl(nestedUrl.trim())
+            ) {
               return nestedUrl.trim();
             }
           }
@@ -835,21 +858,29 @@
       return element;
     }
 
-    function makeAction(url, className, iconClass, label) {
+    function makeAction(url, className, iconClass, label, isDownload = false) {
       const link = makeElement("a", className);
-      link.href = url;
+      link.href = url || "#";
 
       const icon = makeElement("i", iconClass);
       icon.setAttribute("aria-hidden", "true");
 
       link.append(icon, document.createTextNode(" " + label));
 
-      if (className.includes("disabled")) {
+      if (!url || className.includes("disabled")) {
+        link.classList.add("disabled");
         link.setAttribute("aria-disabled", "true");
         link.tabIndex = -1;
-      } else {
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
+        return link;
+      }
+
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      if (isDownload) {
+        // Google Drive handles the actual download response.
+        // Avoid the HTML download attribute because cross-origin URLs may ignore it.
+        link.title = "Google Drive में PDF download खोलें";
       }
 
       return link;
@@ -857,7 +888,10 @@
 
     function createCard(type, url) {
       const config = pdfTypes[type];
-      const available = Boolean(url);
+      const viewUrl = url ? getViewUrl(url) : "";
+      const downloadUrl = url ? getDownloadUrl(url) : "";
+      const available = Boolean(viewUrl && downloadUrl);
+
       const card = makeElement("article", "pdf-card");
 
       const iconBox = makeElement("div", "pdf-icon");
@@ -888,17 +922,18 @@
       const actions = makeElement("div", "pdf-actions");
 
       const view = makeAction(
-        available ? getViewUrl(url) : "#",
-        `pdf-btn pdf-btn-view${available ? "" : " disabled"}`,
+        available ? viewUrl : "",
+        "pdf-btn pdf-btn-view",
         "fa-regular fa-eye",
         "View PDF"
       );
 
       const download = makeAction(
-        available ? getDownloadUrl(url) : "#",
-        `pdf-btn pdf-btn-download${available ? "" : " disabled"}`,
+        available ? downloadUrl : "",
+        "pdf-btn pdf-btn-download",
         "fa-solid fa-download",
-        "Download"
+        "Download",
+        true
       );
 
       actions.append(view, download);
@@ -923,9 +958,8 @@
       if (!data || typeof data !== "object") return null;
 
       const wantedSlug = normalize(chapterSlug);
-      const entries = Object.entries(data);
 
-      for (const [key, item] of entries) {
+      for (const [key, item] of Object.entries(data)) {
         if (!item || typeof item !== "object") continue;
 
         const itemSlug = getItemSlug(item, key);
@@ -963,16 +997,17 @@
 
       for (const type of typesToShow) {
         const url = getPdfUrl(chapterItem, type);
+
         if (url) availableCount++;
         grid.appendChild(createCard(type, url));
       }
 
       if (availableCount === 0) {
         $("pdfNoteText").textContent =
-          "Chapter मिल गया, लेकिन इस record में पहचाने गए PDF fields में कोई link नहीं मिला। Admin/objectives.html में इस्तेमाल होने वाले वास्तविक field names से mapping करनी होगी।";
+          "Chapter mil gaya, lekin Firebase record mein pehchane gaye PDF fields mein link nahi mila. Admin panel mein save hone wale field names ko match karna hoga.";
       } else {
         $("pdfNoteText").textContent =
-          `${availableCount} PDF link उपलब्ध है। Google Drive file की sharing permission सही होने पर View/Download काम करेगा।`;
+          `${availableCount} PDF link available hai. Google Drive sharing permission "Anyone with the link" par Viewer honi chahiye. Download link Google Drive par khulega.`;
       }
     }
 
@@ -980,32 +1015,34 @@
       if (!chapterSlug) {
         $("chapterName").textContent = "All Chemistry Chapters";
         showMessage(
-          "URL में chapter नहीं मिला। कृपया Objectives page से किसी chapter को खोलें।"
+          "URL mein chapter nahi mila. Kripya Objectives page se kisi chapter ko kholen."
         );
         return;
       }
 
       const knownName = chapterNames[chapterSlug];
+
       $("chapterName").textContent =
         `Class ${classLevel} · ${knownName || formatSlug(chapterSlug)}`;
 
       if (!pdfTypes[objectiveType]) {
-        showMessage("Objective type सही नहीं है। V.V.I, PYQ या All में से कोई चुनें.");
+        showMessage("Objective type sahi nahi hai. V.V.I, PYQ ya All mein se koi chunen.");
         return;
       }
 
       onValue(
         ref(db, "chapters"),
         snapshot => {
-          const data = snapshot.val();
-          const chapterItem = getChapterMatch(data);
+          const chapterItem = getChapterMatch(snapshot.val());
 
           if (!chapterItem) {
             showMessage(
-              "इस class और chapter का record Firebase के chapters path में नहीं मिला।"
+              "Is class aur chapter ka record Firebase ke chapters path mein nahi mila."
             );
+
             $("pdfNoteText").textContent =
-              "अगर chapter किसी अलग database path में save होता है, तो इस page को उसी path से connect करना होगा.";
+              "Agar chapters kisi doosre database path mein save hote hain, toh is page ko us path se connect karna hoga.";
+
             return;
           }
 
@@ -1013,15 +1050,16 @@
         },
         error => {
           console.error("Firebase PDF data error:", error);
+
           showMessage(
-            "PDF details load नहीं हो पाईं। Firebase rules और internet connection check करें.",
+            "PDF details load nahi ho paayin. Firebase rules aur internet connection check karein.",
             "fa-triangle-exclamation"
           );
         }
       );
     }
 
-    // Theme toggle
+    // Theme toggle with saved preference.
     const themeToggle = $("themeToggle");
     const themeIcon = $("themeIcon");
     const themeText = $("themeText");
@@ -1030,30 +1068,52 @@
       document.documentElement.setAttribute("data-theme", theme);
 
       const dark = theme === "dark";
-      themeIcon.className = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+
+      themeIcon.className = dark
+        ? "fa-solid fa-sun"
+        : "fa-solid fa-moon";
+
       themeText.textContent = dark ? "Light Mode" : "Dark Mode";
 
       document.querySelector('meta[name="theme-color"]')
         .setAttribute("content", dark ? "#0b0d12" : "#f4f5f8");
     }
 
-    applyTheme("dark");
+    let savedTheme = "dark";
+
+    try {
+      savedTheme = localStorage.getItem("cwp-theme") || "dark";
+    } catch (error) {
+      console.warn("Theme preference unavailable:", error);
+    }
+
+    applyTheme(savedTheme === "light" ? "light" : "dark");
 
     themeToggle.addEventListener("click", () => {
       const current = document.documentElement.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
+      const next = current === "dark" ? "light" : "dark";
+
+      applyTheme(next);
+
+      try {
+        localStorage.setItem("cwp-theme", next);
+      } catch (error) {
+        console.warn("Theme preference could not be saved:", error);
+      }
     });
 
-    // Mobile navigation
+    // Mobile navigation.
     const menuBtn = $("menuBtn");
     const mobileNav = $("mobileNav");
 
     menuBtn.addEventListener("click", () => {
       const isOpen = mobileNav.classList.toggle("show");
+
       menuBtn.setAttribute("aria-expanded", String(isOpen));
 
-      const icon = menuBtn.querySelector("i");
-      icon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+      menuBtn.querySelector("i").className = isOpen
+        ? "fa-solid fa-xmark"
+        : "fa-solid fa-bars";
     });
 
     mobileNav.querySelectorAll("a").forEach(link => {
