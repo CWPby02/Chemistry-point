@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="theme-color" content="#0b0d12">
   <title>PDF Study Material | Chemistry Point</title>
   <meta name="description" content="Chemistry Point chapter-wise PDF study material.">
 
@@ -13,34 +14,186 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    /* =========================================
-       PDF PAGE
-    ========================================== */
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --surface: #12151d;
+      --surface-2: #181c26;
+      --border: rgba(255,255,255,.09);
+      --text: #f4f5f7;
+      --muted: #a0a6b5;
+      --gold: #e8b84b;
+      --gold-soft: rgba(232,184,75,.12);
+      --shadow: 0 15px 35px rgba(0,0,0,.17);
+      --header: #0d1017;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f5f8;
+      --surface: #fff;
+      --surface-2: #f8f6ef;
+      --border: rgba(22,26,35,.1);
+      --text: #171923;
+      --muted: #666d7c;
+      --gold: #a9750b;
+      --gold-soft: rgba(197,145,28,.12);
+      --shadow: 0 12px 30px rgba(0,0,0,.07);
+      --header: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Poppins", sans-serif;
+      transition: background .2s, color .2s;
+    }
+
+    a { text-decoration: none; }
+
+    button { font: inherit; }
+
+    .site-header {
+      position: relative;
+      z-index: 100;
+      background: var(--header);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      width: min(1100px, 92%);
+      min-height: 75px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text strong { font-size: 14px; }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .main-nav a {
+      color: var(--muted);
+      font-size: 12px;
+      transition: color .2s;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active { color: var(--gold); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .theme-toggle,
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 9px 12px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .theme-toggle { font-size: 11px; }
+
+    .theme-toggle i { color: var(--gold); }
+
+    .menu-btn {
+      display: none;
+      width: 42px;
+      font-size: 17px;
+    }
+
+    .mobile-nav {
+      display: none;
+      padding: 8px 4%;
+      background: var(--header);
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-nav.show { display: flex; flex-direction: column; }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 8px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .mobile-nav a:last-child { border-bottom: 0; }
+
+    .mobile-nav a i { width: 18px; color: var(--gold); }
 
     .pdf-page {
       min-height: calc(100vh - 80px);
-      padding: 110px 0 70px;
-      background: var(--dark-bg);
+      padding: 65px 0 65px;
+      background:
+        radial-gradient(ellipse at top, var(--gold-soft), transparent 55%),
+        var(--bg);
     }
 
     .pdf-container {
-      max-width: 1100px;
-      margin: 0 auto;
+      width: min(1100px, 92%);
+      margin: auto;
     }
-    
+
     .pdf-header {
-      text-align: center;
       max-width: 760px;
-      margin: 0 auto 42px;
+      margin: 0 auto 38px;
+      text-align: center;
     }
 
     .pdf-label {
@@ -48,74 +201,67 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 15px;
-      color: var(--primary-light);
-      font-size: 13px;
+      color: var(--gold);
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: .4px;
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .pdf-header h1 {
       margin: 0 0 13px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.2;
+      color: var(--text);
+      font-size: clamp(28px, 4vw, 43px);
+      line-height: 1.25;
     }
 
-    .pdf-header h1 span {
-      color: var(--primary-light);
-    }
+    .pdf-header h1 span { color: var(--gold); }
 
     .pdf-header p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.8;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
     }
 
     .chapter-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 9px;
       width: fit-content;
       max-width: 100%;
       margin: 20px auto 0;
-      padding: 10px 17px;
+      padding: 10px 16px;
       border: 1px solid var(--border);
       border-radius: 999px;
-      background: var(--dark-card);
-      color: var(--white);
-      font-size: 13px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
       font-weight: 600;
     }
 
-    .chapter-info i {
-      color: var(--primary-light);
-    }
+    .chapter-info i { color: var(--gold); }
 
     .pdf-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
+      gap: 20px;
     }
 
     .pdf-card {
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: 330px;
-      padding: 26px 23px 22px;
+      min-height: 320px;
+      padding: 25px 22px 21px;
       overflow: hidden;
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--dark-card);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+      border-radius: 17px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, border-color .2s;
     }
 
     .pdf-card::before {
@@ -125,47 +271,40 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(
-        90deg,
-        var(--primary-dark),
-        var(--primary-light),
-        var(--primary-dark)
-      );
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
 
     .pdf-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(217, 154, 22, .55);
-      box-shadow: 0 20px 42px rgba(0, 0, 0, .22);
+      transform: translateY(-4px);
+      border-color: var(--gold);
     }
 
     .pdf-icon {
-      width: 58px;
-      height: 58px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 19px;
-      border: 1px solid rgba(217, 154, 22, .25);
-      border-radius: 15px;
-      background: rgba(217, 154, 22, .11);
-      color: var(--primary-light);
-      font-size: 24px;
+      margin-bottom: 18px;
+      color: var(--gold);
+      background: var(--gold-soft);
+      border: 1px solid rgba(232,184,75,.2);
+      border-radius: 14px;
+      font-size: 23px;
     }
 
     .pdf-card h2 {
       margin: 0 0 9px;
-      color: var(--white);
-      font-family: Poppins, sans-serif;
-      font-size: 20px;
-      line-height: 1.35;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.5;
     }
 
     .pdf-card p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.75;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
     }
 
     .pdf-status {
@@ -173,279 +312,199 @@
       align-items: center;
       gap: 7px;
       width: fit-content;
-      margin-top: 17px;
-      padding: 7px 10px;
+      margin-top: 16px;
+      padding: 7px 9px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 11px;
+      color: var(--muted);
+      font-size: 10px;
       font-weight: 600;
     }
 
-    .pdf-status i {
-      color: var(--primary-light);
-    }
+    .pdf-status.available i { color: #4cc58a; }
+    .pdf-status.unavailable i { color: var(--gold); }
 
     .pdf-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 9px;
       margin-top: auto;
-      padding-top: 23px;
+      padding-top: 22px;
     }
 
     .pdf-btn {
-      min-height: 43px;
+      min-height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 12px;
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 11px;
       font-weight: 700;
-      transition: .25s ease;
+      text-align: center;
+      transition: .2s;
     }
 
     .pdf-btn-view {
-      color: var(--white);
-      border: 1px solid var(--border);
+      color: var(--text);
       background: transparent;
     }
 
     .pdf-btn-view:hover {
-      color: var(--primary-light);
-      border-color: var(--primary-light);
+      color: var(--gold);
+      border-color: var(--gold);
     }
 
     .pdf-btn-download {
-      color: #111;
-      border: 1px solid var(--primary-light);
-      background: var(--primary-light);
+      color: #17130a;
+      background: var(--gold);
+      border-color: var(--gold);
     }
 
-    .pdf-btn-download:hover {
-      border-color: var(--primary);
-      background: var(--primary);
-      transform: translateY(-1px);
-    }
+    .pdf-btn-download:hover { filter: brightness(1.08); }
 
     .pdf-btn.disabled {
-      opacity: .55;
+      opacity: .45;
       cursor: not-allowed;
       pointer-events: none;
+    }
+
+    .pdf-message {
+      grid-column: 1 / -1;
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      line-height: 1.9;
+      font-size: 13px;
+    }
+
+    .pdf-message i {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: 25px;
     }
 
     .pdf-note {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
+      gap: 12px;
       max-width: 850px;
-      margin: 28px auto 0;
+      margin: 25px auto 0;
       padding: 15px 17px;
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: var(--dark-card);
+      background: var(--surface);
     }
 
-    .pdf-note i {
-      margin-top: 2px;
-      color: var(--primary-light);
+    .pdf-note > i {
+      margin-top: 3px;
+      color: var(--gold);
     }
 
     .pdf-note p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.7;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.9;
     }
 
-    /* Loading */
-    .pdf-loading {
-      grid-column: 1 / -1;
-      min-height: 260px;
+    .site-footer {
+      background: var(--header);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      width: min(1100px, 92%);
+      margin: auto;
+      padding: 35px 0;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    .footer-brand p {
+      max-width: 330px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    .footer-column {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .footer-column h4 {
+      margin: 4px 0;
+      font-size: 13px;
+    }
+
+    .footer-column a {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-column a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      padding: 17px 4%;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 13px;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--dark-card);
-    }
-
-    .pdf-loading i {
-      color: var(--primary-light);
-      font-size: 28px;
-    }
-
-    /* Error */
-    .pdf-error {
-      grid-column: 1 / -1;
-      display: none;
-      padding: 22px;
+      flex-wrap: wrap;
+      gap: 5px 25px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
       text-align: center;
-      border: 1px solid rgba(220, 70, 70, .25);
-      border-radius: 15px;
-      background: var(--dark-card);
-      color: var(--text-muted);
+      font-size: 10px;
     }
 
-    .pdf-error i {
-      margin-bottom: 10px;
-      color: #e26b6b;
-      font-size: 25px;
-    }
-
-    /* =========================================
-       LIGHT MODE
-    ========================================== */
-
-    body.light-mode .pdf-page {
-      background: #f7f7f8;
-    }
-
-    body.light-mode .pdf-header h1,
-    body.light-mode .pdf-card h2 {
-      color: #17191c;
-    }
-
-    body.light-mode .pdf-header p,
-    body.light-mode .pdf-card p,
-    body.light-mode .pdf-note p {
-      color: #666b74;
-    }
-
-    body.light-mode .chapter-info,
-    body.light-mode .pdf-card,
-    body.light-mode .pdf-note,
-    body.light-mode .pdf-loading,
-    body.light-mode .pdf-error {
-      background: #fff;
-      border-color: #e4e5e8;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, .07);
-    }
-
-    body.light-mode .pdf-btn-view {
-      color: #17191c;
-      border-color: #dedfe3;
-    }
-
-    body.light-mode .pdf-btn-view:hover {
-      color: var(--primary-dark);
-      border-color: var(--primary);
-    }
-
-    /* =========================================
-       MOBILE NAV
-    ========================================== */
+    .footer-bottom p { margin: 0; }
+    .footer-bottom strong { color: var(--gold); }
 
     @media (max-width: 900px) {
-
-      .pdf-page {
-        padding: 92px 20px 55px;
-      }
-
-      .pdf-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .mobile-nav {
-        display: none !important;
-        position: fixed !important;
-        top: 68px !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 10px 20px 20px !important;
-        background: #13161a !important;
-        background-color: #13161a !important;
-        opacity: 1 !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border-bottom: 1px solid var(--border) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,.20) !important;
-        z-index: 100000 !important;
-        max-height: calc(100vh - 68px);
-        overflow-y: auto;
-        isolation: isolate;
-      }
-
-      .mobile-nav.show {
-        display: flex !important;
-      }
-
-      .mobile-nav a {
-        display: flex !important;
-        align-items: center;
-        min-height: 48px;
-        padding: 12px 8px;
-        color: var(--white) !important;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-      }
-
-      .mobile-nav a:last-child {
-        border-bottom: 0;
-      }
-
-      body.light-mode .mobile-nav {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
-
-      body.light-mode .mobile-nav a {
-        color: #17191c !important;
-        border-bottom-color: #e4e5e8;
-      }
+      .main-nav { display: none; }
+      .menu-btn { display: inline-flex; }
+      .pdf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
     @media (max-width: 600px) {
-
-      .pdf-page {
-        padding: 88px 15px 45px;
-      }
-
-      .pdf-header {
-        margin-bottom: 30px;
-      }
-
-      .pdf-header h1 {
-        font-size: 29px;
-      }
-
-      .pdf-header p {
-        font-size: 13px;
-      }
-
-      .chapter-info {
-        font-size: 12px;
-        padding: 9px 13px;
-      }
-
-      .pdf-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .pdf-card {
-        min-height: 0;
-        padding: 23px 19px 20px;
-      }
-
-      .pdf-note {
-        padding: 13px;
-      }
+      .nav-container { min-height: 68px; }
+      .brand img { width: 38px; height: 38px; }
+      .brand-text strong { font-size: 12px; }
+      .brand-text span { font-size: 9px; }
+      .theme-toggle { padding: 9px; font-size: 10px; }
+      .theme-toggle span { display: none; }
+      .pdf-page { padding: 42px 0 45px; }
+      .pdf-container { width: 92%; }
+      .pdf-header { margin-bottom: 28px; }
+      .pdf-header h1 { font-size: 29px; }
+      .pdf-header p { font-size: 12px; }
+      .chapter-info { border-radius: 12px; font-size: 11px; }
+      .pdf-grid { grid-template-columns: 1fr; gap: 15px; }
+      .pdf-card { min-height: 0; padding: 22px 18px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 22px; }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 360px) {
+      .pdf-actions { grid-template-columns: 1fr; }
+    }
 
-      .pdf-actions {
-        grid-template-columns: 1fr;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
       }
     }
   </style>
@@ -453,918 +512,559 @@
 
 <body>
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
-
   <header class="site-header">
-
-    <div class="container nav-container">
+    <div class="nav-container">
 
       <a href="../index.html" class="brand">
-
-        <img
-          src="../assets/images/logo/logo.png"
-          alt="Chemistry Point Logo">
-
-        <div class="brand-text">
+        <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
+        <span class="brand-text">
           <strong>Chemistry Point</strong>
           <span>By Pardeep Sir</span>
-        </div>
-
+        </span>
       </a>
 
-      <nav class="main-nav">
-
+      <nav class="main-nav" aria-label="Main navigation">
         <a href="../index.html">Home</a>
         <a href="../videos.html">Videos</a>
         <a href="../objectives.html" class="active">Objectives</a>
         <a href="../quiz.html">Quiz</a>
         <a href="../about.html">About</a>
         <a href="../contact.html">Contact</a>
-
       </nav>
 
-      <button
-        class="menu-btn"
-        id="menuBtn"
-        aria-label="Open Menu">
+      <div class="header-controls">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+          <span id="themeText">Light Mode</span>
+        </button>
 
-        <i class="fa-solid fa-bars"></i>
-
-      </button>
-
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
 
-    <div class="mobile-nav" id="mobileNav">
-
-      <a href="../index.html">
-        <i class="fa-solid fa-house"></i>
-        Home
-      </a>
-
-      <a href="../videos.html">
-        <i class="fa-solid fa-play"></i>
-        Videos
-      </a>
-
-      <a href="../objectives.html" class="active">
-        <i class="fa-solid fa-book-open"></i>
-        Objectives
-      </a>
-
-      <a href="../quiz.html">
-        <i class="fa-solid fa-circle-question"></i>
-        Quiz
-      </a>
-
-      <a href="../about.html">
-        <i class="fa-solid fa-user"></i>
-        About
-      </a>
-
-      <a href="../contact.html">
-        <i class="fa-solid fa-envelope"></i>
-        Contact
-      </a>
-
-    </div>
-
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
+      <a href="../videos.html"><i class="fa-solid fa-play"></i>Videos</a>
+      <a href="../objectives.html" class="active"><i class="fa-solid fa-book-open"></i>Objectives</a>
+      <a href="../quiz.html"><i class="fa-solid fa-circle-question"></i>Quiz</a>
+      <a href="../about.html"><i class="fa-solid fa-user"></i>About</a>
+      <a href="../contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
+    </nav>
   </header>
 
-
-  <!-- =========================================
-       PDF CONTENT
-  ========================================== -->
-
   <main class="pdf-page">
-
     <div class="pdf-container">
 
       <section class="pdf-header">
-
         <div class="pdf-label">
-
           <i class="fa-solid fa-file-pdf"></i>
-
           Study Material
-
         </div>
 
-        <h1>
-          Chemistry <span>PDFs</span>
-        </h1>
+        <h1>Chemistry <span>PDFs</span></h1>
 
         <p>
-          Chapter-wise objective study material एक ही जगह से
-          पढ़ें और PDF को online view या download करें।
+          Chapter-wise objective study material एक ही जगह से पढ़ें।
+          उपलब्ध PDF को online view या download करें।
         </p>
 
         <div class="chapter-info">
-
           <i class="fa-solid fa-book-open"></i>
-
-          <span id="chapterName">
-            Chemistry Chapter
-          </span>
-
+          <span id="chapterName">Loading chapter...</span>
         </div>
-
       </section>
 
-
-      <!-- =====================================
-           PDF CARDS
-      ====================================== -->
-
-      <section class="pdf-grid" id="pdfGrid">
-
-        <div class="pdf-loading">
-
+      <section class="pdf-grid" id="pdfGrid" aria-live="polite">
+        <div class="pdf-message">
           <i class="fa-solid fa-spinner fa-spin"></i>
-
-          <span>
-            PDF details load हो रही हैं...
-          </span>
-
+          PDF details load हो रही हैं...
         </div>
-
       </section>
-
 
       <div class="pdf-note">
-
         <i class="fa-solid fa-circle-info"></i>
-
         <p id="pdfNoteText">
-          Admin panel में Google Drive PDF link add होने के बाद
-          यहाँ View और Download options automatically दिखाई देंगे।
+          PDF links Firebase में उपलब्ध होने पर यहाँ View और Download options दिखाई देंगे।
+          Google Drive पर file sharing permissions भी सही होनी चाहिए।
         </p>
-
       </div>
 
     </div>
-
   </main>
 
-
-  <!-- =========================================
-       FOOTER
-  ========================================== -->
-
   <footer class="site-footer">
-
-    <div class="container footer-grid">
+    <div class="footer-grid">
 
       <div class="footer-brand">
-
         <a href="../index.html" class="brand">
-
-          <img
-            src="../assets/images/logo/logo.png"
-            alt="Chemistry Point Logo">
-
-          <div class="brand-text">
-
-            <strong>Chemistry Point</strong>
-
-            <span>By Pardeep Sir</span>
-
-          </div>
-
+          <img src="../assets/images/logo/logo.png" alt="Code With Piyush Logo">
+          <span class="brand-text">
+            <strong>Code With Piyush</strong>
+            <span>Chemistry Point</span>
+          </span>
         </a>
-
         <p>
-          Bihar Board Chemistry की बेहतर तैयारी के लिए
-          quality study materials, videos और quizzes।
+          Bihar Board Chemistry की तैयारी के लिए study materials,
+          educational videos और quizzes।
         </p>
-
       </div>
 
-
       <div class="footer-column">
-
         <h4>Quick Links</h4>
-
         <a href="../index.html">Home</a>
         <a href="../videos.html">Videos</a>
         <a href="../objectives.html">Objectives</a>
         <a href="../quiz.html">Quiz</a>
-
       </div>
 
-
       <div class="footer-column">
-
         <h4>Important</h4>
-
         <a href="../about.html">About Us</a>
         <a href="../contact.html">Contact</a>
         <a href="../objectives.html">Study Material</a>
-
       </div>
 
     </div>
 
-
     <div class="footer-bottom">
-
-      <p>
-        © <span id="year"></span> Chemistry Point. All Rights Reserved.
-      </p>
-
-      <p>
-        Developed by <strong>Code With Piyush</strong>
-      </p>
-
+      <p>© <span id="year"></span> Code With Piyush. All Rights Reserved.</p>
+      <p>Built with ❤️</p>
     </div>
-
   </footer>
 
-
-  <!-- =========================================
-       FIREBASE
-  ========================================== -->
-
   <script type="module">
-
-    import {
-      initializeApp
-    } from
+    import { initializeApp } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-    import {
-      getDatabase,
-      ref,
-      onValue
-    } from
+    import { getDatabase, ref, onValue } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
-
-    /* =========================================
-       FIREBASE CONFIG
-    ========================================== */
-
     const firebaseConfig = {
-
-      apiKey:
-        "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
-
-      authDomain:
-        "chemistry-point-9a41b.firebaseapp.com",
-
-      projectId:
-        "chemistry-point-9a41b",
-
-      storageBucket:
-        "chemistry-point-9a41b.firebasestorage.app",
-
-      messagingSenderId:
-        "791007663942",
-
-      appId:
-        "1:791007663942:web:693c008e475a2e74357747"
-
+      apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+      authDomain: "chemistry-point-9a41b.firebaseapp.com",
+      databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "chemistry-point-9a41b",
+      storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+      messagingSenderId: "791007663942",
+      appId: "1:791007663942:web:693c008e475a2e74357747"
     };
 
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-    const app =
-      initializeApp(firebaseConfig);
+    const params = new URLSearchParams(window.location.search);
+    const chapterSlug = params.get("chapter") || "";
+    const objectiveType = (params.get("type") || "vvi").toLowerCase();
+    const classParam = params.get("class") || "12";
 
-
-    const db =
-      getDatabase(
-        app,
-        "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
-      );
-
-
-    /* =========================================
-       MOBILE MENU
-    ========================================== */
-
-    const menuBtn =
-      document.getElementById("menuBtn");
-
-    const mobileNav =
-      document.getElementById("mobileNav");
-
-
-    menuBtn.addEventListener("click", () => {
-
-      mobileNav.classList.toggle("show");
-
-      const icon =
-        menuBtn.querySelector("i");
-
-
-      if (mobileNav.classList.contains("show")) {
-
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
-
-      } else {
-
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
-
-      }
-
-    });
-
-
-    document
-      .querySelectorAll(".mobile-nav a")
-      .forEach(link => {
-
-        link.addEventListener("click", () => {
-
-          mobileNav.classList.remove("show");
-
-          const icon =
-            menuBtn.querySelector("i");
-
-          icon.classList.remove("fa-xmark");
-          icon.classList.add("fa-bars");
-
-        });
-
-      });
-
-
-    /* =========================================
-       CHAPTER NAMES
-    ========================================== */
+    const classLevel =
+      classParam === "11" || classParam.toLowerCase() === "class-11"
+        ? "11"
+        : "12";
 
     const chapterNames = {
-
-      "solid-state":
-        "Solid State",
-
-      "solutions":
-        "Solutions",
-
-      "electrochemistry":
-        "Electrochemistry",
-
-      "chemical-kinetics":
-        "Chemical Kinetics",
-
-      "surface-chemistry":
-        "Surface Chemistry",
-
-      "d-and-f-block":
-        "D & F Block Elements",
-
-      "coordination-compounds":
-        "Coordination Compounds",
-
-      "haloalkanes-haloarenes":
-        "Haloalkanes & Haloarenes",
-
-      "alcohols-phenols-ethers":
-        "Alcohols, Phenols & Ethers",
-
+      "solid-state": "Solid State",
+      "solutions": "Solutions",
+      "electrochemistry": "Electrochemistry",
+      "chemical-kinetics": "Chemical Kinetics",
+      "surface-chemistry": "Surface Chemistry",
+      "d-and-f-block": "d and f Block Elements",
+      "coordination-compounds": "Coordination Compounds",
+      "haloalkanes-haloarenes": "Haloalkanes and Haloarenes",
+      "alcohols-phenols-ethers": "Alcohols, Phenols and Ethers",
       "aldehydes-ketones-carboxylic-acids":
-        "Aldehydes, Ketones & Carboxylic Acids",
-
-      "amines":
-        "Amines",
-
-      "biomolecules":
-        "Biomolecules"
-
+        "Aldehydes, Ketones and Carboxylic Acids",
+      "amines": "Amines",
+      "biomolecules": "Biomolecules"
     };
-
-
-    /* =========================================
-       URL PARAMETER
-    ========================================== */
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const chapter =
-      params.get("chapter");
-
-
-    const type =
-      params.get("type");
-
-
-    const chapterNameElement =
-      document.getElementById("chapterName");
-
-
-    if (
-      chapter &&
-      chapterNames[chapter]
-    ) {
-
-      chapterNameElement.textContent =
-        chapterNames[chapter];
-
-    } else {
-
-      chapterNameElement.textContent =
-        "All Chemistry Chapters";
-
-    }
-
-
-    /* =========================================
-       PDF TYPE
-    ========================================== */
 
     const pdfTypes = {
-
       vvi: {
         title: "V.V.I Objectives",
-        description:
-          "परीक्षा के लिए सबसे महत्वपूर्ण objective questions का study PDF.",
-        icon: "fa-star"
+        description: "परीक्षा के लिए सबसे महत्वपूर्ण objective questions का PDF.",
+        icon: "fa-star",
+        fields: ["vviPdf", "vviPDF", "vviPdfUrl", "vviPdfLink", "vvi", "vviUrl"]
       },
-
       pyq: {
         title: "PYQ Objectives",
-        description:
-          "Previous Year Questions से जुड़े objective questions का study PDF.",
-        icon: "fa-clock-rotate-left"
+        description: "Previous Year Questions से जुड़े objective questions का PDF.",
+        icon: "fa-clock-rotate-left",
+        fields: ["pyqPdf", "pyqPDF", "pyqPdfUrl", "pyqPdfLink", "pyq", "pyqUrl"]
       },
-
       all: {
         title: "All Objectives",
-        description:
-          "इस chapter के सभी available objective questions का complete study PDF.",
-        icon: "fa-layer-group"
+        description: "इस chapter के सभी available objective questions का PDF.",
+        icon: "fa-layer-group",
+        fields: ["allPdf", "allPDF", "allPdfUrl", "allPdfLink", "all", "allUrl"]
       }
-
     };
 
+    const $ = id => document.getElementById(id);
 
-    /* =========================================
-       GOOGLE DRIVE ID
-    ========================================== */
+    $("year").textContent = new Date().getFullYear();
 
-    function getGoogleDriveId(url) {
+    function formatSlug(value) {
+      return String(value || "")
+        .split("-")
+        .filter(Boolean)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    }
 
-      if (!url) {
-        return null;
-      }
+    function normalize(value) {
+      return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/[_\s]+/g, "-");
+    }
 
+    function getItemSlug(item, key) {
+      return normalize(
+        item.slug ||
+        item.chapterSlug ||
+        item.chapterId ||
+        item.key ||
+        key ||
+        ""
+      );
+    }
+
+    function getItemClass(item) {
+      const raw =
+        item.classLevel ??
+        item.class ??
+        item.className ??
+        item.class_level ??
+        item.standard ??
+        "";
+
+      const value = String(raw).toLowerCase();
+
+      if (value.includes("11") || value.includes("eleven")) return "11";
+      if (value.includes("12") || value.includes("twelve")) return "12";
+
+      // Legacy chapter entries without a class value are treated as Class 12.
+      return raw === "" || raw === null ? "12" : "";
+    }
+
+    function getDriveId(url) {
+      if (!url) return null;
 
       try {
+        const parsed = new URL(String(url).trim());
 
-        const cleanUrl =
-          decodeURIComponent(
-            String(url).trim()
-          );
+        if (
+          parsed.hostname === "drive.google.com" ||
+          parsed.hostname.endsWith(".drive.google.com")
+        ) {
+          const match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
+          if (match) return match[1];
 
-
-        /* /file/d/FILE_ID/ */
-
-        const fileMatch =
-          cleanUrl.match(
-            /\/file\/d\/([a-zA-Z0-9_-]+)/
-          );
-
-
-        if (fileMatch) {
-          return fileMatch[1];
+          const id = parsed.searchParams.get("id");
+          if (id) return id;
         }
-
-
-        /* ?id=FILE_ID */
-
-        const idMatch =
-          cleanUrl.match(
-            /[?&]id=([a-zA-Z0-9_-]+)/
-          );
-
-
-        if (idMatch) {
-          return idMatch[1];
-        }
-
-
-        /* /open?id=FILE_ID */
-
-        const openMatch =
-          cleanUrl.match(
-            /\/open\?id=([a-zA-Z0-9_-]+)/
-          );
-
-
-        if (openMatch) {
-          return openMatch[1];
-        }
-
-
+      } catch {
         return null;
-
-      } catch (error) {
-
-        return null;
-
       }
 
+      return null;
     }
-
-
-    /* =========================================
-       VIEW URL
-    ========================================== */
 
     function getViewUrl(url) {
-
-      const driveId =
-        getGoogleDriveId(url);
-
-
-      if (driveId) {
-
-        return `https://drive.google.com/file/d/${driveId}/view`;
-
-      }
-
-
-      return url;
-
+      const id = getDriveId(url);
+      return id
+        ? `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`
+        : url;
     }
-
-
-    /* =========================================
-       DOWNLOAD URL
-    ========================================== */
 
     function getDownloadUrl(url) {
-
-      const driveId =
-        getGoogleDriveId(url);
-
-
-      if (driveId) {
-
-        return `https://drive.usercontent.google.com/download?id=${driveId}&export=download`;
-
-      }
-
-
-      return url;
-
+      const id = getDriveId(url);
+      return id
+        ? `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`
+        : url;
     }
 
+    function getPdfUrl(item, type) {
+      const config = pdfTypes[type];
 
-    /* =========================================
-       CREATE PDF CARD
-    ========================================== */
+      if (!config || !item || typeof item !== "object") return "";
 
-    function createPdfCard(
-      key,
-      pdfUrl
-    ) {
+      for (const field of config.fields) {
+        const value = item[field];
 
-      const config =
-        pdfTypes[key];
-
-
-      const card =
-        document.createElement("article");
-
-      card.className =
-        "pdf-card";
-
-
-      const hasPdf =
-        typeof pdfUrl === "string" &&
-        pdfUrl.trim() !== "" &&
-        pdfUrl.trim() !== "#";
-
-
-      let viewUrl = "#";
-      let downloadUrl = "#";
-
-
-      if (hasPdf) {
-
-        viewUrl =
-          getViewUrl(
-            pdfUrl.trim()
-          );
-
-        downloadUrl =
-          getDownloadUrl(
-            pdfUrl.trim()
-          );
-
-      }
-
-
-      const statusText =
-        hasPdf
-          ? "PDF Available"
-          : "PDF अभी उपलब्ध नहीं है";
-
-
-      const statusIcon =
-        hasPdf
-          ? "fa-circle-check"
-          : "fa-clock";
-
-
-      card.innerHTML = `
-
-        <div class="pdf-icon">
-
-          <i class="fa-solid ${config.icon}"></i>
-
-        </div>
-
-
-        <h2>
-          ${config.title}
-        </h2>
-
-
-        <p>
-          ${config.description}
-        </p>
-
-
-        <div class="pdf-status">
-
-          <i class="fa-solid ${statusIcon}"></i>
-
-          <span>
-            ${statusText}
-          </span>
-
-        </div>
-
-
-        <div class="pdf-actions">
-
-          <a
-            href="${viewUrl}"
-            class="pdf-btn pdf-btn-view ${hasPdf ? "" : "disabled"}"
-            ${hasPdf ? 'target="_blank" rel="noopener noreferrer"' : ''}
-          >
-
-            <i class="fa-regular fa-eye"></i>
-
-            View PDF
-
-          </a>
-
-
-          <a
-            href="${downloadUrl}"
-            class="pdf-btn pdf-btn-download ${hasPdf ? "" : "disabled"}"
-            ${hasPdf ? 'target="_blank" rel="noopener noreferrer"' : ''}
-          >
-
-            <i class="fa-solid fa-download"></i>
-
-            Download
-
-          </a>
-
-        </div>
-
-      `;
-
-
-      return card;
-
-    }
-
-
-    /* =========================================
-       SHOW ERROR
-    ========================================== */
-
-    function showError(message) {
-
-      const grid =
-        document.getElementById("pdfGrid");
-
-
-      grid.innerHTML = `
-
-        <div class="pdf-error"
-             style="display:block;">
-
-          <i class="fa-solid fa-triangle-exclamation"></i>
-
-          <div>
-            ${message}
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* =========================================
-       LOAD CHAPTER PDFS
-    ========================================== */
-
-    function loadChapterPDFs() {
-
-      const grid =
-        document.getElementById("pdfGrid");
-
-
-      if (
-        !chapter ||
-        !chapterNames[chapter]
-      ) {
-
-        showError(
-          "Chapter नहीं मिला। कृपया Objectives से किसी chapter को खोलें।"
-        );
-
-        return;
-
-      }
-
-
-      const chaptersRef =
-        ref(db, "chapters");
-
-
-      onValue(
-
-        chaptersRef,
-
-        snapshot => {
-
-          const data =
-            snapshot.val();
-
-
-          if (!data) {
-
-            showError(
-              "अभी कोई chapter data उपलब्ध नहीं है।"
-            );
-
-            return;
-
-          }
-
-
-          let selectedChapter =
-            null;
-
-
-          Object.keys(data).forEach(id => {
-
-            const item =
-              data[id];
-
-
-            if (!item) {
-              return;
-            }
-
-
-            const itemSlug =
-              String(
-                item.slug || ""
-              )
-              .trim()
-              .toLowerCase();
-
-
-            if (
-              itemSlug ===
-              String(chapter)
-                .trim()
-                .toLowerCase()
-            ) {
-
-              selectedChapter = item;
-
-            }
-
-          });
-
-
-          if (!selectedChapter) {
-
-            showError(
-              "इस chapter का PDF data अभी उपलब्ध नहीं है।"
-            );
-
-            return;
-
-          }
-
-
-          grid.innerHTML = "";
-
-
-          const cards = [
-
-            createPdfCard(
-              "vvi",
-              selectedChapter.vviPdf
-            ),
-
-            createPdfCard(
-              "pyq",
-              selectedChapter.pyqPdf
-            ),
-
-            createPdfCard(
-              "all",
-              selectedChapter.allPdf
-            )
-
-          ];
-
-
-          cards.forEach(card => {
-
-            grid.appendChild(card);
-
-          });
-
-
-          const availableCount =
-            cards.filter(card =>
-              !card
-                .querySelector(".pdf-btn-view")
-                .classList
-                .contains("disabled")
-            ).length;
-
-
-          const note =
-            document.getElementById(
-              "pdfNoteText"
-            );
-
-
-          if (availableCount === 3) {
-
-            note.textContent =
-              "इस chapter के सभी PDF available हैं। आप किसी भी PDF को online view या download कर सकते हैं।";
-
-          } else if (availableCount > 0) {
-
-            note.textContent =
-              `${availableCount} PDF अभी available है। बाकी PDF admin panel में add होने के बाद यहाँ automatically दिखाई देंगी।`;
-
-          } else {
-
-            note.textContent =
-              "अभी इस chapter की कोई PDF available नहीं है। Admin panel में Google Drive PDF links add होने के बाद यहाँ automatically दिखाई देंगी।";
-
-          }
-
-        },
-
-        error => {
-
-          console.error(
-            "Firebase PDF Error:",
-            error
-          );
-
-
-          showError(
-            "PDF data load नहीं हो पाया। कृपया कुछ देर बाद फिर try करें।"
-          );
-
+        if (typeof value === "string" && value.trim()) {
+          return value.trim();
         }
 
-      );
+        if (value && typeof value === "object") {
+          const nestedUrl = value.url || value.link || value.pdfUrl;
 
+          if (typeof nestedUrl === "string" && nestedUrl.trim()) {
+            return nestedUrl.trim();
+          }
+        }
+      }
+
+      // Some schemas store links in a nested PDF object.
+      const nested = item.pdfs || item.pdfLinks || item.materials;
+
+      if (nested && typeof nested === "object") {
+        for (const field of config.fields) {
+          const value = nested[field];
+
+          if (typeof value === "string" && value.trim()) return value.trim();
+
+          if (value && typeof value === "object") {
+            const nestedUrl = value.url || value.link || value.pdfUrl;
+            if (typeof nestedUrl === "string" && nestedUrl.trim()) {
+              return nestedUrl.trim();
+            }
+          }
+        }
+      }
+
+      return "";
     }
 
+    function makeElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
 
-    /* =========================================
-       START
-    ========================================== */
+    function makeAction(url, className, iconClass, label) {
+      const link = makeElement("a", className);
+      link.href = url;
 
-    loadChapterPDFs();
+      const icon = makeElement("i", iconClass);
+      icon.setAttribute("aria-hidden", "true");
 
+      link.append(icon, document.createTextNode(" " + label));
 
-    /* =========================================
-       YEAR
-    ========================================== */
+      if (className.includes("disabled")) {
+        link.setAttribute("aria-disabled", "true");
+        link.tabIndex = -1;
+      } else {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+      return link;
+    }
 
+    function createCard(type, url) {
+      const config = pdfTypes[type];
+      const available = Boolean(url);
+      const card = makeElement("article", "pdf-card");
+
+      const iconBox = makeElement("div", "pdf-icon");
+      const icon = makeElement("i", `fa-solid ${config.icon}`);
+      iconBox.appendChild(icon);
+
+      const heading = makeElement("h2", "", config.title);
+      const description = makeElement("p", "", config.description);
+
+      const status = makeElement(
+        "div",
+        `pdf-status ${available ? "available" : "unavailable"}`
+      );
+
+      const statusIcon = makeElement(
+        "i",
+        `fa-solid ${available ? "fa-circle-check" : "fa-clock"}`
+      );
+
+      const statusText = makeElement(
+        "span",
+        "",
+        available ? "PDF Available" : "PDF अभी उपलब्ध नहीं है"
+      );
+
+      status.append(statusIcon, statusText);
+
+      const actions = makeElement("div", "pdf-actions");
+
+      const view = makeAction(
+        available ? getViewUrl(url) : "#",
+        `pdf-btn pdf-btn-view${available ? "" : " disabled"}`,
+        "fa-regular fa-eye",
+        "View PDF"
+      );
+
+      const download = makeAction(
+        available ? getDownloadUrl(url) : "#",
+        `pdf-btn pdf-btn-download${available ? "" : " disabled"}`,
+        "fa-solid fa-download",
+        "Download"
+      );
+
+      actions.append(view, download);
+      card.append(iconBox, heading, description, status, actions);
+
+      return card;
+    }
+
+    function showMessage(message, icon = "fa-circle-info") {
+      const grid = $("pdfGrid");
+      grid.replaceChildren();
+
+      const box = makeElement("div", "pdf-message");
+      const iconElement = makeElement("i", `fa-solid ${icon}`);
+      const text = makeElement("div", "", message);
+
+      box.append(iconElement, text);
+      grid.appendChild(box);
+    }
+
+    function getChapterMatch(data) {
+      if (!data || typeof data !== "object") return null;
+
+      const wantedSlug = normalize(chapterSlug);
+      const entries = Object.entries(data);
+
+      for (const [key, item] of entries) {
+        if (!item || typeof item !== "object") continue;
+
+        const itemSlug = getItemSlug(item, key);
+        const itemClass = getItemClass(item);
+
+        const nameMatch = [
+          item.name,
+          item.title,
+          item.chapterName,
+          item.chapter
+        ].some(value => normalize(value) === wantedSlug);
+
+        if (
+          (itemSlug === wantedSlug || nameMatch) &&
+          (!itemClass || itemClass === classLevel)
+        ) {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    function renderPdfs(chapterItem) {
+      const grid = $("pdfGrid");
+      grid.replaceChildren();
+
+      let typesToShow = Object.keys(pdfTypes);
+
+      if (pdfTypes[objectiveType]) {
+        typesToShow = [objectiveType];
+      }
+
+      let availableCount = 0;
+
+      for (const type of typesToShow) {
+        const url = getPdfUrl(chapterItem, type);
+        if (url) availableCount++;
+        grid.appendChild(createCard(type, url));
+      }
+
+      if (availableCount === 0) {
+        $("pdfNoteText").textContent =
+          "Chapter मिल गया, लेकिन इस record में पहचाने गए PDF fields में कोई link नहीं मिला। Admin/objectives.html में इस्तेमाल होने वाले वास्तविक field names से mapping करनी होगी।";
+      } else {
+        $("pdfNoteText").textContent =
+          `${availableCount} PDF link उपलब्ध है। Google Drive file की sharing permission सही होने पर View/Download काम करेगा।`;
+      }
+    }
+
+    function startPage() {
+      if (!chapterSlug) {
+        $("chapterName").textContent = "All Chemistry Chapters";
+        showMessage(
+          "URL में chapter नहीं मिला। कृपया Objectives page से किसी chapter को खोलें।"
+        );
+        return;
+      }
+
+      const knownName = chapterNames[chapterSlug];
+      $("chapterName").textContent =
+        `Class ${classLevel} · ${knownName || formatSlug(chapterSlug)}`;
+
+      if (!pdfTypes[objectiveType]) {
+        showMessage("Objective type सही नहीं है। V.V.I, PYQ या All में से कोई चुनें.");
+        return;
+      }
+
+      onValue(
+        ref(db, "chapters"),
+        snapshot => {
+          const data = snapshot.val();
+          const chapterItem = getChapterMatch(data);
+
+          if (!chapterItem) {
+            showMessage(
+              "इस class और chapter का record Firebase के chapters path में नहीं मिला।"
+            );
+            $("pdfNoteText").textContent =
+              "अगर chapter किसी अलग database path में save होता है, तो इस page को उसी path से connect करना होगा.";
+            return;
+          }
+
+          renderPdfs(chapterItem);
+        },
+        error => {
+          console.error("Firebase PDF data error:", error);
+          showMessage(
+            "PDF details load नहीं हो पाईं। Firebase rules और internet connection check करें.",
+            "fa-triangle-exclamation"
+          );
+        }
+      );
+    }
+
+    // Theme toggle
+    const themeToggle = $("themeToggle");
+    const themeIcon = $("themeIcon");
+    const themeText = $("themeText");
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+
+      const dark = theme === "dark";
+      themeIcon.className = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      themeText.textContent = dark ? "Light Mode" : "Dark Mode";
+
+      document.querySelector('meta[name="theme-color"]')
+        .setAttribute("content", dark ? "#0b0d12" : "#f4f5f8");
+    }
+
+    applyTheme("dark");
+
+    themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    // Mobile navigation
+    const menuBtn = $("menuBtn");
+    const mobileNav = $("mobileNav");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("show");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+
+      const icon = menuBtn.querySelector("i");
+      icon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    });
+
+    mobileNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("show");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.querySelector("i").className = "fa-solid fa-bars";
+      });
+    });
+
+    startPage();
   </script>
-
 </body>
 </html>
