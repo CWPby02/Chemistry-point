@@ -870,17 +870,192 @@
        INITIALIZE PAGE
     ========================================= */
 
-    document.getElementById("year").textContent =
-        new Date().getFullYear();
+/* =========================================
+   INITIALIZE PAGE - FIREBASE CHAPTER LOOKUP
+========================================= */
 
-    const slug = normalizeSlug(chapterParam);
-    const chapterTitle = chapterNames[slug];
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-    if (!chapterParam || !classLevel || !chapterTitle) {
-        showChapterError();
-    } else {
-        showChapter(chapterTitle);
+const DATABASE_URL =
+    "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+function normalizeClass(value) {
+    const v = String(value ?? "").trim().toLowerCase();
+
+    if (["11", "class 11", "class-11", "class11"].includes(v)) {
+        return "11";
     }
+
+    if (["12", "class 12", "class-12", "class12"].includes(v)) {
+        return "12";
+    }
+
+    return "";
+}
+
+function getChapterClass(item) {
+    return normalizeClass(
+        item.classLevel ??
+        item.class ??
+        item.className ??
+        item.class_level ??
+        ""
+    );
+}
+
+function getChapterSlug(item, key) {
+    const value =
+        item.slug ??
+        item.chapterSlug ??
+        item.chapter ??
+        item.name ??
+        item.title ??
+        item.chapterName ??
+        key;
+
+    return normalizeSlug(value);
+}
+
+function getChapterTitle(item) {
+    return String(
+        item.name ??
+        item.title ??
+        item.chapterName ??
+        item.chapterTitle ??
+        item.chapter ??
+        ""
+    ).trim();
+}
+
+function isChapterAvailable(item) {
+    if (!item || typeof item !== "object") return false;
+    if (item.published === false || item.active === false) return false;
+    return true;
+}
+
+function showChapterError(message) {
+    document.getElementById("chapterContent")
+        .classList.add("cp-hidden");
+
+    document.getElementById("chapterError")
+        .classList.remove("cp-hidden");
+
+    document.getElementById("chapterTitle").textContent =
+        "Chapter Not Found";
+
+    document.getElementById("classLabel").textContent =
+        "Chemistry Study Material";
+
+    const errorText = document.querySelector("#chapterError p");
+
+    if (errorText) {
+        errorText.textContent = message ||
+            "Chapter nahi mila. Objectives page par wapas jaakar chapter select karein.";
+    }
+}
+
+async function initializeChapterPage() {
+    const slug = normalizeSlug(chapterParam);
+
+    if (!chapterParam || !classLevel) {
+        showChapterError(
+            "Chapter ya class ka URL parameter missing hai. Objectives page se dobara chapter select karein."
+        );
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            DATABASE_URL + "/chapters.json"
+        );
+
+        if (!response.ok) {
+            throw new Error("Firebase request failed: " + response.status);
+        }
+
+        const data = await response.json();
+
+        if (!data || typeof data !== "object") {
+            throw new Error("Firebase chapters data empty hai.");
+        }
+
+        const entries = Object.entries(data);
+
+        const match = entries.find(([key, rawItem]) => {
+            const item = typeof rawItem === "string"
+                ? { name: rawItem }
+                : rawItem;
+
+            if (!isChapterAvailable(item)) return false;
+
+            // Class 11 chapter ko Class 12 se match nahi karna.
+            const itemClass = getChapterClass(item);
+
+            if (itemClass && itemClass !== classLevel) {
+                return false;
+            }
+
+            const possibleSlugs = [
+                normalizeSlug(key),
+                getChapterSlug(item, key),
+                normalizeSlug(item.name),
+                normalizeSlug(item.title),
+                normalizeSlug(item.chapterName),
+                normalizeSlug(item.chapterTitle)
+            ];
+
+            return possibleSlugs.includes(slug);
+        });
+
+        if (match) {
+            const [key, rawItem] = match;
+
+            const item = typeof rawItem === "string"
+                ? { name: rawItem }
+                : rawItem;
+
+            const title = getChapterTitle(item) ||
+                chapterNames[slug] ||
+                key;
+
+            showChapter(title);
+            return;
+        }
+
+        /*
+          Older chapters ke liye fallback:
+          sirf tab jab Firebase record match na mile.
+        */
+        const fallbackTitle = chapterNames[slug];
+
+        if (fallbackTitle) {
+            showChapter(fallbackTitle);
+            return;
+        }
+
+        showChapterError(
+            "Class " + classLevel +
+            " ka ye chapter Firebase mein match nahi hua. Admin Panel mein chapter ka class, name aur slug check karein."
+        );
+
+    } catch (error) {
+        console.error("Chapter load error:", error);
+
+        // Firebase fail ho to known old chapters ka fallback.
+        const fallbackTitle = chapterNames[slug];
+
+        if (fallbackTitle) {
+            showChapter(fallbackTitle);
+        } else {
+            showChapterError(
+                "Chapter data load nahi ho saka. Internet, Firebase read rules aur chapters database check karein."
+            );
+        }
+    }
+}
+
+initializeChapterPage();
 
 </script>
 
