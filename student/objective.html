@@ -1,441 +1,440 @@
+
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0d12">
 
     <title>Objectives | Chemistry Point</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Main CSS -->
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0b0d12;
+            --surface: #12151d;
+            --surface-2: #181c26;
+            --border: rgba(255, 255, 255, .09);
+            --text: #f4f5f7;
+            --muted: #a0a6b5;
+            --gold: #e8b84b;
+            --gold-light: #ffda78;
+            --gold-soft: rgba(232, 184, 75, .12);
+            --shadow: 0 18px 50px rgba(0, 0, 0, .25);
+            --header: #0d1017;
+        }
+
+        html[data-theme="light"] {
+            color-scheme: light;
+            --bg: #f4f5f8;
+            --surface: #ffffff;
+            --surface-2: #f8f6ef;
+            --border: rgba(22, 26, 35, .1);
+            --text: #171923;
+            --muted: #666d7c;
+            --gold: #a9750b;
+            --gold-light: #855900;
+            --gold-soft: rgba(197, 145, 28, .12);
+            --shadow: 0 18px 50px rgba(22, 26, 35, .08);
+            --header: #ffffff;
+        }
 
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: "Poppins", sans-serif;
-            background: #f5f7fb;
-            color: #111827;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .25s, color .25s;
         }
 
         a {
+            color: inherit;
             text-decoration: none;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
+        button {
+            font: inherit;
+        }
 
         .objective-header {
-            background: linear-gradient(
-                135deg,
-                #111827,
-                #1e3a8a
-            );
-
-            padding: 18px 20px;
-            color: white;
+            background: var(--header);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
         }
 
         .header-inner {
             width: min(1100px, 92%);
             margin: auto;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 15px;
         }
 
         .brand {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-
-            color: white;
-            font-weight: 700;
-            font-size: 17px;
+            gap: 11px;
+            min-width: 0;
+            font-weight: 800;
+            font-size: 16px;
         }
 
         .brand img {
-            width: 45px;
-            height: 45px;
+            width: 43px;
+            height: 43px;
             object-fit: contain;
-            border-radius: 50%;
+            border-radius: 12px;
+            flex-shrink: 0;
         }
 
-        .back-btn {
+        .brand span {
+            color: var(--text);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn,
+        .theme-toggle {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-
-            color: rgba(255,255,255,.9);
-            font-size: 13px;
-
-            transition: .25s;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 13px;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 600;
+            transition: .2s ease;
+            cursor: pointer;
         }
 
-        .back-btn:hover {
-            color: white;
-            transform: translateX(-3px);
+        .back-btn:hover,
+        .theme-toggle:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-1px);
         }
-
-        /* =========================
-           HERO
-        ========================= */
 
         .objective-hero {
-            background:
-                linear-gradient(
-                    135deg,
-                    #111827,
-                    #1e3a8a
-                );
-
-            color: white;
-
-            padding: 35px 20px 70px;
-
+            position: relative;
+            overflow: hidden;
+            padding: 42px 20px 72px;
             text-align: center;
+            background:
+                radial-gradient(ellipse at top, rgba(232, 184, 75, .12), transparent 60%),
+                linear-gradient(145deg, var(--header), var(--bg));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-inner {
+            width: min(800px, 100%);
+            margin: auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-icon {
-            width: 75px;
-            height: 75px;
-
+            width: 70px;
+            height: 70px;
             margin: 0 auto 18px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             border-radius: 20px;
+            color: var(--gold);
+            background: var(--gold-soft);
+            border: 1px solid rgba(232, 184, 75, .3);
+            font-size: 27px;
+        }
 
-            background: rgba(255,255,255,.12);
-
-            border: 1px solid rgba(255,255,255,.2);
-
-            font-size: 31px;
+        .eyebrow {
+            margin: 0 0 9px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .objective-hero h1 {
-            margin: 0 0 8px;
-
-            font-size: clamp(27px, 5vw, 38px);
-
+            margin: 0 0 10px;
+            font-size: clamp(25px, 5vw, 38px);
+            line-height: 1.3;
             font-weight: 800;
         }
 
         .objective-hero p {
             margin: 0;
-
-            color: rgba(255,255,255,.78);
-
+            color: var(--muted);
             font-size: 14px;
+            line-height: 1.8;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
-
         .objective-container {
-            width: min(1100px, 92%);
-            margin: -35px auto 60px;
-
+            width: min(1000px, 92%);
+            margin: -35px auto 55px;
             position: relative;
+            z-index: 2;
         }
 
         .content-card {
-            background: white;
-
-            border-radius: 22px;
-
-            padding: 35px;
-
-            box-shadow:
-                0 15px 45px
-                rgba(15,23,42,.08);
-
-            border: 1px solid #edf0f5;
+            padding: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
-
-        /* =========================
-           TITLE
-        ========================= */
 
         .content-heading {
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
-            margin-bottom: 28px;
-
             padding-bottom: 22px;
-
-            border-bottom: 1px solid #edf0f5;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
         }
 
         .heading-icon {
-            width: 48px;
-            height: 48px;
-
+            width: 49px;
+            height: 49px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            border-radius: 13px;
-
-            background: #eff6ff;
-
-            color: #2563eb;
-
+            border-radius: 14px;
+            background: var(--gold-soft);
+            color: var(--gold);
             font-size: 20px;
         }
 
         .content-heading h2 {
-            margin: 0 0 4px;
-
-            font-size: 22px;
+            margin: 0 0 5px;
+            font-size: 20px;
+            line-height: 1.4;
         }
 
         .content-heading p {
             margin: 0;
-
-            color: #6b7280;
-
+            color: var(--muted);
             font-size: 12px;
+            line-height: 1.7;
         }
 
-        /* =========================
-           PDF AREA
-        ========================= */
+        .material-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 22px;
+        }
+
+        .meta-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--surface-2);
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .meta-chip i {
+            color: var(--gold);
+        }
 
         .pdf-area {
-            min-height: 300px;
-
-            border: 2px dashed #dbe3ef;
-
-            border-radius: 17px;
-
-            background: #f8fafc;
-
+            min-height: 285px;
+            padding: 30px 20px;
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
-
-            padding: 35px 20px;
+            border: 1px dashed rgba(232, 184, 75, .35);
+            border-radius: 16px;
+            background: var(--surface-2);
         }
 
         .pdf-placeholder {
-            max-width: 500px;
+            max-width: 510px;
         }
 
         .pdf-icon {
-            width: 70px;
-            height: 70px;
-
-            margin: 0 auto 18px;
-
-            border-radius: 18px;
-
-            background: #fee2e2;
-
-            color: #dc2626;
-
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 17px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 30px;
+            border-radius: 18px;
+            color: var(--gold);
+            background: var(--gold-soft);
+            font-size: 29px;
         }
 
         .pdf-placeholder h3 {
             margin: 0 0 9px;
-
-            font-size: 20px;
+            font-size: 19px;
         }
 
         .pdf-placeholder p {
             margin: 0;
-
-            color: #6b7280;
-
-            font-size: 13px;
-
-            line-height: 1.7;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
         }
 
-        /* =========================
-           ACTIONS
-        ========================= */
-
         .action-buttons {
-            margin-top: 25px;
-
             display: flex;
-
-            justify-content: center;
-
-            gap: 12px;
-
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 23px;
         }
 
         .action-btn {
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
-            gap: 8px;
-
-            padding: 11px 18px;
-
+            gap: 9px;
+            min-height: 44px;
+            padding: 12px 19px;
             border-radius: 10px;
-
-            font-size: 13px;
-
-            font-weight: 600;
-
-            transition: .25s;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s ease;
+            cursor: pointer;
         }
 
         .back-chapter {
-            background: #111827;
-
-            color: white;
+            background: var(--surface-2);
+            color: var(--text);
         }
-
-        .back-chapter:hover {
-            background: #1f2937;
-
-            transform: translateY(-2px);
-        }
-
-        /* PDF PAGE LINK */
 
         .pdf-btn {
-            background: #2563eb;
+            background: var(--gold);
+            color: #17130a;
+            border-color: var(--gold);
+        }
 
-            color: white;
+        .action-btn:hover {
+            transform: translateY(-2px);
         }
 
         .pdf-btn:hover {
-            background: #1d4ed8;
-
-            transform: translateY(-2px);
+            background: var(--gold-light);
         }
 
-        /* =========================
-           NOTICE
-        ========================= */
+        .back-chapter:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
         .notice {
-            margin-top: 25px;
-
             display: flex;
-
-            gap: 13px;
-
             align-items: flex-start;
-
-            padding: 18px;
-
-            border-radius: 14px;
-
-            background: #eff6ff;
-
-            border: 1px solid #dbeafe;
+            gap: 13px;
+            margin-top: 24px;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--surface-2);
         }
 
-        .notice i {
-            color: #2563eb;
-
-            font-size: 18px;
-
-            margin-top: 2px;
+        .notice > i {
+            margin-top: 3px;
+            color: var(--gold);
+            font-size: 17px;
         }
 
         .notice h4 {
-            margin: 0 0 4px;
-
-            font-size: 13px;
+            margin: 0 0 5px;
+            font-size: 12px;
         }
 
         .notice p {
             margin: 0;
-
-            color: #64748b;
-
+            color: var(--muted);
             font-size: 11px;
-
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
-
         .objective-footer {
-            text-align: center;
-
             padding: 25px 15px;
-
-            color: #6b7280;
-
-            font-size: 12px;
-
-            border-top: 1px solid #e5e7eb;
-
-            background: white;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--header);
+            color: var(--muted);
+            font-size: 11px;
         }
 
         .objective-footer strong {
-            color: #111827;
+            color: var(--gold);
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
-
         @media (max-width: 600px) {
-
             .header-inner {
                 width: 92%;
             }
 
-            .brand span {
+            .brand {
+                gap: 8px;
+                font-size: 13px;
+            }
+
+            .brand img {
+                width: 37px;
+                height: 37px;
+            }
+
+            .header-actions {
+                gap: 7px;
+            }
+
+            .back-btn,
+            .theme-toggle {
+                padding: 10px;
+                font-size: 11px;
+            }
+
+            .back-btn span {
                 display: none;
             }
 
             .objective-hero {
-                padding: 30px 15px 60px;
+                padding: 33px 16px 60px;
+            }
+
+            .objective-hero p {
+                font-size: 12px;
             }
 
             .objective-container {
@@ -443,16 +442,34 @@
             }
 
             .content-card {
-                padding: 22px 17px;
+                padding: 22px 16px;
+                border-radius: 16px;
+            }
+
+            .content-heading {
+                gap: 11px;
+            }
+
+            .heading-icon {
+                width: 43px;
+                height: 43px;
             }
 
             .content-heading h2 {
-                font-size: 19px;
+                font-size: 17px;
             }
 
             .pdf-area {
-                min-height: 270px;
-                padding: 25px 15px;
+                min-height: 260px;
+                padding: 24px 15px;
+            }
+
+            .pdf-placeholder h3 {
+                font-size: 17px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
             }
 
             .action-btn {
@@ -460,434 +477,323 @@
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
     </style>
-
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
-
     <header class="objective-header">
-
         <div class="header-inner">
 
-            <a href="../index.html" class="brand">
-
-                <img
-                    src="../assets/images/logo/logo.png"
-                    alt="Chemistry Point">
-
-                <span>
-                    Chemistry Point
-                </span>
-
+            <a href="../index.html" class="brand" aria-label="Chemistry Point Home">
+                <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
+                <span>Chemistry Point</span>
             </a>
 
-            <a
-                href="chapter.html"
-                id="backButton"
-                class="back-btn">
+            <div class="header-actions">
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun" id="themeIcon"></i>
+                    <span id="themeText">Light Mode</span>
+                </button>
 
-                <i class="fa-solid fa-arrow-left"></i>
-
-                Back to Chapter
-
-            </a>
+                <a href="chapter.html" id="backButton" class="back-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back to Chapter</span>
+                </a>
+            </div>
 
         </div>
-
     </header>
 
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
     <section class="objective-hero">
+        <div class="hero-inner">
 
-        <div class="hero-icon">
+            <div class="hero-icon">
+                <i id="heroIcon" class="fa-solid fa-star"></i>
+            </div>
 
-            <i
-                id="heroIcon"
-                class="fa-solid fa-star">
-            </i>
+            <p class="eyebrow">Chemistry Point · Study Material</p>
+
+            <h1 id="objectiveTitle">V.V.I Objectives</h1>
+
+            <p id="chapterName">Solid State</p>
 
         </div>
-
-        <h1 id="objectiveTitle">
-            V.V.I Objectives
-        </h1>
-
-        <p id="chapterName">
-            Solid State
-        </p>
-
     </section>
-
-
-    <!-- =========================
-         MAIN
-    ========================= -->
 
     <main class="objective-container">
 
-        <div class="content-card">
-
-            <!-- Heading -->
+        <section class="content-card">
 
             <div class="content-heading">
 
                 <div class="heading-icon">
-
                     <i class="fa-solid fa-book-open"></i>
-
                 </div>
 
                 <div>
-
-                    <h2 id="sectionHeading">
-                        V.V.I Objectives
-                    </h2>
-
-                    <p>
-                        Chapter-wise objective study material
-                    </p>
-
+                    <h2 id="sectionHeading">V.V.I Objectives</h2>
+                    <p>Chapter-wise objective study material</p>
                 </div>
 
             </div>
 
+            <div class="material-meta">
+                <span class="meta-chip">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span id="classLabel">Class 12</span>
+                </span>
 
-            <!-- PDF -->
+                <span class="meta-chip">
+                    <i class="fa-solid fa-book"></i>
+                    <span id="chapterLabel">Solid State</span>
+                </span>
 
-            <div class="pdf-area">
+                <span class="meta-chip">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span id="typeLabel">V.V.I Objectives</span>
+                </span>
+            </div>
+
+            <div class="pdf-area" id="pdfArea">
 
                 <div class="pdf-placeholder">
 
                     <div class="pdf-icon">
-
                         <i class="fa-solid fa-file-pdf"></i>
-
                     </div>
 
-                    <h3 id="pdfTitle">
-                        PDF Study Material
-                    </h3>
+                    <h3 id="pdfTitle">PDF Study Material</h3>
 
                     <p id="pdfDescription">
-                        इस section का PDF study material
-                        यहाँ दिखाई देगा।
+                        इस section का PDF study material यहाँ उपलब्ध होने पर दिखेगा।
                     </p>
 
                 </div>
 
             </div>
-
-
-            <!-- Buttons -->
 
             <div class="action-buttons">
 
-                <a
-                    id="backChapter"
-                    href="chapter.html"
-                    class="action-btn back-chapter">
-
+                <a id="backChapter" href="chapter.html" class="action-btn back-chapter">
                     <i class="fa-solid fa-arrow-left"></i>
-
                     Back to Chapter
-
                 </a>
 
-                <!-- Connected to student/pdf.html -->
-
-                <a
-                    id="openPdfPage"
-                    href="pdf.html"
-                    class="action-btn pdf-btn">
-
+                <a id="openPdfPage" href="pdf.html" class="action-btn pdf-btn">
                     <i class="fa-solid fa-file-pdf"></i>
-
                     Open PDF Page
-
                 </a>
 
             </div>
 
-
-            <!-- Notice -->
-
             <div class="notice">
-
                 <i class="fa-solid fa-circle-info"></i>
 
                 <div>
-
-                    <h4>
-                        Study Material
-                    </h4>
-
-                    <p>
-                        अभी PDF page frontend navigation के लिए
-                        connected है। Firebase Database और
-                        Google Drive PDF links बाद में add किए जाएंगे।
+                    <h4>Study Material Information</h4>
+                    <p id="noticeText">
+                        इस पेज पर चुने गए chapter और objective type की जानकारी दिखाई दे रही है।
+                        वास्तविक PDF खोलने के लिए उसे admin में उपलब्ध Google Drive link से connect करना होगा।
                     </p>
-
                 </div>
-
             </div>
 
-        </div>
+        </section>
 
     </main>
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
     <footer class="objective-footer">
-
         © <span id="year"></span>
-
-        <strong>
-            Code With Piyush
-        </strong>
-
+        <strong>Code With Piyush</strong>
         . All Rights Reserved.
-
     </footer>
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
+        "use strict";
 
-        /* Current Year */
-
+        // Current year
         document.getElementById("year").textContent =
             new Date().getFullYear();
 
+        // URL parameters
+        const params = new URLSearchParams(window.location.search);
 
-        /* URL Parameters */
+        const chapter = params.get("chapter") || "solid-state";
+        const type = params.get("type") || "vvi";
+        const classParam = params.get("class") || "12";
 
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
+        const classLevel = (
+            classParam === "11" ||
+            classParam.toLowerCase() === "class-11"
+        ) ? "11" : "12";
 
-
-        const chapter =
-            params.get("chapter") || "solid-state";
-
-
-        const type =
-            params.get("type") || "vvi";
-
-
-        /* Chapter Names */
-
+        // Known chapter names; unknown chapter slugs are formatted as a fallback.
         const chapters = {
-
-            "solid-state":
-                "Solid State",
-
-            "solutions":
-                "Solutions",
-
-            "electrochemistry":
-                "Electrochemistry",
-
-            "chemical-kinetics":
-                "Chemical Kinetics",
-
-            "surface-chemistry":
-                "Surface Chemistry",
-
-            "d-and-f-block":
-                "d and f Block Elements",
-
-            "coordination-compounds":
-                "Coordination Compounds",
-
-            "haloalkanes-haloarenes":
-                "Haloalkanes and Haloarenes",
-
-            "alcohols-phenols-ethers":
-                "Alcohols, Phenols and Ethers",
-
+            "solid-state": "Solid State",
+            "solutions": "Solutions",
+            "electrochemistry": "Electrochemistry",
+            "chemical-kinetics": "Chemical Kinetics",
+            "surface-chemistry": "Surface Chemistry",
+            "d-and-f-block": "d and f Block Elements",
+            "coordination-compounds": "Coordination Compounds",
+            "haloalkanes-haloarenes": "Haloalkanes and Haloarenes",
+            "alcohols-phenols-ethers": "Alcohols, Phenols and Ethers",
             "aldehydes-ketones-carboxylic-acids":
                 "Aldehydes, Ketones and Carboxylic Acids",
-
-            "amines":
-                "Amines",
-
-            "biomolecules":
-                "Biomolecules"
-
+            "amines": "Amines",
+            "biomolecules": "Biomolecules"
         };
 
+        function formatSlug(slug) {
+            return String(slug || "")
+                .split("-")
+                .filter(Boolean)
+                .map(word => {
+                    if (word.toLowerCase() === "d") return "d";
+                    if (word.toLowerCase() === "f") return "f";
 
-        /* Objective Types */
-
-        const objectiveTypes = {
-
-            "vvi": {
-
-                title: "V.V.I Objectives",
-
-                description:
-                    "परीक्षा के लिए सबसे महत्वपूर्ण objective questions.",
-
-                icon:
-                    "fa-solid fa-star"
-
-            },
-
-
-            "pyq": {
-
-                title: "PYQ Objectives",
-
-                description:
-                    "Previous Year Questions से जुड़े objective questions.",
-
-                icon:
-                    "fa-solid fa-clock-rotate-left"
-
-            },
-
-
-            "all": {
-
-                title: "All Objectives",
-
-                description:
-                    "इस chapter के सभी available objective questions.",
-
-                icon:
-                    "fa-solid fa-layer-group"
-
-            }
-
-        };
-
-
-        /* Get Data */
+                    return word.charAt(0).toUpperCase() +
+                        word.slice(1);
+                })
+                .join(" ");
+        }
 
         const currentChapter =
-            chapters[chapter] || "Solid State";
+            chapters[chapter] || formatSlug(chapter) || "Chapter";
 
+        const objectiveTypes = {
+            "vvi": {
+                title: "V.V.I Objectives",
+                description:
+                    "परीक्षा के लिए सबसे महत्वपूर्ण objective questions.",
+                icon: "fa-solid fa-star"
+            },
+
+            "pyq": {
+                title: "PYQ Objectives",
+                description:
+                    "Previous Year Questions से जुड़े objective questions.",
+                icon: "fa-solid fa-clock-rotate-left"
+            },
+
+            "all": {
+                title: "All Objectives",
+                description:
+                    "इस chapter के सभी available objective questions.",
+                icon: "fa-solid fa-layer-group"
+            }
+        };
 
         const currentType =
-            objectiveTypes[type] ||
-            objectiveTypes.vvi;
+            objectiveTypes[type] || objectiveTypes.vvi;
 
-
-        /* Update Page */
-
+        // Update page labels
         document.title =
-            currentType.title +
-            " | " +
-            currentChapter +
-            " | Chemistry Point";
+            currentType.title + " | " +
+            currentChapter + " | Chemistry Point";
 
-
-        document.getElementById(
-            "chapterName"
-        ).textContent =
+        document.getElementById("chapterName").textContent =
             currentChapter;
 
+        document.getElementById("chapterLabel").textContent =
+            currentChapter;
 
-        document.getElementById(
-            "objectiveTitle"
-        ).textContent =
+        document.getElementById("classLabel").textContent =
+            "Class " + classLevel;
+
+        document.getElementById("typeLabel").textContent =
             currentType.title;
 
-
-        document.getElementById(
-            "sectionHeading"
-        ).textContent =
+        document.getElementById("objectiveTitle").textContent =
             currentType.title;
 
+        document.getElementById("sectionHeading").textContent =
+            currentType.title;
 
-        document.getElementById(
-            "pdfTitle"
-        ).textContent =
-            currentType.title +
-            " PDF";
+        document.getElementById("pdfTitle").textContent =
+            currentType.title + " PDF";
 
-
-        document.getElementById(
-            "pdfDescription"
-        ).textContent =
+        document.getElementById("pdfDescription").textContent =
             currentType.description;
 
-
-        /* Change Icon */
-
-        const heroIcon =
-            document.getElementById("heroIcon");
-
-        heroIcon.className =
+        document.getElementById("heroIcon").className =
             currentType.icon;
 
-
-        /* Back Links */
-
+        // Preserve class and chapter when returning to the chapter page.
         const chapterURL =
-            "chapter.html?chapter=" +
+            "chapter.html?class=" +
+            encodeURIComponent(classLevel) +
+            "&chapter=" +
             encodeURIComponent(chapter);
 
+        document.getElementById("backButton").href = chapterURL;
+        document.getElementById("backChapter").href = chapterURL;
 
-        document.getElementById(
-            "backButton"
-        ).href =
-            chapterURL;
-
-
-        document.getElementById(
-            "backChapter"
-        ).href =
-            chapterURL;
-
-
-        /*
-         * =========================================
-         * PDF PAGE CONNECTION
-         * =========================================
-         *
-         * Example:
-         *
-         * objective.html?chapter=solid-state&type=vvi
-         *
-         * becomes:
-         *
-         * pdf.html?chapter=solid-state&type=vvi
-         *
-         * Firebase / Google Drive will be connected
-         * later on pdf.html.
-         */
-
+        // Forward parameters to the PDF page.
         const pdfURL =
-            "pdf.html?chapter=" +
+            "pdf.html?class=" +
+            encodeURIComponent(classLevel) +
+            "&chapter=" +
             encodeURIComponent(chapter) +
             "&type=" +
             encodeURIComponent(type);
 
+        document.getElementById("openPdfPage").href = pdfURL;
 
-        document.getElementById(
-            "openPdfPage"
-        ).href =
-            pdfURL;
+        // Theme toggle. Preference is kept for this page session only.
+        const root = document.documentElement;
+        const themeToggle = document.getElementById("themeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+        const themeText = document.getElementById("themeText");
 
+        function applyTheme(theme) {
+            root.setAttribute("data-theme", theme);
+
+            const isDark = theme === "dark";
+
+            themeIcon.className = isDark
+                ? "fa-solid fa-sun"
+                : "fa-solid fa-moon";
+
+            themeText.textContent = isDark
+                ? "Light Mode"
+                : "Dark Mode";
+
+            document.querySelector('meta[name="theme-color"]')
+                .setAttribute(
+                    "content",
+                    isDark ? "#0b0d12" : "#f4f5f8"
+                );
+        }
+
+        applyTheme("dark");
+
+        themeToggle.addEventListener("click", function () {
+            const nextTheme =
+                root.getAttribute("data-theme") === "dark"
+                    ? "light"
+                    : "dark";
+
+            applyTheme(nextTheme);
+        });
+
+        /*
+         * PDF DATABASE CONNECTION
+         * This page does not yet fetch a PDF record from Firebase.
+         *
+         * Connect it after confirming the actual data structure used by
+         * admin/objectives.html. Do not assume a database path or field name.
+         */
     </script>
 
 </body>
-
 </html>
