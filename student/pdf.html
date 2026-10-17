@@ -344,6 +344,7 @@
       font-weight: 700;
       text-align: center;
       transition: .2s;
+      cursor: pointer;
     }
 
     .pdf-btn-view {
@@ -678,19 +679,25 @@
         title: "V.V.I Objectives",
         description: "परीक्षा के लिए सबसे महत्वपूर्ण objective questions का PDF.",
         icon: "fa-star",
-        fields: ["vviPdf", "vviPDF", "vviPdfUrl", "vviPdfLink", "vvi", "vviUrl"]
+        fields: [
+          "vviPdf", "vviPDF", "vviPdfUrl", "vviPdfLink", "vvi", "vviUrl"
+        ]
       },
       pyq: {
         title: "PYQ Objectives",
         description: "Previous Year Questions से जुड़े objective questions का PDF.",
         icon: "fa-clock-rotate-left",
-        fields: ["pyqPdf", "pyqPDF", "pyqPdfUrl", "pyqPdfLink", "pyq", "pyqUrl"]
+        fields: [
+          "pyqPdf", "pyqPDF", "pyqPdfUrl", "pyqPdfLink", "pyq", "pyqUrl"
+        ]
       },
       all: {
         title: "All Objectives",
         description: "इस chapter के सभी available objective questions का PDF.",
         icon: "fa-layer-group",
-        fields: ["allPdf", "allPDF", "allPdfUrl", "allPdfLink", "all", "allUrl"]
+        fields: [
+          "allPdf", "allPDF", "allPdfUrl", "allPdfLink", "all", "allUrl"
+        ]
       }
     };
 
@@ -738,11 +745,10 @@
       if (value.includes("11") || value.includes("eleven")) return "11";
       if (value.includes("12") || value.includes("twelve")) return "12";
 
-      // Legacy chapter entries without a class value are treated as Class 12.
       return raw === "" || raw === null ? "12" : "";
     }
 
-    // Accept common Google Drive URL formats and extract the file ID.
+    // Google Drive ke common public file URL formats se file ID nikaalo.
     function getDriveId(url) {
       if (!url || typeof url !== "string") return null;
 
@@ -750,29 +756,28 @@
         const parsed = new URL(url.trim());
         const host = parsed.hostname.toLowerCase();
 
-        if (
-          host !== "drive.google.com" &&
-          host !== "docs.google.com" &&
-          host !== "drive.usercontent.google.com"
-        ) {
-          return null;
-        }
+        const supportedHosts = [
+          "drive.google.com",
+          "docs.google.com",
+          "drive.usercontent.google.com"
+        ];
 
-        // https://drive.google.com/file/d/FILE_ID/view
+        if (!supportedHosts.includes(host)) return null;
+
+        // /file/d/FILE_ID/view
         let match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
         if (match) return match[1];
 
-        // https://drive.google.com/open?id=FILE_ID
-        // https://drive.google.com/uc?id=FILE_ID
+        // /document/d/FILE_ID, /spreadsheets/d/FILE_ID, etc.
+        match = parsed.pathname.match(
+          /\/(?:document|spreadsheets|presentation|forms)\/d\/([^/]+)/
+        );
+        if (match) return match[1];
+
+        // /open?id=FILE_ID or /uc?id=FILE_ID
         const queryId = parsed.searchParams.get("id");
         if (queryId) return queryId;
 
-        // Some Docs/Sheets-style links contain /document/d/FILE_ID/
-        match = parsed.pathname.match(
-          /\/(?:document|spreadsheets|presentation)\/d\/([^/]+)/
-        );
-
-        if (match) return match[1];
       } catch (error) {
         console.warn("Invalid PDF URL:", error);
       }
@@ -782,7 +787,7 @@
 
     function isSafeHttpUrl(url) {
       try {
-        const parsed = new URL(url);
+        const parsed = new URL(String(url).trim());
         return parsed.protocol === "https:" || parsed.protocol === "http:";
       } catch {
         return false;
@@ -796,11 +801,10 @@
         return `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
       }
 
-      return isSafeHttpUrl(url) ? url : "";
+      return isSafeHttpUrl(url) ? url.trim() : "";
     }
 
-    // Use Google's download endpoint for Drive files.
-    // Non-Drive links are opened directly; their server controls downloading.
+    // Drive file ke liye direct download endpoint use hota hai.
     function getDownloadUrl(url) {
       const id = getDriveId(url);
 
@@ -808,7 +812,8 @@
         return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
       }
 
-      return isSafeHttpUrl(url) ? url : "";
+      // Normal public PDF URL ko original URL ke saath use karo.
+      return isSafeHttpUrl(url) ? url.trim() : "";
     }
 
     function getPdfUrl(item, type) {
@@ -853,8 +858,10 @@
 
     function makeElement(tag, className, text) {
       const element = document.createElement(tag);
+
       if (className) element.className = className;
       if (text !== undefined) element.textContent = text;
+
       return element;
     }
 
@@ -874,13 +881,15 @@
         return link;
       }
 
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
+      // View opens in a new tab; Download navigates directly to the download URL.
       if (isDownload) {
-        // Google Drive handles the actual download response.
-        // Avoid the HTML download attribute because cross-origin URLs may ignore it.
-        link.title = "Google Drive में PDF download खोलें";
+        link.target = "_self";
+        link.rel = "noopener";
+        link.title = "PDF download link";
+        link.setAttribute("aria-label", "Download PDF");
+      } else {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
       }
 
       return link;
@@ -999,6 +1008,7 @@
         const url = getPdfUrl(chapterItem, type);
 
         if (url) availableCount++;
+
         grid.appendChild(createCard(type, url));
       }
 
@@ -1007,13 +1017,14 @@
           "Chapter mil gaya, lekin Firebase record mein pehchane gaye PDF fields mein link nahi mila. Admin panel mein save hone wale field names ko match karna hoga.";
       } else {
         $("pdfNoteText").textContent =
-          `${availableCount} PDF link available hai. Google Drive sharing permission "Anyone with the link" par Viewer honi chahiye. Download link Google Drive par khulega.`;
+          `${availableCount} PDF link available hai. Google Drive file ki sharing "Anyone with the link" aur role Viewer honi chahiye. Download option Drive ke download endpoint ko open karega.`;
       }
     }
 
     function startPage() {
       if (!chapterSlug) {
         $("chapterName").textContent = "All Chemistry Chapters";
+
         showMessage(
           "URL mein chapter nahi mila. Kripya Objectives page se kisi chapter ko kholen."
         );
@@ -1026,7 +1037,9 @@
         `Class ${classLevel} · ${knownName || formatSlug(chapterSlug)}`;
 
       if (!pdfTypes[objectiveType]) {
-        showMessage("Objective type sahi nahi hai. V.V.I, PYQ ya All mein se koi chunen.");
+        showMessage(
+          "Objective type sahi nahi hai. V.V.I, PYQ ya All mein se koi chunen."
+        );
         return;
       }
 
