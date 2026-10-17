@@ -1,1531 +1,1175 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Chapter Wise Objectives - Chemistry Point">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class 11 and Class 12 Chapter Wise Objectives - Chemistry Point">
+    <meta name="theme-color" content="#111111">
 
     <title>Objectives | Chemistry Point</title>
 
-
     <!-- Google Fonts -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-
     <!-- Font Awesome -->
-
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-
     <!-- Main CSS -->
-
-    <link rel="stylesheet"
-          href="assets/css/root.css">
-
-    <link rel="stylesheet"
-          href="assets/css/style.css">
-
-    <link rel="stylesheet"
-          href="assets/css/responsive.css">
-
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
     <style>
-
         /* ==========================================
            HERO
         ========================================== */
-
         .objective-hero {
-
             padding: 70px 0 55px;
-
             background:
-                radial-gradient(
-                    circle at 15% 20%,
-                    rgba(217, 154, 22, 0.10),
-                    transparent 35%
-                ),
+                radial-gradient(circle at 15% 20%,
+                    rgba(217, 154, 22, 0.10), transparent 35%),
                 var(--bg-main);
-
             border-bottom: 1px solid var(--border);
-
         }
-
 
         .objective-hero h1 {
-
             margin-top: 8px;
-
             font-size: clamp(32px, 5vw, 50px);
-
             font-weight: 800;
-
             line-height: 1.15;
-
         }
-
 
         .objective-hero h1 span {
-
             color: var(--primary-light);
-
         }
-
 
         .objective-hero p {
-
             max-width: 650px;
-
             margin-top: 14px;
-
             color: var(--text-secondary);
-
             font-family: var(--font-secondary);
-
             font-size: 13px;
-
             line-height: 1.8;
-
         }
-
-
 
         /* ==========================================
            MAIN
         ========================================== */
-
         .objective-main {
-
             padding: 65px 0 100px;
-
             background: var(--bg-secondary);
-
+            min-height: 450px;
         }
-
-
 
         /* ==========================================
            TOP BAR
         ========================================== */
-
         .objective-top {
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 20px;
-
-            margin-bottom: 28px;
-
+            flex-wrap: wrap;
+            margin-bottom: 25px;
         }
-
 
         .objective-top h2 {
-
             font-size: 22px;
-
             font-weight: 800;
-
         }
-
 
         .objective-top p {
-
             margin-top: 5px;
-
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
-            font-size: 10px;
-
+            font-size: 11px;
+            line-height: 1.7;
         }
 
+        /* ==========================================
+           CLASS SELECTOR
+        ========================================== */
+        .class-selector {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--bg-card);
+        }
 
+        .class-selector-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .class-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: transparent;
+            color: var(--text-secondary);
+            font: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .class-btn:hover {
+            border-color: var(--border-gold);
+            color: var(--primary-light);
+        }
+
+        .class-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: #111;
+        }
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+        .chapter-search-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 310px;
+        }
+
+        .chapter-search-wrap i {
+            position: absolute;
+            top: 50%;
+            left: 14px;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .chapter-search {
+            width: 100%;
+            min-height: 43px;
+            padding: 11px 14px 11px 40px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .chapter-search:focus {
+            border-color: var(--border-gold);
+        }
 
         /* ==========================================
            CHAPTER GRID
         ========================================== */
-
         .chapter-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
-
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
-
         }
-
-
 
         /* ==========================================
            CHAPTER CARD
         ========================================== */
-
         .chapter-card {
-
             position: relative;
-
             overflow: hidden;
-
             padding: 24px;
-
             min-height: 190px;
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
-
             border: 1px solid var(--border);
-
             border-radius: 17px;
-
             background: var(--bg-card);
-
             text-decoration: none;
-
             color: inherit;
-
             transition:
                 transform var(--transition-normal),
                 border-color var(--transition-normal),
                 box-shadow var(--transition-normal);
-
         }
-
 
         .chapter-card:hover {
-
             transform: translateY(-5px);
-
             border-color: var(--border-gold);
-
             box-shadow: var(--shadow-gold);
-
         }
 
+        .chapter-card:focus-visible,
+        .class-btn:focus-visible {
+            outline: 2px solid var(--primary-light);
+            outline-offset: 3px;
+        }
 
         .chapter-card::after {
-
             content: "";
-
             position: absolute;
-
             width: 140px;
-
             height: 140px;
-
             right: -75px;
-
             top: -75px;
-
             border-radius: 50%;
-
-            background:
-                rgba(217, 154, 22, 0.06);
-
+            background: rgba(217, 154, 22, 0.06);
             pointer-events: none;
-
         }
 
-
+        .chapter-card-content,
+        .chapter-card-bottom {
+            position: relative;
+            z-index: 1;
+        }
 
         /* ==========================================
            ICON
         ========================================== */
-
         .chapter-card-icon {
-
             width: 48px;
-
             height: 48px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             border-radius: 12px;
-
-            background:
-                rgba(217, 154, 22, 0.08);
-
-            border: 1px solid
-                rgba(217, 154, 22, 0.18);
-
+            background: rgba(217, 154, 22, 0.08);
+            border: 1px solid rgba(217, 154, 22, 0.18);
             color: var(--primary-light);
-
             font-size: 17px;
-
         }
-
-
 
         /* ==========================================
            CARD TEXT
         ========================================== */
-
         .chapter-card h3 {
-
             margin-top: 17px;
-
             font-size: 17px;
-
             font-weight: 800;
-
+            line-height: 1.5;
         }
-
 
         .chapter-card p {
-
             margin-top: 6px;
-
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
-            font-size: 10px;
-
+            font-size: 11px;
             line-height: 1.7;
-
         }
 
-
+        .chapter-class-tag {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 5px 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 9px;
+            font-weight: 700;
+        }
 
         /* ==========================================
            CARD BOTTOM
         ========================================== */
-
         .chapter-card-bottom {
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 10px;
-
             margin-top: 20px;
-
         }
-
 
         .chapter-number {
-
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
-            font-size: 9px;
-
+            font-size: 10px;
         }
-
 
         .open-chapter {
-
             display: inline-flex;
-
             align-items: center;
-
             gap: 6px;
-
-            padding: 8px 11px;
-
+            padding: 9px 11px;
             border-radius: 8px;
-
             background: var(--primary);
-
             color: #111;
-
-            font-size: 9px;
-
+            font-size: 10px;
             font-weight: 700;
-
         }
 
+        /* ==========================================
+           STATUS / EMPTY / ERROR
+        ========================================== */
+        .chapter-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 220px;
+            padding: 30px 20px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--bg-card);
+            text-align: center;
+            color: var(--text-secondary);
+        }
 
+        .chapter-status > i {
+            font-size: 30px;
+            color: var(--primary-light);
+        }
+
+        .chapter-status h3 {
+            font-size: 17px;
+            color: var(--text-primary);
+        }
+
+        .chapter-status p {
+            max-width: 470px;
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .status-retry {
+            padding: 10px 15px;
+            border: 0;
+            border-radius: 8px;
+            background: var(--primary);
+            color: #111;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .chapter-status[hidden],
+        .chapter-grid[hidden] {
+            display: none !important;
+        }
+
+        .status-spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary-light);
+            border-radius: 50%;
+            animation: chapterSpin .8s linear infinite;
+        }
+
+        @keyframes chapterSpin {
+            to { transform: rotate(360deg); }
+        }
 
         /* ==========================================
            INFO BOX
         ========================================== */
-
         .objective-info {
-
             display: flex;
-
             align-items: flex-start;
-
             gap: 12px;
-
             margin-top: 28px;
-
             padding: 18px 20px;
-
             border: 1px solid var(--border);
-
             border-radius: 13px;
-
-            background:
-                rgba(217, 154, 22, 0.04);
-
+            background: rgba(217, 154, 22, 0.04);
         }
-
 
         .objective-info i {
-
             margin-top: 3px;
-
             color: var(--primary-light);
-
         }
-
 
         .objective-info p {
-
             color: var(--text-muted);
-
             font-family: var(--font-secondary);
-
-            font-size: 10px;
-
-            line-height: 1.7;
-
+            font-size: 11px;
+            line-height: 1.8;
         }
-
-
 
         /* ==========================================
            RESPONSIVE
         ========================================== */
-
         @media (max-width: 850px) {
-
             .chapter-grid {
-
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-
         }
-
 
         @media (max-width: 600px) {
-
             .objective-hero {
-
                 padding: 55px 0 45px;
-
             }
-
 
             .objective-main {
-
-                padding: 50px 0 75px;
-
+                padding: 45px 0 75px;
             }
-
 
             .chapter-grid {
-
                 grid-template-columns: 1fr;
-
             }
 
+            .objective-top {
+                align-items: stretch;
+            }
+
+            .chapter-search-wrap {
+                max-width: none;
+            }
+
+            .class-selector {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .class-selector-label {
+                grid-column: 1 / -1;
+            }
+
+            .class-btn {
+                padding: 10px 8px;
+            }
+
+            .chapter-card {
+                min-height: 180px;
+            }
         }
 
-    </style>
+        @media (prefers-reduced-motion: reduce) {
+            .chapter-card,
+            .class-btn {
+                transition: none;
+            }
 
+            .status-spinner {
+                animation-duration: 1.8s;
+            }
+        }
+    </style>
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      HEADER
 ===================================================== -->
-
 <header class="site-header">
-
     <div class="container nav-container">
 
-
         <!-- BRAND -->
-
-        <a href="index.html"
-           class="brand">
-
+        <a href="index.html" class="brand">
             <img src="assets/images/logo/logo.png"
                  alt="Chemistry Point Logo">
 
-
             <div class="brand-text">
-
-                <strong>
-                    Chemistry Point
-                </strong>
-
-                <span>
-                    By Pardeep Sir
-                </span>
-
+                <strong>Chemistry Point</strong>
+                <span>By Pardeep Sir</span>
             </div>
-
         </a>
-
-
 
         <!-- DESKTOP NAV -->
-
-        <nav class="main-nav">
-
-            <a href="index.html">
-                Home
-            </a>
-
-
-            <a href="videos.html">
-                Videos
-            </a>
-
-
-            <a href="objectives.html"
-               class="active">
-                Objectives
-            </a>
-
-
-            <a href="quiz.html">
-                Quiz
-            </a>
-
-
-            <a href="about.html">
-                About
-            </a>
-
-
-            <a href="contact.html">
-                Contact
-            </a>
-
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="videos.html">Videos</a>
+            <a href="objectives.html" class="active">Objectives</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
 
-
-
         <!-- MOBILE MENU BUTTON -->
-
         <button class="menu-btn"
                 id="menuBtn"
-                aria-label="Open Menu">
-
+                type="button"
+                aria-label="Open Menu"
+                aria-expanded="false"
+                aria-controls="mobileNav">
             <i class="fa-solid fa-bars"></i>
-
         </button>
-
     </div>
-
-
 
     <!-- MOBILE NAV -->
-
-    <div class="mobile-nav"
-         id="mobileNav">
-
-
+    <div class="mobile-nav" id="mobileNav">
         <a href="index.html">
-
-            <i class="fa-solid fa-house"></i>
-
-            Home
-
+            <i class="fa-solid fa-house"></i> Home
         </a>
-
 
         <a href="videos.html">
-
-            <i class="fa-solid fa-play"></i>
-
-            Videos
-
+            <i class="fa-solid fa-play"></i> Videos
         </a>
 
-
-        <a href="objectives.html"
-           class="active">
-
-            <i class="fa-solid fa-book-open"></i>
-
-            Objectives
-
+        <a href="objectives.html" class="active">
+            <i class="fa-solid fa-book-open"></i> Objectives
         </a>
-
 
         <a href="quiz.html">
-
-            <i class="fa-solid fa-circle-question"></i>
-
-            Quiz
-
+            <i class="fa-solid fa-circle-question"></i> Quiz
         </a>
-
 
         <a href="about.html">
-
-            <i class="fa-solid fa-user"></i>
-
-            About
-
+            <i class="fa-solid fa-user"></i> About
         </a>
-
 
         <a href="contact.html">
-
-            <i class="fa-solid fa-envelope"></i>
-
-            Contact
-
+            <i class="fa-solid fa-envelope"></i> Contact
         </a>
-
     </div>
-
 </header>
-
-
 
 <!-- =====================================================
      MAIN
 ===================================================== -->
-
 <main>
 
-
     <!-- HERO -->
-
     <section class="objective-hero">
-
         <div class="container">
-
-            <span class="section-label">
-                CHAPTER OBJECTIVES
-            </span>
-
+            <span class="section-label">CHAPTER OBJECTIVES</span>
 
             <h1>
-
                 Chemistry
-
-                <span>
-                    Objectives
-                </span>
-
+                <span>Objectives</span>
             </h1>
 
-
             <p>
-
-                अपने Chemistry syllabus के किसी भी chapter को
-                select करें और V.V.I, PYQ तथा All Objectives
+                अपनी Class select करें, फिर अपने Chemistry syllabus
+                का chapter चुनें और V.V.I, PYQ तथा All Objectives
                 की practice करें।
-
             </p>
-
         </div>
-
     </section>
 
-
-
     <!-- OBJECTIVE MAIN -->
-
     <section class="objective-main">
-
         <div class="container">
 
-
             <!-- TOP -->
-
             <div class="objective-top">
-
                 <div>
-
-                    <h2>
-                        Select Chapter
-                    </h2>
-
-                    <p>
+                    <h2 id="chapterHeading">Select Chapter</h2>
+                    <p id="chapterSubheading">
                         जिस chapter की objective practice करनी है,
                         उसे select करें।
                     </p>
-
                 </div>
 
+                <label class="chapter-search-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="search"
+                        id="chapterSearch"
+                        class="chapter-search"
+                        placeholder="Search chapter..."
+                        aria-label="Search chapters"
+                        autocomplete="off">
+                </label>
             </div>
 
-
-
-            <!-- ==========================================
-                 CHAPTER GRID
-            =========================================== -->
-
-            <div class="chapter-grid">
-
-
-
-                <!-- 01 SOLID STATE -->
-
-                <a href="student/chapter.html?chapter=solid-state"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-cube"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Solid State
-                        </h3>
-
-
-                        <p>
-                            Solid State chapter के V.V.I,
-                            PYQ और All Objectives।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 01
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 02 SOLUTIONS -->
-
-                <a href="student/chapter.html?chapter=solutions"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-flask"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Solutions
-                        </h3>
-
-
-                        <p>
-                            Solutions chapter के important
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 02
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 03 ELECTROCHEMISTRY -->
-
-                <a href="student/chapter.html?chapter=electrochemistry"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-bolt"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Electrochemistry
-                        </h3>
-
-
-                        <p>
-                            Electrochemistry chapter के
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 03
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 04 CHEMICAL KINETICS -->
-
-                <a href="student/chapter.html?chapter=chemical-kinetics"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-chart-line"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Chemical Kinetics
-                        </h3>
-
-
-                        <p>
-                            Chemical Kinetics के selected
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 04
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 05 SURFACE CHEMISTRY -->
-
-                <a href="student/chapter.html?chapter=surface-chemistry"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-layer-group"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Surface Chemistry
-                        </h3>
-
-
-                        <p>
-                            Surface Chemistry के important
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 05
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 06 d AND f BLOCK -->
-
-                <a href="student/chapter.html?chapter=d-and-f-block"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-atom"></i>
-
-                        </div>
-
-
-                        <h3>
-                            d &amp; f Block Elements
-                        </h3>
-
-
-                        <p>
-                            d और f Block Elements के
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 06
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 07 COORDINATION -->
-
-                <a href="student/chapter.html?chapter=coordination-compounds"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-diagram-project"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Coordination Compounds
-                        </h3>
-
-
-                        <p>
-                            Coordination Compounds के
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 07
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 08 HALOALKANES -->
-
-                <a href="student/chapter.html?chapter=haloalkanes-haloarenes"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-vial"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Haloalkanes &amp; Haloarenes
-                        </h3>
-
-
-                        <p>
-                            Organic Chemistry के important
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 08
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 09 ALCOHOLS -->
-
-                <a href="student/chapter.html?chapter=alcohols-phenols-ethers"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-droplet"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Alcohols, Phenols &amp; Ethers
-                        </h3>
-
-
-                        <p>
-                            Alcohols, Phenols और Ethers के
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 09
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 10 ALDEHYDES -->
-
-                <a href="student/chapter.html?chapter=aldehydes-ketones-carboxylic-acids"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-flask-vial"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Aldehydes, Ketones &amp; Carboxylic Acids
-                        </h3>
-
-
-                        <p>
-                            Aldehydes, Ketones और Carboxylic
-                            Acids के objectives।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 10
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 11 AMINES -->
-
-                <a href="student/chapter.html?chapter=amines"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-atom"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Amines
-                        </h3>
-
-
-                        <p>
-                            Amines chapter के important
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 11
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- 12 BIOMOLECULES -->
-
-                <a href="student/chapter.html?chapter=biomolecules"
-                   class="chapter-card">
-
-                    <div>
-
-                        <div class="chapter-card-icon">
-
-                            <i class="fa-solid fa-dna"></i>
-
-                        </div>
-
-
-                        <h3>
-                            Biomolecules
-                        </h3>
-
-
-                        <p>
-                            Biomolecules chapter के
-                            objective questions।
-                        </p>
-
-                    </div>
-
-
-                    <div class="chapter-card-bottom">
-
-                        <span class="chapter-number">
-                            Chapter 12
-                        </span>
-
-
-                        <span class="open-chapter">
-
-                            Open Chapter
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </span>
-
-                    </div>
-
-                </a>
-
-
+            <!-- CLASS SELECTOR -->
+            <div class="class-selector" aria-label="Select class">
+                <div class="class-selector-label">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Select Your Class
+                </div>
+
+                <button type="button"
+                        class="class-btn"
+                        data-class="11"
+                        aria-pressed="false">
+                    <i class="fa-solid fa-book"></i>
+                    Class 11
+                </button>
+
+                <button type="button"
+                        class="class-btn active"
+                        data-class="12"
+                        aria-pressed="true">
+                    <i class="fa-solid fa-book-open"></i>
+                    Class 12
+                </button>
             </div>
 
+            <!-- CHAPTER GRID -->
+            <div class="chapter-grid"
+                 id="chapterGrid"
+                 aria-live="polite"
+                 hidden>
+            </div>
 
+            <!-- STATUS -->
+            <div class="chapter-status"
+                 id="chapterStatus"
+                 role="status"
+                 aria-live="polite">
+                <div class="status-spinner" aria-hidden="true"></div>
+                <h3>Chapters load ho rahe hain...</h3>
+                <p>Firebase se chapters fetch kiye ja rahe hain.</p>
+            </div>
 
             <!-- INFO -->
-
             <div class="objective-info">
-
                 <i class="fa-solid fa-circle-info"></i>
-
-
                 <p>
-
-                    किसी भी chapter पर click करने के बाद
-                    आपको उस chapter के V.V.I Objectives,
-                    PYQ Objectives और All Objectives के
-                    sections दिखाई देंगे। PDFs Google Drive
-                    पर host की जाएंगी और उनके links Firebase
-                    Database से load किए जाएंगे।
-
+                    किसी भी chapter पर click करने के बाद आपको उस
+                    chapter के V.V.I Objectives, PYQ Objectives और
+                    All Objectives के sections दिखाई देंगे। PDFs
+                    Google Drive पर host की जाएंगी और उनके links
+                    Firebase Database से load किए जाएंगे।
                 </p>
-
             </div>
-
-
         </div>
-
     </section>
-
 </main>
-
-
 
 <!-- =====================================================
      FOOTER
 ===================================================== -->
-
 <footer class="site-footer">
-
     <div class="container footer-grid">
 
-
         <!-- FOOTER BRAND -->
-
         <div class="footer-brand">
-
             <img src="assets/images/logo/logo.png"
                  alt="Code With Piyush">
 
-
-            <h3>
-                Code With Piyush
-            </h3>
-
+            <h3>Code With Piyush</h3>
 
             <p>
-
-                Modern educational websites और
-                digital learning experiences बनाने
-                का प्रयास।
-
+                Modern educational websites और digital learning
+                experiences बनाने का प्रयास।
             </p>
 
+            <div class="social-links">
+                <a href="https://youtube.com/@thebestchemistrypointbypradeep"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Pardeep Sir YouTube Channel"
+                   title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
 
-            
-<div class="social-links">
-    <!-- Pardeep Sir YouTube -->
-    <a href="https://youtube.com/@thebestchemistrypointbypradeep"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Pardeep Sir YouTube Channel"
-       title="YouTube">
-        <i class="fa-brands fa-youtube"></i>
-    </a>
-
-    <!-- Pardeep Sir Instagram -->
-    <a href="https://instagram.com/chemistry.point.pradeep.sir"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Pardeep Sir Instagram Profile"
-       title="Instagram">
-        <i class="fa-brands fa-instagram"></i>
-    </a>
-</div>
-
+                <a href="https://instagram.com/chemistry.point.pradeep.sir"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Pardeep Sir Instagram Profile"
+                   title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
         </div>
-
-
 
         <!-- QUICK LINKS -->
-
         <div class="footer-column">
-
-            <h4>
-                Quick Links
-            </h4>
-
-
-            <a href="index.html">
-                Home
-            </a>
-
-
-            <a href="videos.html">
-                Videos
-            </a>
-
-
-            <a href="objectives.html">
-                Objectives
-            </a>
-
-
-            <a href="quiz.html">
-                Quiz
-            </a>
-
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="videos.html">Videos</a>
+            <a href="objectives.html">Objectives</a>
+            <a href="quiz.html">Quiz</a>
         </div>
-
-
 
         <!-- INFORMATION -->
-
         <div class="footer-column">
-
-            <h4>
-                Information
-            </h4>
-
-
-            <a href="about.html">
-                About Us
-            </a>
-
-
-            <a href="contact.html">
-                Contact
-            </a>
-
+            <h4>Information</h4>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
         </div>
-
-
 
         <!-- LEARNING -->
-
         <div class="footer-column">
-
-            <h4>
-                Learning
-            </h4>
-
-
-            <a href="objectives.html">
-                V.V.I Objectives
-            </a>
-
-
-            <a href="objectives.html">
-                PYQ Objectives
-            </a>
-
-
-            <a href="quiz.html">
-                Chapter Wise Quiz
-            </a>
-
+            <h4>Learning</h4>
+            <a href="objectives.html?class=11">Class 11 Objectives</a>
+            <a href="objectives.html?class=12">Class 12 Objectives</a>
+            <a href="quiz.html">Chapter Wise Quiz</a>
         </div>
-
-
     </div>
-
-
 
     <!-- FOOTER BOTTOM -->
-
     <div class="footer-bottom">
-
         <div class="container">
-
-            <p>
-
-                © 2026 Code With Piyush.
-                All Rights Reserved.
-
-            </p>
-
-
-            <p>
-
-                Built with ❤️
-
-            </p>
-
+            <p>© 2026 Code With Piyush. All Rights Reserved.</p>
+            <p>Built with ❤️</p>
         </div>
-
     </div>
-
 </footer>
-
-
 
 <!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
+<!-- Mobile Menu -->
 <script>
-
-    /* ==========================================
-       MOBILE MENU
-    ========================================== */
-
-    const menuBtn =
-        document.getElementById("menuBtn");
-
-
-    const mobileNav =
-        document.getElementById("mobileNav");
-
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
 
     if (menuBtn && mobileNav) {
-
         menuBtn.addEventListener("click", () => {
+            const isOpen = mobileNav.classList.toggle("show");
 
-            mobileNav.classList.toggle("show");
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
+            menuBtn.setAttribute(
+                "aria-label",
+                isOpen ? "Close Menu" : "Open Menu"
+            );
 
+            const icon = menuBtn.querySelector("i");
 
-            const icon =
-                menuBtn.querySelector("i");
-
-
-            if (
-                mobileNav.classList.contains("show")
-            ) {
-
-                icon.classList.remove("fa-bars");
-
-                icon.classList.add("fa-xmark");
-
-            } else {
-
-                icon.classList.remove("fa-xmark");
-
-                icon.classList.add("fa-bars");
-
+            if (icon) {
+                icon.classList.toggle("fa-bars", !isOpen);
+                icon.classList.toggle("fa-xmark", isOpen);
             }
-
         });
-
     }
-
 </script>
 
+<!-- Firebase + Objectives -->
+<script type="module">
+    import { initializeApp } from
+        "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+    import {
+        getDatabase,
+        ref,
+        get
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+    /* ==========================================
+       FIREBASE CONFIG
+    ========================================== */
+    const firebaseConfig = {
+        apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+        authDomain: "chemistry-point-9a41b.firebaseapp.com",
+        databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "chemistry-point-9a41b",
+        storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+        messagingSenderId: "791007663942",
+        appId: "1:791007663942:web:693c008e475a2e74357747"
+    };
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    const chapterGrid = document.getElementById("chapterGrid");
+    const chapterStatus = document.getElementById("chapterStatus");
+    const chapterHeading = document.getElementById("chapterHeading");
+    const chapterSubheading = document.getElementById("chapterSubheading");
+    const chapterSearch = document.getElementById("chapterSearch");
+    const classButtons = [...document.querySelectorAll(".class-btn")];
+
+    let allChapters = [];
+    let selectedClass = "12";
+    let isLoading = false;
+
+    const iconBySlug = {
+        "solid-state": "fa-cube",
+        "solutions": "fa-flask",
+        "electrochemistry": "fa-bolt",
+        "chemical-kinetics": "fa-chart-line",
+        "surface-chemistry": "fa-layer-group",
+        "d-and-f-block": "fa-atom",
+        "coordination-compounds": "fa-diagram-project",
+        "haloalkanes-haloarenes": "fa-vial",
+        "alcohols-phenols-ethers": "fa-droplet",
+        "aldehydes-ketones-carboxylic-acids": "fa-flask-vial",
+        "amines": "fa-atom",
+        "biomolecules": "fa-dna",
+        "some-basic-concepts-of-chemistry": "fa-scale-balanced",
+        "structure-of-atom": "fa-atom",
+        "classification-of-elements": "fa-table-cells",
+        "chemical-bonding": "fa-link",
+        "thermodynamics": "fa-temperature-half",
+        "equilibrium": "fa-scale-balanced",
+        "redox-reactions": "fa-arrow-right-arrow-left",
+        "hydrogen": "fa-droplet",
+        "s-block-elements": "fa-table-cells",
+        "p-block-elements": "fa-atom",
+        "organic-chemistry-basic-principles": "fa-flask",
+        "hydrocarbons": "fa-fire",
+        "environmental-chemistry": "fa-leaf"
+    };
+
+    /* ==========================================
+       HELPERS
+    ========================================== */
+
+    function normalizeClass(value) {
+        const text = String(value ?? "").trim().toLowerCase();
+
+        if (["11", "class 11", "xi", "11th"].includes(text)) {
+            return "11";
+        }
+
+        if (["12", "class 12", "xii", "12th"].includes(text)) {
+            return "12";
+        }
+
+        return "";
+    }
+
+    function getChapterClass(chapter) {
+        // Current admin field
+        const current = normalizeClass(chapter.classLevel);
+
+        if (current) return current;
+
+        // Support records using the older "class" field
+        const legacy = normalizeClass(chapter.class);
+
+        if (legacy) return legacy;
+
+        // Preserve older records which did not store a class.
+        // Older objective records were treated as Class 12.
+        return "12";
+    }
+
+    function slugify(value) {
+        return String(value ?? "")
+            .trim()
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/&/g, " and ")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+    }
+
+    function getChapterSlug(chapter, key) {
+        const suppliedSlug = String(chapter.slug ?? "").trim();
+
+        if (suppliedSlug) return suppliedSlug;
+
+        // Legacy records might use the Firebase key as their slug.
+        if (key && !key.includes(" ")) return key;
+
+        return slugify(chapter.name ?? chapter.chapterName ?? "");
+    }
+
+    function getChapterName(chapter) {
+        return String(
+            chapter.name ??
+            chapter.chapterName ??
+            chapter.title ??
+            "Untitled Chapter"
+        ).trim();
+    }
+
+    function getChapterDescription(chapter) {
+        return String(
+            chapter.description ??
+            chapter.shortDescription ??
+            "इस chapter के V.V.I, PYQ और All Objectives की practice करें।"
+        ).trim();
+    }
+
+    function getChapterNumber(chapter, index) {
+        const possibleNumber =
+            chapter.chapterNumber ??
+            chapter.chapterNo ??
+            chapter.number ??
+            chapter.order;
+
+        if (possibleNumber !== undefined &&
+            possibleNumber !== null &&
+            String(possibleNumber).trim() !== "") {
+            return String(possibleNumber).trim();
+        }
+
+        return String(index + 1).padStart(2, "0");
+    }
+
+    function showStatus(title, message, icon = "fa-circle-info", retry = false) {
+        chapterGrid.hidden = true;
+        chapterStatus.hidden = false;
+        chapterStatus.replaceChildren();
+
+        const iconElement = document.createElement("i");
+        iconElement.className = `fa-solid ${icon}`;
+        iconElement.setAttribute("aria-hidden", "true");
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = message;
+
+        chapterStatus.append(iconElement, heading, paragraph);
+
+        if (retry) {
+            const retryButton = document.createElement("button");
+            retryButton.type = "button";
+            retryButton.className = "status-retry";
+            retryButton.textContent = "Try Again";
+            retryButton.addEventListener("click", loadChapters);
+            chapterStatus.appendChild(retryButton);
+        }
+    }
+
+    function showLoading() {
+        chapterGrid.hidden = true;
+        chapterStatus.hidden = false;
+        chapterStatus.replaceChildren();
+
+        const spinner = document.createElement("div");
+        spinner.className = "status-spinner";
+        spinner.setAttribute("aria-hidden", "true");
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Chapters load ho rahe hain...";
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = "Please wait while we fetch the chapters.";
+
+        chapterStatus.append(spinner, heading, paragraph);
+    }
+
+    /* ==========================================
+       CLASS SELECTOR
+    ========================================== */
+    function updateClassButtons() {
+        classButtons.forEach(button => {
+            const active = button.dataset.class === selectedClass;
+
+            button.classList.toggle("active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+
+        chapterHeading.textContent = `Class ${selectedClass} Chapters`;
+        chapterSubheading.textContent =
+            `Class ${selectedClass} के chapter को select करें और objective practice शुरू करें।`;
+    }
+
+    function selectClass(classLevel, updateUrl = true) {
+        if (!["11", "12"].includes(classLevel)) return;
+
+        selectedClass = classLevel;
+        updateClassButtons();
+
+        if (updateUrl) {
+            const url = new URL(window.location.href);
+            url.searchParams.set("class", selectedClass);
+            window.history.replaceState({}, "", url);
+        }
+
+        renderChapters();
+    }
+
+    classButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            selectClass(button.dataset.class);
+        });
+    });
+
+    /* ==========================================
+       RENDER CHAPTER CARDS
+    ========================================== */
+    function renderChapters() {
+        if (isLoading) return;
+
+        const searchTerm = chapterSearch.value.trim().toLowerCase();
+
+        const classChapters = allChapters
+            .filter(item => getChapterClass(item.data) === selectedClass)
+            .filter(item => {
+                const name = getChapterName(item.data).toLowerCase();
+                const slug = getChapterSlug(item.data, item.key).toLowerCase();
+
+                return name.includes(searchTerm) || slug.includes(searchTerm);
+            })
+            .sort((a, b) => {
+                const orderA = Number(
+                    a.data.order ?? a.data.chapterNumber ?? a.data.chapterNo ?? 9999
+                );
+                const orderB = Number(
+                    b.data.order ?? b.data.chapterNumber ?? b.data.chapterNo ?? 9999
+                );
+
+                if (orderA !== orderB) return orderA - orderB;
+
+                return getChapterName(a.data).localeCompare(getChapterName(b.data));
+            });
+
+        chapterGrid.replaceChildren();
+
+        if (classChapters.length === 0) {
+            const hasClassChapters = allChapters.some(
+                item => getChapterClass(item.data) === selectedClass
+            );
+
+            const title = searchTerm
+                ? "No Matching Chapters"
+                : "No Chapters Available";
+
+            const message = searchTerm
+                ? "Search term बदलकर देखें।"
+                : hasClassChapters
+                    ? "इस class के chapters नहीं मिले।"
+                    : `अभी Firebase में Class ${selectedClass} के chapters उपलब्ध नहीं हैं। Admin panel में chapters और उनका class level check करें।`;
+
+            showStatus(title, message, "fa-book-open");
+            return;
+        }
+
+        classChapters.forEach((item, index) => {
+            const chapter = item.data;
+            const name = getChapterName(chapter);
+            const slug = getChapterSlug(chapter, item.key);
+            const description = getChapterDescription(chapter);
+            const number = getChapterNumber(chapter, index);
+            const iconClass = iconBySlug[slug] || "fa-flask";
+
+            const card = document.createElement("a");
+            card.className = "chapter-card";
+
+            // Encode query parameters to preserve special characters.
+            card.href =
+                `student/chapter.html?class=${encodeURIComponent(selectedClass)}` +
+                `&chapter=${encodeURIComponent(slug)}`;
+
+            const content = document.createElement("div");
+            content.className = "chapter-card-content";
+
+            const iconBox = document.createElement("div");
+            iconBox.className = "chapter-card-icon";
+
+            const icon = document.createElement("i");
+            icon.className = `fa-solid ${iconClass}`;
+            icon.setAttribute("aria-hidden", "true");
+            iconBox.appendChild(icon);
+
+            const title = document.createElement("h3");
+            title.textContent = name;
+
+            const desc = document.createElement("p");
+            desc.textContent = description;
+
+            const classTag = document.createElement("span");
+            classTag.className = "chapter-class-tag";
+            classTag.textContent = `CLASS ${selectedClass}`;
+
+            content.append(iconBox, title, desc, classTag);
+
+            const bottom = document.createElement("div");
+            bottom.className = "chapter-card-bottom";
+
+            const chapterNumber = document.createElement("span");
+            chapterNumber.className = "chapter-number";
+            chapterNumber.textContent = `Chapter ${number}`;
+
+            const open = document.createElement("span");
+            open.className = "open-chapter";
+            open.append(
+                document.createTextNode("Open Chapter "),
+                Object.assign(document.createElement("i"), {
+                    className: "fa-solid fa-arrow-right"
+                })
+            );
+
+            bottom.append(chapterNumber, open);
+            card.append(content, bottom);
+            chapterGrid.appendChild(card);
+        });
+
+        chapterStatus.hidden = true;
+        chapterGrid.hidden = false;
+    }
+
+    /* ==========================================
+       LOAD CHAPTERS FROM FIREBASE
+    ========================================== */
+    async function loadChapters() {
+        if (isLoading) return;
+
+        isLoading = true;
+        showLoading();
+
+        try {
+            const snapshot = await get(ref(database, "chapters"));
+
+            if (!snapshot.exists()) {
+                allChapters = [];
+                isLoading = false;
+
+                showStatus(
+                    "No Chapters Found",
+                    "Firebase के /chapters path में अभी कोई chapter मौजूद नहीं है। Admin panel से chapters add करें।",
+                    "fa-book-open"
+                );
+                return;
+            }
+
+            const rawData = snapshot.val();
+
+            allChapters = Object.entries(rawData)
+                .filter(([, value]) => value && typeof value === "object")
+                .map(([key, value]) => ({
+                    key,
+                    data: value
+                }))
+                .filter(item => {
+                    // Respect a published flag if the admin uses one.
+                    // Records without a published field remain visible.
+                    return item.data.published !== false &&
+                           item.data.active !== false;
+                });
+
+            isLoading = false;
+            renderChapters();
+
+        } catch (error) {
+            console.error("Failed to load chapters:", error);
+            isLoading = false;
+
+            showStatus(
+                "Chapters Load Nahi Ho Paye",
+                "Firebase connection या database rules check करें। Internet connection भी check करके Try Again दबाएँ।",
+                "fa-triangle-exclamation",
+                true
+            );
+        }
+    }
+
+    /* ==========================================
+       SEARCH
+    ========================================== */
+    chapterSearch.addEventListener("input", () => {
+        renderChapters();
+    });
+
+    /* ==========================================
+       INITIAL CLASS FROM URL
+    ========================================== */
+    const params = new URLSearchParams(window.location.search);
+    const requestedClass = normalizeClass(
+        params.get("class") ?? params.get("classLevel")
+    );
+
+    if (requestedClass) {
+        selectedClass = requestedClass;
+    }
+
+    updateClassButtons();
+    loadChapters();
+</script>
 
 </body>
-
 </html>
