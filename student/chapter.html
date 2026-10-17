@@ -1,262 +1,498 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0d12">
 
     <title>Chapter Objectives | Chemistry Point</title>
+    <meta name="description" content="Chapter-wise Chemistry objective questions, V.V.I objectives and previous year questions.">
 
-    <!-- Google Font -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Main CSS -->
+    <!-- Website CSS -->
     <link rel="stylesheet" href="../assets/css/root.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
 
     <style>
-        * {
+        /* =========================================
+           CHEMISTRY POINT - DARK / GOLD THEME
+        ========================================= */
+
+        #chapterPage {
+            --cp-bg: #0b0d12;
+            --cp-surface: #12151d;
+            --cp-card: #151922;
+            --cp-card-hover: #1b202b;
+            --cp-text: #f4f4f5;
+            --cp-muted: #a0a6b5;
+            --cp-border: rgba(255, 255, 255, 0.09);
+            --cp-gold: #d6ad55;
+            --cp-gold-light: #f3d58a;
+            --cp-gold-bg: rgba(214, 173, 85, 0.11);
+            --cp-shadow: 0 14px 40px rgba(0, 0, 0, 0.20);
+
+            min-height: 100vh;
+            background: var(--cp-bg);
+            color: var(--cp-text);
+            font-family: 'Poppins', sans-serif;
+            transition: background .25s ease, color .25s ease;
+        }
+
+        #chapterPage *,
+        #chapterPage *::before,
+        #chapterPage *::after {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
+        #chapterPage a {
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .chapter-page {
-            min-height: 100vh;
+        /* Light theme */
+        html[data-theme="light"] #chapterPage {
+            --cp-bg: #f5f6f8;
+            --cp-surface: #ffffff;
+            --cp-card: #ffffff;
+            --cp-card-hover: #fffaf0;
+            --cp-text: #171a22;
+            --cp-muted: #687080;
+            --cp-border: rgba(25, 30, 40, 0.10);
+            --cp-gold: #a87b22;
+            --cp-gold-light: #805a13;
+            --cp-gold-bg: rgba(214, 173, 85, 0.13);
+            --cp-shadow: 0 12px 35px rgba(25, 30, 40, 0.07);
         }
 
         /* Header */
-        .chapter-header {
-            background: linear-gradient(135deg, #111827, #1e3a8a);
-            padding: 45px 20px 70px;
-            color: #fff;
+        #chapterPage .cp-header {
+            position: relative;
+            overflow: hidden;
+            padding: 25px 20px 76px;
             text-align: center;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(214,173,85,.13), transparent 60%),
+                var(--cp-surface);
+            border-bottom: 1px solid var(--cp-border);
         }
 
-        .back-btn {
+        #chapterPage .cp-header::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: min(360px, 80%);
+            height: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, var(--cp-gold), transparent);
+        }
+
+        #chapterPage .cp-header-top {
+            width: min(1100px, 100%);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        #chapterPage .cp-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--cp-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color .2s ease;
+        }
+
+        #chapterPage .cp-back:hover {
+            color: var(--cp-gold);
+        }
+
+        #chapterPage .cp-theme-toggle {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border: 1px solid var(--cp-border);
+            border-radius: 13px;
+            background: var(--cp-card);
+            color: var(--cp-gold);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .2s ease;
+        }
+
+        #chapterPage .cp-theme-toggle:hover {
+            border-color: var(--cp-gold);
+            transform: translateY(-2px);
+        }
+
+        #chapterPage .cp-class-label {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 25px;
-            opacity: .9;
+            margin-bottom: 19px;
+            padding: 7px 13px;
+            border: 1px solid rgba(214,173,85,.3);
+            border-radius: 50px;
+            background: var(--cp-gold-bg);
+            color: var(--cp-gold-light);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .7px;
+            text-transform: uppercase;
         }
 
-        .back-btn:hover {
-            opacity: 1;
-        }
-
-        .chapter-icon {
-            width: 75px;
-            height: 75px;
+        #chapterPage .cp-chapter-icon {
+            width: 76px;
+            height: 76px;
             margin: 0 auto 18px;
-            border-radius: 20px;
-            background: rgba(255,255,255,.12);
-            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 23px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            color: var(--cp-gold);
+            font-size: 30px;
+            background: linear-gradient(145deg, var(--cp-gold-bg), transparent);
+            border: 1px solid rgba(214,173,85,.28);
+            box-shadow: 0 8px 30px rgba(214,173,85,.05);
         }
 
-        .chapter-header h1 {
-            margin: 0 0 8px;
-            font-size: 32px;
+        #chapterPage .cp-header h1 {
+            margin: 0 0 10px;
+            color: var(--cp-text);
+            font-size: clamp(25px, 4vw, 36px);
+            line-height: 1.3;
             font-weight: 800;
+            overflow-wrap: anywhere;
         }
 
-        .chapter-header p {
+        #chapterPage .cp-header-description {
             margin: 0;
-            color: rgba(255,255,255,.8);
-            font-size: 14px;
-        }
-
-        /* Main */
-        .chapter-container {
-            width: min(1100px, 92%);
-            margin: -35px auto 50px;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .section-title h2 {
-            margin: 0 0 7px;
-            font-size: 24px;
-            color: #111827;
-        }
-
-        .section-title p {
-            margin: 0;
-            color: #6b7280;
+            color: var(--cp-muted);
             font-size: 13px;
+            line-height: 1.8;
         }
 
-        /* Cards */
-        .objective-grid {
+        #chapterPage .cp-accent {
+            color: var(--cp-gold);
+        }
+
+        /* Main content */
+        #chapterPage .cp-container {
+            width: min(1100px, 92%);
+            margin: -32px auto 55px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #chapterPage .cp-section-heading {
+            margin: 0 0 25px;
+            text-align: center;
+        }
+
+        #chapterPage .cp-section-heading .cp-eyebrow {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--cp-gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        #chapterPage .cp-section-heading h2 {
+            margin: 0 0 8px;
+            color: var(--cp-text);
+            font-size: clamp(21px, 3vw, 27px);
+            font-weight: 700;
+        }
+
+        #chapterPage .cp-section-heading p {
+            margin: 0;
+            color: var(--cp-muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Objective cards */
+        #chapterPage .cp-objective-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
         }
 
-        .objective-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 28px 22px;
+        #chapterPage .cp-objective-card {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 29px 22px 25px;
             text-align: center;
             text-decoration: none;
-            color: #111827;
-            box-shadow: 0 10px 35px rgba(15, 23, 42, .08);
-            border: 1px solid #edf0f5;
-            transition: .3s ease;
-            position: relative;
-            overflow: hidden;
+            color: var(--cp-text);
+            background: var(--cp-card);
+            border: 1px solid var(--cp-border);
+            border-radius: 19px;
+            box-shadow: var(--cp-shadow);
+            transition: transform .25s ease, border-color .25s ease,
+                        background .25s ease, box-shadow .25s ease;
         }
 
-        .objective-card::before {
+        #chapterPage .cp-objective-card::before {
             content: "";
             position: absolute;
-            left: 0;
             top: 0;
-            width: 100%;
-            height: 4px;
-            background: #2563eb;
+            left: 18%;
+            width: 64%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cp-gold), transparent);
+            opacity: .8;
         }
 
-        .objective-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 18px 45px rgba(15, 23, 42, .13);
+        #chapterPage .cp-objective-card:hover {
+            transform: translateY(-6px);
+            background: var(--cp-card-hover);
+            border-color: rgba(214,173,85,.45);
+            box-shadow: 0 18px 45px rgba(0,0,0,.14);
         }
 
-        .objective-icon {
-            width: 65px;
-            height: 65px;
-            margin: 0 auto 18px;
-            border-radius: 18px;
-            background: #eff6ff;
-            color: #2563eb;
+        #chapterPage .cp-objective-icon {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 19px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 27px;
+            border: 1px solid rgba(214,173,85,.25);
+            border-radius: 18px;
+            background: var(--cp-gold-bg);
+            color: var(--cp-gold);
+            font-size: 24px;
+            transition: transform .25s ease;
         }
 
-        .objective-card h3 {
-            margin: 0 0 9px;
-            font-size: 18px;
+        #chapterPage .cp-objective-card:hover .cp-objective-icon {
+            transform: scale(1.06);
         }
 
-        .objective-card p {
-            margin: 0 0 20px;
-            color: #6b7280;
-            font-size: 13px;
-            line-height: 1.6;
+        #chapterPage .cp-objective-card h3 {
+            margin: 0 0 10px;
+            color: var(--cp-text);
+            font-size: 17px;
+            font-weight: 700;
         }
 
-        .open-btn {
+        #chapterPage .cp-objective-card p {
+            flex: 1;
+            margin: 0 0 22px;
+            color: var(--cp-muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        #chapterPage .cp-open-btn {
+            min-height: 39px;
+            padding: 10px 16px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 7px;
-            padding: 9px 17px;
-            border-radius: 9px;
-            background: #2563eb;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 600;
+            gap: 9px;
+            border: 1px solid rgba(214,173,85,.45);
+            border-radius: 10px;
+            background: var(--cp-gold-bg);
+            color: var(--cp-gold-light);
+            font-size: 11px;
+            font-weight: 700;
+            transition: .2s ease;
         }
 
-        /* Notice */
-        .pdf-notice {
-            margin-top: 28px;
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 18px 20px;
+        #chapterPage .cp-objective-card:hover .cp-open-btn {
+            background: var(--cp-gold);
+            border-color: var(--cp-gold);
+            color: #15120a;
+        }
+
+        /* PDF notice */
+        #chapterPage .cp-pdf-notice {
             display: flex;
             align-items: flex-start;
-            gap: 13px;
-            box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+            gap: 15px;
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid var(--cp-border);
+            border-radius: 16px;
+            background: var(--cp-surface);
         }
 
-        .pdf-notice i {
-            color: #dc2626;
-            font-size: 21px;
-            margin-top: 2px;
+        #chapterPage .cp-pdf-icon {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(214,173,85,.25);
+            border-radius: 13px;
+            background: var(--cp-gold-bg);
+            color: var(--cp-gold);
+            font-size: 19px;
         }
 
-        .pdf-notice h4 {
-            margin: 0 0 4px;
-            font-size: 14px;
+        #chapterPage .cp-pdf-notice h3 {
+            margin: 0 0 6px;
+            color: var(--cp-text);
+            font-size: 13px;
+            font-weight: 700;
         }
 
-        .pdf-notice p {
+        #chapterPage .cp-pdf-notice p {
             margin: 0;
-            color: #6b7280;
+            color: var(--cp-muted);
+            font-size: 11px;
+            line-height: 1.9;
+        }
+
+        /* Invalid chapter state */
+        #chapterPage .cp-error {
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid var(--cp-border);
+            border-radius: 17px;
+            background: var(--cp-card);
+        }
+
+        #chapterPage .cp-error i {
+            color: var(--cp-gold);
+            font-size: 30px;
+        }
+
+        #chapterPage .cp-error h3 {
+            margin: 13px 0 8px;
+            color: var(--cp-text);
+            font-size: 18px;
+        }
+
+        #chapterPage .cp-error p {
+            margin: 0 0 18px;
+            color: var(--cp-muted);
             font-size: 12px;
-            line-height: 1.6;
+            line-height: 1.8;
+        }
+
+        #chapterPage .cp-error a {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: var(--cp-gold);
+            color: #15120a;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        #chapterPage .cp-hidden {
+            display: none !important;
         }
 
         /* Footer */
-        .simple-footer {
+        #chapterPage .cp-footer {
+            padding: 24px 15px;
             text-align: center;
-            padding: 25px 15px;
-            color: #6b7280;
-            font-size: 12px;
-            border-top: 1px solid #e5e7eb;
-            background: #fff;
+            border-top: 1px solid var(--cp-border);
+            background: var(--cp-surface);
+            color: var(--cp-muted);
+            font-size: 11px;
+            line-height: 1.9;
         }
 
-        .simple-footer strong {
-            color: #111827;
+        #chapterPage .cp-footer strong {
+            color: var(--cp-gold);
+            font-weight: 700;
         }
 
-        /* Mobile */
-        @media (max-width: 800px) {
-            .objective-grid {
+        /* Focus accessibility */
+        #chapterPage a:focus-visible,
+        #chapterPage button:focus-visible {
+            outline: 2px solid var(--cp-gold);
+            outline-offset: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            #chapterPage .cp-objective-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
 
-            .chapter-header h1 {
-                font-size: 27px;
+            #chapterPage .cp-objective-card {
+                padding: 24px 20px;
             }
 
-            .chapter-header {
-                padding: 35px 18px 60px;
-            }
-
-            .chapter-container {
-                width: 92%;
+            #chapterPage .cp-objective-card p {
+                max-width: 440px;
             }
         }
 
         @media (max-width: 480px) {
-            .objective-card {
-                padding: 24px 18px;
+            #chapterPage .cp-header {
+                padding: 19px 16px 65px;
             }
 
-            .chapter-header h1 {
-                font-size: 24px;
+            #chapterPage .cp-header-top {
+                margin-bottom: 24px;
             }
 
-            .pdf-notice {
+            #chapterPage .cp-container {
+                width: 91%;
+                margin-bottom: 35px;
+            }
+
+            #chapterPage .cp-chapter-icon {
+                width: 65px;
+                height: 65px;
+                border-radius: 19px;
+                font-size: 26px;
+            }
+
+            #chapterPage .cp-class-label {
+                font-size: 9px;
+            }
+
+            #chapterPage .cp-pdf-notice {
                 padding: 15px;
+                gap: 12px;
+            }
+
+            #chapterPage .cp-pdf-icon {
+                width: 39px;
+                height: 39px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #chapterPage *,
+            #chapterPage *::before,
+            #chapterPage *::after {
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
             }
         }
     </style>
@@ -264,216 +500,386 @@
 
 <body>
 
-<div class="chapter-page">
+<div id="chapterPage">
 
-    <!-- Header -->
-    <header class="chapter-header">
+    <!-- Chapter Header -->
+    <header class="cp-header">
 
-        <a href="../objectives.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back to Objectives
-        </a>
+        <div class="cp-header-top">
+            <a href="../objectives.html" id="backLink" class="cp-back">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Objectives</span>
+            </a>
 
-        <div class="chapter-icon">
+            <button
+                type="button"
+                id="themeToggle"
+                class="cp-theme-toggle"
+                aria-label="Switch to light theme"
+                title="Change theme">
+                <i class="fa-solid fa-sun" id="themeIcon"></i>
+            </button>
+        </div>
+
+        <div class="cp-class-label">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span id="classLabel">Class 12 Chemistry</span>
+        </div>
+
+        <div class="cp-chapter-icon">
             <i class="fa-solid fa-flask"></i>
         </div>
 
-        <h1 id="chapterTitle">Solid State</h1>
+        <h1 id="chapterTitle">Loading Chapter...</h1>
 
-        <p>
-            Chapter-wise Objective Questions &amp; Study Material
+        <p class="cp-header-description">
+            Chapter-wise <span class="cp-accent">Objective Questions</span>
+            &amp; Study Material
         </p>
 
     </header>
 
-
     <!-- Main Content -->
-    <main class="chapter-container">
+    <main class="cp-container">
 
-        <div class="section-title">
-            <h2>Objective Sections</h2>
-            <p>
-                अपनी तैयारी के अनुसार कोई भी section चुनें
-            </p>
-        </div>
+        <div id="chapterContent">
 
+            <div class="cp-section-heading">
+                <span class="cp-eyebrow">Study Resources</span>
+                <h2>Objective Sections</h2>
+                <p>अपनी तैयारी के अनुसार कोई भी section चुनें।</p>
+            </div>
 
-        <div class="objective-grid">
+            <div class="cp-objective-grid">
 
-            <!-- VVI -->
-            <a id="vviLink" href="objective.html?chapter=solid-state&type=vvi"
-   class="objective-card">
+                <!-- VVI Objectives -->
+                <a id="vviLink" href="#" class="cp-objective-card">
 
-                <div class="objective-icon">
-                    <i class="fa-solid fa-star"></i>
+                    <div class="cp-objective-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                    <h3>V.V.I Objectives</h3>
+
+                    <p>
+                        Chapter के सबसे महत्वपूर्ण objective questions
+                        जो exam preparation के लिए useful हैं।
+                    </p>
+
+                    <span class="cp-open-btn">
+                        Open PDF
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- Previous Year Questions -->
+                <a id="pyqLink" href="#" class="cp-objective-card">
+
+                    <div class="cp-objective-icon">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+
+                    <h3>PYQ Objectives</h3>
+
+                    <p>
+                        Previous Year Questions से जुड़े objective
+                        questions का collection।
+                    </p>
+
+                    <span class="cp-open-btn">
+                        Open PDF
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- All Objectives -->
+                <a id="allLink" href="#" class="cp-objective-card">
+
+                    <div class="cp-objective-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <h3>All Objectives</h3>
+
+                    <p>
+                        Chapter के सभी available objective questions
+                        एक ही जगह पर।
+                    </p>
+
+                    <span class="cp-open-btn">
+                        Open PDF
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </div>
+
+            <!-- PDF Notice -->
+            <div class="cp-pdf-notice">
+
+                <div class="cp-pdf-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
                 </div>
 
-                <h3>V.V.I Objectives</h3>
+                <div>
+                    <h3>PDF Study Material</h3>
 
-                <p>
-                    Chapter के सबसे महत्वपूर्ण objective questions
-                    जो exam preparation के लिए useful हैं।
-                </p>
-
-                <span class="open-btn">
-                    Open PDF
-                    <i class="fa-solid fa-arrow-right"></i>
-                </span>
-
-            </a>
-
-
-            <!-- PYQ -->
-            <a id="pyqLink" href="objective.html?chapter=solid-state&type=pyq"
-   class="objective-card">
-                
-                <div class="objective-icon">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <p>
+                        Objective PDFs Google Drive पर host किए जा सकते हैं।
+                        PDF links Firebase Database से load karne ke liye
+                        objective page par PDF integration configured hona
+                        zaroori hai. Available PDFs ko online view aur
+                        download kiya ja sakega.
+                    </p>
                 </div>
 
-                <h3>PYQ Objectives</h3>
-
-                <p>
-                    Previous Year Questions से जुड़े objective
-                    questions का collection।
-                </p>
-
-                <span class="open-btn">
-                    Open PDF
-                    <i class="fa-solid fa-arrow-right"></i>
-                </span>
-
-            </a>
-
-
-            <!-- ALL -->
-            <a id="allLink" href="objective.html?chapter=solid-state&type=all"
-   class="objective-card">
-
-                <div class="objective-icon">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
-
-                <h3>All Objectives</h3>
-
-                <p>
-                    Chapter के सभी available objective questions
-                    एक ही जगह पर।
-                </p>
-
-                <span class="open-btn">
-                    Open PDF
-                    <i class="fa-solid fa-arrow-right"></i>
-                </span>
-
-            </a>
-
-        </div>
-
-
-        <!-- PDF Notice -->
-        <div class="pdf-notice">
-
-            <i class="fa-solid fa-file-pdf"></i>
-
-            <div>
-                <h4>PDF Study Material</h4>
-
-                <p>
-                    सभी objective PDFs Google Drive पर host किए जाएंगे।
-                    PDF का link Firebase Database से load होगा और
-                    student उसे online view तथा download कर सकेगा।
-                </p>
             </div>
 
         </div>
 
+        <!-- Invalid or missing chapter -->
+        <div id="chapterError" class="cp-error cp-hidden" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <h3>Chapter Not Found</h3>
+            <p>
+                Chapter ka link missing ya invalid hai. Please Objectives
+                page se apna chapter dobara select karein.
+            </p>
+            <a id="errorBackLink" href="../objectives.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Objectives
+            </a>
+        </div>
+
     </main>
 
-
     <!-- Footer -->
-    <footer class="simple-footer">
+    <footer class="cp-footer">
         © <span id="year"></span>
-        <strong>Code With Piyush</strong>.
-        All Rights Reserved.
+        <strong>Code With Piyush</strong>. All Rights Reserved.
     </footer>
 
 </div>
 
-
 <script>
+    "use strict";
 
-    // Current year
+    /* =========================================
+       URL PARAMETERS
+    ========================================= */
+
+    const params = new URLSearchParams(window.location.search);
+
+    const chapterParam = (params.get("chapter") || "").trim();
+    const classParam = (
+        params.get("class") ||
+        params.get("classLevel") ||
+        "12"
+    ).trim();
+
+    const normalizedClass = classParam.toLowerCase();
+
+    const classLevel =
+        normalizedClass === "11" ||
+        normalizedClass === "class 11" ||
+        normalizedClass === "class-11" ||
+        normalizedClass === "class11"
+            ? "11"
+            : (
+                normalizedClass === "12" ||
+                normalizedClass === "class 12" ||
+                normalizedClass === "class-12" ||
+                normalizedClass === "class12"
+                    ? "12"
+                    : ""
+            );
+
+    /* =========================================
+       CHAPTER NAME FALLBACKS
+       Firebase-loaded chapters can also be
+       resolved by matching their slug or key.
+    ========================================= */
+
+    const chapterNames = {
+        "solid-state": "Solid State",
+        "solutions": "Solutions",
+        "electrochemistry": "Electrochemistry",
+        "chemical-kinetics": "Chemical Kinetics",
+        "surface-chemistry": "Surface Chemistry",
+        "d-and-f-block": "d and f Block Elements",
+        "d-f-block": "d and f Block Elements",
+        "coordination-compounds": "Coordination Compounds",
+        "haloalkanes-haloarenes": "Haloalkanes and Haloarenes",
+        "alcohols-phenols-ethers": "Alcohols, Phenols and Ethers",
+        "aldehydes-ketones-carboxylic-acids":
+            "Aldehydes, Ketones and Carboxylic Acids",
+        "amines": "Amines",
+        "biomolecules": "Biomolecules",
+
+        "some-basic-concepts-of-chemistry":
+            "Some Basic Concepts of Chemistry",
+        "structure-of-atom": "Structure of Atom",
+        "classification-of-elements-and-periodicity":
+            "Classification of Elements and Periodicity",
+        "chemical-bonding": "Chemical Bonding and Molecular Structure",
+        "chemical-bonding-and-molecular-structure":
+            "Chemical Bonding and Molecular Structure",
+        "states-of-matter": "States of Matter",
+        "thermodynamics": "Thermodynamics",
+        "equilibrium": "Equilibrium",
+        "redox-reactions": "Redox Reactions",
+        "hydrogen": "Hydrogen",
+        "s-block-elements": "The s-Block Elements",
+        "p-block-elements": "The p-Block Elements",
+        "organic-chemistry-basic-principles":
+            "Organic Chemistry: Basic Principles and Techniques",
+        "organic-chemistry-some-basic-principles":
+            "Organic Chemistry: Basic Principles and Techniques",
+        "hydrocarbons": "Hydrocarbons",
+        "environmental-chemistry": "Environmental Chemistry"
+    };
+
+    /* =========================================
+       SAFE SLUG NORMALIZATION
+    ========================================= */
+
+    function normalizeSlug(value) {
+        return String(value || "")
+            .trim()
+            .toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+    }
+
+    /* =========================================
+       THEME SWITCH
+    ========================================= */
+
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const rootElement = document.documentElement;
+
+    function applyTheme(theme) {
+        const selectedTheme = theme === "light" ? "light" : "dark";
+
+        rootElement.setAttribute("data-theme", selectedTheme);
+
+        themeIcon.className = selectedTheme === "dark"
+            ? "fa-solid fa-sun"
+            : "fa-solid fa-moon";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            selectedTheme === "dark"
+                ? "Switch to light theme"
+                : "Switch to dark theme"
+        );
+
+        const themeColor = selectedTheme === "dark" ? "#0b0d12" : "#f5f6f8";
+        document.querySelector('meta[name="theme-color"]')
+            .setAttribute("content", themeColor);
+    }
+
+    let savedTheme = "dark";
+
+    try {
+        savedTheme = localStorage.getItem("cp-theme") || "dark";
+    } catch (error) {
+        savedTheme = "dark";
+    }
+
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener("click", function () {
+        const currentTheme = rootElement.getAttribute("data-theme");
+        const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+        applyTheme(nextTheme);
+
+        try {
+            localStorage.setItem("cp-theme", nextTheme);
+        } catch (error) {
+            // Theme still works for the current page session.
+        }
+    });
+
+    /* =========================================
+       BUILD OBJECTIVE PAGE LINKS
+    ========================================= */
+
+    function buildObjectiveUrl(type) {
+        const query = new URLSearchParams();
+
+        query.set("chapter", chapterParam);
+        query.set("type", type);
+
+        if (classLevel) {
+            query.set("class", classLevel);
+        }
+
+        return "objective.html?" + query.toString();
+    }
+
+    /* =========================================
+       SHOW CHAPTER
+    ========================================= */
+
+    function showChapter(title) {
+        document.getElementById("chapterTitle").textContent = title;
+
+        document.getElementById("vviLink").href =
+            buildObjectiveUrl("vvi");
+
+        document.getElementById("pyqLink").href =
+            buildObjectiveUrl("pyq");
+
+        document.getElementById("allLink").href =
+            buildObjectiveUrl("all");
+
+        document.getElementById("classLabel").textContent =
+            "Class " + classLevel + " Chemistry";
+
+        document.getElementById("chapterContent")
+            .classList.remove("cp-hidden");
+
+        document.getElementById("chapterError")
+            .classList.add("cp-hidden");
+
+        document.title = title + " Objectives | Chemistry Point";
+    }
+
+    function showChapterError() {
+        document.getElementById("chapterContent")
+            .classList.add("cp-hidden");
+
+        document.getElementById("chapterError")
+            .classList.remove("cp-hidden");
+
+        document.getElementById("chapterTitle").textContent =
+            "Chapter Not Found";
+
+        document.getElementById("classLabel").textContent =
+            "Chemistry Study Material";
+    }
+
+    /* =========================================
+       INITIALIZE PAGE
+    ========================================= */
+
     document.getElementById("year").textContent =
         new Date().getFullYear();
 
+    const slug = normalizeSlug(chapterParam);
+    const chapterTitle = chapterNames[slug];
 
-    // Read chapter from URL
-    const params = new URLSearchParams(window.location.search);
-
-    const chapter = params.get("chapter");
-
-
-    /*
-        Future chapters can be added here.
-
-        Example:
-        electrochemistry → Electrochemistry
-        solutions → Solutions
-        chemical-kinetics → Chemical Kinetics
-    */
-
-    const chapters = {
-
-        "solid-state": "Solid State",
-
-        "solutions": "Solutions",
-
-        "electrochemistry": "Electrochemistry",
-
-        "chemical-kinetics": "Chemical Kinetics",
-
-        "surface-chemistry": "Surface Chemistry",
-
-        "d-and-f-block": "d and f Block Elements",
-
-        "coordination-compounds": "Coordination Compounds",
-
-        "haloalkanes-haloarenes": "Haloalkanes and Haloarenes",
-
-        "alcohols-phenols-ethers": "Alcohols, Phenols and Ethers",
-
-        "aldehydes-ketones-carboxylic-acids":
-            "Aldehydes, Ketones and Carboxylic Acids",
-
-        "amines": "Amines",
-
-        "biomolecules": "Biomolecules"
-
-    };
-
-
-    // Change chapter title
-    if (chapter && chapters[chapter]) {
-
-        document.getElementById("chapterTitle").textContent =
-            chapters[chapter];
-
-    }
-
-
-    // Update PDF links dynamically
-    if (chapter) {
-
-        document.getElementById("vviLink").href =
-    `objective.html?chapter=${chapter}&type=vvi`;
-
-document.getElementById("pyqLink").href =
-    `objective.html?chapter=${chapter}&type=pyq`;
-
-document.getElementById("allLink").href =
-    `objective.html?chapter=${chapter}&type=all`;
-
+    if (!chapterParam || !classLevel || !chapterTitle) {
+        showChapterError();
+    } else {
+        showChapter(chapterTitle);
     }
 
 </script>
