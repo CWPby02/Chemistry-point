@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="hi" data-theme="dark">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0d12">
+
   <title>PDF Study Material | Chemistry Point</title>
   <meta name="description" content="Chemistry Point chapter-wise PDF study material.">
 
@@ -15,184 +14,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0b0d12;
-      --surface: #12151d;
-      --surface-2: #181c26;
-      --border: rgba(255,255,255,.09);
-      --text: #f4f5f7;
-      --muted: #a0a6b5;
-      --gold: #e8b84b;
-      --gold-soft: rgba(232,184,75,.12);
-      --shadow: 0 15px 35px rgba(0,0,0,.17);
-      --header: #0d1017;
-    }
-
-    html[data-theme="light"] {
-      color-scheme: light;
-      --bg: #f4f5f8;
-      --surface: #fff;
-      --surface-2: #f8f6ef;
-      --border: rgba(22,26,35,.1);
-      --text: #171923;
-      --muted: #666d7c;
-      --gold: #a9750b;
-      --gold-soft: rgba(197,145,28,.12);
-      --shadow: 0 12px 30px rgba(0,0,0,.07);
-      --header: #fff;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Poppins", sans-serif;
-      transition: background .2s, color .2s;
-    }
-
-    a { text-decoration: none; }
-    button { font: inherit; }
-
-    .site-header {
-      position: relative;
-      z-index: 100;
-      background: var(--header);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      width: min(1100px, 92%);
-      min-height: 75px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      flex-shrink: 0;
-    }
-
-    .brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-      border-radius: 10px;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-text strong { font-size: 14px; }
-
-    .brand-text span {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .main-nav a {
-      color: var(--muted);
-      font-size: 12px;
-      transition: color .2s;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active { color: var(--gold); }
-
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .theme-toggle,
-    .menu-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 40px;
-      padding: 9px 12px;
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .theme-toggle { font-size: 11px; }
-    .theme-toggle i { color: var(--gold); }
-
-    .menu-btn {
-      display: none;
-      width: 42px;
-      font-size: 17px;
-    }
-
-    .mobile-nav {
-      display: none;
-      padding: 8px 4%;
-      background: var(--header);
-      border-top: 1px solid var(--border);
-    }
-
-    .mobile-nav.show {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mobile-nav a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 8px;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    .mobile-nav a:last-child { border-bottom: 0; }
-    .mobile-nav a i { width: 18px; color: var(--gold); }
-
     .pdf-page {
       min-height: calc(100vh - 80px);
-      padding: 65px 0;
-      background:
-        radial-gradient(ellipse at top, var(--gold-soft), transparent 55%),
-        var(--bg);
+      padding: 110px 20px 70px;
+      background: var(--dark-bg);
     }
 
     .pdf-container {
-      width: min(1100px, 92%);
-      margin: auto;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .pdf-header {
-      max-width: 760px;
-      margin: 0 auto 38px;
       text-align: center;
+      max-width: 760px;
+      margin: 0 auto 42px;
     }
 
     .pdf-label {
@@ -200,67 +41,72 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 15px;
-      color: var(--gold);
-      font-size: 12px;
+      color: var(--primary-light);
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: .4px;
       text-transform: uppercase;
     }
 
     .pdf-header h1 {
       margin: 0 0 13px;
-      color: var(--text);
-      font-size: clamp(28px, 4vw, 43px);
-      line-height: 1.25;
+      color: var(--white);
+      font-family: Poppins, sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.2;
     }
 
-    .pdf-header h1 span { color: var(--gold); }
+    .pdf-header h1 span {
+      color: var(--primary-light);
+    }
 
     .pdf-header p {
       margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     .chapter-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
       width: fit-content;
       max-width: 100%;
       margin: 20px auto 0;
-      padding: 10px 16px;
+      padding: 10px 17px;
       border: 1px solid var(--border);
       border-radius: 999px;
-      background: var(--surface);
-      color: var(--text);
-      font-size: 12px;
+      background: var(--dark-card);
+      color: var(--white);
+      font-size: 13px;
       font-weight: 600;
     }
 
-    .chapter-info i { color: var(--gold); }
+    .chapter-info i {
+      color: var(--primary-light);
+    }
 
     .pdf-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
     .pdf-card {
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: 320px;
-      padding: 25px 22px 21px;
+      min-height: 330px;
+      padding: 26px 23px 22px;
       overflow: hidden;
-      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 17px;
-      box-shadow: var(--shadow);
-      transition: transform .2s, border-color .2s;
+      border-radius: 18px;
+      background: var(--dark-card);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+      transition: transform .25s ease, border-color .25s ease,
+                  box-shadow .25s ease;
     }
 
     .pdf-card::before {
@@ -270,40 +116,47 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(
+        90deg,
+        var(--primary-dark),
+        var(--primary-light),
+        var(--primary-dark)
+      );
     }
 
     .pdf-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold);
+      transform: translateY(-5px);
+      border-color: rgba(217, 154, 22, .55);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, .22);
     }
 
     .pdf-icon {
-      width: 55px;
-      height: 55px;
+      width: 58px;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
-      color: var(--gold);
-      background: var(--gold-soft);
-      border: 1px solid rgba(232,184,75,.2);
-      border-radius: 14px;
-      font-size: 23px;
+      margin-bottom: 19px;
+      border: 1px solid rgba(217, 154, 22, .25);
+      border-radius: 15px;
+      background: rgba(217, 154, 22, .11);
+      color: var(--primary-light);
+      font-size: 24px;
     }
 
     .pdf-card h2 {
       margin: 0 0 9px;
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.5;
+      color: var(--white);
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      line-height: 1.35;
     }
 
     .pdf-card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.85;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.75;
     }
 
     .pdf-status {
@@ -311,249 +164,285 @@
       align-items: center;
       gap: 7px;
       width: fit-content;
-      margin-top: 16px;
-      padding: 7px 9px;
+      margin-top: 17px;
+      padding: 7px 10px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      color: var(--muted);
-      font-size: 10px;
+      color: var(--text-muted);
+      font-size: 11px;
       font-weight: 600;
     }
 
-    .pdf-status.available i { color: #4cc58a; }
-    .pdf-status.unavailable i { color: var(--gold); }
+    .pdf-status i {
+      color: var(--primary-light);
+    }
 
     .pdf-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 9px;
+      gap: 10px;
       margin-top: auto;
-      padding-top: 22px;
+      padding-top: 23px;
     }
 
     .pdf-btn {
-      min-height: 42px;
+      min-height: 43px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font-size: 11px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 12px;
       font-weight: 700;
-      text-align: center;
-      transition: .2s;
+      transition: .25s ease;
       cursor: pointer;
     }
 
     .pdf-btn-view {
-      color: var(--text);
+      color: var(--white);
+      border: 1px solid var(--border);
       background: transparent;
     }
 
     .pdf-btn-view:hover {
-      color: var(--gold);
-      border-color: var(--gold);
+      color: var(--primary-light);
+      border-color: var(--primary-light);
     }
 
     .pdf-btn-download {
-      color: #17130a;
-      background: var(--gold);
-      border-color: var(--gold);
+      color: #111;
+      border: 1px solid var(--primary-light);
+      background: var(--primary-light);
     }
 
-    .pdf-btn-download:hover { filter: brightness(1.08); }
+    .pdf-btn-download:hover {
+      border-color: var(--primary);
+      background: var(--primary);
+      transform: translateY(-1px);
+    }
 
     .pdf-btn.disabled {
       opacity: .45;
-      cursor: not-allowed;
       pointer-events: none;
-    }
-
-    .pdf-message {
-      grid-column: 1 / -1;
-      padding: 30px 20px;
-      text-align: center;
-      color: var(--muted);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      line-height: 1.9;
-      font-size: 13px;
-    }
-
-    .pdf-message i {
-      display: block;
-      margin-bottom: 12px;
-      color: var(--gold);
-      font-size: 25px;
+      cursor: not-allowed;
     }
 
     .pdf-note {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 11px;
       max-width: 850px;
-      margin: 25px auto 0;
+      margin: 28px auto 0;
       padding: 15px 17px;
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: var(--surface);
+      background: var(--dark-card);
     }
 
-    .pdf-note > i {
-      margin-top: 3px;
-      color: var(--gold);
+    .pdf-note i {
+      margin-top: 2px;
+      color: var(--primary-light);
     }
 
     .pdf-note p {
       margin: 0;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.9;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.7;
     }
 
-    .site-footer {
-      background: var(--header);
-      border-top: 1px solid var(--border);
+    body.light-mode .pdf-page {
+      background: #f7f7f8;
     }
 
-    .footer-grid {
-      width: min(1100px, 92%);
-      margin: auto;
-      padding: 35px 0;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 35px;
+    body.light-mode .pdf-header h1,
+    body.light-mode .pdf-card h2 {
+      color: #17191c;
     }
 
-    .footer-brand p {
-      max-width: 330px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.9;
+    body.light-mode .pdf-header p,
+    body.light-mode .pdf-card p,
+    body.light-mode .pdf-note p {
+      color: #666b74;
     }
 
-    .footer-column {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+    body.light-mode .chapter-info,
+    body.light-mode .pdf-card,
+    body.light-mode .pdf-note {
+      background: #fff;
+      border-color: #e4e5e8;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .07);
     }
 
-    .footer-column h4 {
-      margin: 4px 0;
-      font-size: 13px;
+    body.light-mode .pdf-btn-view {
+      color: #17191c;
+      border-color: #dedfe3;
     }
 
-    .footer-column a {
-      color: var(--muted);
-      font-size: 11px;
+    body.light-mode .pdf-btn-view:hover {
+      color: var(--primary-dark);
+      border-color: var(--primary);
     }
-
-    .footer-column a:hover { color: var(--gold); }
-
-    .footer-bottom {
-      padding: 17px 4%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 5px 25px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      text-align: center;
-      font-size: 10px;
-    }
-
-    .footer-bottom p { margin: 0; }
-    .footer-bottom strong { color: var(--gold); }
 
     @media (max-width: 900px) {
-      .main-nav { display: none; }
-      .menu-btn { display: inline-flex; }
-      .pdf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-brand { grid-column: 1 / -1; }
+      .pdf-page {
+        padding-top: 92px;
+      }
+
+      .pdf-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mobile-nav {
+        display: none !important;
+        position: fixed !important;
+        top: 68px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 10px 20px 20px !important;
+        background: #13161a !important;
+        background-color: #13161a !important;
+        opacity: 1 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid var(--border) !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,.20) !important;
+        z-index: 100000 !important;
+        max-height: calc(100vh - 68px);
+        overflow-y: auto;
+        isolation: isolate;
+      }
+
+      .mobile-nav.show {
+        display: flex !important;
+      }
+
+      .mobile-nav a {
+        display: flex !important;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 12px 8px;
+        color: var(--white) !important;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+
+      .mobile-nav a:last-child {
+        border-bottom: 0;
+      }
+
+      body.light-mode .mobile-nav {
+        background: #fff !important;
+        background-color: #fff !important;
+      }
+
+      body.light-mode .mobile-nav a {
+        color: #17191c !important;
+        border-bottom-color: #e4e5e8;
+      }
     }
 
     @media (max-width: 600px) {
-      .nav-container { min-height: 68px; }
-      .brand img { width: 38px; height: 38px; }
-      .brand-text strong { font-size: 12px; }
-      .brand-text span { font-size: 9px; }
-      .theme-toggle { padding: 9px; font-size: 10px; }
-      .theme-toggle span { display: none; }
-      .pdf-page { padding: 42px 0 45px; }
-      .pdf-container { width: 92%; }
-      .pdf-header { margin-bottom: 28px; }
-      .pdf-header h1 { font-size: 29px; }
-      .pdf-header p { font-size: 12px; }
-      .chapter-info { border-radius: 12px; font-size: 11px; }
-      .pdf-grid { grid-template-columns: 1fr; gap: 15px; }
-      .pdf-card { min-height: 0; padding: 22px 18px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 22px; }
-      .footer-brand { grid-column: 1 / -1; }
+      .pdf-page {
+        padding: 88px 15px 45px;
+      }
+
+      .pdf-header {
+        margin-bottom: 30px;
+      }
+
+      .pdf-header h1 {
+        font-size: 29px;
+      }
+
+      .pdf-header p {
+        font-size: 13px;
+      }
+
+      .chapter-info {
+        font-size: 12px;
+        padding: 9px 13px;
+      }
+
+      .pdf-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .pdf-card {
+        min-height: 0;
+        padding: 23px 19px 20px;
+      }
+
+      .pdf-note {
+        padding: 13px;
+      }
     }
 
-    @media (max-width: 360px) {
-      .pdf-actions { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
+    @media (max-width: 380px) {
+      .pdf-actions {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- HEADER -->
   <header class="site-header">
-    <div class="nav-container">
+    <div class="container nav-container">
+
       <a href="../index.html" class="brand">
-        <img src="../assets/images/logo/logo.png" alt="Chemistry Point Logo">
-        <span class="brand-text">
+        <img src="../assets/images/logo/logo.png"
+             alt="Chemistry Point Logo">
+
+        <div class="brand-text">
           <strong>Chemistry Point</strong>
           <span>By Pardeep Sir</span>
-        </span>
+        </div>
       </a>
 
-      <nav class="main-nav" aria-label="Main navigation">
+      <nav class="main-nav">
         <a href="../index.html">Home</a>
         <a href="../videos.html">Videos</a>
-        <a href="../objectives.html" class="active">Objectives</a>
+        <a href="../objectives.html">Objectives</a>
         <a href="../quiz.html">Quiz</a>
         <a href="../about.html">About</a>
         <a href="../contact.html">Contact</a>
       </nav>
 
-      <div class="header-controls">
-        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
-          <i class="fa-solid fa-sun" id="themeIcon"></i>
-          <span id="themeText">Light Mode</span>
-        </button>
-
-        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
 
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-      <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
-      <a href="../videos.html"><i class="fa-solid fa-play"></i>Videos</a>
-      <a href="../objectives.html" class="active"><i class="fa-solid fa-book-open"></i>Objectives</a>
-      <a href="../quiz.html"><i class="fa-solid fa-circle-question"></i>Quiz</a>
-      <a href="../about.html"><i class="fa-solid fa-user"></i>About</a>
-      <a href="../contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
-    </nav>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="../index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="../videos.html"><i class="fa-solid fa-play"></i> Videos</a>
+      <a href="../objectives.html" class="active">
+        <i class="fa-solid fa-book-open"></i> Objectives
+      </a>
+      <a href="../quiz.html">
+        <i class="fa-solid fa-circle-question"></i> Quiz
+      </a>
+      <a href="../about.html"><i class="fa-solid fa-user"></i> About</a>
+      <a href="../contact.html">
+        <i class="fa-solid fa-envelope"></i> Contact
+      </a>
+    </div>
   </header>
 
+  <!-- PDF CONTENT -->
   <main class="pdf-page">
     <div class="pdf-container">
+
       <section class="pdf-header">
         <div class="pdf-label">
           <i class="fa-solid fa-file-pdf"></i>
@@ -563,46 +452,134 @@
         <h1>Chemistry <span>PDFs</span></h1>
 
         <p>
-          Chapter-wise objective study material एक ही जगह से पढ़ें।
-          उपलब्ध PDF को online view या download करें।
+          Chapter-wise objective study material एक ही जगह से पढ़ें
+          और अपने PDF को online view या download करें।
         </p>
 
         <div class="chapter-info">
           <i class="fa-solid fa-book-open"></i>
-          <span id="chapterName">Loading chapter...</span>
+          <span id="chapterName">Chemistry Chapter</span>
         </div>
       </section>
 
-      <section class="pdf-grid" id="pdfGrid" aria-live="polite">
-        <div class="pdf-message">
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          PDF details load हो रही हैं...
-        </div>
+      <section class="pdf-grid">
+
+        <!-- VVI -->
+        <article class="pdf-card" data-type="vvi">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-star"></i>
+          </div>
+
+          <h2>V.V.I Objectives</h2>
+          <p>
+            परीक्षा के लिए सबसे महत्वपूर्ण objective questions
+            का study PDF.
+          </p>
+
+          <div class="pdf-status">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span class="status-text">PDF link load हो रहा है...</span>
+          </div>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view disabled">
+              <i class="fa-regular fa-eye"></i> View PDF
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download disabled">
+              <i class="fa-solid fa-download"></i> Download
+            </a>
+          </div>
+        </article>
+
+        <!-- PYQ -->
+        <article class="pdf-card" data-type="pyq">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+
+          <h2>PYQ Objectives</h2>
+          <p>
+            Previous Year Questions से जुड़े objective questions
+            का study PDF.
+          </p>
+
+          <div class="pdf-status">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span class="status-text">PDF link load हो रहा है...</span>
+          </div>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view disabled">
+              <i class="fa-regular fa-eye"></i> View PDF
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download disabled">
+              <i class="fa-solid fa-download"></i> Download
+            </a>
+          </div>
+        </article>
+
+        <!-- ALL -->
+        <article class="pdf-card" data-type="all">
+          <div class="pdf-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+
+          <h2>All Objectives</h2>
+          <p>
+            इस chapter के सभी available objective questions
+            का complete study PDF.
+          </p>
+
+          <div class="pdf-status">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span class="status-text">PDF link load हो रहा है...</span>
+          </div>
+
+          <div class="pdf-actions">
+            <a href="#" class="pdf-btn pdf-btn-view disabled">
+              <i class="fa-regular fa-eye"></i> View PDF
+            </a>
+
+            <a href="#" class="pdf-btn pdf-btn-download disabled">
+              <i class="fa-solid fa-download"></i> Download
+            </a>
+          </div>
+        </article>
+
       </section>
 
       <div class="pdf-note">
         <i class="fa-solid fa-circle-info"></i>
-        <p id="pdfNoteText">
-          PDF links Firebase में उपलब्ध होने पर यहाँ View और Download options दिखाई देंगे।
-          Google Drive पर file sharing permissions भी सही होनी चाहिए।
+        <p id="pdfNote">
+          PDF links Firebase Database से load होंगे।
+          Google Drive files को Anyone with the link - Viewer
+          permission पर share करना जरूरी है।
         </p>
       </div>
+
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-grid">
+    <div class="container footer-grid">
+
       <div class="footer-brand">
         <a href="../index.html" class="brand">
-          <img src="../assets/images/logo/logo.png" alt="Code With Piyush Logo">
-          <span class="brand-text">
+          <img src="../assets/images/logo/logo.png"
+               alt="Code With Piyush Logo">
+
+          <div class="brand-text">
             <strong>Code With Piyush</strong>
-            <span>Chemistry Point</span>
-          </span>
+            <span>Educational Projects</span>
+          </div>
         </a>
+
         <p>
-          Bihar Board Chemistry की तैयारी के लिए study materials,
-          educational videos और quizzes।
+          Bihar Board Chemistry की बेहतर तैयारी के लिए
+          quality study materials, videos और quizzes।
         </p>
       </div>
 
@@ -620,19 +597,23 @@
         <a href="../contact.html">Contact</a>
         <a href="../objectives.html">Study Material</a>
       </div>
+
     </div>
 
     <div class="footer-bottom">
-      <p>© <span id="year"></span> Code With Piyush. All Rights Reserved.</p>
+      <p>
+        © <span id="year"></span> Code With Piyush. All Rights Reserved.
+      </p>
       <p>Built with ❤️</p>
     </div>
   </footer>
 
+  <!-- Firebase + Page Logic -->
   <script type="module">
     import { initializeApp } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-    import { getDatabase, ref, onValue } from
+    import { getDatabase, ref, get } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
     const firebaseConfig = {
@@ -648,15 +629,8 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    const params = new URLSearchParams(window.location.search);
-    const chapterSlug = params.get("chapter") || "";
-    const objectiveType = (params.get("type") || "vvi").toLowerCase();
-    const classParam = params.get("class") || "12";
-
-    const classLevel =
-      classParam === "11" || classParam.toLowerCase() === "class-11"
-        ? "11"
-        : "12";
+    const params = new URLSearchParams(location.search);
+    const chapter = params.get("chapter") || "solid-state";
 
     const chapterNames = {
       "solid-state": "Solid State",
@@ -664,480 +638,262 @@
       "electrochemistry": "Electrochemistry",
       "chemical-kinetics": "Chemical Kinetics",
       "surface-chemistry": "Surface Chemistry",
-      "d-and-f-block": "d and f Block Elements",
+      "d-and-f-block": "D & F Block Elements",
       "coordination-compounds": "Coordination Compounds",
-      "haloalkanes-haloarenes": "Haloalkanes and Haloarenes",
-      "alcohols-phenols-ethers": "Alcohols, Phenols and Ethers",
+      "haloalkanes-haloarenes": "Haloalkanes & Haloarenes",
+      "alcohols-phenols-ethers": "Alcohols, Phenols & Ethers",
       "aldehydes-ketones-carboxylic-acids":
-        "Aldehydes, Ketones and Carboxylic Acids",
+        "Aldehydes, Ketones & Carboxylic Acids",
       "amines": "Amines",
       "biomolecules": "Biomolecules"
     };
 
-    const pdfTypes = {
-      vvi: {
-        title: "V.V.I Objectives",
-        description: "परीक्षा के लिए सबसे महत्वपूर्ण objective questions का PDF.",
-        icon: "fa-star",
-        fields: [
-          "vviPdf", "vviPDF", "vviPdfUrl", "vviPdfLink", "vvi", "vviUrl"
-        ]
-      },
-      pyq: {
-        title: "PYQ Objectives",
-        description: "Previous Year Questions से जुड़े objective questions का PDF.",
-        icon: "fa-clock-rotate-left",
-        fields: [
-          "pyqPdf", "pyqPDF", "pyqPdfUrl", "pyqPdfLink", "pyq", "pyqUrl"
-        ]
-      },
-      all: {
-        title: "All Objectives",
-        description: "इस chapter के सभी available objective questions का PDF.",
-        icon: "fa-layer-group",
-        fields: [
-          "allPdf", "allPDF", "allPdfUrl", "allPdfLink", "all", "allUrl"
-        ]
-      }
+    document.getElementById("chapterName").textContent =
+      chapterNames[chapter] || chapter.replaceAll("-", " ");
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    /*
+      Accepted PDF field names from the existing database structure.
+      Firebase path remains /chapters/{chapter}.
+    */
+    const pdfFields = {
+      vvi: [
+        "vviPdf", "vviPDF", "vviPdfUrl", "vviPdfLink",
+        "vvi", "vviUrl"
+      ],
+      pyq: [
+        "pyqPdf", "pyqPDF", "pyqPdfUrl", "pyqPdfLink",
+        "pyq", "pyqUrl"
+      ],
+      all: [
+        "allPdf", "allPDF", "allPdfUrl", "allPdfLink",
+        "all", "allUrl"
+      ]
     };
 
-    const $ = id => document.getElementById(id);
-
-    $("year").textContent = new Date().getFullYear();
-
-    function formatSlug(value) {
-      return String(value || "")
-        .split("-")
-        .filter(Boolean)
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-    }
-
-    function normalize(value) {
-      return String(value ?? "")
-        .trim()
-        .toLowerCase()
-        .replace(/[_\s]+/g, "-");
-    }
-
-    function getItemSlug(item, key) {
-      return normalize(
-        item.slug ||
-        item.chapterSlug ||
-        item.chapterId ||
-        item.key ||
-        key ||
-        ""
-      );
-    }
-
-    function getItemClass(item) {
-      const raw =
-        item.classLevel ??
-        item.class ??
-        item.className ??
-        item.class_level ??
-        item.standard ??
-        "";
-
-      const value = String(raw).toLowerCase();
-
-      if (value.includes("11") || value.includes("eleven")) return "11";
-      if (value.includes("12") || value.includes("twelve")) return "12";
-
-      return raw === "" || raw === null ? "12" : "";
-    }
-
-    // Google Drive ke common public file URL formats se file ID nikaalo.
-    function getDriveId(url) {
-      if (!url || typeof url !== "string") return null;
-
-      try {
-        const parsed = new URL(url.trim());
-        const host = parsed.hostname.toLowerCase();
-
-        const supportedHosts = [
-          "drive.google.com",
-          "docs.google.com",
-          "drive.usercontent.google.com"
-        ];
-
-        if (!supportedHosts.includes(host)) return null;
-
-        // /file/d/FILE_ID/view
-        let match = parsed.pathname.match(/\/file\/d\/([^/]+)/);
-        if (match) return match[1];
-
-        // /document/d/FILE_ID, /spreadsheets/d/FILE_ID, etc.
-        match = parsed.pathname.match(
-          /\/(?:document|spreadsheets|presentation|forms)\/d\/([^/]+)/
-        );
-        if (match) return match[1];
-
-        // /open?id=FILE_ID or /uc?id=FILE_ID
-        const queryId = parsed.searchParams.get("id");
-        if (queryId) return queryId;
-
-      } catch (error) {
-        console.warn("Invalid PDF URL:", error);
+    function extractUrl(value) {
+      if (typeof value === "string") {
+        return value.trim();
       }
 
-      return null;
-    }
-
-    function isSafeHttpUrl(url) {
-      try {
-        const parsed = new URL(String(url).trim());
-        return parsed.protocol === "https:" || parsed.protocol === "http:";
-      } catch {
-        return false;
-      }
-    }
-
-    function getViewUrl(url) {
-      const id = getDriveId(url);
-
-      if (id) {
-        return `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+      if (value && typeof value === "object") {
+        return String(
+          value.url ||
+          value.link ||
+          value.pdfUrl ||
+          value.pdfLink ||
+          ""
+        ).trim();
       }
 
-      return isSafeHttpUrl(url) ? url.trim() : "";
+      return "";
     }
 
-    // Drive file ke liye direct download endpoint use hota hai.
-    function getDownloadUrl(url) {
-      const id = getDriveId(url);
-
-      if (id) {
-        return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
-      }
-
-      // Normal public PDF URL ko original URL ke saath use karo.
-      return isSafeHttpUrl(url) ? url.trim() : "";
-    }
-
-    function getPdfUrl(item, type) {
-      const config = pdfTypes[type];
-
-      if (!config || !item || typeof item !== "object") return "";
+    function getPdfUrl(data, type) {
+      if (!data || typeof data !== "object") return "";
 
       const containers = [
-        item,
-        item.pdfs,
-        item.pdfLinks,
-        item.materials,
-        item.objectives
+        data,
+        data.pdfs,
+        data.pdfLinks,
+        data.materials,
+        data.objectives
       ];
 
       for (const container of containers) {
         if (!container || typeof container !== "object") continue;
 
-        for (const field of config.fields) {
-          const value = container[field];
-
-          if (typeof value === "string" && value.trim()) {
-            const candidate = value.trim();
-            if (isSafeHttpUrl(candidate)) return candidate;
-          }
-
-          if (value && typeof value === "object") {
-            const nestedUrl = value.url || value.link || value.pdfUrl;
-
-            if (
-              typeof nestedUrl === "string" &&
-              isSafeHttpUrl(nestedUrl.trim())
-            ) {
-              return nestedUrl.trim();
-            }
-          }
+        for (const field of pdfFields[type]) {
+          const url = extractUrl(container[field]);
+          if (url) return url;
         }
       }
 
       return "";
     }
 
-    function makeElement(tag, className, text) {
-      const element = document.createElement(tag);
-
-      if (className) element.className = className;
-      if (text !== undefined) element.textContent = text;
-
-      return element;
-    }
-
-    function makeAction(url, className, iconClass, label, isDownload = false) {
-      const link = makeElement("a", className);
-      link.href = url || "#";
-
-      const icon = makeElement("i", iconClass);
-      icon.setAttribute("aria-hidden", "true");
-
-      link.append(icon, document.createTextNode(" " + label));
-
-      if (!url || className.includes("disabled")) {
-        link.classList.add("disabled");
-        link.setAttribute("aria-disabled", "true");
-        link.tabIndex = -1;
-        return link;
+    function isValidHttpUrl(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === "https:" || url.protocol === "http:";
+      } catch {
+        return false;
       }
-
-      // View opens in a new tab; Download navigates directly to the download URL.
-      if (isDownload) {
-        link.target = "_self";
-        link.rel = "noopener";
-        link.title = "PDF download link";
-        link.setAttribute("aria-label", "Download PDF");
-      } else {
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-      }
-
-      return link;
     }
 
-    function createCard(type, url) {
-      const config = pdfTypes[type];
-      const viewUrl = url ? getViewUrl(url) : "";
-      const downloadUrl = url ? getDownloadUrl(url) : "";
-      const available = Boolean(viewUrl && downloadUrl);
-
-      const card = makeElement("article", "pdf-card");
-
-      const iconBox = makeElement("div", "pdf-icon");
-      const icon = makeElement("i", `fa-solid ${config.icon}`);
-      iconBox.appendChild(icon);
-
-      const heading = makeElement("h2", "", config.title);
-      const description = makeElement("p", "", config.description);
-
-      const status = makeElement(
-        "div",
-        `pdf-status ${available ? "available" : "unavailable"}`
-      );
-
-      const statusIcon = makeElement(
-        "i",
-        `fa-solid ${available ? "fa-circle-check" : "fa-clock"}`
-      );
-
-      const statusText = makeElement(
-        "span",
-        "",
-        available ? "PDF Available" : "PDF अभी उपलब्ध नहीं है"
-      );
-
-      status.append(statusIcon, statusText);
-
-      const actions = makeElement("div", "pdf-actions");
-
-      const view = makeAction(
-        available ? viewUrl : "",
-        "pdf-btn pdf-btn-view",
-        "fa-regular fa-eye",
-        "View PDF"
-      );
-
-      const download = makeAction(
-        available ? downloadUrl : "",
-        "pdf-btn pdf-btn-download",
-        "fa-solid fa-download",
-        "Download",
-        true
-      );
-
-      actions.append(view, download);
-      card.append(iconBox, heading, description, status, actions);
-
-      return card;
-    }
-
-    function showMessage(message, icon = "fa-circle-info") {
-      const grid = $("pdfGrid");
-      grid.replaceChildren();
-
-      const box = makeElement("div", "pdf-message");
-      const iconElement = makeElement("i", `fa-solid ${icon}`);
-      const text = makeElement("div", "", message);
-
-      box.append(iconElement, text);
-      grid.appendChild(box);
-    }
-
-    function getChapterMatch(data) {
-      if (!data || typeof data !== "object") return null;
-
-      const wantedSlug = normalize(chapterSlug);
-
-      for (const [key, item] of Object.entries(data)) {
-        if (!item || typeof item !== "object") continue;
-
-        const itemSlug = getItemSlug(item, key);
-        const itemClass = getItemClass(item);
-
-        const nameMatch = [
-          item.name,
-          item.title,
-          item.chapterName,
-          item.chapter
-        ].some(value => normalize(value) === wantedSlug);
+    /*
+      Read the Google Drive file ID from common share links.
+      Examples:
+      drive.google.com/file/d/FILE_ID/view
+      drive.google.com/open?id=FILE_ID
+      docs.google.com/document/d/FILE_ID/edit
+    */
+    function getDriveId(rawUrl) {
+      try {
+        const url = new URL(rawUrl);
+        const host = url.hostname.toLowerCase();
 
         if (
-          (itemSlug === wantedSlug || nameMatch) &&
-          (!itemClass || itemClass === classLevel)
+          !host.endsWith("google.com") &&
+          !host.endsWith("googleusercontent.com")
         ) {
-          return item;
+          return "";
         }
-      }
 
-      return null;
-    }
+        const queryId = url.searchParams.get("id");
+        if (queryId) return queryId;
 
-    function renderPdfs(chapterItem) {
-      const grid = $("pdfGrid");
-      grid.replaceChildren();
-
-      let typesToShow = Object.keys(pdfTypes);
-
-      if (pdfTypes[objectiveType]) {
-        typesToShow = [objectiveType];
-      }
-
-      let availableCount = 0;
-
-      for (const type of typesToShow) {
-        const url = getPdfUrl(chapterItem, type);
-
-        if (url) availableCount++;
-
-        grid.appendChild(createCard(type, url));
-      }
-
-      if (availableCount === 0) {
-        $("pdfNoteText").textContent =
-          "Chapter mil gaya, lekin Firebase record mein pehchane gaye PDF fields mein link nahi mila. Admin panel mein save hone wale field names ko match karna hoga.";
-      } else {
-        $("pdfNoteText").textContent =
-          `${availableCount} PDF link available hai. Google Drive file ki sharing "Anyone with the link" aur role Viewer honi chahiye. Download option Drive ke download endpoint ko open karega.`;
-      }
-    }
-
-    function startPage() {
-      if (!chapterSlug) {
-        $("chapterName").textContent = "All Chemistry Chapters";
-
-        showMessage(
-          "URL mein chapter nahi mila. Kripya Objectives page se kisi chapter ko kholen."
+        const match = url.pathname.match(
+          /\/(?:file\/d|document\/d|spreadsheets\/d|presentation\/d)\/([^/]+)/
         );
+
+        return match ? match[1] : "";
+      } catch {
+        return "";
+      }
+    }
+
+    function buildViewUrl(rawUrl) {
+      const fileId = getDriveId(rawUrl);
+
+      if (fileId) {
+        return `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/view`;
+      }
+
+      return rawUrl;
+    }
+
+    function buildDownloadUrl(rawUrl) {
+      const fileId = getDriveId(rawUrl);
+
+      if (fileId) {
+        /*
+          Drive's direct download endpoint.
+          The file must permit downloading by the viewer.
+        */
+        return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`;
+      }
+
+      return rawUrl;
+    }
+
+    function setStatus(card, message, iconClass = "fa-circle-info") {
+      const icon = card.querySelector(".pdf-status i");
+      const text = card.querySelector(".status-text");
+
+      icon.className = `fa-solid ${iconClass}`;
+      text.textContent = message;
+    }
+
+    function setButton(button, url, target = "_blank") {
+      button.href = url;
+      button.classList.remove("disabled");
+      button.removeAttribute("aria-disabled");
+
+      if (target) {
+        button.target = target;
+        button.rel = "noopener noreferrer";
+      }
+    }
+
+    function setCardLinks(card, rawUrl) {
+      const viewButton = card.querySelector(".pdf-btn-view");
+      const downloadButton = card.querySelector(".pdf-btn-download");
+
+      if (!rawUrl || !isValidHttpUrl(rawUrl)) {
+        viewButton.href = "#";
+        downloadButton.href = "#";
+        viewButton.classList.add("disabled");
+        downloadButton.classList.add("disabled");
+
+        setStatus(card, "इस section की PDF उपलब्ध नहीं है");
         return;
       }
 
-      const knownName = chapterNames[chapterSlug];
+      const viewUrl = buildViewUrl(rawUrl);
+      const downloadUrl = buildDownloadUrl(rawUrl);
 
-      $("chapterName").textContent =
-        `Class ${classLevel} · ${knownName || formatSlug(chapterSlug)}`;
+      setButton(viewButton, viewUrl, "_blank");
 
-      if (!pdfTypes[objectiveType]) {
-        showMessage(
-          "Objective type sahi nahi hai. V.V.I, PYQ ya All mein se koi chunen."
-        );
-        return;
-      }
+      /*
+        Use same tab for the Drive download endpoint.
+        Google may still show a confirmation page for some files.
+      */
+      setButton(downloadButton, downloadUrl, "_self");
 
-      onValue(
-        ref(db, "chapters"),
-        snapshot => {
-          const chapterItem = getChapterMatch(snapshot.val());
-
-          if (!chapterItem) {
-            showMessage(
-              "Is class aur chapter ka record Firebase ke chapters path mein nahi mila."
-            );
-
-            $("pdfNoteText").textContent =
-              "Agar chapters kisi doosre database path mein save hote hain, toh is page ko us path se connect karna hoga.";
-
-            return;
-          }
-
-          renderPdfs(chapterItem);
-        },
-        error => {
-          console.error("Firebase PDF data error:", error);
-
-          showMessage(
-            "PDF details load nahi ho paayin. Firebase rules aur internet connection check karein.",
-            "fa-triangle-exclamation"
-          );
-        }
-      );
+      setStatus(card, "PDF उपलब्ध है", "fa-circle-check");
     }
 
-    // Theme toggle with saved preference.
-    const themeToggle = $("themeToggle");
-    const themeIcon = $("themeIcon");
-    const themeText = $("themeText");
-
-    function applyTheme(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-
-      const dark = theme === "dark";
-
-      themeIcon.className = dark
-        ? "fa-solid fa-sun"
-        : "fa-solid fa-moon";
-
-      themeText.textContent = dark ? "Light Mode" : "Dark Mode";
-
-      document.querySelector('meta[name="theme-color"]')
-        .setAttribute("content", dark ? "#0b0d12" : "#f4f5f8");
-    }
-
-    let savedTheme = "dark";
-
-    try {
-      savedTheme = localStorage.getItem("cwp-theme") || "dark";
-    } catch (error) {
-      console.warn("Theme preference unavailable:", error);
-    }
-
-    applyTheme(savedTheme === "light" ? "light" : "dark");
-
-    themeToggle.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme");
-      const next = current === "dark" ? "light" : "dark";
-
-      applyTheme(next);
+    async function loadPdfs() {
+      const cards = document.querySelectorAll(".pdf-card");
 
       try {
-        localStorage.setItem("cwp-theme", next);
-      } catch (error) {
-        console.warn("Theme preference could not be saved:", error);
-      }
-    });
+        const snapshot = await get(ref(db, `chapters/${chapter}`));
 
-    // Mobile navigation.
-    const menuBtn = $("menuBtn");
-    const mobileNav = $("mobileNav");
+        if (!snapshot.exists()) {
+          cards.forEach(card => {
+            setStatus(card, "इस chapter का data नहीं मिला");
+            card.querySelector(".pdf-btn-view").classList.add("disabled");
+            card.querySelector(".pdf-btn-download").classList.add("disabled");
+          });
+
+          document.getElementById("pdfNote").textContent =
+            "Firebase में इस chapter का data नहीं मिला। Admin panel में chapter और PDF links check करें।";
+          return;
+        }
+
+        const data = snapshot.val();
+
+        cards.forEach(card => {
+          const type = card.dataset.type;
+          const url = getPdfUrl(data, type);
+          setCardLinks(card, url);
+        });
+
+        document.getElementById("pdfNote").textContent =
+          "Download के लिए Google Drive PDF को Anyone with the link - Viewer permission पर share करें। अगर Drive download restriction लगाता है, तो file owner को permission बदलनी होगी.";
+      } catch (error) {
+        console.error("PDF loading error:", error);
+
+        cards.forEach(card => {
+          setStatus(card, "PDF links load नहीं हो सके");
+          card.querySelector(".pdf-btn-view").classList.add("disabled");
+          card.querySelector(".pdf-btn-download").classList.add("disabled");
+        });
+
+        document.getElementById("pdfNote").textContent =
+          "Firebase से PDF links load नहीं हुए। Internet connection, database rules और chapter key check करें।";
+      }
+    }
+
+    loadPdfs();
+  </script>
+
+  <!-- Mobile menu -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
 
     menuBtn.addEventListener("click", () => {
-      const isOpen = mobileNav.classList.toggle("show");
+      mobileNav.classList.toggle("show");
 
-      menuBtn.setAttribute("aria-expanded", String(isOpen));
-
-      menuBtn.querySelector("i").className = isOpen
-        ? "fa-solid fa-xmark"
-        : "fa-solid fa-bars";
+      const icon = menuBtn.querySelector("i");
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-xmark");
     });
 
-    mobileNav.querySelectorAll("a").forEach(link => {
+    document.querySelectorAll(".mobile-nav a").forEach(link => {
       link.addEventListener("click", () => {
         mobileNav.classList.remove("show");
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.querySelector("i").className = "fa-solid fa-bars";
+
+        const icon = menuBtn.querySelector("i");
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-xmark");
       });
     });
-
-    startPage();
   </script>
+
 </body>
 </html>
