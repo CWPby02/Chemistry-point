@@ -2,877 +2,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111827">
-  <title>Certificate | Chemistry Point</title>
-
-  <link rel="stylesheet" href="../assets/css/root.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
-
-  <!-- Used to export the actual certificate design as PNG -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-  <style>
-    :root {
-      --cert-gold: #c9a44c;
-      --cert-gold-light: #f4df9b;
-      --cert-dark: #151b29;
-      --cert-text: #242424;
-      --cert-muted: #666;
-      --cert-paper: #fffdf7;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 24px 14px 40px;
-      color: var(--cert-text);
-      background: #111827;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .certificate-page {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .page-heading {
-      color: #fff;
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    .page-heading h1 {
-      font-size: clamp(22px, 4vw, 32px);
-      margin: 0 0 8px;
-    }
-
-    .page-heading p {
-      margin: 0;
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-
-    /* Certificate design */
-    #certificate {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      min-height: 680px;
-      margin: 0 auto;
-      padding: 15px;
-      overflow: hidden;
-      background: var(--cert-paper);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .35);
-      color: var(--cert-text);
-    }
-
-    .certificate-outer-border {
-      position: relative;
-      min-height: 650px;
-      border: 5px double var(--cert-gold);
-      padding: 10px;
-    }
-
-    .certificate-inner-border {
-      position: relative;
-      min-height: 620px;
-      border: 1px solid var(--cert-gold);
-      padding: 32px 42px 24px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .certificate-inner-border::before {
-      content: "CP";
-      position: absolute;
-      z-index: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: rgba(201, 164, 76, .075);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(170px, 30vw, 310px);
-      font-weight: 700;
-      pointer-events: none;
-    }
-
-    .certificate-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .certificate-top-line {
-      width: 105px;
-      height: 3px;
-      margin: 0 auto 16px;
-      background: var(--cert-gold);
-    }
-
-    .certificate-brand {
-      margin: 0;
-      color: #8b6b21;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(24px, 4vw, 37px);
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .certificate-location {
-      margin: 8px 0 0;
-      color: #56504a;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: .5px;
-    }
-
-    .certificate-title {
-      margin: 30px 0 8px;
-      color: #252525;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .certificate-subtitle {
-      margin: 0;
-      color: #9b792e;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
-
-    .certificate-divider {
-      width: 72%;
-      max-width: 440px;
-      height: 1px;
-      margin: 24px auto;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--cert-gold),
-        transparent
-      );
-    }
-
-    .presented-text {
-      margin: 0 0 12px;
-      color: #555;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 17px;
-      font-style: italic;
-    }
-
-    .student-name {
-      min-height: 43px;
-      margin: 0;
-      overflow-wrap: anywhere;
-      color: #172033;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(26px, 4.5vw, 38px);
-      font-weight: 700;
-    }
-
-    .name-underline {
-      width: 65%;
-      max-width: 390px;
-      height: 1px;
-      margin: 12px auto 20px;
-      background: var(--cert-gold);
-    }
-
-    .achievement-text {
-      max-width: 680px;
-      margin: 0 auto;
-      color: #4b4b4b;
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .quiz-name {
-      color: #8b6b21;
-      font-weight: 700;
-    }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      max-width: 680px;
-      margin: 25px auto 20px;
-    }
-
-    .result-box {
-      min-width: 0;
-      padding: 15px 8px;
-      border: 1px solid #e4d5ae;
-      background: rgba(255, 255, 255, .75);
-    }
-
-    .result-label {
-      display: block;
-      margin-bottom: 8px;
-      color: #6c6250;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .result-value {
-      display: block;
-      color: #222b3b;
-      font-size: clamp(19px, 3vw, 27px);
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    .completion-message {
-      margin: 12px 0 0;
-      color: #555;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 15px;
-      font-style: italic;
-    }
-
-    .certificate-footer {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr 1fr;
-      align-items: end;
-      gap: 18px;
-      margin-top: 36px;
-    }
-
-    .footer-block {
-      min-width: 0;
-      text-align: center;
-    }
-
-    .footer-line {
-      width: 100%;
-      max-width: 175px;
-      height: 1px;
-      margin: 0 auto 9px;
-      background: #a78a48;
-    }
-
-    .footer-title {
-      margin: 0;
-      color: #252525;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .footer-caption {
-      margin: 5px 0 0;
-      color: #777;
-      font-size: 11px;
-    }
-
-    .address-block {
-      color: #514b40;
-      font-size: 11px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-    }
-
-    .address-block strong {
-      display: block;
-      margin-bottom: 3px;
-      color: #8b6b21;
-      font-size: 12px;
-    }
-
-    .certificate-bottom-line {
-      width: 105px;
-      height: 3px;
-      margin: 23px auto 0;
-      background: var(--cert-gold);
-    }
-
-    /* Action buttons */
-    .certificate-actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 24px auto 0;
-    }
-
-    .cert-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 12px 20px;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform .2s ease, opacity .2s ease;
-    }
-
-    .cert-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .cert-btn:disabled {
-      cursor: wait;
-      opacity: .6;
-      transform: none;
-    }
-
-    .cert-btn:focus-visible {
-      outline: 3px solid #fff;
-      outline-offset: 3px;
-    }
-
-    .btn-gold {
-      color: #191919;
-      background: var(--cert-gold-light);
-      border-color: var(--cert-gold);
-    }
-
-    .btn-light {
-      color: #fff;
-      background: #263449;
-      border-color: #64748b;
-    }
-
-    .btn-outline {
-      color: #fff;
-      background: transparent;
-      border-color: #94a3b8;
-    }
-
-    .status-message {
-      min-height: 22px;
-      margin: 14px auto 0;
-      color: #e2e8f0;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 650px) {
-      body {
-        padding: 16px 8px 28px;
-      }
-
-      #certificate {
-        min-height: auto;
-        padding: 7px;
-      }
-
-      .certificate-outer-border {
-        min-height: auto;
-        padding: 5px;
-        border-width: 3px;
-      }
-
-      .certificate-inner-border {
-        min-height: auto;
-        padding: 25px 12px 20px;
-      }
-
-      .certificate-title {
-        margin-top: 24px;
-        letter-spacing: 2px;
-      }
-
-      .certificate-subtitle {
-        letter-spacing: 2px;
-      }
-
-      .certificate-divider {
-        margin: 18px auto;
-      }
-
-      .achievement-text {
-        font-size: 13px;
-        line-height: 1.7;
-      }
-
-      .result-grid {
-        gap: 6px;
-        margin: 20px auto 15px;
-      }
-
-      .result-box {
-        padding: 12px 4px;
-      }
-
-      .result-label {
-        font-size: 9px;
-        letter-spacing: .5px;
-      }
-
-      .certificate-footer {
-        grid-template-columns: 1fr 1fr;
-        gap: 22px 10px;
-        margin-top: 28px;
-      }
-
-      .address-block {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        padding: 0 8px;
-      }
-
-      .footer-title {
-        font-size: 12px;
-      }
-
-      .footer-caption {
-        font-size: 10px;
-      }
-
-      .certificate-actions {
-        gap: 9px;
-      }
-
-      .cert-btn {
-        flex: 1 1 145px;
-        padding: 11px 12px;
-        font-size: 13px;
-      }
-    }
-
-    @media print {
-      @page {
-        size: A4 landscape;
-        margin: 7mm;
-      }
-
-      html,
-      body {
-        width: 100%;
-        min-height: 0;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: #fff !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      body * {
-        visibility: hidden !important;
-      }
-
-      #certificate,
-      #certificate * {
-        visibility: visible !important;
-      }
-
-      #certificate {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        max-width: none !important;
-        min-height: 0 !important;
-        margin: 0 !important;
-        padding: 5mm !important;
-        overflow: visible !important;
-        box-shadow: none !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .certificate-outer-border {
-        min-height: 0 !important;
-        padding: 5px !important;
-      }
-
-      .certificate-inner-border {
-        min-height: 0 !important;
-        padding: 22px 30px 18px !important;
-      }
-
-      .certificate-title {
-        margin-top: 18px !important;
-        font-size: 36px !important;
-      }
-
-      .certificate-divider {
-        margin: 15px auto !important;
-      }
-
-      .result-grid {
-        margin: 16px auto !important;
-      }
-
-      .certificate-footer {
-        margin-top: 22px !important;
-      }
-
-      .certificate-actions,
-      .page-heading,
-      .status-message {
-        display: none !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate | Chemistry Point</title>
+
+    <!-- Existing CSS files preserved -->
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <!-- PNG export library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px 14px 40px;
+            background: #f1f3f8;
+            color: #172033;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .certificate-studio {
+            width: 100%;
+            max-width: 1155px;
+            margin: 0 auto;
+        }
+
+        .studio-heading {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .studio-heading h1 {
+            margin: 0 0 8px;
+            color: #14213d;
+            font-size: clamp(23px, 4vw, 34px);
+        }
+
+        .studio-heading p {
+            margin: 0;
+            color: #657087;
+            font-size: 14px;
+        }
+
+        .name-panel {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 0 auto 18px;
+            padding: 14px;
+            background: #fff;
+            border: 1px solid #e0e5ef;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px #1720330a;
+        }
+
+        .name-panel input {
+            flex: 1;
+            width: 100%;
+            min-width: 0;
+            height: 45px;
+            padding: 0 13px;
+            border: 1px solid #d6dce8;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .name-panel input:focus {
+            border-color: #bd963e;
+        }
+
+        button {
+            min-height: 43px;
+            padding: 10px 16px;
+            border: 0;
+            border-radius: 8px;
+            background: #14213d;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .generate-btn {
+            background: #bd963e;
+            color: #151515;
+            white-space: nowrap;
+        }
+
+        /* Mobile preview scrolls instead of cropping */
+        .certificate-scroll {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 4px 2px 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Fixed landscape canvas for consistent PNG/PDF output */
+        #certificate {
+            position: relative;
+            isolation: isolate;
+            flex: none;
+            width: 1123px;
+            height: 794px;
+            padding: 28px;
+            overflow: hidden;
+            background: #fffdf7;
+            color: #18233b;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 12px 35px #14213d20;
+        }
+
+        .certificate-border {
+            position: absolute;
+            inset: 15px;
+            border: 3px solid #bd963e;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .certificate-border::before {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border: 1px solid #bd963e;
+        }
+
+        .certificate-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            border: 1px solid #e7d6a8;
+            padding: 32px 55px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cp-watermark {
+            position: absolute;
+            z-index: -1;
+            left: 50%;
+            top: 46%;
+            transform: translate(-50%, -50%);
+            color: #bd963e;
+            opacity: 0.07;
+            font-size: 205px;
+            font-weight: bold;
+            letter-spacing: -15px;
+            user-select: none;
+        }
+
+        .brand-name {
+            margin: 0;
+            color: #172442;
+            font-size: 43px;
+            line-height: 1.1;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .brand-location {
+            margin-top: 7px;
+            color: #a27b27;
+            font: bold 15px Arial, sans-serif;
+            letter-spacing: 5px;
+        }
+
+        .gold-line {
+            width: 170px;
+            height: 2px;
+            margin: 19px 0 17px;
+            background: #bd963e;
+        }
+
+        .certificate-label {
+            margin: 0;
+            color: #a27b27;
+            font: bold 15px Arial, sans-serif;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .certificate-title {
+            margin: 8px 0 0;
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: normal;
+        }
+
+        .presented-to {
+            margin: 20px 0 5px;
+            font: 14px Arial, sans-serif;
+            color: #657087;
+            letter-spacing: 2px;
+        }
+
+        .student-name {
+            max-width: 100%;
+            margin: 0;
+            color: #a27b27;
+            font-size: 43px;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+
+        .student-underline {
+            width: 360px;
+            max-width: 90%;
+            margin: 10px 0 12px;
+            border-bottom: 1px solid #bd963e;
+        }
+
+        .achievement-text {
+            margin: 0;
+            color: #4c566c;
+            font: 16px/1.5 Arial, sans-serif;
+        }
+
+        .quiz-title {
+            max-width: 90%;
+            margin: 7px 0 0;
+            color: #172442;
+            font-size: 23px;
+            overflow-wrap: anywhere;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: center;
+            gap: 38px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            min-width: 145px;
+            padding: 10px 18px;
+            border: 1px solid #e6d8b5;
+            background: #fffaf0;
+        }
+
+        .result-item span {
+            display: block;
+            margin-bottom: 6px;
+            color: #697287;
+            font: 11px Arial, sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .result-item strong {
+            color: #172442;
+            font: bold 22px Arial, sans-serif;
+        }
+
+        .certificate-footer {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            align-items: end;
+            gap: 24px;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 22px;
+        }
+
+        .footer-block {
+            min-width: 0;
+            text-align: center;
+            color: #687187;
+            font: 12px/1.5 Arial, sans-serif;
+            overflow-wrap: anywhere;
+        }
+
+        .signature-name {
+            display: inline-block;
+            min-width: 150px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid #bd963e;
+            color: #172442;
+            font: italic bold 25px Georgia, serif;
+        }
+
+        .signature-caption {
+            margin-top: 7px;
+            color: #687187;
+            font: 11px Arial, sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .address {
+            color: #4f596d;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background: #bd963e;
+            color: #151515;
+        }
+
+        .pdf-btn {
+            background: #172442;
+        }
+
+        .share-btn {
+            background: #26734d;
+        }
+
+        .help-text {
+            margin: 14px 0 0;
+            text-align: center;
+            color: #657087;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* Print exactly one landscape page */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            html,
+            body {
+                width: 297mm;
+                height: 210mm;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                background: #fff !important;
+            }
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            #certificate,
+            #certificate * {
+                visibility: visible !important;
+            }
+
+            #certificate {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 297mm !important;
+                height: 210mm !important;
+                margin: 0 !important;
+                padding: 7mm !important;
+                box-shadow: none !important;
+                overflow: hidden !important;
+                print-color-adjust: exact !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .certificate-border {
+                inset: 4mm;
+            }
+
+            .certificate-content {
+                padding: 8mm 13mm 6mm;
+            }
+
+            .brand-name {
+                font-size: 30pt;
+            }
+
+            .certificate-title {
+                font-size: 35pt;
+            }
+
+            .student-name {
+                font-size: 31pt;
+            }
+
+            .quiz-title {
+                font-size: 17pt;
+            }
+
+            .result-row {
+                margin-top: 4mm;
+            }
+
+            .certificate-footer {
+                padding-top: 4mm;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 10px 30px;
+            }
+
+            .name-panel {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .name-panel input,
+            .name-panel button {
+                width: 100%;
+            }
+
+            .action-buttons button {
+                flex: 1 1 140px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <main class="certificate-page">
-    <header class="page-heading">
-      <h1>Your Achievement Certificate</h1>
-      <p>Download, save as PDF, or share your certificate.</p>
-    </header>
+    <main class="certificate-studio">
+        <header class="studio-heading">
+            <h1>Certificate Studio</h1>
+            <p>Generate, download and share your Chemistry Point certificate.</p>
+        </header>
 
-    <section id="certificate" aria-label="Student achievement certificate">
-      <div class="certificate-outer-border">
-        <div class="certificate-inner-border">
-          <div class="certificate-content">
+        <section class="name-panel">
+            <input
+                type="text"
+                id="studentNameInput"
+                placeholder="Enter student's full name"
+                maxlength="70"
+                autocomplete="name"
+            >
+            <button class="generate-btn" id="generateBtn" type="button">
+                Generate Certificate
+            </button>
+        </section>
 
-            <div class="certificate-top-line"></div>
+        <div class="certificate-scroll">
+            <section id="certificate" aria-label="Student achievement certificate">
+                <div class="certificate-border"></div>
 
-            <h2 class="certificate-brand">Chemistry Point</h2>
-            <p class="certificate-location">NAWADA (BIHAR)</p>
+                <div class="certificate-content">
+                    <div class="cp-watermark">CP</div>
 
-            <h1 class="certificate-title">Certificate</h1>
-            <p class="certificate-subtitle">Of Achievement</p>
+                    <h2 class="brand-name">CHEMISTRY POINT</h2>
+                    <div class="brand-location">NAWADA · BIHAR</div>
 
-            <div class="certificate-divider"></div>
+                    <div class="gold-line"></div>
 
-            <p class="presented-text">This certificate is proudly presented to</p>
+                    <p class="certificate-label">Certificate of</p>
+                    <h1 class="certificate-title">Achievement</h1>
 
-            <h2 class="student-name" id="studentName">Student</h2>
-            <div class="name-underline"></div>
+                    <p class="presented-to">THIS CERTIFICATE IS PROUDLY PRESENTED TO</p>
+                    <h2 class="student-name" id="certificateStudentName">Student Name</h2>
+                    <div class="student-underline"></div>
 
-            <p class="achievement-text">
-              For completing the quiz
-              <span class="quiz-name" id="quizTitle">Chemistry Quiz</span>
-              and achieving the following result. Keep learning, keep improving,
-              and continue working towards your goals.
-            </p>
+                    <p class="achievement-text">
+                        For participating in and completing the assessment
+                    </p>
+                    <h3 class="quiz-title" id="certificateQuizTitle">Chemistry Quiz</h3>
 
-            <div class="result-grid">
-              <div class="result-box">
-                <span class="result-label">Marks Obtained</span>
-                <span class="result-value" id="scoreValue">0 / 0</span>
-              </div>
+                    <div class="result-row">
+                        <div class="result-item">
+                            <span>Marks Obtained</span>
+                            <strong id="certificateScore">0 / 0</strong>
+                        </div>
 
-              <div class="result-box">
-                <span class="result-label">Percentage</span>
-                <span class="result-value" id="percentageValue">0%</span>
-              </div>
+                        <div class="result-item">
+                            <span>Percentage</span>
+                            <strong id="certificatePercentage">0%</strong>
+                        </div>
 
-              <div class="result-box">
-                <span class="result-label">Grade</span>
-                <span class="result-value" id="gradeValue">-</span>
-              </div>
-            </div>
+                        <div class="result-item">
+                            <span>Grade</span>
+                            <strong id="certificateGrade">—</strong>
+                        </div>
+                    </div>
 
-            <p class="completion-message">
-              Knowledge is the foundation of every great achievement.
-            </p>
+                    <footer class="certificate-footer">
+                        <div class="footer-block">
+                            <div id="certificateDate">Date</div>
+                            <div class="signature-caption">Date of Issue</div>
+                        </div>
 
-            <div class="certificate-footer">
-              <div class="footer-block">
-                <div class="footer-line"></div>
-                <p class="footer-title">Pardeep Sir</p>
-                <p class="footer-caption">Authorized Signature</p>
-              </div>
+                        <div class="footer-block address">
+                            <strong>Chemistry Point, Nawada (Bihar)</strong><br>
+                            V.I.P Colony Nawada, अमित आट्स,<br>
+                            Classes के नीचे, First Floor पर
+                        </div>
 
-              <div class="footer-block address-block">
-                <strong>Chemistry Point Nawada (Bihar)</strong>
-                V.I.P Colony Nawada<br>
-                अमित आट्स, Classes के नीचे,<br>
-                First Floor पर
-              </div>
-
-              <div class="footer-block">
-                <div class="footer-line"></div>
-                <p class="footer-title" id="certificateDate">-</p>
-                <p class="footer-caption">Date of Achievement</p>
-              </div>
-            </div>
-
-            <div class="certificate-bottom-line"></div>
-          </div>
+                        <div class="footer-block">
+                            <div class="signature-name">Pardeep Sir</div>
+                            <div class="signature-caption">Authorized Signature</div>
+                        </div>
+                    </footer>
+                </div>
+            </section>
         </div>
-      </div>
-    </section>
 
-    <div class="certificate-actions">
-      <button type="button" class="cert-btn btn-gold" id="downloadPngBtn">
-        ↓ Download PNG
-      </button>
+        <div class="action-buttons">
+            <button class="download-btn" id="downloadBtn" type="button">
+                Download PNG
+            </button>
 
-      <button type="button" class="cert-btn btn-light" id="downloadPdfBtn">
-        ↓ Save as PDF
-      </button>
+            <button class="pdf-btn" id="pdfBtn" type="button">
+                Save as PDF
+            </button>
 
-      <button type="button" class="cert-btn btn-outline" id="shareBtn">
-        ↗ Share Certificate
-      </button>
-    </div>
+            <button class="share-btn" id="shareBtn" type="button">
+                Share Certificate
+            </button>
+        </div>
 
-    <p class="status-message" id="statusMessage" role="status" aria-live="polite"></p>
-  </main>
+        <p class="help-text">
+            Mobile par certificate dekhne ke liye preview ko left-right scroll karein.
+            PDF ke liye print window mein Landscape select karein agar zaroorat ho.
+        </p>
+    </main>
 
-  <script>
-    (() => {
-      "use strict";
+    <script>
+        const certificate = document.getElementById("certificate");
+        const nameInput = document.getElementById("studentNameInput");
 
-      const params = new URLSearchParams(window.location.search);
-
-      const getParam = (...keys) => {
-        for (const key of keys) {
-          const value = params.get(key);
-          if (value !== null && value.trim() !== "") {
-            return value.trim();
-          }
-        }
-        return "";
-      };
-
-      const safeNumber = (value, fallback = 0) => {
-        const parsed = Number(value);
-        return Number.isFinite(parsed) ? parsed : fallback;
-      };
-
-      const score = Math.max(0, safeNumber(getParam("score")));
-      const total = Math.max(0, safeNumber(getParam("total", "totalMarks")));
-
-      let percentage;
-      if (getParam("percentage", "percent") !== "") {
-        percentage = safeNumber(getParam("percentage", "percent"));
-      } else {
-        percentage = total > 0 ? (score / total) * 100 : 0;
-      }
-
-      percentage = Math.max(0, Math.min(100, percentage));
-
-      const studentName =
-        getParam("studentName", "name", "student") || "Student";
-
-      const quizTitle =
-        getParam("quizTitle", "title", "quiz") || "Chemistry Quiz";
-
-      const grade = percentage >= 90 ? "A+"
-        : percentage >= 80 ? "A"
-        : percentage >= 70 ? "B+"
-        : percentage >= 60 ? "B"
-        : percentage >= 50 ? "C"
-        : percentage >= 33 ? "D"
-        : "Needs Improvement";
-
-      const certificate = document.getElementById("certificate");
-      const statusMessage = document.getElementById("statusMessage");
-      const pngButton = document.getElementById("downloadPngBtn");
-      const pdfButton = document.getElementById("downloadPdfBtn");
-      const shareButton = document.getElementById("shareBtn");
-
-      document.getElementById("studentName").textContent = studentName;
-      document.getElementById("quizTitle").textContent = quizTitle;
-      document.getElementById("scoreValue").textContent =
-        `${score} / ${total}`;
-      document.getElementById("percentageValue").textContent =
-        `${percentage.toFixed(percentage % 1 === 0 ? 0 : 2)}%`;
-      document.getElementById("gradeValue").textContent = grade;
-      document.getElementById("certificateDate").textContent =
-        new Date().toLocaleDateString("en-IN", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric"
-        });
-
-      function showStatus(message) {
-        statusMessage.textContent = message;
-      }
-
-      function makeFileName(extension) {
-        const cleanName = studentName
-          .normalize("NFKD")
-          .replace(/[^\w-]+/g, "_")
-          .replace(/^_+|_+$/g, "")
-          .slice(0, 45) || "Student";
-
-        return `Chemistry_Point_Certificate_${cleanName}.${extension}`;
-      }
-
-      function setBusy(button, busy, busyText, normalText) {
-        button.disabled = busy;
-        button.textContent = busy ? busyText : normalText;
-      }
-
-      async function renderCertificateCanvas() {
-        if (typeof window.html2canvas !== "function") {
-          throw new Error(
-            "Certificate image library load nahi hui. Internet connection check karke page reload karein."
-          );
+        function getParams() {
+            return new URLSearchParams(window.location.search);
         }
 
-        // Allow browser to finish painting the certificate before capture.
-        await new Promise(resolve => requestAnimationFrame(resolve));
-
-        return window.html2canvas(certificate, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: "#fffdf7",
-          logging: false,
-          width: certificate.scrollWidth,
-          height: certificate.scrollHeight,
-          windowWidth: Math.max(
-            document.documentElement.clientWidth,
-            certificate.scrollWidth
-          ),
-          onclone: clonedDocument => {
-            const clonedCertificate =
-              clonedDocument.getElementById("certificate");
-
-            if (clonedCertificate) {
-              clonedCertificate.style.boxShadow = "none";
+        function getFirstParam(params, keys, fallback = "") {
+            for (const key of keys) {
+                const value = params.get(key);
+                if (value && value.trim()) {
+                    return value.trim();
+                }
             }
-          }
-        });
-      }
+            return fallback;
+        }
 
-      function canvasToBlob(canvas) {
-        return new Promise((resolve, reject) => {
-          canvas.toBlob(blob => {
-            if (blob) {
-              resolve(blob);
-            } else {
-              reject(new Error("PNG file create nahi ho paayi."));
+        function calculateGrade(percentage) {
+            if (percentage >= 90) return "A+";
+            if (percentage >= 80) return "A";
+            if (percentage >= 70) return "B+";
+            if (percentage >= 60) return "B";
+            if (percentage >= 50) return "C";
+            if (percentage >= 33) return "D";
+            return "Needs Improvement";
+        }
+
+        function safeNumber(value, fallback = 0) {
+            const number = Number(value);
+            return Number.isFinite(number) ? number : fallback;
+        }
+
+        function updateCertificate() {
+            const params = getParams();
+
+            const studentName =
+                nameInput.value.trim() ||
+                getFirstParam(params, ["studentName", "name", "student"], "Student Name");
+
+            const quizTitle = getFirstParam(
+                params,
+                ["quizTitle", "title"],
+                "Chemistry Quiz"
+            );
+
+            const score = safeNumber(
+                getFirstParam(params, ["score", "marks"], "0")
+            );
+
+            const total = Math.max(
+                0,
+                safeNumber(getFirstParam(params, ["total", "maxMarks"], "0"))
+            );
+
+            const suppliedPercentage = params.get("percentage");
+            let percentage = 0;
+
+            if (suppliedPercentage !== null && suppliedPercentage.trim() !== "") {
+                percentage = safeNumber(suppliedPercentage, 0);
+            } else if (total > 0) {
+                percentage = (score / total) * 100;
             }
-          }, "image/png");
+
+            percentage = Math.max(0, Math.min(100, percentage));
+
+            document.getElementById("certificateStudentName").textContent =
+                studentName;
+
+            document.getElementById("certificateQuizTitle").textContent =
+                quizTitle;
+
+            document.getElementById("certificateScore").textContent =
+                `${score} / ${total}`;
+
+            document.getElementById("certificatePercentage").textContent =
+                `${percentage.toFixed(1)}%`;
+
+            document.getElementById("certificateGrade").textContent =
+                calculateGrade(percentage);
+
+            document.getElementById("certificateDate").textContent =
+                new Date().toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+        }
+
+        document.getElementById("generateBtn").addEventListener("click", () => {
+            if (!nameInput.value.trim()) {
+                nameInput.focus();
+                alert("Bhai, pehle student ka naam enter karo.");
+                return;
+            }
+            updateCertificate();
         });
-      }
 
-      function downloadBlob(blob, filename) {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
+        nameInput.addEventListener("keydown", event => {
+            if (event.key === "Enter") {
+                document.getElementById("generateBtn").click();
+            }
+        });
 
-        link.href = url;
-        link.download = filename;
-        link.style.display = "none";
-
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-
-        setTimeout(() => URL.revokeObjectURL(url), 1500);
-      }
-
-      async function getCertificateBlob() {
-        const canvas = await renderCertificateCanvas();
-        return canvasToBlob(canvas);
-      }
-
-      pngButton.addEventListener("click", async () => {
-        setBusy(
-          pngButton,
-          true,
-          "Preparing PNG...",
-          "↓ Download PNG"
-        );
-
-        showStatus("Certificate image ban rahi hai...");
-
-        try {
-          const blob = await getCertificateBlob();
-          downloadBlob(blob, makeFileName("png"));
-          showStatus("PNG certificate download start ho gaya.");
-        } catch (error) {
-          console.error("PNG export error:", error);
-          showStatus(error.message || "PNG download nahi ho paaya.");
-        } finally {
-          setBusy(
-            pngButton,
-            false,
-            "",
-            "↓ Download PNG"
-          );
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
         }
-      });
 
-      pdfButton.addEventListener("click", () => {
-        showStatus(
-          "Print dialog mein Destination/Printer ke andar 'Save as PDF' select karein."
-        );
+        async function createCertificateCanvas() {
+            updateCertificate();
 
-        // Browser print dialog provides the Save as PDF option.
-        window.print();
-      });
+            if (typeof html2canvas !== "function") {
+                throw new Error(
+                    "PNG library load nahi hui. Internet connection check karke page reload karein."
+                );
+            }
 
-      shareButton.addEventListener("click", async () => {
-        setBusy(
-          shareButton,
-          true,
-          "Preparing...",
-          "↗ Share Certificate"
-        );
+            await document.fonts.ready;
 
-        try {
-          const blob = await getCertificateBlob();
-          const file = new File(
-            [blob],
-            makeFileName("png"),
-            { type: "image/png" }
-          );
-
-          if (
-            navigator.share &&
-            navigator.canShare &&
-            navigator.canShare({ files: [file] })
-          ) {
-            await navigator.share({
-              title: "Chemistry Point Certificate",
-              text: `${studentName} - ${quizTitle} - ${percentage.toFixed(2)}%`,
-              files: [file]
+            return html2canvas(certificate, {
+                backgroundColor: "#fffdf7",
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                width: 1123,
+                height: 794,
+                windowWidth: 1200,
+                scrollX: 0,
+                scrollY: 0
             });
-
-            showStatus("Share menu open ho gaya.");
-          } else if (navigator.share) {
-            await navigator.share({
-              title: "Chemistry Point Certificate",
-              text: `${studentName} achieved ${percentage.toFixed(2)}% in ${quizTitle}.`
-            });
-
-            showStatus("Certificate details share ho gayi.");
-          } else {
-            // Browsers without Web Share API can still download the image.
-            downloadBlob(blob, makeFileName("png"));
-            showStatus(
-              "Is browser mein direct sharing available nahi hai. Certificate PNG download kar diya gaya hai; ise kisi app par share kar sakte hain."
-            );
-          }
-        } catch (error) {
-          if (error.name === "AbortError") {
-            showStatus("Sharing cancel kar di gayi.");
-          } else {
-            console.error("Share error:", error);
-            showStatus(
-              error.message || "Share nahi ho paaya. PNG download karke share karein."
-            );
-          }
-        } finally {
-          setBusy(
-            shareButton,
-            false,
-            "",
-            "↗ Share Certificate"
-          );
         }
-      });
-    })();
-  </script>
+
+        document.getElementById("downloadBtn").addEventListener("click", async () => {
+            const button = document.getElementById("downloadBtn");
+            button.disabled = true;
+            button.textContent = "Preparing PNG...";
+
+            try {
+                const canvas = await createCertificateCanvas();
+                const blob = await new Promise(resolve =>
+                    canvas.toBlob(resolve, "image/png")
+                );
+
+                if (!blob) throw new Error("PNG file create nahi ho payi.");
+
+                downloadBlob(blob, "Chemistry-Point-Certificate.png");
+            } catch (error) {
+                alert(error.message || "Certificate download nahi ho paya.");
+            } finally {
+                button.disabled = false;
+                button.textContent = "Download PNG";
+            }
+        });
+
+        document.getElementById("pdfBtn").addEventListener("click", () => {
+            updateCertificate();
+            window.print();
+        });
+
+        document.getElementById("shareBtn").addEventListener("click", async () => {
+            const button = document.getElementById("shareBtn");
+            button.disabled = true;
+            button.textContent = "Preparing...";
+
+            try {
+                const canvas = await createCertificateCanvas();
+                const blob = await new Promise(resolve =>
+                    canvas.toBlob(resolve, "image/png")
+                );
+
+                if (!blob) throw new Error("Certificate image create nahi ho payi.");
+
+                const file = new File(
+                    [blob],
+                    "Chemistry-Point-Certificate.png",
+                    { type: "image/png" }
+                );
+
+                if (navigator.share && navigator.canShare &&
+                    navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        title: "Chemistry Point Certificate",
+                        text: "My Chemistry Point achievement certificate",
+                        files: [file]
+                    });
+                } else {
+                    downloadBlob(blob, "Chemistry-Point-Certificate.png");
+                    alert("Is device par direct file sharing available nahi hai. PNG download kar diya gaya hai.");
+                }
+            } catch (error) {
+                if (error.name !== "AbortError") {
+                    alert(error.message || "Certificate share nahi ho paya.");
+                }
+            } finally {
+                button.disabled = false;
+                button.textContent = "Share Certificate";
+            }
+        });
+
+        // Load details from URL, if available.
+        const initialParams = getParams();
+        nameInput.value = getFirstParam(
+            initialParams,
+            ["studentName", "name", "student"],
+            ""
+        );
+
+        updateCertificate();
+    </script>
 </body>
 </html>
