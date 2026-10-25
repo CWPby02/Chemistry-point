@@ -2,342 +2,855 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificate | Chemistry Point</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/root.css">
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/responsive.css">
-<style>
-:root {
-  --cert-gold:#c79532;
-  --cert-ink:#202b3a;
-}
-body { font-family:Inter,sans-serif; }
-.certificate-page { max-width:1100px; margin:auto; padding:35px 16px 70px; }
-.page-heading { text-align:center; margin-bottom:25px; }
-.page-heading h1 { margin-bottom:8px; }
-.page-heading p { color:var(--text-muted,#777); }
-.cert-form {
-  display:flex; flex-wrap:wrap; gap:12px; align-items:end;
-  max-width:850px; margin:0 auto 25px; padding:18px;
-  border:1px solid rgba(199,149,50,.35); border-radius:14px;
-  background:var(--card-bg,#fff);
-}
-.cert-field { flex:1 1 200px; }
-.cert-field label { display:block; font-weight:700; margin-bottom:7px; }
-.cert-field input {
-  width:100%; padding:12px; border:1px solid #b8bdc5;
-  border-radius:8px; font:inherit; color:#202b3a; background:#fff;
-}
-.cert-btn {
-  border:0; border-radius:9px; padding:12px 16px; cursor:pointer;
-  font:600 14px Inter,sans-serif; text-decoration:none;
-  display:inline-flex; justify-content:center; align-items:center; gap:8px;
-}
-.cert-btn-primary { background:#c79532; color:#171717; }
-.cert-btn-secondary { background:#263548; color:#fff; }
-.cert-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:20px 0; }
-.certificate {
-  position:relative; width:100%; max-width:1000px; aspect-ratio:1.414/1;
-  margin:auto; padding:clamp(14px,3.5vw,38px);
-  background:#fffdf7; color:var(--cert-ink); overflow:hidden;
-  box-shadow:0 12px 35px #0002;
-}
-.cert-outer { height:100%; border:3px solid var(--cert-gold); padding:7px; }
-.cert-inner {
-  height:100%; border:1px solid var(--cert-gold); position:relative;
-  text-align:center; padding:clamp(10px,2.3vw,25px);
-  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-}
-.cert-topline { color:#997021; text-transform:uppercase; letter-spacing:.2em; font-size:clamp(7px,1.2vw,12px); font-weight:800; }
-.cert-logo {
-  width:clamp(34px,6vw,62px); height:clamp(34px,6vw,62px);
-  border:2px solid var(--cert-gold); border-radius:50%;
-  display:grid; place-items:center; color:#997021; font-size:clamp(17px,3vw,30px);
-  margin:5px auto;
-}
-.cert-school { font-size:clamp(12px,2vw,21px); font-weight:800; letter-spacing:.04em; }
-.cert-title {
-  font-family:"Playfair Display",serif; font-size:clamp(22px,5vw,48px);
-  color:#997021; line-height:1.1; margin:5px 0;
-}
-.cert-subtitle { font-size:clamp(8px,1.4vw,14px); letter-spacing:.12em; text-transform:uppercase; }
-.cert-award-text { font-size:clamp(8px,1.5vw,14px); margin:6px 0; }
-.cert-student {
-  font-family:"Playfair Display",serif; font-size:clamp(17px,3.8vw,36px);
-  font-weight:700; color:#263548; border-bottom:1px solid #c79532;
-  padding:0 12px 5px; max-width:100%; overflow-wrap:anywhere;
-}
-.cert-description { max-width:700px; font-size:clamp(8px,1.5vw,14px); line-height:1.6; }
-.cert-stats { display:flex; justify-content:center; flex-wrap:wrap; gap:clamp(8px,3vw,30px); }
-.cert-stat { min-width:55px; }
-.cert-stat strong { display:block; font-size:clamp(12px,2.4vw,23px); color:#997021; }
-.cert-stat span { font-size:clamp(7px,1.2vw,11px); }
-.cert-bottom { display:flex; width:100%; justify-content:space-between; align-items:end; gap:10px; text-align:left; }
-.cert-small { font-size:clamp(6px,1.1vw,10px); line-height:1.5; }
-.cert-sign { border-top:1px solid #997021; padding-top:5px; min-width:85px; text-align:center; font-size:clamp(7px,1.1vw,10px); }
-.cert-watermark {
-  position:absolute; right:5%; top:42%; font-size:clamp(40px,10vw,100px);
-  color:#c79532; opacity:.06; font-weight:800; pointer-events:none;
-}
-.cert-error { color:#b42318; text-align:center; margin:12px 0; }
-@media(max-width:600px) {
-  .certificate-page { padding-left:8px; padding-right:8px; }
-  .cert-form { padding:12px; }
-  .cert-outer { border-width:2px; padding:4px; }
-  .cert-inner { padding:7px; }
-  .cert-description { line-height:1.3; }
-  .cert-actions .cert-btn { flex:1 1 130px; }
-}
-@media print {
-  body { background:#fff!important; }
-  body * { visibility:hidden!important; }
-  #certificate, #certificate * { visibility:visible!important; }
-  #certificate {
-    position:fixed; left:0; top:0; width:100%; max-width:none;
-    box-shadow:none; print-color-adjust:exact; -webkit-print-color-adjust:exact;
-  }
-  @page { size:A4 landscape; margin:8mm; }
-}
-</style>
-</head>
-<body>
-<main class="certificate-page">
-  <div class="page-heading">
-    <h1>🏅 Quiz Certificate</h1>
-    <p>Apni quiz performance ka certificate taiyar karein.</p>
-  </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11151c">
+  <title>Quiz Certificate | Chemistry Point</title>
 
-  <form class="cert-form" id="certificateForm">
-    <div class="cert-field">
-      <label for="studentName">Student ka naam</label>
-      <input id="studentName" maxlength="70" required placeholder="Apna poora naam likhein">
-    </div>
-    <button class="cert-btn cert-btn-primary" type="submit">Update Certificate</button>
-  </form>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <p class="cert-error" id="certError" role="alert"></p>
+  <link rel="stylesheet" href="../assets/css/root.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
 
-  <section class="certificate" id="certificate" aria-label="Quiz certificate">
-    <div class="cert-outer">
-      <div class="cert-inner">
-        <div class="cert-watermark">CP</div>
-        <div>
-          <div class="cert-topline">Certificate of Achievement</div>
-          <div class="cert-logo">★</div>
-          <div class="cert-school">CHEMISTRY POINT</div>
-          <div class="cert-subtitle">By Pardeep Sir</div>
-        </div>
-
-        <div>
-          <h2 class="cert-title">Certificate</h2>
-          <div class="cert-subtitle">Of Quiz Performance</div>
-          <p class="cert-award-text">This certificate is presented to</p>
-          <div class="cert-student" id="displayName">Student Name</div>
-          <p class="cert-description">
-            for completing the quiz shown below. This certificate records the
-            quiz performance displayed here.
-          </p>
-        </div>
-
-        <div class="cert-stats">
-          <div class="cert-stat"><strong id="quizTitle">Chemistry Quiz</strong><span>QUIZ / EXAM</span></div>
-          <div class="cert-stat"><strong id="marks">0 / 0</strong><span>MARKS</span></div>
-          <div class="cert-stat"><strong id="percentage">0%</strong><span>PERCENTAGE</span></div>
-          <div class="cert-stat"><strong id="grade">—</strong><span>GRADE</span></div>
-        </div>
-
-        <div class="cert-bottom">
-          <div class="cert-small">
-            <div><b>Issue date:</b> <span id="issueDate"></span></div>
-            <div><b>Certificate ID:</b> <span id="certificateId"></span></div>
-            <div>Code With Piyush</div>
-          </div>
-          <div class="cert-sign">Quiz Record<br><b>Chemistry Point</b></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="cert-actions">
-    <button class="cert-btn cert-btn-primary" id="downloadPng" type="button">Download PNG</button>
-    <button class="cert-btn cert-btn-secondary" id="downloadPdf" type="button">Download / Save PDF</button>
-    <button class="cert-btn cert-btn-secondary" id="shareCert" type="button">Share Certificate</button>
-    <a class="cert-btn cert-btn-secondary" href="result.html">Back to Result</a>
-  </div>
-  <p class="page-heading">PDF ke liye print window mein “Save as PDF” select karein.</p>
-</main>
-
-<script>
-(() => {
-  const params = new URLSearchParams(location.search);
-  const $ = id => document.getElementById(id);
-
-  const readNumber = (key, fallback = 0) => {
-    const raw = params.get(key);
-    if (raw === null || raw.trim() === "") return fallback;
-    const value = Number(raw);
-    return Number.isFinite(value) ? value : fallback;
-  };
-
-  const score = Math.max(0, readNumber("score"));
-  const total = Math.max(0, readNumber("total"));
-  const percentage = Math.max(0, Math.min(100, readNumber(
-    "percentage", total ? Math.round(score / total * 100) : 0
-  )));
-  const quizName = (params.get("quizTitle") || params.get("title") || "Chemistry Quiz")
-    .trim().slice(0, 100);
-
-  const grade = percentage >= 90 ? "A+" :
-    percentage >= 80 ? "A" :
-    percentage >= 70 ? "B+" :
-    percentage >= 60 ? "B" :
-    percentage >= 50 ? "C" :
-    percentage >= 33 ? "D" : "Needs Practice";
-
-  const date = new Date();
-  $("issueDate").textContent = date.toLocaleDateString("en-IN", {
-    day:"2-digit", month:"short", year:"numeric"
-  });
-  $("certificateId").textContent =
-    "CP-" + date.getFullYear() + "-" +
-    Math.random().toString(36).slice(2, 8).toUpperCase();
-
-  $("quizTitle").textContent = quizName;
-  $("marks").textContent = `${score} / ${total}`;
-  $("percentage").textContent = `${percentage}%`;
-  $("grade").textContent = grade;
-
-  $("certificateForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const name = $("studentName").value.trim();
-    if (!name) {
-      $("certError").textContent = "Student ka naam likhna zaroori hai.";
-      return;
+  <style>
+    :root {
+      --cert-gold: #c79532;
+      --cert-ink: #202b3a;
     }
-    $("displayName").textContent = name;
-    $("certError").textContent = "";
-  });
 
-  // If no real result was passed, don't pretend this is a verified result.
-  if (!params.has("score") || !params.has("total")) {
-    $("certError").textContent =
-      "Result details abhi connect nahi hain. Result page se aane par actual marks yahan dikhenge.";
-  }
-
-  async function makePngBlob() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 1600;
-    canvas.height = 1131;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#fffdf7";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.strokeStyle = "#c79532";
-    ctx.lineWidth = 8;
-    ctx.strokeRect(25, 25, 1550, 1081);
-    ctx.lineWidth = 2;
-    ctx.strokeRect(43, 43, 1514, 1045);
-
-    const center = 800;
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#997021";
-    ctx.font = "bold 24px Arial";
-    ctx.fillText("CERTIFICATE OF ACHIEVEMENT", center, 110);
-    ctx.font = "bold 38px Arial";
-    ctx.fillText("★  CHEMISTRY POINT  ★", center, 180);
-    ctx.fillStyle = "#263548";
-    ctx.font = "bold 74px Georgia";
-    ctx.fillText("Certificate", center, 300);
-    ctx.font = "28px Arial";
-    ctx.fillText("OF QUIZ PERFORMANCE", center, 355);
-    ctx.font = "26px Arial";
-    ctx.fillText("This certificate is presented to", center, 425);
-
-    const student = $("displayName").textContent;
-    ctx.fillStyle = "#997021";
-    ctx.font = "bold 54px Georgia";
-    ctx.fillText(student, center, 510, 1300);
-    ctx.strokeStyle = "#c79532";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(300, 535);
-    ctx.lineTo(1300, 535);
-    ctx.stroke();
-
-    ctx.fillStyle = "#263548";
-    ctx.font = "26px Arial";
-    ctx.fillText(quizName, center, 605, 1350);
-
-    ctx.font = "bold 34px Arial";
-    ctx.fillStyle = "#997021";
-    ctx.fillText(`Marks: ${score} / ${total}     Percentage: ${percentage}%     Grade: ${grade}`, center, 700, 1400);
-
-    ctx.fillStyle = "#263548";
-    ctx.font = "22px Arial";
-    ctx.fillText("Issue date: " + $("issueDate").textContent, 420, 900);
-    ctx.fillText("Certificate ID: " + $("certificateId").textContent, 420, 945);
-    ctx.font = "bold 24px Arial";
-    ctx.fillText("Code With Piyush", 1200, 980);
-    ctx.font = "22px Arial";
-    ctx.fillText("By Pardeep Sir", 1200, 1020);
-
-    return new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-  }
-
-  $("downloadPng").addEventListener("click", async () => {
-    if ($("displayName").textContent === "Student Name") {
-      $("certError").textContent = "Pehle student ka naam enter karke Update Certificate dabayein.";
-      return;
+    .certificate-page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 16px 70px;
+      font-family: Inter, sans-serif;
     }
-    const blob = await makePngBlob();
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "chemistry-point-certificate.png";
-    link.click();
-    URL.revokeObjectURL(url);
-  });
 
-  $("downloadPdf").addEventListener("click", () => {
-    if ($("displayName").textContent === "Student Name") {
-      $("certError").textContent = "Pehle student ka naam enter karke Update Certificate dabayein.";
-      return;
+    .page-heading {
+      text-align: center;
+      margin-bottom: 25px;
     }
-    window.print();
-  });
 
-  $("shareCert").addEventListener("click", async () => {
-    if ($("displayName").textContent === "Student Name") {
-      $("certError").textContent = "Pehle student ka naam enter karke Update Certificate dabayein.";
-      return;
+    .page-heading h1 {
+      margin-bottom: 8px;
     }
-    const blob = await makePngBlob();
-    if (navigator.share && navigator.canShare) {
-      const file = new File([blob], "chemistry-point-certificate.png", {type:"image/png"});
-      if (navigator.canShare({files:[file]})) {
-        try {
-          await navigator.share({title:"Chemistry Point Certificate", files:[file]});
-          return;
-        } catch (error) {
-          if (error.name === "AbortError") return;
-        }
+
+    .page-heading p {
+      color: var(--text-muted, #777);
+    }
+
+    .cert-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: end;
+      max-width: 850px;
+      margin: 0 auto 25px;
+      padding: 18px;
+      border: 1px solid rgba(199, 149, 50, .35);
+      border-radius: 14px;
+      background: var(--card-bg, #fff);
+    }
+
+    .cert-field {
+      flex: 1 1 200px;
+    }
+
+    .cert-field label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .cert-field input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #b8bdc5;
+      border-radius: 8px;
+      font: inherit;
+      color: #202b3a;
+      background: #fff;
+    }
+
+    .cert-btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font: 600 14px Inter, sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cert-btn-primary {
+      background: #c79532;
+      color: #171717;
+    }
+
+    .cert-btn-secondary {
+      background: #263548;
+      color: #fff;
+    }
+
+    .cert-btn:focus-visible {
+      outline: 3px solid #e6b94e;
+      outline-offset: 3px;
+    }
+
+    .cert-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    /* CERTIFICATE */
+    .certificate {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 1.414 / 1;
+      margin: auto;
+      padding: clamp(12px, 3vw, 30px);
+      background: #fffdf7;
+      color: var(--cert-ink);
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .15);
+    }
+
+    .cert-outer {
+      height: 100%;
+      border: 3px solid var(--cert-gold);
+      padding: 7px;
+    }
+
+    .cert-inner {
+      height: 100%;
+      border: 1px solid var(--cert-gold);
+      position: relative;
+      text-align: center;
+      padding: clamp(9px, 2vw, 22px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .cert-topline {
+      color: #997021;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: clamp(7px, 1.15vw, 12px);
+      font-weight: 800;
+    }
+
+    .cert-logo {
+      width: clamp(32px, 5vw, 55px);
+      height: clamp(32px, 5vw, 55px);
+      border: 2px solid var(--cert-gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #997021;
+      font-size: clamp(17px, 3vw, 29px);
+      margin: 5px auto;
+    }
+
+    .cert-school {
+      font-size: clamp(12px, 2.1vw, 21px);
+      font-weight: 800;
+      letter-spacing: .025em;
+    }
+
+    .cert-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(22px, 5vw, 48px);
+      color: #997021;
+      line-height: 1.1;
+      margin: 5px 0;
+    }
+
+    .cert-subtitle {
+      font-size: clamp(7px, 1.25vw, 13px);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .cert-award-text {
+      font-size: clamp(8px, 1.4vw, 14px);
+      margin: 6px 0;
+    }
+
+    .cert-student {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(17px, 3.7vw, 36px);
+      font-weight: 700;
+      color: #263548;
+      border-bottom: 1px solid #c79532;
+      padding: 0 12px 5px;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .cert-description {
+      max-width: 700px;
+      font-size: clamp(8px, 1.35vw, 13px);
+      line-height: 1.5;
+      margin: 8px auto;
+    }
+
+    .cert-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: clamp(8px, 2.6vw, 28px);
+      width: 100%;
+    }
+
+    .cert-stat {
+      min-width: 55px;
+      max-width: 42%;
+      overflow-wrap: anywhere;
+    }
+
+    .cert-stat strong {
+      display: block;
+      font-size: clamp(11px, 2.1vw, 21px);
+      color: #997021;
+    }
+
+    .cert-stat span {
+      font-size: clamp(6px, 1vw, 10px);
+      letter-spacing: .04em;
+    }
+
+    .cert-bottom {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: end;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .cert-small {
+      font-size: clamp(6px, 1vw, 10px);
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .cert-sign {
+      border-top: 1px solid #997021;
+      padding-top: 5px;
+      min-width: 85px;
+      text-align: center;
+      font-size: clamp(8px, 1.15vw, 11px);
+      line-height: 1.5;
+    }
+
+    .cert-sign strong {
+      font-size: clamp(10px, 1.5vw, 14px);
+    }
+
+    .cert-address {
+      font-size: clamp(6px, 1vw, 10px);
+      line-height: 1.45;
+      text-align: center;
+      color: #263548;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .cert-watermark {
+      position: absolute;
+      right: 5%;
+      top: 39%;
+      font-size: clamp(40px, 10vw, 100px);
+      color: #c79532;
+      opacity: .06;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .cert-error {
+      color: #b42318;
+      text-align: center;
+      margin: 12px 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .certificate-page {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .cert-form {
+        padding: 12px;
+      }
+
+      .cert-outer {
+        border-width: 2px;
+        padding: 4px;
+      }
+
+      .cert-inner {
+        padding: 6px;
+        gap: 3px;
+      }
+
+      .cert-description {
+        line-height: 1.25;
+        margin: 3px auto;
+      }
+
+      .cert-actions .cert-btn {
+        flex: 1 1 130px;
+      }
+
+      .cert-bottom {
+        gap: 5px;
       }
     }
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "chemistry-point-certificate.png";
-    link.click();
-    URL.revokeObjectURL(url);
-    $("certError").textContent =
-      "Is browser mein direct sharing available nahi thi, isliye PNG download kar diya gaya.";
-  });
-})();
-</script>
+
+    @media print {
+      body {
+        background: #fff !important;
+      }
+
+      body * {
+        visibility: hidden !important;
+      }
+
+      #certificate,
+      #certificate * {
+        visibility: visible !important;
+      }
+
+      #certificate {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      @page {
+        size: A4 landscape;
+        margin: 8mm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="certificate-page">
+
+    <div class="page-heading">
+      <h1>🏅 Quiz Certificate</h1>
+      <p>Apni quiz performance ka certificate taiyar karein.</p>
+    </div>
+
+    <form class="cert-form" id="certificateForm">
+      <div class="cert-field">
+        <label for="studentName">Student ka naam</label>
+        <input
+          id="studentName"
+          maxlength="70"
+          required
+          autocomplete="name"
+          placeholder="Apna poora naam likhein"
+        >
+      </div>
+
+      <button class="cert-btn cert-btn-primary" type="submit">
+        Update Certificate
+      </button>
+    </form>
+
+    <p class="cert-error" id="certError" role="alert"></p>
+
+    <section
+      class="certificate"
+      id="certificate"
+      aria-label="Chemistry Point quiz certificate"
+    >
+      <div class="cert-outer">
+        <div class="cert-inner">
+
+          <div class="cert-watermark" aria-hidden="true">CP</div>
+
+          <div>
+            <div class="cert-topline">Certificate of Achievement</div>
+            <div class="cert-logo" aria-hidden="true">★</div>
+
+            <div class="cert-school">
+              CHEMISTRY POINT
+            </div>
+
+            <div class="cert-subtitle">
+              Nawada (Bihar)
+            </div>
+          </div>
+
+          <div>
+            <h2 class="cert-title">Certificate</h2>
+            <div class="cert-subtitle">Of Quiz Performance</div>
+
+            <p class="cert-award-text">
+              This certificate is presented to
+            </p>
+
+            <div class="cert-student" id="displayName">
+              Student Name
+            </div>
+
+            <p class="cert-description">
+              for completing the quiz shown below. This certificate records
+              the quiz performance displayed here.
+            </p>
+          </div>
+
+          <div class="cert-stats">
+            <div class="cert-stat">
+              <strong id="quizTitle">Chemistry Quiz</strong>
+              <span>QUIZ / EXAM</span>
+            </div>
+
+            <div class="cert-stat">
+              <strong id="marks">0 / 0</strong>
+              <span>MARKS</span>
+            </div>
+
+            <div class="cert-stat">
+              <strong id="percentage">0%</strong>
+              <span>PERCENTAGE</span>
+            </div>
+
+            <div class="cert-stat">
+              <strong id="grade">—</strong>
+              <span>GRADE</span>
+            </div>
+          </div>
+
+          <div class="cert-bottom">
+            <div class="cert-small">
+              <div>
+                <b>Issue Date:</b>
+                <span id="issueDate"></span>
+              </div>
+
+              <div>
+                <b>Certificate ID:</b>
+                <span id="certificateId"></span>
+              </div>
+            </div>
+
+            <div class="cert-sign">
+              <strong>Pardeep Sir</strong>
+            </div>
+          </div>
+
+          <div class="cert-address">
+            <b>Chemistry Point Nawada (Bihar)</b><br>
+            V.I.P Colony, Nawada<br>
+            अमित आट्स, Classes के नीचे, First Floor पर
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="cert-actions">
+      <button class="cert-btn cert-btn-primary" id="downloadPng" type="button">
+        Download PNG
+      </button>
+
+      <button class="cert-btn cert-btn-secondary" id="downloadPdf" type="button">
+        Download / Save PDF
+      </button>
+
+      <button class="cert-btn cert-btn-secondary" id="shareCert" type="button">
+        Share Certificate
+      </button>
+
+      <a class="cert-btn cert-btn-secondary" href="result.html">
+        Back to Result
+      </a>
+    </div>
+
+    <p class="page-heading">
+      PDF ke liye print window mein “Save as PDF” select karein.
+    </p>
+
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const params = new URLSearchParams(window.location.search);
+      const $ = id => document.getElementById(id);
+
+      const readNumber = (key, fallback = 0) => {
+        const raw = params.get(key);
+
+        if (raw === null || raw.trim() === "") {
+          return fallback;
+        }
+
+        const value = Number(raw);
+        return Number.isFinite(value) ? value : fallback;
+      };
+
+      const score = Math.max(0, readNumber("score"));
+      const total = Math.max(0, readNumber("total"));
+
+      const calculatedPercentage = total > 0
+        ? Math.round((score / total) * 100)
+        : 0;
+
+      const percentage = Math.max(
+        0,
+        Math.min(
+          100,
+          readNumber("percentage", calculatedPercentage)
+        )
+      );
+
+      const quizName = (
+        params.get("quizTitle") ||
+        params.get("title") ||
+        "Chemistry Quiz"
+      ).trim().slice(0, 100);
+
+      const grade =
+        percentage >= 90 ? "A+" :
+        percentage >= 80 ? "A" :
+        percentage >= 70 ? "B+" :
+        percentage >= 60 ? "B" :
+        percentage >= 50 ? "C" :
+        percentage >= 33 ? "D" :
+        "Needs Practice";
+
+      const date = new Date();
+
+      $("issueDate").textContent = date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+
+      const certificateId =
+        "CP-" +
+        date.getFullYear() +
+        "-" +
+        Math.random().toString(36).slice(2, 8).toUpperCase();
+
+      $("certificateId").textContent = certificateId;
+      $("quizTitle").textContent = quizName;
+      $("marks").textContent = `${score} / ${total}`;
+      $("percentage").textContent = `${percentage}%`;
+      $("grade").textContent = grade;
+
+      let nameConfirmed = false;
+
+      $("certificateForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const name = $("studentName").value.trim();
+
+        if (!name) {
+          $("certError").textContent =
+            "Student ka naam likhna zaroori hai.";
+          return;
+        }
+
+        $("displayName").textContent = name;
+        $("certError").textContent = "";
+        nameConfirmed = true;
+      });
+
+      if (!params.has("score") || !params.has("total")) {
+        $("certError").textContent =
+          "Result details abhi connect nahi hain. Actual result ke liye result page se certificate kholein.";
+      }
+
+      function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(/\s+/);
+        let line = "";
+        let currentY = y;
+
+        for (const word of words) {
+          const testLine = line ? line + " " + word : word;
+
+          if (ctx.measureText(testLine).width > maxWidth && line) {
+            ctx.fillText(line, x, currentY);
+            line = word;
+            currentY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+
+        if (line) {
+          ctx.fillText(line, x, currentY);
+        }
+
+        return currentY;
+      }
+
+      function makePngBlob() {
+        return new Promise(resolve => {
+          const canvas = document.createElement("canvas");
+
+          // Landscape canvas with extra height for the full address.
+          canvas.width = 1600;
+          canvas.height = 1200;
+
+          const ctx = canvas.getContext("2d");
+
+          if (!ctx) {
+            resolve(null);
+            return;
+          }
+
+          ctx.fillStyle = "#fffdf7";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.strokeStyle = "#c79532";
+          ctx.lineWidth = 8;
+          ctx.strokeRect(25, 25, 1550, 1150);
+
+          ctx.lineWidth = 2;
+          ctx.strokeRect(43, 43, 1514, 1114);
+
+          const center = 800;
+
+          ctx.textAlign = "center";
+          ctx.textBaseline = "alphabetic";
+
+          ctx.fillStyle = "#997021";
+          ctx.font = "bold 24px Arial";
+          ctx.fillText("CERTIFICATE OF ACHIEVEMENT", center, 100);
+
+          ctx.font = "bold 36px Arial";
+          ctx.fillText("CHEMISTRY POINT", center, 155);
+
+          ctx.font = "24px Arial";
+          ctx.fillText("Nawada (Bihar)", center, 190);
+
+          ctx.fillStyle = "#263548";
+          ctx.font = "bold 72px Georgia";
+          ctx.fillText("Certificate", center, 285);
+
+          ctx.font = "25px Arial";
+          ctx.fillText("OF QUIZ PERFORMANCE", center, 330);
+
+          ctx.font = "25px Arial";
+          ctx.fillText("This certificate is presented to", center, 390);
+
+          const studentName = $("displayName").textContent;
+
+          ctx.fillStyle = "#997021";
+          ctx.font = "bold 48px Georgia";
+
+          drawWrappedText(
+            ctx,
+            studentName,
+            center,
+            455,
+            1300,
+            58
+          );
+
+          ctx.strokeStyle = "#c79532";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(300, 490);
+          ctx.lineTo(1300, 490);
+          ctx.stroke();
+
+          ctx.fillStyle = "#263548";
+          ctx.font = "25px Arial";
+          drawWrappedText(ctx, quizName, center, 540, 1350, 34);
+
+          ctx.fillStyle = "#997021";
+          ctx.font = "bold 29px Arial";
+
+          ctx.fillText(
+            `Marks: ${score} / ${total}`,
+            330,
+            650
+          );
+
+          ctx.fillText(
+            `Percentage: ${percentage}%`,
+            800,
+            650
+          );
+
+          ctx.fillText(
+            `Grade: ${grade}`,
+            1260,
+            650
+          );
+
+          ctx.fillStyle = "#263548";
+          ctx.font = "21px Arial";
+          ctx.fillText(
+            "Issue Date: " + $("issueDate").textContent,
+            400,
+            930
+          );
+
+          ctx.fillText(
+            "Certificate ID: " + certificateId,
+            400,
+            970
+          );
+
+          ctx.strokeStyle = "#997021";
+          ctx.beginPath();
+          ctx.moveTo(1080, 900);
+          ctx.lineTo(1390, 900);
+          ctx.stroke();
+
+          ctx.font = "bold 27px Arial";
+          ctx.fillText("Pardeep Sir", 1235, 940);
+
+          ctx.font = "bold 23px Arial";
+          ctx.fillText(
+            "Chemistry Point Nawada (Bihar)",
+            center,
+            1030
+          );
+
+          ctx.font = "21px Arial";
+          ctx.fillText(
+            "V.I.P Colony, Nawada",
+            center,
+            1070
+          );
+
+          // Use a Unicode-capable font when available for Hindi text.
+          ctx.font = '20px "Noto Sans Devanagari", "Mangal", sans-serif';
+          ctx.fillText(
+            "अमित आट्स, Classes के नीचे, First Floor पर",
+            center,
+            1110
+          );
+
+          canvas.toBlob(resolve, "image/png");
+        });
+      }
+
+      async function getCertificateBlob() {
+        if (!nameConfirmed) {
+          $("certError").textContent =
+            "Pehle student ka naam likhkar Update Certificate dabayein.";
+          return null;
+        }
+
+        if (!params.has("score") || !params.has("total")) {
+          $("certError").textContent =
+            "Actual result details nahi mile. Pehle quiz result se certificate kholein.";
+          return null;
+        }
+
+        const blob = await makePngBlob();
+
+        if (!blob) {
+          $("certError").textContent =
+            "Certificate generate nahi ho paya. Browser dobara open karke try karein.";
+          return null;
+        }
+
+        return blob;
+      }
+
+      $("downloadPng").addEventListener("click", async () => {
+        const blob = await getCertificateBlob();
+        if (!blob) return;
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "chemistry-point-certificate.png";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+
+      $("downloadPdf").addEventListener("click", () => {
+        if (!nameConfirmed) {
+          $("certError").textContent =
+            "Pehle student ka naam likhkar Update Certificate dabayein.";
+          return;
+        }
+
+        if (!params.has("score") || !params.has("total")) {
+          $("certError").textContent =
+            "Actual result details nahi mile. Pehle quiz result se certificate kholein.";
+          return;
+        }
+
+        window.print();
+      });
+
+      $("shareCert").addEventListener("click", async () => {
+        const blob = await getCertificateBlob();
+        if (!blob) return;
+
+        const file = new File(
+          [blob],
+          "chemistry-point-certificate.png",
+          { type: "image/png" }
+        );
+
+        try {
+          if (
+            navigator.share &&
+            navigator.canShare &&
+            navigator.canShare({ files: [file] })
+          ) {
+            await navigator.share({
+              title: "Chemistry Point Certificate",
+              files: [file]
+            });
+            return;
+          }
+        } catch (error) {
+          if (error && error.name === "AbortError") return;
+        }
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "chemistry-point-certificate.png";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        $("certError").textContent =
+          "Direct sharing available nahi thi, isliye certificate PNG download kar diya gaya.";
+      });
+    })();
+  </script>
 </body>
 </html>
