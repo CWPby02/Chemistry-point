@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,53 +10,105 @@
 
 <style>
 :root {
-  --bg:#08090b; --card:#13161a; --card2:#0e1013;
-  --border:rgba(217,154,22,.2); --text:#fff;
-  --muted:#9297a0; --gold:#d99a16; --gold2:#f3bd45;
-  --green:#26c281; --red:#ff6675;
+  --bg:#08090b;
+  --card:#13161a;
+  --card2:#0e1013;
+  --border:rgba(217,154,22,.2);
+  --text:#fff;
+  --muted:#9297a0;
+  --gold:#d99a16;
+  --gold2:#f3bd45;
+  --green:#26c281;
+  --red:#ff6675;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
-body.light-mode{--bg:#f5f5f5;--card:#fff;--card2:#f8f8f8;--border:rgba(168,111,0,.2);--text:#17191c;--muted:#666}
+body.light-mode{
+  --bg:#f5f5f5;
+  --card:#fff;
+  --card2:#f8f8f8;
+  --border:rgba(168,111,0,.2);
+  --text:#17191c;
+  --muted:#666;
+}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.sidebar{position:fixed;inset:0 auto 0 0;width:245px;background:var(--card);border-right:1px solid var(--border);padding:20px 14px;display:flex;flex-direction:column;z-index:5}
-.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 22px;border-bottom:1px solid var(--border)}
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:245px;
+  background:var(--card);border-right:1px solid var(--border);
+  padding:20px 14px;display:flex;flex-direction:column;z-index:5
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  padding:4px 8px 22px;border-bottom:1px solid var(--border)
+}
 .brand img{width:43px;height:43px;object-fit:contain}
 .brand strong{font-family:Poppins;font-size:15px}
 .brand small{display:block;color:var(--gold2);font-size:10px;margin-top:3px}
 .nav{padding-top:20px}
-.nav a{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--muted);padding:13px;border-radius:10px;margin-bottom:5px;font-size:13px;font-weight:600}
+.nav a{
+  display:flex;gap:12px;align-items:center;text-decoration:none;
+  color:var(--muted);padding:13px;border-radius:10px;
+  margin-bottom:5px;font-size:13px;font-weight:600
+}
 .nav a:hover,.nav a.active{background:rgba(217,154,22,.1);color:var(--gold2)}
 .nav i{width:18px;text-align:center}
 .side-bottom{margin-top:auto}
-.logout{width:100%;padding:12px;background:rgba(255,80,90,.08);color:var(--red);border:1px solid rgba(255,80,90,.2);border-radius:10px}
+.logout{
+  width:100%;padding:12px;background:rgba(255,80,90,.08);
+  color:var(--red);border:1px solid rgba(255,80,90,.2);border-radius:10px
+}
 .main{margin-left:245px;min-height:100vh}
-.top{height:72px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:3}
+.top{
+  height:72px;background:var(--card);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 26px;
+  position:sticky;top:0;z-index:3
+}
 .top h1{font:600 19px Poppins;margin:0}
 .top-actions{display:flex;align-items:center;gap:12px}
-.icon-btn{width:40px;height:40px;border:1px solid var(--border);background:var(--card2);color:var(--gold2);border-radius:10px}
+.icon-btn{
+  width:40px;height:40px;border:1px solid var(--border);
+  background:var(--card2);color:var(--gold2);border-radius:10px
+}
 .menu-btn{display:none}
 .content{padding:25px;max-width:1200px;margin:auto}
-.intro{padding:22px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(120deg,rgba(217,154,22,.12),transparent),var(--card);margin-bottom:22px}
+.intro{
+  padding:22px;border:1px solid var(--border);border-radius:16px;
+  background:linear-gradient(120deg,rgba(217,154,22,.12),transparent),var(--card);
+  margin-bottom:22px
+}
 .intro h2{font:700 22px Poppins;margin:0 0 7px}
 .intro h2 span{color:var(--gold2)}
 .intro p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
-.stat,.panel{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px}
+.stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;margin-bottom:22px
+}
+.stat,.panel{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:15px;padding:19px
+}
 .stat-label{color:var(--muted);font-size:12px}
 .stat-value{font:700 26px Poppins;margin-top:8px}
 .stat i{color:var(--gold2);margin-right:7px}
 .panel{margin-bottom:20px}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.panel-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:18px
+}
 .panel h3{font:600 16px Poppins;margin:0}
 .panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .field{display:flex;flex-direction:column;gap:7px}
 .field.full{grid-column:1/-1}
 .field label{font-size:12px;color:var(--muted);font-weight:600}
-.field input,.field select{width:100%;min-width:0;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:12px;outline:none}
+.field input,.field select{
+  width:100%;min-width:0;background:var(--card2);color:var(--text);
+  border:1px solid var(--border);border-radius:9px;padding:12px;outline:none
+}
 .field input:focus,.field select:focus{border-color:var(--gold)}
+.field input[readonly]{opacity:.8}
+.field select option{background:var(--card);color:var(--text)}
 .hint{font-size:11px;color:var(--muted);line-height:1.6}
 .btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;font-size:12px}
 .btn-gold{background:var(--gold);color:#17120a}
@@ -65,7 +116,11 @@ button{cursor:pointer}
 .btn-green{background:rgba(38,194,129,.13);color:var(--green);border:1px solid rgba(38,194,129,.3)}
 .btn-red{background:rgba(255,102,117,.1);color:var(--red);border:1px solid rgba(255,102,117,.25)}
 .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
-.notice{padding:13px 14px;border-radius:10px;background:rgba(217,154,22,.08);border:1px solid var(--border);font-size:12px;line-height:1.7;color:var(--muted);margin-top:14px}
+.notice{
+  padding:13px 14px;border-radius:10px;background:rgba(217,154,22,.08);
+  border:1px solid var(--border);font-size:12px;line-height:1.7;
+  color:var(--muted);margin-top:14px
+}
 .notice i{color:var(--gold2);margin-right:5px}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:570px}
@@ -83,25 +138,25 @@ td{line-height:1.6}
 #message.error{background:rgba(255,102,117,.1);color:var(--red)}
 #message.success{background:rgba(38,194,129,.1);color:var(--green)}
 @media(max-width:850px){
- .sidebar{transform:translateX(-100%);transition:.25s}
- .sidebar.open{transform:translateX(0)}
- .main{margin-left:0}
- .menu-btn{display:inline-block}
- .content{padding:17px}
- .top{padding:0 16px}
+  .sidebar{transform:translateX(-100%);transition:.25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:inline-block}
+  .content{padding:17px}
+  .top{padding:0 16px}
 }
 @media(max-width:580px){
- .stats{grid-template-columns:1fr}
- .fields{grid-template-columns:1fr}
- .field.full{grid-column:auto}
- .intro h2{font-size:19px}
- .panel{padding:15px}
- .top h1{font-size:16px}
+  .stats{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .intro h2{font-size:19px}
+  .panel{padding:15px}
+  .top h1{font-size:16px}
 }
 </style>
 </head>
-<body>
 
+<body>
 <aside class="sidebar" id="sidebar">
   <div class="brand">
     <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
@@ -126,31 +181,47 @@ td{line-height:1.6}
 <main class="main">
   <header class="top">
     <div style="display:flex;align-items:center;gap:12px">
-      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <h1>Payment Management</h1>
     </div>
     <div class="top-actions">
-      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
     </div>
   </header>
 
   <div class="content">
     <section class="intro">
       <h2>Payment <span>Control Center</span></h2>
-      <p>UPI details, product pricing aur student payment requests ko yahan manage karein. Payment ko approve karne se pehle transaction ko manually verify karna zaroori hai.</p>
+      <p>UPI details, product pricing aur student payment requests ko yahan manage karein. Payment ko approve karne se pehle transaction manually verify karein.</p>
     </section>
 
     <div id="message" role="status"></div>
 
     <section class="stats">
-      <div class="stat"><div class="stat-label"><i class="fa-regular fa-clock"></i> Pending Requests</div><div class="stat-value" id="pendingCount">—</div></div>
-      <div class="stat"><div class="stat-label"><i class="fa-solid fa-check"></i> Approved Requests</div><div class="stat-value" id="approvedCount">—</div></div>
-      <div class="stat"><div class="stat-label"><i class="fa-solid fa-indian-rupee-sign"></i> Approved Amount</div><div class="stat-value" id="approvedAmount">—</div></div>
+      <div class="stat">
+        <div class="stat-label"><i class="fa-regular fa-clock"></i> Pending Requests</div>
+        <div class="stat-value" id="pendingCount">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label"><i class="fa-solid fa-check"></i> Approved Requests</div>
+        <div class="stat-value" id="approvedCount">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label"><i class="fa-solid fa-indian-rupee-sign"></i> Approved Amount</div>
+        <div class="stat-value" id="approvedAmount">—</div>
+      </div>
     </section>
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3><i class="fa-solid fa-wallet" style="color:var(--gold2)"></i> Payment Settings</h3><p>Student payment page ke liye contact aur UPI details.</p></div>
+        <div>
+          <h3><i class="fa-solid fa-wallet" style="color:var(--gold2)"></i> Payment Settings</h3>
+          <p>Student payment page ke liye contact aur UPI details.</p>
+        </div>
       </div>
 
       <form id="settingsForm">
@@ -177,8 +248,12 @@ td{line-height:1.6}
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3><i class="fa-solid fa-tags" style="color:var(--gold2)"></i> Product Prices</h3><p>Har quiz aur PDF ki price alag set karein.</p></div>
+        <div>
+          <h3><i class="fa-solid fa-tags" style="color:var(--gold2)"></i> Product Prices</h3>
+          <p>Existing quiz ya PDF select karke uski price set karein.</p>
+        </div>
       </div>
+
       <form id="priceForm">
         <div class="fields">
           <div class="field">
@@ -188,54 +263,97 @@ td{line-height:1.6}
               <option value="pdf">PDF</option>
             </select>
           </div>
+
           <div class="field">
-            <label for="productId">Existing Product ID</label>
-            <input id="productId" placeholder="Firebase product key" required maxlength="150">
+            <label for="productSelect">Select Quiz / PDF</label>
+            <select id="productSelect" required>
+              <option value="">Loading products...</option>
+            </select>
           </div>
+
+          <div class="field">
+            <label for="productId">Product ID</label>
+            <input id="productId" placeholder="Auto-filled product ID" readonly required>
+          </div>
+
           <div class="field">
             <label for="productName">Product Name</label>
-            <input id="productName" placeholder="Example: Solid State Quiz" required maxlength="150">
+            <input id="productName" placeholder="Auto-filled product name" readonly required>
           </div>
-          <div class="field">
+
+          <div class="field full">
             <label for="productPrice">Price (₹)</label>
             <input id="productPrice" type="number" min="0" max="100000" step="0.01" placeholder="49" required>
           </div>
         </div>
+
         <div class="form-actions">
-          <button class="btn btn-gold" type="submit"><i class="fa-solid fa-plus"></i> Save Price</button>
+          <button class="btn btn-gold" type="submit">
+            <i class="fa-solid fa-floppy-disk"></i> Save Price
+          </button>
+          <button class="btn btn-muted" type="button" id="reloadProducts">
+            <i class="fa-solid fa-rotate"></i> Reload Products
+          </button>
         </div>
       </form>
-      <div class="notice"><i class="fa-solid fa-circle-info"></i> Product ID wahi hona chahiye jo existing quiz/PDF ke Firebase record mein use hota hai. Yeh page price record banata hai; student-side checkout integration agle step mein hogi.</div>
+
+      <div class="notice">
+        <i class="fa-solid fa-circle-info"></i>
+        Dropdown existing Firebase quiz records aur chapter ke PDF records se products load karne ki koshish karta hai. Agar koi PDF list mein nahi dikhti, toh uske database data structure ko check karna hoga.
+      </div>
+
       <div class="table-wrap" style="margin-top:18px">
         <table>
-          <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr></thead>
-          <tbody id="pricesTable"><tr><td colspan="5" class="empty">Loading prices...</td></tr></tbody>
+          <thead>
+            <tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr>
+          </thead>
+          <tbody id="pricesTable">
+            <tr><td colspan="5" class="empty">Loading prices...</td></tr>
+          </tbody>
         </table>
       </div>
     </section>
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3><i class="fa-solid fa-receipt" style="color:var(--gold2)"></i> Payment Requests</h3><p>Student requests ko transaction verification ke baad hi approve karein.</p></div>
-        <button class="btn btn-muted" id="reloadRequests" type="button"><i class="fa-solid fa-rotate"></i> Refresh</button>
+        <div>
+          <h3><i class="fa-solid fa-receipt" style="color:var(--gold2)"></i> Payment Requests</h3>
+          <p>Transaction verify karne ke baad hi request approve karein.</p>
+        </div>
+        <button class="btn btn-muted" id="reloadRequests" type="button">
+          <i class="fa-solid fa-rotate"></i> Refresh
+        </button>
       </div>
-      <div class="notice"><i class="fa-solid fa-shield-halved"></i> Approval controls tabhi active honge jab Firebase mein request aur approval ke liye required permissions properly configure hon. Payment screenshot ko WhatsApp par manually verify karein.</div>
+
+      <div class="notice">
+        <i class="fa-solid fa-shield-halved"></i>
+        Approve/reject actions abhi disabled hain. Student access ko secure karne ke liye Firebase Rules aur student-side payment verification ko configure karna zaroori hai.
+      </div>
+
       <div class="table-wrap" style="margin-top:15px">
         <table>
-          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
-          <tbody id="requestsTable"><tr><td colspan="5" class="empty">Loading requests...</td></tr></tbody>
+          <thead>
+            <tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody id="requestsTable">
+            <tr><td colspan="5" class="empty">Loading requests...</td></tr>
+          </tbody>
         </table>
       </div>
     </section>
 
-    <p style="text-align:center;color:var(--muted);font-size:11px;padding:8px">© 2026 Code With Piyush · Chemistry Point Admin</p>
+    <p style="text-align:center;color:var(--muted);font-size:11px;padding:8px">
+      © 2026 Code With Piyush · Chemistry Point Admin
+    </p>
   </div>
 </main>
 
 <script type="module">
 import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import { getDatabase, ref, get, set, update, remove, onValue } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import {
+  getDatabase, ref, get, set, remove
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
@@ -247,27 +365,31 @@ const firebaseConfig = {
 };
 
 const app = (() => {
-  try { return getApp(); }
-  catch { return initializeApp(firebaseConfig); }
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(firebaseConfig);
+  }
 })();
+
 const auth = getAuth(app);
-const db = getDatabase(app, "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/");
+const db = getDatabase(
+  app,
+  "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+);
 const $ = id => document.getElementById(id);
 
 let currentUser = null;
 let requestsData = {};
 let pricesData = {};
 let configData = {};
+let availableProducts = [];
 
 function message(text, type = "success") {
   const el = $("message");
   el.textContent = text;
   el.className = `show ${type}`;
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function safeText(value) {
-  return String(value ?? "");
 }
 
 function money(value) {
@@ -278,20 +400,191 @@ function money(value) {
 
 async function verifyAdmin(user) {
   const snap = await get(ref(db, `admins/${user.uid}`));
+
   if (!snap.exists()) throw new Error("NOT_ADMIN");
+
   const data = snap.val();
-  if (data.role !== "admin" || data.active === false) throw new Error("NOT_ADMIN");
+
+  if (data.role !== "admin" || data.active === false) {
+    throw new Error("NOT_ADMIN");
+  }
 }
+
+/*
+  Quiz products:
+  Reads records from /quizzes.
+
+  PDF products:
+  Reads records from /chapters and supports:
+  - chapter.pdfs as an object of PDF records
+  - direct chapter PDF URL fields
+*/
+function normalizeProducts(data, type) {
+  const products = [];
+
+  if (!data || typeof data !== "object") {
+    return products;
+  }
+
+  Object.entries(data).forEach(([key, item]) => {
+    if (!item || typeof item !== "object") return;
+
+    if (type === "quiz") {
+      const name = item.title || item.name || item.quizTitle;
+
+      if (!name) return;
+
+      products.push({
+        id: key,
+        name: String(name),
+        type: "quiz"
+      });
+
+      return;
+    }
+
+    const chapterName =
+      item.chapterName ||
+      item.name ||
+      item.title ||
+      item.chapterTitle ||
+      key;
+
+    const chapterSlug = item.slug || item.chapterSlug || key;
+    const pdfs = item.pdfs;
+
+    if (pdfs && typeof pdfs === "object") {
+      Object.entries(pdfs).forEach(([pdfKey, pdf]) => {
+        if (!pdf || typeof pdf !== "object") return;
+
+        const pdfName =
+          pdf.name ||
+          pdf.title ||
+          pdf.label ||
+          pdf.type ||
+          pdfKey;
+
+        products.push({
+          id: `${key}/${pdfKey}`,
+          name: `${chapterName || chapterSlug} — ${pdfName}`,
+          type: "pdf"
+        });
+      });
+    }
+
+    const directUrl =
+      item.pdfUrl ||
+      item.pdfURL ||
+      item.driveUrl ||
+      item.googleDriveUrl;
+
+    if (directUrl && !pdfs) {
+      products.push({
+        id: key,
+        name: String(chapterName || chapterSlug),
+        type: "pdf"
+      });
+    }
+  });
+
+  return products;
+}
+
+async function loadProducts() {
+  const select = $("productSelect");
+  const type = $("productType").value;
+
+  select.innerHTML = "";
+  const loadingOption = document.createElement("option");
+  loadingOption.value = "";
+  loadingOption.textContent = "Loading products...";
+  select.appendChild(loadingOption);
+
+  $("productId").value = "";
+  $("productName").value = "";
+  availableProducts = [];
+
+  try {
+    const path = type === "quiz" ? "quizzes" : "chapters";
+    const snapshot = await get(ref(db, path));
+    const data = snapshot.exists() ? snapshot.val() : {};
+
+    availableProducts = normalizeProducts(data, type);
+
+    select.innerHTML = "";
+
+    const firstOption = document.createElement("option");
+    firstOption.value = "";
+    firstOption.textContent = availableProducts.length
+      ? "Select a product"
+      : "No products found";
+
+    select.appendChild(firstOption);
+
+    availableProducts.forEach((product, index) => {
+      const option = document.createElement("option");
+      option.value = String(index);
+      option.textContent = product.name;
+      select.appendChild(option);
+    });
+
+    if (!availableProducts.length) {
+      message(
+        type === "quiz"
+          ? "Quiz nahi mila. /quizzes ke records aur title/name fields check karein."
+          : "PDF nahi mili. /chapters ka PDF data structure check karna hoga.",
+        "error"
+      );
+    }
+  } catch (error) {
+    console.error("Product load error:", error);
+    select.innerHTML = '<option value="">Products load nahi hue</option>';
+
+    message(
+      "Products load nahi hue. Firebase Rules ya database path check karein: " +
+      error.message,
+      "error"
+    );
+  }
+}
+
+$("productType").addEventListener("change", loadProducts);
+
+$("productSelect").addEventListener("change", () => {
+  const selectedValue = $("productSelect").value;
+
+  if (selectedValue === "") {
+    $("productId").value = "";
+    $("productName").value = "";
+    return;
+  }
+
+  const product = availableProducts[Number(selectedValue)];
+
+  if (!product) {
+    $("productId").value = "";
+    $("productName").value = "";
+    return;
+  }
+
+  $("productId").value = product.id;
+  $("productName").value = product.name;
+});
+
+$("reloadProducts").addEventListener("click", loadProducts);
 
 function renderPrices() {
   const tbody = $("pricesTable");
   const entries = Object.entries(pricesData || {});
+
   if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
+    tbody.innerHTML =
+      '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
     return;
   }
 
   tbody.innerHTML = "";
+
   entries.forEach(([key, item]) => {
     const tr = document.createElement("tr");
     const product = document.createElement("td");
@@ -309,13 +602,21 @@ function renderPrices() {
     btn.className = "btn btn-red";
     btn.type = "button";
     btn.textContent = "Delete";
+
     btn.addEventListener("click", async () => {
-      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) return;
+      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) {
+        return;
+      }
+
       try {
         await remove(ref(db, `paymentPrices/${key}`));
+        await loadPrices();
         message("Price entry delete ho gayi.");
       } catch (error) {
-        message("Delete nahi hua. Firebase Rules check karein: " + error.message, "error");
+        message(
+          "Delete nahi hua. Firebase Rules check karein: " + error.message,
+          "error"
+        );
       }
     });
 
@@ -328,14 +629,19 @@ function renderPrices() {
 function renderRequests() {
   const tbody = $("requestsTable");
   const entries = Object.entries(requestsData || {});
-  let pending = 0, approved = 0, total = 0;
+
+  let pending = 0;
+  let approved = 0;
+  let total = 0;
 
   entries.forEach(([, item]) => {
     const status = String(item.status || "pending").toLowerCase();
+
     if (status === "pending") pending++;
+
     if (status === "approved") {
       approved++;
-      total += Number(item.amount || item.price || 0);
+      total += Number(item.amount ?? item.price ?? 0);
     }
   });
 
@@ -344,11 +650,13 @@ function renderRequests() {
   $("approvedAmount").textContent = money(total);
 
   if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
+    tbody.innerHTML =
+      '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
     return;
   }
 
   tbody.innerHTML = "";
+
   entries.reverse().forEach(([key, item]) => {
     const tr = document.createElement("tr");
     const paymentId = document.createElement("td");
@@ -358,12 +666,21 @@ function renderRequests() {
     const action = document.createElement("td");
 
     paymentId.textContent = item.paymentId || key;
-    student.textContent = `${item.studentName || item.name || "Student"} · ${item.productName || item.productId || "Product"}`;
+
+    student.textContent =
+      `${item.studentName || item.name || "Student"} · ` +
+      `${item.productName || item.productId || "Product"}`;
+
     amount.textContent = money(item.amount ?? item.price);
 
     const status = String(item.status || "pending").toLowerCase();
     const badge = document.createElement("span");
-    badge.className = `status ${["pending","approved","rejected"].includes(status) ? status : "pending"}`;
+
+    badge.className =
+      `status ${["pending", "approved", "rejected"].includes(status)
+        ? status
+        : "pending"}`;
+
     badge.textContent = status.toUpperCase();
     statusCell.appendChild(badge);
 
@@ -372,19 +689,25 @@ function renderRequests() {
       approve.className = "btn btn-green";
       approve.textContent = "Approve";
       approve.type = "button";
-      approve.addEventListener("click", () => message(
-        "Approval abhi enable nahi kiya gaya hai. Pehle Firebase Rules aur student access validation configure karna hoga.",
-        "error"
-      ));
+
+      approve.addEventListener("click", () => {
+        message(
+          "Approval abhi enable nahi hai. Pehle Firebase Rules aur student access validation configure karna hoga.",
+          "error"
+        );
+      });
 
       const reject = document.createElement("button");
       reject.className = "btn btn-red";
       reject.textContent = "Reject";
       reject.type = "button";
-      reject.addEventListener("click", () => message(
-        "Rejection abhi enable nahi kiya gaya hai. Secure request schema aur Firebase Rules pehle configure honge.",
-        "error"
-      ));
+
+      reject.addEventListener("click", () => {
+        message(
+          "Rejection abhi enable nahi hai. Secure request schema aur Firebase Rules pehle configure honge.",
+          "error"
+        );
+      });
 
       const actions = document.createElement("div");
       actions.className = "request-actions";
@@ -402,6 +725,7 @@ function renderRequests() {
 async function loadSettings() {
   const snap = await get(ref(db, "paymentConfig"));
   configData = snap.exists() ? snap.val() : {};
+
   $("upiId").value = configData.upiId || "";
   $("whatsapp").value = configData.whatsapp || "";
   $("groupLink").value = configData.groupLink || "";
@@ -421,66 +745,119 @@ async function loadRequests() {
 
 $("settingsForm").addEventListener("submit", async event => {
   event.preventDefault();
-  if (!currentUser) return;
+
+  if (!currentUser) {
+    return message("Admin login required.", "error");
+  }
 
   const upiId = $("upiId").value.trim();
   const whatsapp = $("whatsapp").value.replace(/\D/g, "");
   const groupLink = $("groupLink").value.trim();
 
-  if (!upiId.includes("@")) return message("Valid UPI ID enter karein.", "error");
-  if (whatsapp.length < 10) return message("WhatsApp number check karein.", "error");
+  if (!upiId.includes("@")) {
+    return message("Valid UPI ID enter karein.", "error");
+  }
+
+  if (whatsapp.length < 10) {
+    return message("WhatsApp number check karein.", "error");
+  }
 
   try {
     const parsed = new URL(groupLink);
-    if (parsed.protocol !== "https:" || !parsed.hostname.endsWith("whatsapp.com")) {
+
+    if (
+      parsed.protocol !== "https:" ||
+      !parsed.hostname.endsWith("whatsapp.com")
+    ) {
       return message("Valid WhatsApp group link enter karein.", "error");
     }
 
     await set(ref(db, "paymentConfig"), {
-      upiId, whatsapp, groupLink,
+      upiId,
+      whatsapp,
+      groupLink,
       updatedAt: Date.now(),
       updatedBy: currentUser.uid
     });
+
     message("Payment settings save ho gayi.");
   } catch (error) {
-    message("Settings save nahi hui. Firebase Rules check karein: " + error.message, "error");
+    message(
+      "Settings save nahi hui. Firebase Rules check karein: " + error.message,
+      "error"
+    );
   }
 });
 
 $("priceForm").addEventListener("submit", async event => {
   event.preventDefault();
+
+  if (!currentUser) {
+    return message("Admin login required.", "error");
+  }
+
   const type = $("productType").value;
   const productId = $("productId").value.trim();
   const name = $("productName").value.trim();
   const price = Number($("productPrice").value);
 
-  if (!productId || !name || !Number.isFinite(price) || price < 0) {
-    return message("Product details aur valid price enter karein.", "error");
+  if (
+    !productId ||
+    !name ||
+    !Number.isFinite(price) ||
+    price < 0 ||
+    price > 100000
+  ) {
+    return message("Product select karein aur valid price enter karein.", "error");
   }
 
+  /*
+    Firebase keys cannot contain:
+    . # $ [ ] /
+    Product IDs containing "/" are encoded for the price record key.
+    The original productId is saved separately for matching later.
+  */
   const key = `${type}_${productId}`.replace(/[.#$[\]/]/g, "_");
 
   try {
     await set(ref(db, `paymentPrices/${key}`), {
-      type, productId, name, price,
+      type,
+      productId,
+      name,
+      price,
       updatedAt: Date.now(),
       updatedBy: currentUser.uid
     });
-    $("priceForm").reset();
-    message("Product price save ho gayi.");
+
+    await loadPrices();
+
+    $("productPrice").value = "";
+
+    message("Product price successfully save ho gayi.");
   } catch (error) {
-    message("Price save nahi hui. Firebase Rules check karein: " + error.message, "error");
+    message(
+      "Price save nahi hui. Firebase Rules check karein: " + error.message,
+      "error"
+    );
   }
 });
 
 $("reloadSettings").addEventListener("click", async () => {
-  try { await loadSettings(); message("Settings reload ho gayi."); }
-  catch (error) { message("Settings load error: " + error.message, "error"); }
+  try {
+    await loadSettings();
+    message("Settings reload ho gayi.");
+  } catch (error) {
+    message("Settings load error: " + error.message, "error");
+  }
 });
 
 $("reloadRequests").addEventListener("click", async () => {
-  try { await loadRequests(); message("Requests refresh ho gayi."); }
-  catch (error) { message("Requests load error: " + error.message, "error"); }
+  try {
+    await loadRequests();
+    message("Requests refresh ho gayi.");
+  } catch (error) {
+    message("Requests load error: " + error.message, "error");
+  }
 });
 
 onAuthStateChanged(auth, async user => {
@@ -496,17 +873,27 @@ onAuthStateChanged(auth, async user => {
     await Promise.all([
       loadSettings(),
       loadPrices(),
-      loadRequests()
+      loadRequests(),
+      loadProducts()
     ]);
   } catch (error) {
     console.error(error);
+
     if (error.message === "NOT_ADMIN") {
       await signOut(auth);
       location.href = "login.html";
     } else {
-      message("Firebase data load nahi hua. Database Rules aur connection check karein: " + error.message, "error");
-      $("pricesTable").innerHTML = '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
-      $("requestsTable").innerHTML = '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
+      message(
+        "Firebase data load nahi hua. Database Rules aur connection check karein: " +
+        error.message,
+        "error"
+      );
+
+      $("pricesTable").innerHTML =
+        '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
+
+      $("requestsTable").innerHTML =
+        '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
     }
   }
 });
@@ -516,18 +903,27 @@ $("logout").addEventListener("click", async () => {
   location.href = "login.html";
 });
 
-$("menuBtn").addEventListener("click", () => $("sidebar").classList.toggle("open"));
+$("menuBtn").addEventListener("click", () => {
+  $("sidebar").classList.toggle("open");
+});
 
 const themeKey = "chemistryPointTheme";
+
 function applyTheme(theme) {
   document.body.classList.toggle("light-mode", theme === "light");
+
   $("themeBtn").innerHTML = theme === "light"
     ? '<i class="fa-solid fa-sun"></i>'
     : '<i class="fa-solid fa-moon"></i>';
 }
+
 applyTheme(localStorage.getItem(themeKey) || "dark");
+
 $("themeBtn").addEventListener("click", () => {
-  const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+  const next = document.body.classList.contains("light-mode")
+    ? "dark"
+    : "light";
+
   localStorage.setItem(themeKey, next);
   applyTheme(next);
 });
