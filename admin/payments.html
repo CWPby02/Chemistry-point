@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Management | Chemistry Point</title>
+<link rel="icon" href="../assets/images/logo/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+:root {
+  --bg:#08090b; --card:#13161a; --card2:#0e1013;
+  --border:rgba(217,154,22,.2); --text:#fff;
+  --muted:#9297a0; --gold:#d99a16; --gold2:#f3bd45;
+  --green:#26c281; --red:#ff6675;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
+body.light-mode{--bg:#f5f5f5;--card:#fff;--card2:#f8f8f8;--border:rgba(168,111,0,.2);--text:#17191c;--muted:#666}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.sidebar{position:fixed;inset:0 auto 0 0;width:245px;background:var(--card);border-right:1px solid var(--border);padding:20px 14px;display:flex;flex-direction:column;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 22px;border-bottom:1px solid var(--border)}
+.brand img{width:43px;height:43px;object-fit:contain}
+.brand strong{font-family:Poppins;font-size:15px}
+.brand small{display:block;color:var(--gold2);font-size:10px;margin-top:3px}
+.nav{padding-top:20px}
+.nav a{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--muted);padding:13px;border-radius:10px;margin-bottom:5px;font-size:13px;font-weight:600}
+.nav a:hover,.nav a.active{background:rgba(217,154,22,.1);color:var(--gold2)}
+.nav i{width:18px;text-align:center}
+.side-bottom{margin-top:auto}
+.logout{width:100%;padding:12px;background:rgba(255,80,90,.08);color:var(--red);border:1px solid rgba(255,80,90,.2);border-radius:10px}
+.main{margin-left:245px;min-height:100vh}
+.top{height:72px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:3}
+.top h1{font:600 19px Poppins;margin:0}
+.top-actions{display:flex;align-items:center;gap:12px}
+.icon-btn{width:40px;height:40px;border:1px solid var(--border);background:var(--card2);color:var(--gold2);border-radius:10px}
+.menu-btn{display:none}
+.content{padding:25px;max-width:1200px;margin:auto}
+.intro{padding:22px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(120deg,rgba(217,154,22,.12),transparent),var(--card);margin-bottom:22px}
+.intro h2{font:700 22px Poppins;margin:0 0 7px}
+.intro h2 span{color:var(--gold2)}
+.intro p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.stat,.panel{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px}
+.stat-label{color:var(--muted);font-size:12px}
+.stat-value{font:700 26px Poppins;margin-top:8px}
+.stat i{color:var(--gold2);margin-right:7px}
+.panel{margin-bottom:20px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.panel h3{font:600 16px Poppins;margin:0}
+.panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;color:var(--muted);font-weight:600}
+.field input,.field select{width:100%;min-width:0;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:12px;outline:none}
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.hint{font-size:11px;color:var(--muted);line-height:1.6}
+.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;font-size:12px}
+.btn-gold{background:var(--gold);color:#17120a}
+.btn-muted{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+.btn-green{background:rgba(38,194,129,.13);color:var(--green);border:1px solid rgba(38,194,129,.3)}
+.btn-red{background:rgba(255,102,117,.1);color:var(--red);border:1px solid rgba(255,102,117,.25)}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+.notice{padding:13px 14px;border-radius:10px;background:rgba(217,154,22,.08);border:1px solid var(--border);font-size:12px;line-height:1.7;color:var(--muted);margin-top:14px}
+.notice i{color:var(--gold2);margin-right:5px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:570px}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--border);font-size:12px}
+th{color:var(--muted);font-weight:600}
+td{line-height:1.6}
+.empty{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+.status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.status.pending{color:var(--gold2);background:rgba(217,154,22,.1)}
+.status.approved{color:var(--green);background:rgba(38,194,129,.1)}
+.status.rejected{color:var(--red);background:rgba(255,102,117,.1)}
+.request-actions{display:flex;gap:6px;flex-wrap:wrap}
+#message{display:none;padding:12px;border-radius:9px;margin-bottom:15px;font-size:12px;line-height:1.6}
+#message.show{display:block}
+#message.error{background:rgba(255,102,117,.1);color:var(--red)}
+#message.success{background:rgba(38,194,129,.1);color:var(--green)}
+@media(max-width:850px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0}
+ .menu-btn{display:inline-block}
+ .content{padding:17px}
+ .top{padding:0 16px}
+}
+@media(max-width:580px){
+ .stats{grid-template-columns:1fr}
+ .fields{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .intro h2{font-size:19px}
+ .panel{padding:15px}
+ .top h1{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
+    <div><strong>Chemistry Point</strong><small>ADMIN PANEL</small></div>
+  </div>
+
+  <nav class="nav">
+    <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+    <a href="videos.html"><i class="fa-solid fa-video"></i> Videos</a>
+    <a href="objectives.html"><i class="fa-solid fa-file-pdf"></i> Objectives / PDFs</a>
+    <a href="quizzes.html"><i class="fa-solid fa-circle-question"></i> Quizzes</a>
+    <a href="questions.html"><i class="fa-solid fa-list-check"></i> Questions</a>
+    <a href="payments.html" class="active"><i class="fa-solid fa-credit-card"></i> Payments</a>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+  </nav>
+
+  <div class="side-bottom">
+    <button class="logout" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="top">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <h1>Payment Management</h1>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </header>
+
+  <div class="content">
+    <section class="intro">
+      <h2>Payment <span>Control Center</span></h2>
+      <p>UPI details, product pricing aur student payment requests ko yahan manage karein. Payment ko approve karne se pehle transaction ko manually verify karna zaroori hai.</p>
+    </section>
+
+    <div id="message" role="status"></div>
+
+    <section class="stats">
+      <div class="stat"><div class="stat-label"><i class="fa-regular fa-clock"></i> Pending Requests</div><div class="stat-value" id="pendingCount">—</div></div>
+      <div class="stat"><div class="stat-label"><i class="fa-solid fa-check"></i> Approved Requests</div><div class="stat-value" id="approvedCount">—</div></div>
+      <div class="stat"><div class="stat-label"><i class="fa-solid fa-indian-rupee-sign"></i> Approved Amount</div><div class="stat-value" id="approvedAmount">—</div></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h3><i class="fa-solid fa-wallet" style="color:var(--gold2)"></i> Payment Settings</h3><p>Student payment page ke liye contact aur UPI details.</p></div>
+      </div>
+
+      <form id="settingsForm">
+        <div class="fields">
+          <div class="field">
+            <label for="upiId">UPI ID</label>
+            <input id="upiId" placeholder="example@upi" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp Number</label>
+            <input id="whatsapp" placeholder="91XXXXXXXXXX" required inputmode="numeric" maxlength="15">
+          </div>
+          <div class="field full">
+            <label for="groupLink">Payment Verification WhatsApp Group Link</label>
+            <input id="groupLink" type="url" placeholder="https://chat.whatsapp.com/..." required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-gold" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+          <button class="btn btn-muted" type="button" id="reloadSettings">Reload</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h3><i class="fa-solid fa-tags" style="color:var(--gold2)"></i> Product Prices</h3><p>Har quiz aur PDF ki price alag set karein.</p></div>
+      </div>
+      <form id="priceForm">
+        <div class="fields">
+          <div class="field">
+            <label for="productType">Product Type</label>
+            <select id="productType" required>
+              <option value="quiz">Quiz</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="productId">Existing Product ID</label>
+            <input id="productId" placeholder="Firebase product key" required maxlength="150">
+          </div>
+          <div class="field">
+            <label for="productName">Product Name</label>
+            <input id="productName" placeholder="Example: Solid State Quiz" required maxlength="150">
+          </div>
+          <div class="field">
+            <label for="productPrice">Price (₹)</label>
+            <input id="productPrice" type="number" min="0" max="100000" step="0.01" placeholder="49" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-gold" type="submit"><i class="fa-solid fa-plus"></i> Save Price</button>
+        </div>
+      </form>
+      <div class="notice"><i class="fa-solid fa-circle-info"></i> Product ID wahi hona chahiye jo existing quiz/PDF ke Firebase record mein use hota hai. Yeh page price record banata hai; student-side checkout integration agle step mein hogi.</div>
+      <div class="table-wrap" style="margin-top:18px">
+        <table>
+          <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr></thead>
+          <tbody id="pricesTable"><tr><td colspan="5" class="empty">Loading prices...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h3><i class="fa-solid fa-receipt" style="color:var(--gold2)"></i> Payment Requests</h3><p>Student requests ko transaction verification ke baad hi approve karein.</p></div>
+        <button class="btn btn-muted" id="reloadRequests" type="button"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      </div>
+      <div class="notice"><i class="fa-solid fa-shield-halved"></i> Approval controls tabhi active honge jab Firebase mein request aur approval ke liye required permissions properly configure hon. Payment screenshot ko WhatsApp par manually verify karein.</div>
+      <div class="table-wrap" style="margin-top:15px">
+        <table>
+          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="requestsTable"><tr><td colspan="5" class="empty">Loading requests...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p style="text-align:center;color:var(--muted);font-size:11px;padding:8px">© 2026 Code With Piyush · Chemistry Point Admin</p>
+  </div>
+</main>
+
+<script type="module">
+import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import { getDatabase, ref, get, set, update, remove, onValue } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+  authDomain: "chemistry-point-9a41b.firebaseapp.com",
+  projectId: "chemistry-point-9a41b",
+  storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+  messagingSenderId: "791007663942",
+  appId: "1:791007663942:web:693c008e475a2e74357747"
+};
+
+const app = (() => {
+  try { return getApp(); }
+  catch { return initializeApp(firebaseConfig); }
+})();
+const auth = getAuth(app);
+const db = getDatabase(app, "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/");
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+let requestsData = {};
+let pricesData = {};
+let configData = {};
+
+function message(text, type = "success") {
+  const el = $("message");
+  el.textContent = text;
+  el.className = `show ${type}`;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function safeText(value) {
+  return String(value ?? "");
+}
+
+function money(value) {
+  return "₹" + (Number(value) || 0).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
+}
+
+async function verifyAdmin(user) {
+  const snap = await get(ref(db, `admins/${user.uid}`));
+  if (!snap.exists()) throw new Error("NOT_ADMIN");
+  const data = snap.val();
+  if (data.role !== "admin" || data.active === false) throw new Error("NOT_ADMIN");
+}
+
+function renderPrices() {
+  const tbody = $("pricesTable");
+  const entries = Object.entries(pricesData || {});
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = "";
+  entries.forEach(([key, item]) => {
+    const tr = document.createElement("tr");
+    const product = document.createElement("td");
+    const type = document.createElement("td");
+    const price = document.createElement("td");
+    const id = document.createElement("td");
+    const action = document.createElement("td");
+
+    product.textContent = item.name || key;
+    type.textContent = item.type || "—";
+    price.textContent = money(item.price);
+    id.textContent = item.productId || key;
+
+    const btn = document.createElement("button");
+    btn.className = "btn btn-red";
+    btn.type = "button";
+    btn.textContent = "Delete";
+    btn.addEventListener("click", async () => {
+      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) return;
+      try {
+        await remove(ref(db, `paymentPrices/${key}`));
+        message("Price entry delete ho gayi.");
+      } catch (error) {
+        message("Delete nahi hua. Firebase Rules check karein: " + error.message, "error");
+      }
+    });
+
+    action.appendChild(btn);
+    tr.append(product, type, price, id, action);
+    tbody.appendChild(tr);
+  });
+}
+
+function renderRequests() {
+  const tbody = $("requestsTable");
+  const entries = Object.entries(requestsData || {});
+  let pending = 0, approved = 0, total = 0;
+
+  entries.forEach(([, item]) => {
+    const status = String(item.status || "pending").toLowerCase();
+    if (status === "pending") pending++;
+    if (status === "approved") {
+      approved++;
+      total += Number(item.amount || item.price || 0);
+    }
+  });
+
+  $("pendingCount").textContent = pending;
+  $("approvedCount").textContent = approved;
+  $("approvedAmount").textContent = money(total);
+
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = "";
+  entries.reverse().forEach(([key, item]) => {
+    const tr = document.createElement("tr");
+    const paymentId = document.createElement("td");
+    const student = document.createElement("td");
+    const amount = document.createElement("td");
+    const statusCell = document.createElement("td");
+    const action = document.createElement("td");
+
+    paymentId.textContent = item.paymentId || key;
+    student.textContent = `${item.studentName || item.name || "Student"} · ${item.productName || item.productId || "Product"}`;
+    amount.textContent = money(item.amount ?? item.price);
+
+    const status = String(item.status || "pending").toLowerCase();
+    const badge = document.createElement("span");
+    badge.className = `status ${["pending","approved","rejected"].includes(status) ? status : "pending"}`;
+    badge.textContent = status.toUpperCase();
+    statusCell.appendChild(badge);
+
+    if (status === "pending") {
+      const approve = document.createElement("button");
+      approve.className = "btn btn-green";
+      approve.textContent = "Approve";
+      approve.type = "button";
+      approve.addEventListener("click", () => message(
+        "Approval abhi enable nahi kiya gaya hai. Pehle Firebase Rules aur student access validation configure karna hoga.",
+        "error"
+      ));
+
+      const reject = document.createElement("button");
+      reject.className = "btn btn-red";
+      reject.textContent = "Reject";
+      reject.type = "button";
+      reject.addEventListener("click", () => message(
+        "Rejection abhi enable nahi kiya gaya hai. Secure request schema aur Firebase Rules pehle configure honge.",
+        "error"
+      ));
+
+      const actions = document.createElement("div");
+      actions.className = "request-actions";
+      actions.append(approve, reject);
+      action.appendChild(actions);
+    } else {
+      action.textContent = "No action";
+    }
+
+    tr.append(paymentId, student, amount, statusCell, action);
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadSettings() {
+  const snap = await get(ref(db, "paymentConfig"));
+  configData = snap.exists() ? snap.val() : {};
+  $("upiId").value = configData.upiId || "";
+  $("whatsapp").value = configData.whatsapp || "";
+  $("groupLink").value = configData.groupLink || "";
+}
+
+async function loadPrices() {
+  const snap = await get(ref(db, "paymentPrices"));
+  pricesData = snap.exists() ? snap.val() : {};
+  renderPrices();
+}
+
+async function loadRequests() {
+  const snap = await get(ref(db, "paymentRequests"));
+  requestsData = snap.exists() ? snap.val() : {};
+  renderRequests();
+}
+
+$("settingsForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentUser) return;
+
+  const upiId = $("upiId").value.trim();
+  const whatsapp = $("whatsapp").value.replace(/\D/g, "");
+  const groupLink = $("groupLink").value.trim();
+
+  if (!upiId.includes("@")) return message("Valid UPI ID enter karein.", "error");
+  if (whatsapp.length < 10) return message("WhatsApp number check karein.", "error");
+
+  try {
+    const parsed = new URL(groupLink);
+    if (parsed.protocol !== "https:" || !parsed.hostname.endsWith("whatsapp.com")) {
+      return message("Valid WhatsApp group link enter karein.", "error");
+    }
+
+    await set(ref(db, "paymentConfig"), {
+      upiId, whatsapp, groupLink,
+      updatedAt: Date.now(),
+      updatedBy: currentUser.uid
+    });
+    message("Payment settings save ho gayi.");
+  } catch (error) {
+    message("Settings save nahi hui. Firebase Rules check karein: " + error.message, "error");
+  }
+});
+
+$("priceForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const type = $("productType").value;
+  const productId = $("productId").value.trim();
+  const name = $("productName").value.trim();
+  const price = Number($("productPrice").value);
+
+  if (!productId || !name || !Number.isFinite(price) || price < 0) {
+    return message("Product details aur valid price enter karein.", "error");
+  }
+
+  const key = `${type}_${productId}`.replace(/[.#$[\]/]/g, "_");
+
+  try {
+    await set(ref(db, `paymentPrices/${key}`), {
+      type, productId, name, price,
+      updatedAt: Date.now(),
+      updatedBy: currentUser.uid
+    });
+    $("priceForm").reset();
+    message("Product price save ho gayi.");
+  } catch (error) {
+    message("Price save nahi hui. Firebase Rules check karein: " + error.message, "error");
+  }
+});
+
+$("reloadSettings").addEventListener("click", async () => {
+  try { await loadSettings(); message("Settings reload ho gayi."); }
+  catch (error) { message("Settings load error: " + error.message, "error"); }
+});
+
+$("reloadRequests").addEventListener("click", async () => {
+  try { await loadRequests(); message("Requests refresh ho gayi."); }
+  catch (error) { message("Requests load error: " + error.message, "error"); }
+});
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    location.href = "login.html";
+    return;
+  }
+
+  try {
+    await verifyAdmin(user);
+    currentUser = user;
+
+    await Promise.all([
+      loadSettings(),
+      loadPrices(),
+      loadRequests()
+    ]);
+  } catch (error) {
+    console.error(error);
+    if (error.message === "NOT_ADMIN") {
+      await signOut(auth);
+      location.href = "login.html";
+    } else {
+      message("Firebase data load nahi hua. Database Rules aur connection check karein: " + error.message, "error");
+      $("pricesTable").innerHTML = '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
+      $("requestsTable").innerHTML = '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
+    }
+  }
+});
+
+$("logout").addEventListener("click", async () => {
+  await signOut(auth);
+  location.href = "login.html";
+});
+
+$("menuBtn").addEventListener("click", () => $("sidebar").classList.toggle("open"));
+
+const themeKey = "chemistryPointTheme";
+function applyTheme(theme) {
+  document.body.classList.toggle("light-mode", theme === "light");
+  $("themeBtn").innerHTML = theme === "light"
+    ? '<i class="fa-solid fa-sun"></i>'
+    : '<i class="fa-solid fa-moon"></i>';
+}
+applyTheme(localStorage.getItem(themeKey) || "dark");
+$("themeBtn").addEventListener("click", () => {
+  const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+  localStorage.setItem(themeKey, next);
+  applyTheme(next);
+});
+</script>
+</body>
+</html>
