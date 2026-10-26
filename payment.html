@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Code With Piyush">
+  <title>Student Payment | Chemistry Point</title>
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --card: #141821;
+      --text: #f7f7f7;
+      --muted: #a4aab7;
+      --gold: #e6ad36;
+      --border: #303440;
+      --input: #0e1118;
+    }
+
+    body.light {
+      --bg: #f3f5f8;
+      --card: #ffffff;
+      --text: #171923;
+      --muted: #656b78;
+      --gold: #b47b0b;
+      --border: #dce0e8;
+      --input: #f7f8fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      transition: background .2s, color .2s;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    .topbar {
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .brand span {
+      color: var(--gold);
+    }
+
+    .theme-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 0 16px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .heading h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .heading p, .muted {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px;
+      background: var(--input);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--gold);
+    }
+
+    input[readonly] {
+      opacity: .85;
+    }
+
+    .student-id {
+      color: var(--gold);
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .amount {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 10px 0 18px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .primary {
+      background: var(--gold);
+      color: #17130a;
+    }
+
+    .secondary {
+      background: var(--input);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .notice {
+      background: rgba(230, 173, 54, .09);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    #message {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        margin-top: 22px;
+      }
+
+      .heading h1 {
+        font-size: 24px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Chemistry <span>Point</span></div>
+    <button class="theme-btn" id="themeBtn" type="button">
+      ☀️ / 🌙
+    </button>
+  </header>
+
+  <main>
+    <section class="heading">
+      <h1>Complete Your Payment</h1>
+      <p>Select your product, check the amount and follow the payment steps.</p>
+    </section>
+
+    <section class="card">
+      <h2>01. Student Details</h2>
+
+      <div class="field">
+        <label for="studentName">Student Name</label>
+        <input id="studentName" type="text"
+               placeholder="Enter your full name"
+               maxlength="80" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="phone">Mobile Number</label>
+        <input id="phone" type="tel"
+               placeholder="Enter your mobile number"
+               maxlength="15" inputmode="tel"
+               autocomplete="tel" required>
+      </div>
+
+      <div class="field">
+        <label for="product">Select Product</label>
+        <select id="product" required>
+          <option value="">Loading products...</option>
+        </select>
+      </div>
+
+      <label>Your Student ID</label>
+      <div class="notice student-id" id="studentId">Loading...</div>
+      <p class="muted">
+        Keep this ID for payment verification. This initial version stores
+        the ID in this browser; it is not yet a verified account ID.
+      </p>
+
+      <div class="muted" id="message" role="status"></div>
+    </section>
+
+    <section class="card">
+      <h2>02. Payment Details</h2>
+      <div class="muted">Amount payable</div>
+      <div class="amount" id="amount">₹—</div>
+
+      <button class="btn primary" id="payBtn" type="button">
+        Pay Now with UPI
+      </button>
+
+      <div class="notice" style="margin-top:16px">
+        Payment karne ke baad apne payment ka screenshot Chemistry Point
+        Payment Verification WhatsApp Group mein bhejein. Screenshot ke
+        saath apni Unique Student ID bhi zaroor likhein, taaki admin aapki
+        payment verify kar sake.
+      </div>
+
+      <button class="btn secondary" id="groupBtn" type="button">
+        Open Verification Group
+      </button>
+
+      <button class="btn secondary" id="whatsappBtn" type="button">
+        Send Details on WhatsApp
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Code With Piyush · Built with ❤️
+  </footer>
+
+  <script type="module">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+    import {
+      getDatabase, ref, get
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+      authDomain: "chemistry-point-9a41b.firebaseapp.com",
+      projectId: "chemistry-point-9a41b",
+      storageBucket: "chemistry-point-9a41b.firebasestorage.app",
+      messagingSenderId: "791007663942",
+      appId: "1:791007663942:web:693c008e475a2e74357747"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(
+      app,
+      "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    );
+
+    const $ = id => document.getElementById(id);
+
+    let settings = {};
+    let prices = {};
+    let products = [];
+
+    function showMessage(text) {
+      $("message").textContent = text;
+    }
+
+    function getStudentId() {
+      const storageKey = "chemistryPointStudentId";
+      let id = localStorage.getItem(storageKey);
+
+      if (!id) {
+        const randomPart = crypto.randomUUID()
+          .replaceAll("-", "")
+          .slice(0, 12)
+          .toUpperCase();
+
+        id = "CWP-" + randomPart;
+        localStorage.setItem(storageKey, id);
+      }
+
+      return id;
+    }
+
+    $("studentId").textContent = getStudentId();
+
+    function selectedProduct() {
+      return products.find(p => p.key === $("product").value);
+    }
+
+    function updateAmount() {
+      const product = selectedProduct();
+
+      if (!product) {
+        $("amount").textContent = "₹—";
+        return;
+      }
+
+      const price = Number(prices[product.key]?.price);
+
+      $("amount").textContent =
+        Number.isFinite(price) && price >= 0
+          ? "₹" + price.toLocaleString("en-IN")
+          : "Price not set";
+
+      $("payBtn").disabled =
+        !Number.isFinite(price) || price <= 0;
+    }
+
+    async function loadPaymentData() {
+      try {
+        const [settingsSnap, pricesSnap, quizSnap, chaptersSnap] =
+          await Promise.all([
+            get(ref(db, "paymentConfig")),
+            get(ref(db, "paymentPrices")),
+            get(ref(db, "quizzes")),
+            get(ref(db, "chapters"))
+          ]);
+
+        settings = settingsSnap.exists() ? settingsSnap.val() : {};
+        prices = pricesSnap.exists() ? pricesSnap.val() : {};
+
+        const quizData = quizSnap.exists() ? quizSnap.val() : {};
+        const chapterData = chaptersSnap.exists() ? chaptersSnap.val() : {};
+
+        products = [];
+
+        Object.entries(prices).forEach(([key, item]) => {
+          if (!item || !item.productId || !item.type) return;
+
+          if (item.type === "quiz") {
+            products.push({
+              key,
+              name: item.name || item.productId,
+              productId: item.productId,
+              type: "quiz"
+            });
+            return;
+          }
+
+          if (item.type === "pdf") {
+            products.push({
+              key,
+              name: item.name || item.productId,
+              productId: item.productId,
+              type: "pdf"
+            });
+          }
+        });
+
+        const select = $("product");
+        select.replaceChildren();
+
+        const first = document.createElement("option");
+        first.value = "";
+        first.textContent = products.length
+          ? "Choose your product"
+          : "No priced products available";
+        select.appendChild(first);
+
+        products.forEach(product => {
+          const option = document.createElement("option");
+          option.value = product.key;
+          option.textContent =
+            product.name + " — ₹" +
+            Number(prices[product.key].price).toLocaleString("en-IN");
+          select.appendChild(option);
+        });
+
+        $("product").addEventListener("change", updateAmount);
+        updateAmount();
+
+        if (!settings.upiId || !settings.whatsapp || !settings.groupLink) {
+          showMessage(
+            "Payment settings incomplete hain. Admin panel mein UPI ID, WhatsApp number aur group link save karein."
+          );
+        } else if (!products.length) {
+          showMessage(
+            "Abhi koi priced product nahi mila. Admin panel mein quiz/PDF ki price set karein."
+          );
+        } else {
+          showMessage("Payment details loaded. Product select karein.");
+        }
+
+      } catch (error) {
+        console.error(error);
+        showMessage(
+          "Data load nahi hua. Firebase Rules aur database connection check karein."
+        );
+      }
+    }
+
+    function validateStudent() {
+      const name = $("studentName").value.trim();
+      const phone = $("phone").value.replace(/\D/g, "");
+      const product = selectedProduct();
+
+      if (name.length < 2) {
+        showMessage("Apna naam enter karein.");
+        return null;
+      }
+
+      if (phone.length < 10 || phone.length > 15) {
+        showMessage("Valid mobile number enter karein.");
+        return null;
+      }
+
+      if (!product) {
+        showMessage("Pehle product select karein.");
+        return null;
+      }
+
+      const price = Number(prices[product.key]?.price);
+
+      if (!Number.isFinite(price) || price <= 0) {
+        showMessage("Is product ki valid price set nahi hai.");
+        return null;
+      }
+
+      return {
+        name,
+        phone,
+        product,
+        price,
+        id: getStudentId()
+      };
+    }
+
+    $("payBtn").addEventListener("click", () => {
+      const student = validateStudent();
+      if (!student) return;
+
+      if (!settings.upiId) {
+        showMessage("Admin ne abhi UPI ID set nahi ki hai.");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        pa: settings.upiId,
+        pn: "Chemistry Point",
+        am: student.price.toFixed(2),
+        cu: "INR",
+        tn: `${student.product.name} | Student ID: ${student.id}`
+      });
+
+      window.location.href = "upi://pay?" + params.toString();
+    });
+
+    $("groupBtn").addEventListener("click", () => {
+      if (!settings.groupLink) {
+        showMessage("Verification group link admin panel mein set nahi hai.");
+        return;
+      }
+
+      try {
+        const url = new URL(settings.groupLink);
+
+        if (
+          url.protocol !== "https:" ||
+          !url.hostname.endsWith("whatsapp.com")
+        ) {
+          showMessage("Admin panel mein valid WhatsApp group link set karein.");
+          return;
+        }
+
+        window.open(url.href, "_blank", "noopener,noreferrer");
+      } catch {
+        showMessage("Verification group link valid nahi hai.");
+      }
+    });
+
+    $("whatsappBtn").addEventListener("click", () => {
+      const student = validateStudent();
+      if (!student) return;
+
+      const number = String(settings.whatsapp || "").replace(/\D/g, "");
+
+      if (number.length < 10) {
+        showMessage("Admin panel mein valid WhatsApp number set karein.");
+        return;
+      }
+
+      const message = [
+        "Chemistry Point Payment Request",
+        `Student Name: ${student.name}`,
+        `Mobile Number: ${student.phone}`,
+        `Product: ${student.product.name}`,
+        `Amount: ₹${student.price}`,
+        `Unique Student ID: ${student.id}`,
+        "",
+        "I will share my payment screenshot in the verification group."
+      ].join("\n");
+
+      const url = "https://wa.me/" + number +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    $("themeBtn").addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem(
+        "chemistryPointTheme",
+        document.body.classList.contains("light") ? "light" : "dark"
+      );
+    });
+
+    if (localStorage.getItem("chemistryPointTheme") === "light") {
+      document.body.classList.add("light");
+    }
+
+    loadPaymentData();
+  </script>
+</body>
+</html>
