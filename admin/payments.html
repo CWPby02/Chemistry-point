@@ -25,92 +25,76 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
 body.light-mode{
-  --bg:#f5f5f5;
-  --card:#fff;
-  --card2:#f8f8f8;
-  --border:rgba(168,111,0,.2);
-  --text:#17191c;
-  --muted:#666;
+  --bg:#f5f5f5;--card:#fff;--card2:#f8f8f8;
+  --border:rgba(168,111,0,.2);--text:#17191c;--muted:#666;
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
 .sidebar{
   position:fixed;inset:0 auto 0 0;width:245px;
   background:var(--card);border-right:1px solid var(--border);
-  padding:20px 14px;display:flex;flex-direction:column;z-index:5
+  padding:20px 14px;display:flex;flex-direction:column;z-index:5;
+  overflow-y:auto;
 }
-.brand{
-  display:flex;align-items:center;gap:10px;
-  padding:4px 8px 22px;border-bottom:1px solid var(--border)
-}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 22px;border-bottom:1px solid var(--border)}
 .brand img{width:43px;height:43px;object-fit:contain}
 .brand strong{font-family:Poppins;font-size:15px}
 .brand small{display:block;color:var(--gold2);font-size:10px;margin-top:3px}
 .nav{padding-top:20px}
 .nav a{
   display:flex;gap:12px;align-items:center;text-decoration:none;
-  color:var(--muted);padding:13px;border-radius:10px;
-  margin-bottom:5px;font-size:13px;font-weight:600
+  color:var(--muted);padding:13px;border-radius:10px;margin-bottom:5px;
+  font-size:13px;font-weight:600;
 }
 .nav a:hover,.nav a.active{background:rgba(217,154,22,.1);color:var(--gold2)}
 .nav i{width:18px;text-align:center}
-.side-bottom{margin-top:auto}
+.side-bottom{margin-top:auto;padding-top:20px}
 .logout{
   width:100%;padding:12px;background:rgba(255,80,90,.08);
-  color:var(--red);border:1px solid rgba(255,80,90,.2);border-radius:10px
+  color:var(--red);border:1px solid rgba(255,80,90,.2);border-radius:10px;
 }
 .main{margin-left:245px;min-height:100vh}
 .top{
   height:72px;background:var(--card);border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;padding:0 26px;
-  position:sticky;top:0;z-index:3
+  position:sticky;top:0;z-index:3;
 }
 .top h1{font:600 19px Poppins;margin:0}
 .top-actions{display:flex;align-items:center;gap:12px}
 .icon-btn{
   width:40px;height:40px;border:1px solid var(--border);
-  background:var(--card2);color:var(--gold2);border-radius:10px
+  background:var(--card2);color:var(--gold2);border-radius:10px;
 }
 .menu-btn{display:none}
 .content{padding:25px;max-width:1200px;margin:auto}
 .intro{
   padding:22px;border:1px solid var(--border);border-radius:16px;
   background:linear-gradient(120deg,rgba(217,154,22,.12),transparent),var(--card);
-  margin-bottom:22px
+  margin-bottom:22px;
 }
 .intro h2{font:700 22px Poppins;margin:0 0 7px}
 .intro h2 span{color:var(--gold2)}
 .intro p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
-.stats{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;margin-bottom:22px
-}
-.stat,.panel{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:15px;padding:19px
-}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.stat,.panel{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px}
 .stat-label{color:var(--muted);font-size:12px}
-.stat-value{font:700 26px Poppins;margin-top:8px}
+.stat-value{font:700 26px Poppins;margin-top:8px;overflow-wrap:anywhere}
 .stat i{color:var(--gold2);margin-right:7px}
 .panel{margin-bottom:20px}
-.panel-head{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin-bottom:18px
-}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 .panel h3{font:600 16px Poppins;margin:0}
-.panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0}
+.panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.field{display:flex;flex-direction:column;gap:7px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
 .field.full{grid-column:1/-1}
 .field label{font-size:12px;color:var(--muted);font-weight:600}
 .field input,.field select{
   width:100%;min-width:0;background:var(--card2);color:var(--text);
-  border:1px solid var(--border);border-radius:9px;padding:12px;outline:none
+  border:1px solid var(--border);border-radius:9px;padding:12px;outline:none;
 }
 .field input:focus,.field select:focus{border-color:var(--gold)}
 .field input[readonly]{opacity:.8}
 .field select option{background:var(--card);color:var(--text)}
-.hint{font-size:11px;color:var(--muted);line-height:1.6}
 .btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;font-size:12px}
 .btn-gold{background:var(--gold);color:#17120a}
 .btn-muted{background:var(--card2);color:var(--text);border:1px solid var(--border)}
@@ -120,26 +104,26 @@ button{cursor:pointer}
 .notice{
   padding:13px 14px;border-radius:10px;background:rgba(217,154,22,.08);
   border:1px solid var(--border);font-size:12px;line-height:1.7;
-  color:var(--muted);margin-top:14px
+  color:var(--muted);margin-top:14px;
 }
 .notice i{color:var(--gold2);margin-right:5px}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:570px}
 th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--border);font-size:12px}
 th{color:var(--muted);font-weight:600}
-td{line-height:1.6}
+td{line-height:1.6;overflow-wrap:anywhere}
 .empty{text-align:center;padding:25px;color:var(--muted);font-size:12px}
 .status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700}
 .status.pending{color:var(--gold2);background:rgba(217,154,22,.1)}
 .status.approved{color:var(--green);background:rgba(38,194,129,.1)}
 .status.rejected{color:var(--red);background:rgba(255,102,117,.1)}
 .request-actions{display:flex;gap:6px;flex-wrap:wrap}
-#message{display:none;padding:12px;border-radius:9px;margin-bottom:15px;font-size:12px;line-height:1.6}
+#message{display:none;padding:12px;border-radius:9px;margin-bottom:15px;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
 #message.show{display:block}
 #message.error{background:rgba(255,102,117,.1);color:var(--red)}
 #message.success{background:rgba(38,194,129,.1);color:var(--green)}
 @media(max-width:850px){
-  .sidebar{transform:translateX(-100%);transition:.25s}
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
   .sidebar.open{transform:translateX(0)}
   .main{margin-left:0}
   .menu-btn{display:inline-block}
@@ -163,7 +147,6 @@ td{line-height:1.6}
     <img src="../assets/images/logo/logo.png" alt="Chemistry Point">
     <div><strong>Chemistry Point</strong><small>ADMIN PANEL</small></div>
   </div>
-
   <nav class="nav">
     <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
     <a href="videos.html"><i class="fa-solid fa-video"></i> Videos</a>
@@ -173,7 +156,6 @@ td{line-height:1.6}
     <a href="payments.html" class="active"><i class="fa-solid fa-credit-card"></i> Payments</a>
     <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
   </nav>
-
   <div class="side-bottom">
     <button class="logout" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </div>
@@ -200,7 +182,7 @@ td{line-height:1.6}
       <p>UPI details, product pricing aur student payment requests ko yahan manage karein. Payment ko approve karne se pehle transaction manually verify karein.</p>
     </section>
 
-    <div id="message" role="status"></div>
+    <div id="message" role="status" aria-live="polite"></div>
 
     <section class="stats">
       <div class="stat">
@@ -238,6 +220,7 @@ td{line-height:1.6}
           <div class="field full">
             <label for="groupLink">Payment Verification WhatsApp Group Link</label>
             <input id="groupLink" type="url" placeholder="https://chat.whatsapp.com/..." required>
+            <small class="hint">Invite URL ka format check hoga; link active hai ya nahi, woh yahan se verify nahi hota.</small>
           </div>
         </div>
         <div class="form-actions">
@@ -264,53 +247,40 @@ td{line-height:1.6}
               <option value="pdf">PDF</option>
             </select>
           </div>
-
           <div class="field">
             <label for="productSelect">Select Quiz / PDF</label>
             <select id="productSelect" required>
               <option value="">Loading products...</option>
             </select>
           </div>
-
           <div class="field">
             <label for="productId">Product ID</label>
             <input id="productId" placeholder="Auto-filled product ID" readonly required>
           </div>
-
           <div class="field">
             <label for="productName">Product Name</label>
             <input id="productName" placeholder="Auto-filled product name" readonly required>
           </div>
-
           <div class="field full">
             <label for="productPrice">Price (₹)</label>
             <input id="productPrice" type="number" min="0" max="100000" step="0.01" placeholder="49" required>
           </div>
         </div>
-
         <div class="form-actions">
-          <button class="btn btn-gold" type="submit">
-            <i class="fa-solid fa-floppy-disk"></i> Save Price
-          </button>
-          <button class="btn btn-muted" type="button" id="reloadProducts">
-            <i class="fa-solid fa-rotate"></i> Reload Products
-          </button>
+          <button class="btn btn-gold" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Price</button>
+          <button class="btn btn-muted" type="button" id="reloadProducts"><i class="fa-solid fa-rotate"></i> Reload Products</button>
         </div>
       </form>
 
       <div class="notice">
         <i class="fa-solid fa-circle-info"></i>
-        PDF dropdown ab chapter ke vviPdf, pyqPdf aur allPdf fields ko read karta hai. Purane pdfs object aur direct PDF URL formats bhi supported hain.
+        PDF dropdown mein chapter ke vviPdf, pyqPdf aur allPdf fields ke saath older nested PDF formats bhi check kiye jaate hain.
       </div>
 
       <div class="table-wrap" style="margin-top:18px">
         <table>
-          <thead>
-            <tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr>
-          </thead>
-          <tbody id="pricesTable">
-            <tr><td colspan="5" class="empty">Loading prices...</td></tr>
-          </tbody>
+          <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr></thead>
+          <tbody id="pricesTable"><tr><td colspan="5" class="empty">Loading prices...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -321,24 +291,18 @@ td{line-height:1.6}
           <h3><i class="fa-solid fa-receipt" style="color:var(--gold2)"></i> Payment Requests</h3>
           <p>Transaction verify karne ke baad hi request approve karein.</p>
         </div>
-        <button class="btn btn-muted" id="reloadRequests" type="button">
-          <i class="fa-solid fa-rotate"></i> Refresh
-        </button>
+        <button class="btn btn-muted" id="reloadRequests" type="button"><i class="fa-solid fa-rotate"></i> Refresh</button>
       </div>
 
       <div class="notice">
         <i class="fa-solid fa-shield-halved"></i>
-        Approve/reject actions abhi disabled hain. Student access ko secure karne ke liye Firebase Rules aur student-side payment verification ko configure karna zaroori hai.
+        Approve/Reject actions disabled hain. Student access ko secure karne ke liye server-side verification ya secure backend aur Firebase Rules configure karna zaroori hai.
       </div>
 
       <div class="table-wrap" style="margin-top:15px">
         <table>
-          <thead>
-            <tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr>
-          </thead>
-          <tbody id="requestsTable">
-            <tr><td colspan="5" class="empty">Loading requests...</td></tr>
-          </tbody>
+          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="requestsTable"><tr><td colspan="5" class="empty">Loading requests...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -350,34 +314,23 @@ td{line-height:1.6}
 </main>
 
 <script type="module">
-import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import {
-  getDatabase, ref, get, set, remove
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
   authDomain: "chemistry-point-9a41b.firebaseapp.com",
+  databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "chemistry-point-9a41b",
   storageBucket: "chemistry-point-9a41b.firebasestorage.app",
   messagingSenderId: "791007663942",
   appId: "1:791007663942:web:693c008e475a2e74357747"
 };
 
-const app = (() => {
-  try {
-    return getApp();
-  } catch {
-    return initializeApp(firebaseConfig);
-  }
-})();
-
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(
-  app,
-  "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app/"
-);
+const db = getDatabase(app, firebaseConfig.databaseURL);
 const $ = id => document.getElementById(id);
 
 let currentUser = null;
@@ -393,9 +346,19 @@ function message(text, type = "success") {
 }
 
 function money(value) {
-  return "₹" + (Number(value) || 0).toLocaleString("en-IN", {
+  const amount = Number(value);
+  return "₹" + (Number.isFinite(amount) ? amount : 0).toLocaleString("en-IN", {
     maximumFractionDigits: 2
   });
+}
+
+/* Avoid invalid Firebase Realtime Database key characters. */
+function safeKey(value) {
+  return String(value).replace(/[.#$/\[\]]/g, "_");
+}
+
+function priceKey(product) {
+  return safeKey(`${product.type}_${product.id}`);
 }
 
 async function verifyAdmin(user) {
@@ -404,63 +367,73 @@ async function verifyAdmin(user) {
   if (!snap.exists()) throw new Error("NOT_ADMIN");
 
   const data = snap.val();
-
   if (data.role !== "admin" || data.active !== true) {
     throw new Error("NOT_ADMIN");
   }
 }
 
-/*
- * Quiz products:
- *   /quizzes
- *
- * Objective PDF products:
- *   /chapters/{chapterId}/vviPdf
- *   /chapters/{chapterId}/pyqPdf
- *   /chapters/{chapterId}/allPdf
- *
- * Also supports older pdfs objects and direct PDF URL fields.
- */
+/* Accept only a real WhatsApp group-invite URL format. */
+function cleanWhatsAppGroupLink(value) {
+  let parsed;
+
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error("WhatsApp group link ka URL format sahi nahi hai.");
+  }
+
+  if (
+    parsed.protocol !== "https:" ||
+    parsed.hostname.toLowerCase() !== "chat.whatsapp.com" ||
+    parsed.username ||
+    parsed.password ||
+    parsed.port ||
+    parsed.hash
+  ) {
+    throw new Error("Valid https://chat.whatsapp.com/ invite link enter karein.");
+  }
+
+  const inviteCode = parsed.pathname.replace(/^\/+|\/+$/g, "");
+
+  if (!/^[A-Za-z0-9_-]{10,}$/.test(inviteCode)) {
+    throw new Error("WhatsApp group invite code check karein.");
+  }
+
+  // Remove query/tracking parameters.
+  return `https://chat.whatsapp.com/${inviteCode}`;
+}
+
 function normalizeProducts(data, type) {
   const products = [];
-
-  if (!data || typeof data !== "object") {
-    return products;
-  }
+  if (!data || typeof data !== "object") return products;
 
   Object.entries(data).forEach(([key, item]) => {
     if (!item || typeof item !== "object") return;
 
     if (type === "quiz") {
       const name = item.title || item.name || item.quizTitle;
-
       if (!name) return;
 
-      products.push({
-        id: key,
-        name: String(name),
-        type: "quiz"
-      });
-
+      products.push({ id: key, name: String(name), type: "quiz" });
       return;
     }
 
     const chapterName =
-      item.chapterName ||
-      item.name ||
-      item.title ||
-      item.chapterTitle ||
-      key;
+      item.chapterName || item.name || item.title || item.chapterTitle || key;
 
-    // Actual fields saved by the Objectives admin page.
-    const objectivePdfs = [
-      { field: "vviPdf", label: "V.V.I Objectives" },
-      { field: "pyqPdf", label: "PYQ Objectives" },
-      { field: "allPdf", label: "All Objectives" }
+    const objectiveFields = [
+      ["vviPdf", "V.V.I Objectives"],
+      ["pyqPdf", "PYQ Objectives"],
+      ["allPdf", "All Objectives"]
     ];
 
-    objectivePdfs.forEach(({ field, label }) => {
-      const url = item[field];
+    objectiveFields.forEach(([field, label]) => {
+      const value = item[field];
+      const url = typeof value === "string"
+        ? value
+        : value && typeof value === "object"
+          ? value.pdfUrl || value.driveUrl || value.url || value.link
+          : "";
 
       if (typeof url === "string" && url.trim()) {
         products.push({
@@ -471,239 +444,164 @@ function normalizeProducts(data, type) {
       }
     });
 
-    // Support older nested PDF records.
-    const pdfs = item.pdfs;
+    if (item.pdfs && typeof item.pdfs === "object") {
+      Object.entries(item.pdfs).forEach(([pdfKey, pdf]) => {
+        const url = typeof pdf === "string"
+          ? pdf
+          : pdf && typeof pdf === "object"
+            ? pdf.pdfUrl || pdf.pdfURL || pdf.driveUrl ||
+              pdf.googleDriveUrl || pdf.url || pdf.link
+            : "";
 
-    if (pdfs && typeof pdfs === "object") {
-      Object.entries(pdfs).forEach(([pdfKey, pdf]) => {
-        if (typeof pdf === "string" && pdf.trim()) {
-          products.push({
-            id: `${key}/${pdfKey}`,
-            name: `${chapterName} — ${pdfKey}`,
-            type: "pdf"
-          });
-          return;
-        }
+        if (!url || typeof url !== "string") return;
 
-        if (!pdf || typeof pdf !== "object") return;
-
-        const pdfUrl =
-          pdf.pdfUrl ||
-          pdf.pdfURL ||
-          pdf.driveUrl ||
-          pdf.googleDriveUrl ||
-          pdf.url ||
-          pdf.link;
-
-        if (!pdfUrl || typeof pdfUrl !== "string") return;
-
-        const pdfName =
-          pdf.name ||
-          pdf.title ||
-          pdf.label ||
-          pdf.type ||
-          pdfKey;
+        const label = pdf && typeof pdf === "object"
+          ? pdf.name || pdf.title || pdf.label || pdf.type || pdfKey
+          : pdfKey;
 
         products.push({
           id: `${key}/${pdfKey}`,
-          name: `${chapterName} — ${pdfName}`,
+          name: `${chapterName} — ${label}`,
           type: "pdf"
         });
       });
     }
 
-    // Support older direct URL fields.
     const directUrl =
-      item.pdfUrl ||
-      item.pdfURL ||
-      item.driveUrl ||
-      item.googleDriveUrl;
+      item.pdfUrl || item.pdfURL || item.driveUrl || item.googleDriveUrl;
 
-    if (typeof directUrl === "string" && directUrl.trim() && !pdfs) {
-      products.push({
-        id: key,
-        name: String(chapterName),
-        type: "pdf"
-      });
+    if (typeof directUrl === "string" && directUrl.trim() && !item.pdfs) {
+      products.push({ id: key, name: String(chapterName), type: "pdf" });
     }
   });
 
-  // Avoid showing duplicate products if data contains overlapping formats.
   const unique = new Map();
-
-  products.forEach(product => {
-    unique.set(`${product.type}:${product.id}`, product);
-  });
-
-  return Array.from(unique.values());
+  products.forEach(product => unique.set(`${product.type}:${product.id}`, product));
+  return [...unique.values()];
 }
 
 async function loadProducts() {
   const select = $("productSelect");
   const type = $("productType").value;
 
-  select.innerHTML = "";
-  const loadingOption = document.createElement("option");
-  loadingOption.value = "";
-  loadingOption.textContent = "Loading products...";
-  select.appendChild(loadingOption);
-
+  select.replaceChildren(new Option("Loading products...", ""));
   $("productId").value = "";
   $("productName").value = "";
+  $("productPrice").value = "";
   availableProducts = [];
 
   try {
-    const path = type === "quiz" ? "quizzes" : "chapters";
-    const snapshot = await get(ref(db, path));
-    const data = snapshot.exists() ? snapshot.val() : {};
+    const snapshot = await get(ref(db, type === "quiz" ? "quizzes" : "chapters"));
+    availableProducts = normalizeProducts(snapshot.exists() ? snapshot.val() : {}, type);
 
-    availableProducts = normalizeProducts(data, type);
-
-    select.innerHTML = "";
-
-    const firstOption = document.createElement("option");
-    firstOption.value = "";
-    firstOption.textContent = availableProducts.length
-      ? "Select a product"
-      : "No products found";
-
-    select.appendChild(firstOption);
+    select.replaceChildren(new Option(
+      availableProducts.length ? "Select a product" : "No products found",
+      ""
+    ));
 
     availableProducts.forEach((product, index) => {
-      const option = document.createElement("option");
-      option.value = String(index);
-      option.textContent = product.name;
-      select.appendChild(option);
+      select.add(new Option(product.name, String(index)));
     });
 
     if (!availableProducts.length) {
       message(
         type === "quiz"
-          ? "Quiz nahi mila. /quizzes ke title/name fields check karein."
-          : "PDF nahi mili. Check karein ki /chapters mein vviPdf, pyqPdf ya allPdf mein valid link saved hai.",
+          ? "Quiz nahi mila. /quizzes mein title/name fields check karein."
+          : "PDF nahi mili. /chapters ke PDF links aur database path check karein.",
         "error"
       );
     }
   } catch (error) {
-    console.error("Product load error:", error);
-    select.innerHTML = '<option value="">Products load nahi hue</option>';
-
-    message(
-      "Products load nahi hue. Firebase Rules ya database path check karein: " +
-      error.message,
-      "error"
-    );
+    console.error(error);
+    select.replaceChildren(new Option("Products load nahi hue", ""));
+    message("Products load nahi hue: " + error.message, "error");
   }
 }
 
 $("productType").addEventListener("change", loadProducts);
+$("reloadProducts").addEventListener("click", loadProducts);
 
 $("productSelect").addEventListener("change", () => {
-  const selectedValue = $("productSelect").value;
+  const value = $("productSelect").value;
+  const product = value === "" ? null : availableProducts[Number(value)];
 
-  if (selectedValue === "") {
-    $("productId").value = "";
-    $("productName").value = "";
-    $("productPrice").value = "";
-    return;
-  }
-
-  const product = availableProducts[Number(selectedValue)];
-
-  if (!product) {
-    $("productId").value = "";
-    $("productName").value = "";
-    return;
-  }
-
-  $("productId").value = product.id;
-  $("productName").value = product.name;
-
-  // If this product already has a saved price, populate the input.
-  const priceKey = `${product.type}_${product.id}`.replace(/[.#$[\]/]/g, "_");
-  const saved = pricesData[priceKey];
-
-  $("productPrice").value =
-    saved && Number.isFinite(Number(saved.price))
-      ? saved.price
-      : "";
+  $("productId").value = product?.id || "";
+  $("productName").value = product?.name || "";
+  $("productPrice").value = product
+    ? pricesData[priceKey(product)]?.price ?? ""
+    : "";
 });
-
-$("reloadProducts").addEventListener("click", loadProducts);
 
 function renderPrices() {
   const tbody = $("pricesTable");
-  const entries = Object.entries(pricesData || {});
+  tbody.replaceChildren();
+
+  const entries = Object.entries(pricesData || {}).filter(
+    ([, item]) => item && typeof item === "object"
+  );
 
   if (!entries.length) {
-    tbody.innerHTML =
-      '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = "";
-
   entries.forEach(([key, item]) => {
-    if (!item || typeof item !== "object") return;
-
     const tr = document.createElement("tr");
-    const product = document.createElement("td");
-    const type = document.createElement("td");
-    const price = document.createElement("td");
-    const id = document.createElement("td");
+
+    [
+      item.name || key,
+      item.type || "—",
+      money(item.price),
+      item.productId || key
+    ].forEach(value => {
+      const td = document.createElement("td");
+      td.textContent = String(value);
+      tr.appendChild(td);
+    });
+
     const action = document.createElement("td");
-
-    product.textContent = item.name || key;
-    type.textContent = item.type || "—";
-    price.textContent = money(item.price);
-    id.textContent = item.productId || key;
-
     const btn = document.createElement("button");
     btn.className = "btn btn-red";
     btn.type = "button";
     btn.textContent = "Delete";
 
     btn.addEventListener("click", async () => {
-      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) {
-        return;
-      }
+      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) return;
 
       try {
         await remove(ref(db, `paymentPrices/${key}`));
         await loadPrices();
         message("Price entry delete ho gayi.");
       } catch (error) {
-        message(
-          "Delete nahi hua. Firebase Rules check karein: " + error.message,
-          "error"
-        );
+        message("Delete nahi hua: " + error.message, "error");
       }
     });
 
     action.appendChild(btn);
-    tr.append(product, type, price, id, action);
+    tr.appendChild(action);
     tbody.appendChild(tr);
   });
 }
 
 function renderRequests() {
   const tbody = $("requestsTable");
-  const entries = Object.entries(requestsData || {});
+  tbody.replaceChildren();
+
+  const entries = Object.entries(requestsData || {}).filter(
+    ([, item]) => item && typeof item === "object"
+  );
 
   let pending = 0;
   let approved = 0;
   let total = 0;
 
   entries.forEach(([, item]) => {
-    if (!item || typeof item !== "object") return;
-
     const status = String(item.status || "pending").toLowerCase();
-
     if (status === "pending") pending++;
 
     if (status === "approved") {
       approved++;
-      total += Number(item.amount ?? item.price ?? 0);
+      total += Number(item.amount ?? item.price ?? 0) || 0;
     }
   });
 
@@ -712,71 +610,37 @@ function renderRequests() {
   $("approvedAmount").textContent = money(total);
 
   if (!entries.length) {
-    tbody.innerHTML =
-      '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = "";
-
   entries.reverse().forEach(([key, item]) => {
-    if (!item || typeof item !== "object") return;
-
     const tr = document.createElement("tr");
-    const paymentId = document.createElement("td");
-    const student = document.createElement("td");
-    const amount = document.createElement("td");
-    const statusCell = document.createElement("td");
-    const action = document.createElement("td");
+    const status = String(item.status || "pending").toLowerCase();
 
+    const paymentId = document.createElement("td");
     paymentId.textContent = item.paymentId || key;
 
+    const student = document.createElement("td");
     student.textContent =
-      `${item.studentName || item.name || "Student"} · ` +
-      `${item.productName || item.productId || "Product"}`;
+      `${item.studentName || item.name || "Student"} · ${item.productName || item.productId || "Product"}`;
 
+    const amount = document.createElement("td");
     amount.textContent = money(item.amount ?? item.price);
 
-    const status = String(item.status || "pending").toLowerCase();
+    const statusCell = document.createElement("td");
     const badge = document.createElement("span");
-
-    badge.className =
-      `status ${["pending", "approved", "rejected"].includes(status)
-        ? status
-        : "pending"}`;
-
+    badge.className = `status ${["pending", "approved", "rejected"].includes(status) ? status : "pending"}`;
     badge.textContent = status.toUpperCase();
     statusCell.appendChild(badge);
 
+    const action = document.createElement("td");
+
     if (status === "pending") {
-      const approve = document.createElement("button");
-      approve.className = "btn btn-green";
-      approve.textContent = "Approve";
-      approve.type = "button";
-
-      approve.addEventListener("click", () => {
-        message(
-          "Approval abhi enable nahi hai. Pehle Firebase Rules aur student access validation configure karna hoga.",
-          "error"
-        );
-      });
-
-      const reject = document.createElement("button");
-      reject.className = "btn btn-red";
-      reject.textContent = "Reject";
-      reject.type = "button";
-
-      reject.addEventListener("click", () => {
-        message(
-          "Rejection abhi enable nahi hai. Secure request schema aur Firebase Rules pehle configure honge.",
-          "error"
-        );
-      });
-
-      const actions = document.createElement("div");
-      actions.className = "request-actions";
-      actions.append(approve, reject);
-      action.appendChild(actions);
+      const note = document.createElement("span");
+      note.className = "hint";
+      note.textContent = "Secure verification required";
+      action.appendChild(note);
     } else {
       action.textContent = "No action";
     }
@@ -800,15 +664,11 @@ async function loadPrices() {
   pricesData = snap.exists() ? snap.val() : {};
   renderPrices();
 
-  // Keep selected product's saved price in sync after reloading.
-  const selectedValue = $("productSelect").value;
-  if (selectedValue !== "") {
-    const product = availableProducts[Number(selectedValue)];
-    if (product) {
-      const key = `${product.type}_${product.id}`.replace(/[.#$[\]/]/g, "_");
-      const saved = pricesData[key];
-      $("productPrice").value = saved ? saved.price : "";
-    }
+  const value = $("productSelect").value;
+  const product = value === "" ? null : availableProducts[Number(value)];
+
+  if (product) {
+    $("productPrice").value = pricesData[priceKey(product)]?.price ?? "";
   }
 }
 
@@ -822,31 +682,32 @@ $("settingsForm").addEventListener("submit", async event => {
   event.preventDefault();
 
   if (!currentUser) {
-    return message("Admin login required.", "error");
+    message("Admin login required.", "error");
+    return;
   }
 
   const upiId = $("upiId").value.trim();
   const whatsapp = $("whatsapp").value.replace(/\D/g, "");
-  const groupLink = $("groupLink").value.trim();
+  let groupLink;
 
-  if (!upiId.includes("@")) {
-    return message("Valid UPI ID enter karein.", "error");
+  if (!/^[^@\s]+@[^@\s]+$/.test(upiId)) {
+    message("Valid UPI ID enter karein.", "error");
+    return;
   }
 
-  if (whatsapp.length < 10) {
-    return message("WhatsApp number check karein.", "error");
+  if (whatsapp.length < 10 || whatsapp.length > 15) {
+    message("WhatsApp number 10–15 digits ka hona chahiye.", "error");
+    return;
   }
 
   try {
-    const parsed = new URL(groupLink);
+    groupLink = cleanWhatsAppGroupLink($("groupLink").value.trim());
+  } catch (error) {
+    message(error.message, "error");
+    return;
+  }
 
-    if (
-      parsed.protocol !== "https:" ||
-      !parsed.hostname.endsWith("whatsapp.com")
-    ) {
-      return message("Valid WhatsApp group link enter karein.", "error");
-    }
-
+  try {
     await set(ref(db, "paymentConfig"), {
       upiId,
       whatsapp,
@@ -855,12 +716,11 @@ $("settingsForm").addEventListener("submit", async event => {
       updatedBy: currentUser.uid
     });
 
+    $("groupLink").value = groupLink;
     message("Payment settings save ho gayi.");
   } catch (error) {
-    message(
-      "Settings save nahi hui. Firebase Rules check karein: " + error.message,
-      "error"
-    );
+    console.error(error);
+    message("Settings save nahi hui. Firebase Rules check karein: " + error.message, "error");
   }
 });
 
@@ -868,7 +728,8 @@ $("priceForm").addEventListener("submit", async event => {
   event.preventDefault();
 
   if (!currentUser) {
-    return message("Admin login required.", "error");
+    message("Admin login required.", "error");
+    return;
   }
 
   const type = $("productType").value;
@@ -877,18 +738,19 @@ $("priceForm").addEventListener("submit", async event => {
   const price = Number($("productPrice").value);
 
   if (
+    !$("productSelect").value ||
     !productId ||
     !name ||
-    $("productSelect").value === "" ||
+    $("productPrice").value.trim() === "" ||
     !Number.isFinite(price) ||
     price < 0 ||
     price > 100000
   ) {
-    return message("Product select karein aur valid price enter karein.", "error");
+    message("Product select karein aur valid price enter karein.", "error");
+    return;
   }
 
-  // Firebase keys cannot contain . # $ [ ] /
-  const key = `${type}_${productId}`.replace(/[.#$[\]/]/g, "_");
+  const key = priceKey({ type, id: productId });
 
   try {
     await set(ref(db, `paymentPrices/${key}`), {
@@ -903,10 +765,8 @@ $("priceForm").addEventListener("submit", async event => {
     await loadPrices();
     message("Product price successfully save ho gayi.");
   } catch (error) {
-    message(
-      "Price save nahi hui. Firebase Rules check karein: " + error.message,
-      "error"
-    );
+    console.error(error);
+    message("Price save nahi hui. Firebase Rules check karein: " + error.message, "error");
   }
 });
 
@@ -938,37 +798,40 @@ onAuthStateChanged(auth, async user => {
     await verifyAdmin(user);
     currentUser = user;
 
-    await Promise.all([
+    // One failed read should not prevent other sections from loading.
+    const results = await Promise.allSettled([
       loadSettings(),
       loadPrices(),
       loadRequests(),
       loadProducts()
     ]);
+
+    const failed = results.filter(result => result.status === "rejected");
+
+    if (failed.length) {
+      console.error("Section loading errors:", failed);
+      message("Kuch data load nahi hua. Firebase Rules aur database paths check karein.", "error");
+    }
   } catch (error) {
     console.error(error);
 
     if (error.message === "NOT_ADMIN") {
       await signOut(auth);
       location.href = "login.html";
-    } else {
-      message(
-        "Firebase data load nahi hua. Database Rules aur connection check karein: " +
-        error.message,
-        "error"
-      );
-
-      $("pricesTable").innerHTML =
-        '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
-
-      $("requestsTable").innerHTML =
-        '<tr><td colspan="5" class="empty">Data load failed.</td></tr>';
+      return;
     }
+
+    message("Admin verification/data load error: " + error.message, "error");
   }
 });
 
 $("logout").addEventListener("click", async () => {
-  await signOut(auth);
-  location.href = "login.html";
+  try {
+    await signOut(auth);
+    location.href = "login.html";
+  } catch (error) {
+    message("Logout error: " + error.message, "error");
+  }
 });
 
 $("menuBtn").addEventListener("click", () => {
@@ -979,21 +842,26 @@ const themeKey = "chemistryPointTheme";
 
 function applyTheme(theme) {
   document.body.classList.toggle("light-mode", theme === "light");
-
   $("themeBtn").innerHTML = theme === "light"
     ? '<i class="fa-solid fa-sun"></i>'
     : '<i class="fa-solid fa-moon"></i>';
 }
 
-applyTheme(localStorage.getItem(themeKey) || "dark");
+try {
+  applyTheme(localStorage.getItem(themeKey) || "dark");
+} catch {
+  applyTheme("dark");
+}
 
 $("themeBtn").addEventListener("click", () => {
-  const next = document.body.classList.contains("light-mode")
-    ? "dark"
-    : "light";
-
-  localStorage.setItem(themeKey, next);
+  const next = document.body.classList.contains("light-mode") ? "dark" : "light";
   applyTheme(next);
+
+  try {
+    localStorage.setItem(themeKey, next);
+  } catch {
+    // Theme still changes for the current page session.
+  }
 });
 </script>
 </body>
