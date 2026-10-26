@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -299,7 +300,7 @@ td{line-height:1.6}
 
       <div class="notice">
         <i class="fa-solid fa-circle-info"></i>
-        Dropdown existing Firebase quiz records aur chapter ke PDF records se products load karne ki koshish karta hai. Agar koi PDF list mein nahi dikhti, toh uske database data structure ko check karna hoga.
+        PDF dropdown ab chapter ke vviPdf, pyqPdf aur allPdf fields ko read karta hai. Purane pdfs object aur direct PDF URL formats bhi supported hain.
       </div>
 
       <div class="table-wrap" style="margin-top:18px">
@@ -382,7 +383,6 @@ const $ = id => document.getElementById(id);
 let currentUser = null;
 let requestsData = {};
 let pricesData = {};
-let configData = {};
 let availableProducts = [];
 
 function message(text, type = "success") {
@@ -405,20 +405,22 @@ async function verifyAdmin(user) {
 
   const data = snap.val();
 
-  if (data.role !== "admin" || data.active === false) {
+  if (data.role !== "admin" || data.active !== true) {
     throw new Error("NOT_ADMIN");
   }
 }
 
 /*
-  Quiz products:
-  Reads records from /quizzes.
-
-  PDF products:
-  Reads records from /chapters and supports:
-  - chapter.pdfs as an object of PDF records
-  - direct chapter PDF URL fields
-*/
+ * Quiz products:
+ *   /quizzes
+ *
+ * Objective PDF products:
+ *   /chapters/{chapterId}/vviPdf
+ *   /chapters/{chapterId}/pyqPdf
+ *   /chapters/{chapterId}/allPdf
+ *
+ * Also supports older pdfs objects and direct PDF URL fields.
+ */
 function normalizeProducts(data, type) {
   const products = [];
 
@@ -450,12 +452,50 @@ function normalizeProducts(data, type) {
       item.chapterTitle ||
       key;
 
-    const chapterSlug = item.slug || item.chapterSlug || key;
+    // Actual fields saved by the Objectives admin page.
+    const objectivePdfs = [
+      { field: "vviPdf", label: "V.V.I Objectives" },
+      { field: "pyqPdf", label: "PYQ Objectives" },
+      { field: "allPdf", label: "All Objectives" }
+    ];
+
+    objectivePdfs.forEach(({ field, label }) => {
+      const url = item[field];
+
+      if (typeof url === "string" && url.trim()) {
+        products.push({
+          id: `${key}/${field}`,
+          name: `${chapterName} — ${label}`,
+          type: "pdf"
+        });
+      }
+    });
+
+    // Support older nested PDF records.
     const pdfs = item.pdfs;
 
     if (pdfs && typeof pdfs === "object") {
       Object.entries(pdfs).forEach(([pdfKey, pdf]) => {
+        if (typeof pdf === "string" && pdf.trim()) {
+          products.push({
+            id: `${key}/${pdfKey}`,
+            name: `${chapterName} — ${pdfKey}`,
+            type: "pdf"
+          });
+          return;
+        }
+
         if (!pdf || typeof pdf !== "object") return;
+
+        const pdfUrl =
+          pdf.pdfUrl ||
+          pdf.pdfURL ||
+          pdf.driveUrl ||
+          pdf.googleDriveUrl ||
+          pdf.url ||
+          pdf.link;
+
+        if (!pdfUrl || typeof pdfUrl !== "string") return;
 
         const pdfName =
           pdf.name ||
@@ -466,28 +506,36 @@ function normalizeProducts(data, type) {
 
         products.push({
           id: `${key}/${pdfKey}`,
-          name: `${chapterName || chapterSlug} — ${pdfName}`,
+          name: `${chapterName} — ${pdfName}`,
           type: "pdf"
         });
       });
     }
 
+    // Support older direct URL fields.
     const directUrl =
       item.pdfUrl ||
       item.pdfURL ||
       item.driveUrl ||
       item.googleDriveUrl;
 
-    if (directUrl && !pdfs) {
+    if (typeof directUrl === "string" && directUrl.trim() && !pdfs) {
       products.push({
         id: key,
-        name: String(chapterName || chapterSlug),
+        name: String(chapterName),
         type: "pdf"
       });
     }
   });
 
-  return products;
+  // Avoid showing duplicate products if data contains overlapping formats.
+  const unique = new Map();
+
+  products.forEach(product => {
+    unique.set(`${product.type}:${product.id}`, product);
+  });
+
+  return Array.from(unique.values());
 }
 
 async function loadProducts() {
@@ -531,8 +579,8 @@ async function loadProducts() {
     if (!availableProducts.length) {
       message(
         type === "quiz"
-          ? "Quiz nahi mila. /quizzes ke records aur title/name fields check karein."
-          : "PDF nahi mili. /chapters ka PDF data structure check karna hoga.",
+          ? "Quiz nahi mila. /quizzes ke title/name fields check karein."
+          : "PDF nahi mili. Check karein ki /chapters mein vviPdf, pyqPdf ya allPdf mein valid link saved hai.",
         "error"
       );
     }
@@ -556,6 +604,7 @@ $("productSelect").addEventListener("change", () => {
   if (selectedValue === "") {
     $("productId").value = "";
     $("productName").value = "";
+    $("productPrice").value = "";
     return;
   }
 
@@ -569,6 +618,15 @@ $("productSelect").addEventListener("change", () => {
 
   $("productId").value = product.id;
   $("productName").value = product.name;
+
+  // If this product already has a saved price, populate the input.
+  const priceKey = `${product.type}_${product.id}`.replace(/[.#$[\]/]/g, "_");
+  const saved = pricesData[priceKey];
+
+  $("productPrice").value =
+    saved && Number.isFinite(Number(saved.price))
+      ? saved.price
+      : "";
 });
 
 $("reloadProducts").addEventListener("click", loadProducts);
@@ -586,6 +644,8 @@ function renderPrices() {
   tbody.innerHTML = "";
 
   entries.forEach(([key, item]) => {
+    if (!item || typeof item !== "object") return;
+
     const tr = document.createElement("tr");
     const product = document.createElement("td");
     const type = document.createElement("td");
@@ -635,6 +695,8 @@ function renderRequests() {
   let total = 0;
 
   entries.forEach(([, item]) => {
+    if (!item || typeof item !== "object") return;
+
     const status = String(item.status || "pending").toLowerCase();
 
     if (status === "pending") pending++;
@@ -658,6 +720,8 @@ function renderRequests() {
   tbody.innerHTML = "";
 
   entries.reverse().forEach(([key, item]) => {
+    if (!item || typeof item !== "object") return;
+
     const tr = document.createElement("tr");
     const paymentId = document.createElement("td");
     const student = document.createElement("td");
@@ -724,17 +788,28 @@ function renderRequests() {
 
 async function loadSettings() {
   const snap = await get(ref(db, "paymentConfig"));
-  configData = snap.exists() ? snap.val() : {};
+  const data = snap.exists() ? snap.val() : {};
 
-  $("upiId").value = configData.upiId || "";
-  $("whatsapp").value = configData.whatsapp || "";
-  $("groupLink").value = configData.groupLink || "";
+  $("upiId").value = data.upiId || "";
+  $("whatsapp").value = data.whatsapp || "";
+  $("groupLink").value = data.groupLink || "";
 }
 
 async function loadPrices() {
   const snap = await get(ref(db, "paymentPrices"));
   pricesData = snap.exists() ? snap.val() : {};
   renderPrices();
+
+  // Keep selected product's saved price in sync after reloading.
+  const selectedValue = $("productSelect").value;
+  if (selectedValue !== "") {
+    const product = availableProducts[Number(selectedValue)];
+    if (product) {
+      const key = `${product.type}_${product.id}`.replace(/[.#$[\]/]/g, "_");
+      const saved = pricesData[key];
+      $("productPrice").value = saved ? saved.price : "";
+    }
+  }
 }
 
 async function loadRequests() {
@@ -804,6 +879,7 @@ $("priceForm").addEventListener("submit", async event => {
   if (
     !productId ||
     !name ||
+    $("productSelect").value === "" ||
     !Number.isFinite(price) ||
     price < 0 ||
     price > 100000
@@ -811,12 +887,7 @@ $("priceForm").addEventListener("submit", async event => {
     return message("Product select karein aur valid price enter karein.", "error");
   }
 
-  /*
-    Firebase keys cannot contain:
-    . # $ [ ] /
-    Product IDs containing "/" are encoded for the price record key.
-    The original productId is saved separately for matching later.
-  */
+  // Firebase keys cannot contain . # $ [ ] /
   const key = `${type}_${productId}`.replace(/[.#$[\]/]/g, "_");
 
   try {
@@ -830,9 +901,6 @@ $("priceForm").addEventListener("submit", async event => {
     });
 
     await loadPrices();
-
-    $("productPrice").value = "";
-
     message("Product price successfully save ho gayi.");
   } catch (error) {
     message(
