@@ -57,6 +57,38 @@ const firebaseConfig={apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",authDomai
 const app=initializeApp(firebaseConfig),db=getDatabase(app,firebaseConfig.databaseURL),$=id=>document.getElementById(id),params=new URLSearchParams(location.search);
 const requestedType=(params.get("type")||"").trim().toLowerCase(),requestedProductId=(params.get("productId")||"").trim(),requestedTitle=(params.get("title")||"").trim();
 let settings={},prices={},product=null,currentRequest=null,dashboardToken=null;
+const sessionKey=()=> "cpPaymentSession:"+requestedType+":"+requestedProductId;
+function saveSession(){
+  if(!currentRequest||!dashboardToken)return;
+  localStorage.setItem(sessionKey(),JSON.stringify({
+    requestId:currentRequest.requestId,token:dashboardToken,
+    name:$("studentName").value.trim(),phone:$("phone").value.trim()
+  }));
+}
+async function restoreSession(){
+  try{
+    const raw=localStorage.getItem(sessionKey());
+    if(!raw)return;
+    const saved=JSON.parse(raw);
+    if(!saved||!saved.requestId||!/^[a-f0-9]{64}$/i.test(saved.token||""))return;
+    const snap=await get(ref(db,"paymentDashboards/"+saved.token));
+    if(!snap.exists())return;
+    const data=snap.val()||{},payments=data.payments||{};
+    const record=payments[saved.requestId];
+    if(!record)return;
+    dashboardToken=saved.token;
+    currentRequest={requestId:saved.requestId,item:{...record,studentName:data.studentName,studentId:data.studentId,productName:record.productName||product?.name,productType:record.productType||product?.type,amount:record.amount}};
+    $("studentName").value=saved.name||data.studentName||"";
+    $("phone").value=saved.phone||"";
+    $("utrBtn").disabled=String(record.status||"pending").toLowerCase()!=="pending";
+    $("whatsappBtn").disabled=false;
+    $("dashboardBox").style.display="block";
+    const link=new URL("dashboard.html",location.href);link.searchParams.set("token",dashboardToken);
+    $("dashboardLink").textContent=link.href;
+    if(record.utr)$("utr").value=record.utr;
+    say("Aapki purani payment request restore ho gayi. Dashboard link private rakhein.");
+  }catch(error){console.warn("Payment session restore failed:",error)}
+}
 function say(t){$("message").textContent=t}
 function studentId(){const k="chemistryPointStudentId";let v=localStorage.getItem(k);if(!v){v="CWP-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),x=>x.toString(16).padStart(2,"0")).join("").toUpperCase();localStorage.setItem(k,v)}return v}
 function randomToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,"0")).join("")}
@@ -65,12 +97,24 @@ function draw(){if(!product)return;$("productTitle").textContent=product.name||r
 function student(){const name=$("studentName").value.trim(),phone=$("phone").value.replace(/\D/g,""),amount=price();if(name.length<2){say("Apna naam enter karein.");return null}if(phone.length<10||phone.length>15){say("Valid mobile number enter karein.");return null}if(!product||!Number.isFinite(amount)||amount<=0){say("Product ya valid price available nahi hai.");return null}return{name,phone,amount,studentId:studentId()}}
 async function load(){try{const [c,p]=await Promise.all([get(ref(db,"paymentConfig")),get(ref(db,"paymentPrices"))]);settings=c.val()||{};prices=p.val()||{};const rows=Object.entries(prices).map(([key,v])=>({key,...v,productId:String(v?.productId||""),type:String(v?.type||"").toLowerCase()}));product=rows.find(x=>x.productId===requestedProductId&&(!requestedType||x.type===requestedType))||null;if(!product){$("productTitle").textContent="Product nahi mila";say("Payment link ka Product ID ya Type admin ke saved record se match nahi hua.");return}draw();say("Product aur payment settings load ho gayi.");}catch(e){console.error(e);say("Firebase data load nahi hua: "+e.message)}}
 $("studentId").textContent=studentId();
-$("payBtn").addEventListener("click",async()=>{const s=student();if(!s)return;if(!String(settings.upiId||"").includes("@")){say("Admin panel mein valid UPI ID set nahi hai.");return}if(currentRequest){openUpi(s);return}try{$("payBtn").disabled=true;say("Payment request ban rahi hai…");dashboardToken=randomToken();const requestRef=push(ref(db,"paymentRequests")),requestId=requestRef.key,now=Date.now();const item={requestId,studentName:s.name,phone:s.phone,studentId:s.studentId,productType:product.type,productId:product.productId,productName:product.name||requestedTitle||product.productId,amount:s.amount,status:"pending",utr:"",requestSecret:dashboardToken,createdAt:now,submittedAt:now};const dashboard={studentName:s.name,studentId:s.studentId,createdAt:now,payments:{[requestId]:{productType:item.productType,productId:item.productId,productName:item.productName,amount:item.amount,status:"pending",utr:"",submittedAt:now}}};await update(ref(db),{["paymentRequests/"+requestId]:item,["paymentDashboards/"+dashboardToken]:dashboard});currentRequest={requestId,item};localStorage.setItem("cpDashboardToken",dashboardToken);const link=new URL("dashboard.html",location.href);link.searchParams.set("token",dashboardToken);$("dashboardBox").style.display="block";$("dashboardLink").textContent=link.href;$("utrBtn").disabled=false;$("whatsappBtn").disabled=false;say("Request create ho gayi. Ab UPI payment karein. Dashboard link ko private rakhein.");openUpi(s);}catch(e){console.error(e);$("payBtn").disabled=false;say("Request create nahi hui. Firebase Rules update hone ke baad dobara try karein: "+e.message)}});
+$("payBtn").addEventListener("click",async()=>{const s=student();if(!s)return;if(!String(settings.upiId||"").includes("@")){say("Admin panel mein valid UPI ID set nahi hai.");return}if(currentRequest){openUpi(s);return}try{$("payBtn").disabled=true;say("Payment request ban rahi hai…");dashboardToken=randomToken();const requestRef=push(ref(db,"paymentRequests")),requestId=requestRef.key,now=Date.now();let chapterMeta={};
+if(product.type==="pdf"){
+  const [chapterId,pdfField]=product.productId.split("/");
+  if(chapterId){
+    const chapterSnap=await get(ref(db,"chapters/"+chapterId));
+    const chapterData=chapterSnap.exists()?chapterSnap.val():{};
+    const fieldType={vviPdf:"vvi",pyqPdf:"pyq",allPdf:"all"};
+    const nestedType=pdfField&&!fieldType[pdfField]?pdfField:"";
+    chapterMeta={chapterSlug:String(chapterData.slug||chapterData.chapterSlug||""),objectiveType:fieldType[pdfField]||nestedType||"vvi",classLevel:String(chapterData.classLevel||"12")};
+  }
+}
+const item={requestId,studentName:s.name,phone:s.phone,studentId:s.studentId,productType:product.type,productId:product.productId,productName:product.name||requestedTitle||product.productId,amount:s.amount,status:"pending",utr:"",requestSecret:dashboardToken,...chapterMeta,createdAt:now,submittedAt:now};
+const dashboard={studentName:s.name,studentId:s.studentId,createdAt:now,payments:{[requestId]:{productType:item.productType,productId:item.productId,productName:item.productName,amount:item.amount,status:"pending",utr:"",...chapterMeta,submittedAt:now}}};await update(ref(db),{["paymentRequests/"+requestId]:item,["paymentDashboards/"+dashboardToken]:dashboard});currentRequest={requestId,item};localStorage.setItem("cpDashboardToken",dashboardToken);saveSession();const link=new URL("dashboard.html",location.href);link.searchParams.set("token",dashboardToken);$("dashboardBox").style.display="block";$("dashboardLink").textContent=link.href;$("utrBtn").disabled=false;$("whatsappBtn").disabled=false;say("Request create ho gayi. Ab UPI payment karein. Dashboard link ko private rakhein.");openUpi(s);}catch(e){console.error(e);$("payBtn").disabled=false;say("Request create nahi hui. Firebase Rules update hone ke baad dobara try karein: "+e.message)}});
 function openUpi(s){const q=new URLSearchParams({pa:String(settings.upiId).trim(),pn:"Chemistry Point",am:s.amount.toFixed(2),cu:"INR",tn:(product.name||product.productId)+" | "+s.studentId});location.href="upi://pay?"+q.toString()}
-$("utrBtn").addEventListener("click",async()=>{if(!currentRequest||!dashboardToken){say("Pehle Create Request & Pay karein.");return}const utr=$("utr").value.trim().replace(/\s/g,"");if(!/^[A-Za-z0-9]{8,40}$/.test(utr)){say("Valid UTR / Transaction ID (8–40 characters) enter karein.");return}try{$("utrBtn").disabled=true;const updatedAt=Date.now();await update(ref(db),{["paymentRequests/"+currentRequest.requestId+"/utr"]:utr,["paymentRequests/"+currentRequest.requestId+"/submittedAt"]:updatedAt});currentRequest.item={...currentRequest.item,utr,submittedAt:updatedAt};say("UTR submit ho gaya. Screenshot WhatsApp verification group mein bhejein.");}catch(e){console.error(e);say("UTR submit nahi hua: "+e.message)}finally{$("utrBtn").disabled=false}});
+$("utrBtn").addEventListener("click",async()=>{if(!currentRequest||!dashboardToken){say("Pehle Create Request & Pay karein.");return}const utr=$("utr").value.trim().replace(/\s/g,"");if(!/^[A-Za-z0-9]{8,40}$/.test(utr)){say("Valid UTR / Transaction ID (8–40 characters) enter karein.");return}try{$("utrBtn").disabled=true;const updatedAt=Date.now();await update(ref(db),{["paymentRequests/"+currentRequest.requestId+"/utr"]:utr,["paymentRequests/"+currentRequest.requestId+"/submittedAt"]:updatedAt});currentRequest.item={...currentRequest.item,utr,submittedAt:updatedAt};saveSession();say("UTR submit ho gaya. Screenshot WhatsApp verification group mein bhejein.");}catch(e){console.error(e);say("UTR submit nahi hua: "+e.message)}finally{$("utrBtn").disabled=false}});
 $("whatsappBtn").addEventListener("click",()=>{const s=student();if(!s||!currentRequest)return;const number=String(settings.whatsapp||"").replace(/\D/g,"");if(number.length<10){say("Admin panel mein WhatsApp number set nahi hai.");return}const message=["Chemistry Point Payment Verification", "Student: "+s.name,"Mobile: "+s.phone,"Student ID: "+s.studentId,"Product: "+currentRequest.item.productName,"Product Type: "+currentRequest.item.productType,"Amount: ₹"+s.amount,"UTR: "+($("utr").value.trim()||"Will share separately"),"Please verify my payment. Screenshot attached separately."].join("\n");location.href="https://wa.me/"+number+"?text="+encodeURIComponent(message)});
 $("groupBtn").addEventListener("click",()=>{try{const u=new URL(settings.groupLink||"");if(u.protocol!=="https:"||u.hostname!=="chat.whatsapp.com")throw Error();location.href=u.href}catch{say("Admin panel mein valid WhatsApp group invite link save karein.")}});
 $("copyDashboardBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("dashboardLink").textContent);say("Private dashboard link copy ho gaya. Ise kisi group mein share na karein.")}catch{say("Link ko long-press karke copy karein.")}});
-$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("chemistryPointTheme",document.body.classList.contains("light")?"light":"dark")});if(localStorage.getItem("chemistryPointTheme")==="light")document.body.classList.add("light");load();
+$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("chemistryPointTheme",document.body.classList.contains("light")?"light":"dark")});if(localStorage.getItem("chemistryPointTheme")==="light")document.body.classList.add("light");load().then(restoreSession);
 </script>
 </body></html>
