@@ -627,13 +627,13 @@
         // URL parameters
         const params = new URLSearchParams(window.location.search);
 
-        const chapter = params.get("chapter") || "solid-state";
-        const type = params.get("type") || "vvi";
-        const classParam = params.get("class") || "12";
+        const chapter = (params.get("chapter") || "solid-state").trim();
+        const requestedType = (params.get("type") || "vvi").trim().toLowerCase();
+        const type = ["vvi", "pyq", "all"].includes(requestedType) ? requestedType : "vvi";
+        const classParam = (params.get("class") || "12").trim().toLowerCase();
 
         const classLevel = (
-            classParam === "11" ||
-            classParam.toLowerCase() === "class-11"
+            ["11", "class 11", "class-11", "class11"].includes(classParam)
         ) ? "11" : "12";
 
         // Known chapter names; unknown chapter slugs are formatted as a fallback.
