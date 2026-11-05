@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,17 +39,17 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 0 30px
 <header><div class="brand"><img class="brand-logo" src="assets/images/logo/logo.png" alt="Chemistry Point Logo"> <span>Chemistry Point</span></div><button class="theme" id="themeBtn" type="button">Light / Dark</button></header>
 <main>
   <section class="hero">
-    <div class="eyebrow">Private Student Area</div>
-    <h1>My Dashboard</h1>
-    <p class="muted">Apne payment status aur approved study access yahan dekhein.</p>
+    <div class="eyebrow">निजी विद्यार्थी क्षेत्र</div>
+    <h1>मेरा डैशबोर्ड</h1>
+    <p class="muted">यहाँ अपनी खरीदारी, भुगतान की स्थिति और स्वीकृत पढ़ाई की सुविधा देखें।</p>
   </section>
   <section class="student-card" id="studentCard" hidden>
-    <div><small>Student Name</small><div class="product" id="studentName">—</div></div>
-    <div><small>Student ID</small><div class="student-id" id="studentId">—</div></div>
+    <div><small>विद्यार्थी का नाम</small><div class="product" id="studentName">—</div></div>
+    <div><small>विद्यार्थी पहचान संख्या</small><div class="student-id" id="studentId">—</div></div>
   </section>
-  <div id="message" class="empty" role="status" aria-live="polite">Dashboard load ho raha hai…</div>
+  <div id="message" class="empty" role="status" aria-live="polite">आपका डैशबोर्ड खुल रहा है…</div>
   <section id="paymentsSection" hidden>
-    <div class="section-title"><h2>My Payments & Access</h2><span class="count" id="paymentCount"></span></div>
+    <div class="section-title"><h2>मेरी खरीदारी और पढ़ाई की सुविधा</h2><span class="count" id="paymentCount"></span></div>
     <div class="payment-list" id="paymentList"></div>
   </section>
 </main>
@@ -90,7 +90,7 @@ function render(data){
   $("studentName").textContent=String(data.studentName||"Student");
   $("studentId").textContent=String(data.studentId||"");
   const payments=data.payments&&typeof data.payments==="object"?Object.entries(data.payments):[];
-  $("paymentCount").textContent=payments.length+" item(s)";
+  $("paymentCount").textContent=payments.length+" खरीदारी";
   $("paymentList").replaceChildren();
   if(!payments.length){showMessage("Abhi koi payment record nahi mila.");return;}
   $("message").hidden=true;$("paymentsSection").hidden=false;
@@ -105,38 +105,38 @@ function render(data){
     const title=document.createElement("div");title.className="product";title.textContent=String(item.productName||"Paid Content");
     const meta=document.createElement("div");meta.className="meta";meta.textContent=String(item.productType||item.type||"Product").toUpperCase()+" · "+String(item.productId||"");
     titleBox.append(title,meta);
-    const badge=document.createElement("span");badge.className="status "+safeStatus;badge.textContent=safeStatus;
+    const badge=document.createElement("span");badge.className="status "+safeStatus;badge.textContent=safeStatus==="approved"?"स्वीकृत":safeStatus==="rejected"?"अस्वीकृत":"जाँच जारी";
     top.append(titleBox,badge);card.append(top);
     const details=document.createElement("div");details.className="details";
-    for(const [label,value] of [["Amount",money(item.amount)],["UTR",item.utr||"Not submitted"],["Submitted",item.submittedAt?new Date(Number(item.submittedAt)).toLocaleString("en-IN"):"—"]]){
+    for(const [label,value] of [["राशि",money(item.amount)],["UTR",item.utr||"जमा नहीं हुआ"],["तारीख",item.submittedAt?new Date(Number(item.submittedAt)).toLocaleString("hi-IN"):"—"]]){
       const span=document.createElement("span");span.textContent=label+": ";
       const strong=document.createElement("strong");strong.textContent=String(value);span.append(strong);details.append(span);
     }
     card.append(details);
     const note=document.createElement("div");note.className="note";
-    if(safeStatus==="pending") note.textContent="Payment request mil gayi hai. Admin UTR aur WhatsApp group mein bheje gaye screenshot ko verify karega.";
-    else if(safeStatus==="rejected") note.textContent="Payment approve nahi hui."+ (item.rejectionReason?" Reason: "+String(item.rejectionReason):" Admin se sampark karein.");
-    else note.textContent="Payment approve ho gayi hai. Aapka selected content ab available hai.";
+    if(safeStatus==="pending") note.textContent="आपका भुगतान अनुरोध मिल गया है। व्यवस्थापक आपके UTR और WhatsApp समूह में भेजे गए स्क्रीनशॉट की जाँच करेंगे। जाँच पूरी होने तक प्रतीक्षा करें।";
+    else if(safeStatus==="rejected") note.textContent="आपका भुगतान स्वीकृत नहीं हुआ।"+ (item.rejectionReason?" कारण: "+String(item.rejectionReason):" कृपया व्यवस्थापक से संपर्क करें।");
+    else note.textContent="आपका भुगतान स्वीकृत हो गया है। अब नीचे दिए गए बटन से खरीदी गई सामग्री खोलें।";
     card.append(note);
     if(safeStatus==="approved"){
       const link=makeAccessLink(item);
-      if(link){const actions=document.createElement("div");actions.className="card-actions";const a=document.createElement("a");a.className="open-link";a.href=link;a.textContent="Open "+(String(item.productType||"").toLowerCase()==="quiz"?"Quiz":"Objectives");actions.append(a);card.append(actions);}
-      else {const warn=document.createElement("div");warn.className="note";warn.textContent="Access link details abhi configured nahi hain. Admin se sampark karein.";card.append(warn);}
+      if(link){const actions=document.createElement("div");actions.className="card-actions";const a=document.createElement("a");a.className="open-link";a.href=link;a.textContent=(String(item.productType||"").toLowerCase()==="quiz"?"क्विज़ खोलें":"PDF सामग्री खोलें");actions.append(a);card.append(actions);}
+      else {const warn=document.createElement("div");warn.className="note";warn.textContent="इस सामग्री का लिंक अभी उपलब्ध नहीं है। कृपया व्यवस्थापक से संपर्क करें।";card.append(warn);}
     }
     $("paymentList").append(card);
   }
 }
 async function loadDashboard(){
-  if(!/^[a-f0-9]{64}$/i.test(token)){showMessage("Private dashboard link invalid hai. Payment submit karne ke baad mila hua complete link open karein.",true);return;}
+  if(!/^[a-f0-9]{64}$/i.test(token)){showMessage("निजी डैशबोर्ड लिंक सही नहीं है। भुगतान पृष्ठ से मिला पूरा लिंक खोलें।",true);return;}
   try{
     const snap=await get(ref(db,"paymentDashboards/"+token));
-    if(!snap.exists()){showMessage("Dashboard record nahi mila. Link check karein ya payment submit karne ke baad mila hua link dobara open karein.",true);return;}
+    if(!snap.exists()){showMessage("इस लिंक से डैशबोर्ड नहीं मिला। लिंक की जाँच करें या भुगतान के बाद मिला पूरा लिंक खोलें।",true);return;}
     const data=snap.val();
-    if(!data||typeof data!=="object"){showMessage("Dashboard data invalid hai.",true);return;}
+    if(!data||typeof data!=="object"){showMessage("डैशबोर्ड की जानकारी सही नहीं है।",true);return;}
     render(data);
   }catch(error){
     console.error(error);
-    showMessage("Dashboard load nahi hua. Firebase Rules mein is private token record ka read access check karna hoga.",true);
+    showMessage("डैशबोर्ड नहीं खुल सका। इंटरनेट कनेक्शन जाँचें। समस्या बनी रहे तो व्यवस्थापक से संपर्क करें।",true);
   }
 }
 $("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("chemistryPointTheme",document.body.classList.contains("light")?"light":"dark");});
