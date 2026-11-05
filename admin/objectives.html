@@ -1309,6 +1309,15 @@
 
                         </div>
 
+                        <div class="form-group">
+                            <label for="chapterClassLevel">Class <span>*</span></label>
+                            <select id="chapterClassLevel" required>
+                                <option value="11">Class 11</option>
+                                <option value="12" selected>Class 12</option>
+                            </select>
+                            <div class="form-help">Chapter जिस कक्षा का है, वही चुनें।</div>
+                        </div>
+
 
                         <!-- PDF TITLE -->
 
@@ -1663,6 +1672,9 @@
 
     const chapterSlug =
         document.getElementById("chapterSlug");
+
+    const chapterClassLevel =
+        document.getElementById("chapterClassLevel");
 
     const vviPdf =
         document.getElementById("vviPdf");
@@ -2380,6 +2392,7 @@
     function resetForm() {
 
         chapterForm.reset();
+        chapterClassLevel.value = "12";
 
         Object.keys(accessFields).forEach(key => syncAccessFields(key));
 
@@ -2504,6 +2517,9 @@
         chapterSlug.value =
             chapter.slug || "";
 
+        chapterClassLevel.value =
+            String(chapter.classLevel || chapter.class || "12");
+
         vviPdf.value =
             chapter.vviPdf || "";
 
@@ -2580,6 +2596,8 @@
             const all =
                 allPdf.value.trim();
 
+            const classLevel = chapterClassLevel.value === "11" ? "11" : "12";
+
 
             if (!name || !slug) {
 
@@ -2652,6 +2670,11 @@
 
             for (const key of ["vvi", "pyq", "all"]) {
                 const field = accessFields[key];
+                const pdfValue = { vvi, pyq, all }[key];
+                if (field.type.value === "paid" && !pdfValue) {
+                    showToast(`${key.toUpperCase()} PDF ka link add karein, tabhi Paid Access set hoga.`, "error");
+                    return;
+                }
                 if (field.type.value === "paid") {
                     const price = Number(field.price.value);
                     if (!Number.isFinite(price) || price <= 0) {
@@ -2666,10 +2689,10 @@
             /* Prevent duplicate slug */
 
             const duplicate =
-                chapters.find(
-                    chapter =>
-                        chapter.slug === slug &&
-                        chapter.id !== editingChapterId
+                chapters.find(chapter =>
+                    chapter.slug === slug &&
+                    String(chapter.classLevel || chapter.class || "12") === classLevel &&
+                    chapter.id !== editingChapterId
                 );
 
 
@@ -2703,6 +2726,8 @@
 
                     slug,
 
+                    classLevel,
+
                     vviPdf: vvi,
 
                     pyqPdf: pyq,
@@ -2721,44 +2746,36 @@
                 };
 
 
+                let savedChapterId = editingChapterId;
                 if (editingChapterId) {
-
-                    await update(
-                        ref(
-                            db,
-                            `chapters/${editingChapterId}`
-                        ),
-                        chapterData
-                    );
-
-
-                    showToast(
-                        "Chapter updated successfully."
-                    );
-
+                    await update(ref(db, `chapters/${editingChapterId}`), chapterData);
+                    showToast("Chapter updated successfully.");
                 } else {
-
-                    const newChapterRef =
-                        push(
-                            ref(db, "chapters")
-                        );
-
-
-                    await set(
-                        newChapterRef,
-                        {
-                            ...chapterData,
-                            createdAt: now
-                        }
-                    );
-
-
-                    showToast(
-                        "Chapter added successfully."
-                    );
-
+                    const newChapterRef = push(ref(db, "chapters"));
+                    savedChapterId = newChapterRef.key;
+                    await set(newChapterRef, { ...chapterData, createdAt: now });
+                    showToast("Chapter added successfully.");
                 }
 
+                // Keep payment.html product catalogue in sync with this chapter.
+                const pdfProducts = [
+                    { key: "vvi", field: "vviPdf", label: "V.V.I Objectives", url: vvi },
+                    { key: "pyq", field: "pyqPdf", label: "PYQ Objectives", url: pyq },
+                    { key: "all", field: "allPdf", label: "All Objectives", url: all }
+                ];
+                for (const item of pdfProducts) {
+                    const paymentKey = `pdf_${savedChapterId}_${item.field}`;
+                    if (accessFields[item.key].type.value === "paid" && item.url) {
+                        await set(ref(db, `paymentPrices/${paymentKey}`), {
+                            type: "pdf", productId: `${savedChapterId}/${item.field}`,
+                            name: `${name} — ${item.label}`,
+                            price: Number(accessFields[item.key].price.value),
+                            updatedAt: now, updatedBy: currentAdmin.uid
+                        });
+                    } else {
+                        await remove(ref(db, `paymentPrices/${paymentKey}`));
+                    }
+                }
 
                 formCard.classList.remove("show");
 
