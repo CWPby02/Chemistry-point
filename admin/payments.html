@@ -447,7 +447,7 @@ async function deleteRequest(requestId, item) {
   const studentName = item.studentName || item.name || "this student";
   const productName = item.productName || item.productId || "this product";
   if (!confirm(
-    `Delete payment request for ${studentName} — ${productName}? Its linked dashboard access will also be removed. This cannot be undone.`
+    `क्या आप ${studentName} की “${productName}” खरीदारी हटाना चाहते हैं? केवल इसी खरीदारी का डैशबोर्ड रिकॉर्ड हटेगा। यह कार्य वापस नहीं किया जा सकता।`
   )) return;
 
   const changes = {
@@ -461,7 +461,7 @@ async function deleteRequest(requestId, item) {
   try {
     await update(ref(db), changes);
     await loadRequests();
-    message("Payment request delete ho gayi. Is purchase ka dashboard access bhi hata diya gaya.");
+    message("भुगतान अनुरोध हटा दिया गया है। केवल इसी खरीदारी की सुविधा हटाई गई है।");
   } catch (error) {
     console.error(error);
     message("Request delete nahi hui: " + error.message, "error");
@@ -498,10 +498,10 @@ async function reviewRequest(requestId, item, status) {
   try {
     await update(ref(db), changes);
     await loadRequests();
-    message(status === "approved" ? "Payment approved. Student dashboard update ho gaya." : "Payment rejected. Student dashboard update ho gaya.");
+    message(status === "approved" ? "भुगतान स्वीकृत कर दिया गया है। विद्यार्थी का डैशबोर्ड अपडेट हो गया है।" : "भुगतान अस्वीकृत कर दिया गया है। विद्यार्थी का डैशबोर्ड अपडेट हो गया है।");
   } catch (error) {
     console.error(error);
-    message("Payment status update nahi hua: " + error.message, "error");
+    message("भुगतान की स्थिति अपडेट नहीं हुई: " + error.message, "error");
   }
 }
 
