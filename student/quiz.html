@@ -1046,7 +1046,9 @@
     import {
         getDatabase,
         ref,
-        get
+        get,
+        push,
+        set
     } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
@@ -2945,6 +2947,35 @@
                     answerData
                 )
             );
+
+            // विद्यार्थी के अनुसार अलग-अलग क्विज़ प्रदर्शन सुरक्षित रखें।
+            try {
+                const profiles = JSON.parse(localStorage.getItem("cpStudentProfiles") || "[]");
+                const activeId = localStorage.getItem("cpActiveStudentId") || "";
+                const profile = profiles.find(item => item && item.studentId === activeId);
+                if (profile && /^[a-f0-9]{64}$/i.test(String(profile.token || ""))) {
+                    const historyKey = "cpQuizPerformance:" + profile.studentId;
+                    const history = JSON.parse(localStorage.getItem(historyKey) || "[]");
+                    const performance = {
+                        quizId: answerData.quizId,
+                        quizTitle: answerData.quizTitle,
+                        chapter: answerData.chapter,
+                        total: answerData.total,
+                        score: answerData.score,
+                        wrong: answerData.wrong,
+                        unattempted: answerData.unattempted,
+                        answered: answerData.answered,
+                        percentage: answerData.percentage,
+                        submittedAt: answerData.submittedAt
+                    };
+                    history.push(performance);
+                    localStorage.setItem(historyKey, JSON.stringify(history.slice(-100)));
+                    const resultRef = push(ref(db, "paymentDashboards/" + profile.token + "/performance"));
+                    set(resultRef, performance).catch(error => console.warn("Dashboard performance save failed:", error));
+                }
+            } catch (performanceError) {
+                console.warn("Performance save failed:", performanceError);
+            }
 
         }
 
