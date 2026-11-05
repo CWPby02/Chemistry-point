@@ -1656,7 +1656,11 @@ function card(q) {
             <span><i class="fa-solid fa-list"></i>${count} ${count === 1 ? "Question" : "Questions"}</span>
             <span><i class="fa-regular fa-clock"></i>${esc(durationText(duration))}</span>
         </div>
-        <a href="student/quiz.html?quizId=${encodeURIComponent(q.__id)}" class="quiz-start-btn">Start Quiz <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="${String(q.accessType || "free").toLowerCase() === "paid"
+            ? `payment.html?type=quiz&productId=${encodeURIComponent(q.__id)}&title=${encodeURIComponent(title)}`
+            : `student/quiz.html?quizId=${encodeURIComponent(q.__id)}`}"
+           class="quiz-start-btn">${String(q.accessType || "free").toLowerCase() === "paid" ? "Buy Access" : "Start Quiz"}
+           <i class="fa-solid fa-arrow-right"></i></a>
     </article>`;
 }
 function render() {
