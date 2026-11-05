@@ -306,6 +306,8 @@
       line-height: 1.85;
     }
 
+    .pdf-price { display:inline-flex; align-items:center; width:fit-content; margin-top:12px; padding:9px 13px; border:1px solid rgba(217,154,22,.28); border-radius:10px; background:rgba(217,154,22,.08); color:var(--gold); font-size:14px; font-weight:800; }
+
     .pdf-status {
       display: inline-flex;
       align-items: center;
@@ -897,7 +899,7 @@
       return link;
     }
 
-    function createCard(type, url) {
+    function createCard(type, url, chapterItem) {
       const config = pdfTypes[type];
       const viewUrl = url ? getViewUrl(url) : "";
       const downloadUrl = url ? getDownloadUrl(url) : "";
@@ -911,6 +913,9 @@
 
       const heading = makeElement("h2", "", config.title);
       const description = makeElement("p", "", config.description);
+      const savedPrice = Number(chapterItem[objectiveType + "Price"] || 0);
+      const isPaidProduct = String(chapterItem[objectiveType + "AccessType"] || "free").toLowerCase() === "paid";
+      const priceLabel = makeElement("div", "pdf-price", isPaidProduct ? (savedPrice > 0 ? "Paid Access · ₹" + savedPrice.toLocaleString("en-IN") : "Paid Access · Price unavailable") : "Free Access");
 
       const status = makeElement(
         "div",
@@ -948,7 +953,7 @@
       );
 
       actions.append(view, download);
-      card.append(iconBox, heading, description, status, actions);
+      card.append(iconBox, heading, description, priceLabel, status, actions);
 
       return card;
     }
@@ -1023,7 +1028,8 @@
         }
 
         if (!approved) {
-          showMessage("यह Paid Objective PDF है। Payment करने और Admin Approval मिलने के बाद PDF खुलेगी।");
+          const savedPrice = Number(chapterItem[objectiveType + "Price"] || 0);
+          showMessage("यह Paid Objective PDF है। " + (savedPrice > 0 ? "कीमत: ₹" + savedPrice.toLocaleString("en-IN") + "। " : "कीमत Admin से confirm करें। ") + "Payment और Admin Approval के बाद PDF खुलेगी।");
           const buy = makeElement("a", "pdf-btn pdf-btn-view", "Buy Access");
           const paymentUrl = new URL("../payment.html", window.location.href);
           paymentUrl.searchParams.set("type", "pdf");
@@ -1050,7 +1056,7 @@
 
         if (url) availableCount++;
 
-        grid.appendChild(createCard(type, url));
+        grid.appendChild(createCard(type, url, chapterItem));
       }
 
       if (availableCount === 0) {
