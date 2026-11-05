@@ -4,7 +4,7 @@ Branch: `payment-system-work`
 
 This is the complete proposed Rules JSON based on the Rules pasted in the project conversation, with additions for `paymentRequests` and `paymentDashboards`.
 
-**Do not paste these Rules until reviewed in Firebase Console.** They preserve the previous public read paths and add anonymous creation of pending payment requests. Student UTR updates are limited by immutable request fields; Admin can review and update statuses.
+**Do not paste these Rules until reviewed in Firebase Console.** They preserve the previous public read paths and permit unauthenticated creation of pending payment requests only. Existing pending requests allow UTR/submission timestamp updates while core payment fields remain immutable; Admin can review and update statuses. This is a proposed rules file and must be tested in Firebase Rules Simulator before applying.
 
 Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF URLs remain public as they were before. Dashboard approval is a workflow control, not full content protection.
 
@@ -51,7 +51,7 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
     "paymentRequests": {
       ".read": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true",
       "$requestId": {
-        ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (!data.exists() && newData.child('status').val() == 'pending' && newData.hasChildren(['studentName','phone','studentId','productType','productId','productName','amount','status','requestSecret','createdAt'])) || (auth == null && data.exists() && data.child('status').val() == 'pending' && newData.child('status').val() == 'pending' && newData.child('requestSecret').val() == data.child('requestSecret').val())",
+        ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (auth == null && !data.exists() && newData.child('status').val() == 'pending' && newData.hasChildren(['studentName','phone','studentId','productType','productId','productName','amount','status','requestSecret','createdAt'])) || (auth == null && data.exists() && data.child('status').val() == 'pending' && newData.child('status').val() == 'pending' && newData.child('requestSecret').val() == data.child('requestSecret').val())",
         ".validate": "newData.hasChildren(['studentName','phone','studentId','productType','productId','productName','amount','status','requestSecret','createdAt'])",
         "studentName": {
           ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists() || newData.val() == data.val()"
