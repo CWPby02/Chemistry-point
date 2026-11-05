@@ -895,13 +895,16 @@ function normalizeClass(value) {
 }
 
 function getChapterClass(item) {
-    return normalizeClass(
+    const rawClass = normalizeClass(
         item.classLevel ??
         item.class ??
         item.className ??
         item.class_level ??
         ""
     );
+
+    // Legacy chapter records without class metadata belong to Class 12.
+    return rawClass || "12";
 }
 
 function getChapterSlug(item, key) {
@@ -992,7 +995,7 @@ async function initializeChapterPage() {
             // Class 11 chapter ko Class 12 se match nahi karna.
             const itemClass = getChapterClass(item);
 
-            if (itemClass && itemClass !== classLevel) {
+            if (itemClass !== classLevel) {
                 return false;
             }
 
