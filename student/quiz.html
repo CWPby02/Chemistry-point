@@ -1835,7 +1835,37 @@
 
             await loadQuizData();
 
+            // Paid quiz access is granted only after Admin approval.
+            if (
+                quizId &&
+                loadedQuizData &&
+                String(loadedQuizData.accessType || "free").toLowerCase() === "paid"
+            ) {
+                let approved = false;
+                try {
+                    const savedRaw = localStorage.getItem("cpPaymentSession:quiz:" + quizId);
+                    const saved = savedRaw ? JSON.parse(savedRaw) : null;
+                    if (saved && saved.token && saved.requestId) {
+                        const accessSnapshot = await get(
+                            ref(db, "paymentDashboards/" + saved.token + "/payments/" + saved.requestId)
+                        );
+                        const access = accessSnapshot.exists() ? accessSnapshot.val() : null;
+                        approved = Boolean(
+                            access &&
+                            String(access.status || "").toLowerCase() === "approved" &&
+                            String(access.productType || "").toLowerCase() === "quiz" &&
+                            String(access.productId || "") === String(quizId)
+                        );
+                    }
+                } catch (accessError) {
+                    console.error("Quiz access check failed:", accessError);
+                }
 
+                if (!approved) {
+                    showError("यह Paid Quiz अभी Locked है। पहले Payment करें। Admin Approval के बाद इसी browser में Quiz खुलेगा।");
+                    return;
+                }
+            }
 
             /*
                 Read complete questions node.
