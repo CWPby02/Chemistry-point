@@ -1029,16 +1029,36 @@
 
         if (!approved) {
           const savedPrice = Number(chapterItem[objectiveType + "Price"] || 0);
-          showMessage("यह Paid Objective PDF है। " + (savedPrice > 0 ? "कीमत: ₹" + savedPrice.toLocaleString("en-IN") + "। " : "कीमत Admin से confirm करें। ") + "Payment और Admin Approval के बाद PDF खुलेगी।");
+          const config = pdfTypes[objectiveType];
+          const productCard = makeElement("article", "pdf-card");
+          const iconBox = makeElement("div", "pdf-icon");
+          iconBox.appendChild(makeElement("i", `fa-solid ${config.icon}`));
+          const heading = makeElement("h2", "", config.title);
+          const description = makeElement("p", "", config.description);
+          const chapterDetail = makeElement("p", "", "Chapter: " + getChapterTitle(chapterItem));
+          const classDetail = makeElement("p", "", "Class: " + classLevel);
+          const priceLabel = makeElement(
+            "div",
+            "pdf-price",
+            savedPrice > 0
+              ? "Paid Access · ₹" + savedPrice.toLocaleString("en-IN")
+              : "Paid Access · Price unavailable"
+          );
+          const info = makeElement(
+            "p",
+            "",
+            "इस PDF में इस chapter के objective questions दिए गए हैं। खरीदने से पहले chapter और product details जाँच लें। Payment के बाद Admin Approval मिलने पर PDF access मिलेगा।"
+          );
           const buy = makeElement("a", "pdf-btn pdf-btn-view", "Buy Access");
           const paymentUrl = new URL("../payment.html", window.location.href);
           paymentUrl.searchParams.set("type", "pdf");
           paymentUrl.searchParams.set("productId", productId);
-          paymentUrl.searchParams.set("title", pdfTypes[objectiveType].title);
+          paymentUrl.searchParams.set("title", config.title);
           paymentUrl.searchParams.set("chapter", chapterSlug);
           paymentUrl.searchParams.set("class", classLevel);
           buy.href = paymentUrl.href;
-          grid.appendChild(buy);
+          productCard.append(iconBox, heading, description, chapterDetail, classDetail, priceLabel, info, buy);
+          grid.replaceChildren(productCard);
           return;
         }
       }
