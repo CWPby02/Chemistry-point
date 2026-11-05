@@ -652,11 +652,14 @@
 
     const params = new URLSearchParams(window.location.search);
     const chapterSlug = params.get("chapter") || "";
-    const objectiveType = (params.get("type") || "vvi").toLowerCase();
-    const classParam = params.get("class") || "12";
+    const requestedObjectiveType = (params.get("type") || "vvi").trim().toLowerCase();
+    const objectiveType = ["vvi", "pyq", "all"].includes(requestedObjectiveType)
+      ? requestedObjectiveType
+      : "vvi";
+    const classParam = (params.get("class") || "12").trim().toLowerCase();
 
     const classLevel =
-      classParam === "11" || classParam.toLowerCase() === "class-11"
+      ["11", "class 11", "class-11", "class11"].includes(classParam)
         ? "11"
         : "12";
 
@@ -742,12 +745,26 @@
         item.standard ??
         "";
 
-      const value = String(raw).toLowerCase();
+      const value = String(raw).trim().toLowerCase();
 
       if (value.includes("11") || value.includes("eleven")) return "11";
       if (value.includes("12") || value.includes("twelve")) return "12";
 
+      // Legacy chapter records without a class were historically Class 12.
       return raw === "" || raw === null ? "12" : "";
+    }
+
+    function getChapterTitle(item) {
+      return String(
+        item.name ??
+        item.title ??
+        item.chapterName ??
+        item.chapterTitle ??
+        item.chapter ??
+        chapterNames[normalize(chapterSlug)] ??
+        formatSlug(chapterSlug) ??
+        "Chapter"
+      ).trim();
     }
 
     // Google Drive ke common public file URL formats se file ID nikaalo.
@@ -913,8 +930,8 @@
 
       const heading = makeElement("h2", "", config.title);
       const description = makeElement("p", "", config.description);
-      const savedPrice = Number(chapterItem[objectiveType + "Price"] || 0);
-      const isPaidProduct = String(chapterItem[objectiveType + "AccessType"] || "free").toLowerCase() === "paid";
+      const savedPrice = Number(chapterItem[type + "Price"] || 0);
+      const isPaidProduct = String(chapterItem[type + "AccessType"] || "free").toLowerCase() === "paid";
       const priceLabel = makeElement("div", "pdf-price", isPaidProduct ? (savedPrice > 0 ? "Paid Access · ₹" + savedPrice.toLocaleString("en-IN") : "Paid Access · Price unavailable") : "Free Access");
 
       const status = makeElement(
@@ -990,7 +1007,7 @@
 
         if (
           (itemSlug === wantedSlug || nameMatch) &&
-          (!itemClass || itemClass === classLevel)
+          itemClass === classLevel
         ) {
           return { ...item, __chapterKey: key };
         }
