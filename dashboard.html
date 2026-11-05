@@ -12,7 +12,7 @@ body.light{color-scheme:light;--bg:#f5f6f8;--card:#fff;--field:#f8f9fb;--text:#1
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}
 header,main,footer{width:min(900px,calc(100% - 28px));margin:auto}
 header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-.brand{font-weight:850;font-size:1.1rem}.brand span{color:var(--gold)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:1.1rem}.brand span{color:var(--gold)}.brand-logo{width:38px;height:38px;object-fit:contain;border-radius:10px;flex:none}
 button,a{font:inherit}button{cursor:pointer}.theme,.btn,.open-link{border:1px solid var(--line);border-radius:11px;padding:10px 14px;background:var(--card);color:var(--text);font-weight:700;text-decoration:none}
 .theme{font-size:.85rem}.btn.primary,.open-link{background:var(--gold);border-color:var(--gold);color:#17130a}
 main{padding:12px 0 42px}.hero{margin:8px 0 22px}.eyebrow{color:var(--gold);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
@@ -36,7 +36,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 0 30px
 </style>
 </head>
 <body>
-<header><div class="brand">Chemistry <span>Point</span></div><button class="theme" id="themeBtn" type="button">Light / Dark</button></header>
+<header><div class="brand"><img class="brand-logo" src="assets/images/logo/logo.png" alt="Chemistry Point Logo"> <span>Chemistry Point</span></div><button class="theme" id="themeBtn" type="button">Light / Dark</button></header>
 <main>
   <section class="hero">
     <div class="eyebrow">Private Student Area</div>
