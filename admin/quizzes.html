@@ -3321,6 +3321,8 @@
           };
 
 
+          let savedQuizId = editingQuizId;
+
           if (editingQuizId) {
 
             await update(
@@ -3344,6 +3346,7 @@
                 ref(db, "quizzes")
               );
 
+            savedQuizId = newQuizRef.key;
 
             await set(
               newQuizRef,
@@ -3364,6 +3367,19 @@
 
           }
 
+          // Keep the public Payment catalogue in sync with the quiz access settings.
+          const paymentPriceKey = "quiz_" + savedQuizId;
+          if (accessType === "paid") {
+            await set(ref(db, `paymentPrices/${paymentPriceKey}`), {
+              type: "quiz",
+              productId: savedQuizId,
+              name: title,
+              price,
+              updatedAt: now
+            });
+          } else {
+            await remove(ref(db, `paymentPrices/${paymentPriceKey}`));
+          }
 
           closeModal();
 
