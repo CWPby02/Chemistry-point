@@ -296,13 +296,13 @@ td{line-height:1.6;overflow-wrap:anywhere}
 
       <div class="notice">
         <i class="fa-solid fa-shield-halved"></i>
-        Approve/Reject actions disabled hain. Student access ko secure karne ke liye server-side verification ya secure backend aur Firebase Rules configure karna zaroori hai.
+        Student ka UTR yahan check karein. WhatsApp group mein original payment screenshot aur transaction ko manually verify karne ke baad hi Approve karein.
       </div>
 
       <div class="table-wrap" style="margin-top:15px">
         <table>
-          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
-          <tbody id="requestsTable"><tr><td colspan="5" class="empty">Loading requests...</td></tr></tbody>
+          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>UTR / Transaction ID</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="requestsTable"><tr><td colspan="6" class="empty">Loading requests...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -610,7 +610,7 @@ function renderRequests() {
   $("approvedAmount").textContent = money(total);
 
   if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi payment request nahi mili.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="empty">Abhi koi payment request nahi mili.</td></tr>';
     return;
   }
 
@@ -627,6 +627,9 @@ function renderRequests() {
 
     const amount = document.createElement("td");
     amount.textContent = money(item.amount ?? item.price);
+
+    const utrCell = document.createElement("td");
+    utrCell.textContent = item.utr ? String(item.utr) : "Not submitted";
 
     const statusCell = document.createElement("td");
     const badge = document.createElement("span");
@@ -655,7 +658,7 @@ function renderRequests() {
       action.textContent = "Reviewed";
     }
 
-    tr.append(paymentId, student, amount, statusCell, action);
+    tr.append(paymentId, student, amount, utrCell, statusCell, action);
     tbody.appendChild(tr);
   });
 }
