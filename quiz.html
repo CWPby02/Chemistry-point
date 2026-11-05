@@ -444,6 +444,64 @@
             color: var(--primary-light);
         }
 
+        .quiz-access-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 4px 0 16px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(217, 154, 22, 0.045);
+        }
+
+        .quiz-access-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .quiz-access-label.paid::before,
+        .quiz-access-label.free::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary-light);
+        }
+
+        .quiz-access-label.free::before {
+            background: #55c98b;
+        }
+
+        .quiz-card-price {
+            color: var(--primary-light);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .quiz-card-price.free {
+            color: #55c98b;
+            font-size: 15px;
+        }
+
+        .quiz-details-title {
+            margin: 0 0 7px;
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .quiz-card-description {
+            min-height: 54px;
+        }
+
         .quiz-start-btn {
             width: 100%;
 
@@ -1590,6 +1648,7 @@ const chapterGrid = document.getElementById("chapterQuizGrid");
 const quizEmpty = document.getElementById("quizEmpty");
 let allQuizzes = [];
 let questionCounts = {};
+let paymentPrices = {};
 
 function esc(value) {
     return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -1648,18 +1707,34 @@ function card(q) {
     const chapter = chapterOf(q);
     const count = countOf(q);
     const duration = durationOf(q);
-    return `<article class="quiz-card" data-search="${esc([title, chapter, descriptionOf(q, type), type].join(" ").toLowerCase())}">
+    const priceKey = `quiz_${String(q.__id).replace(/[.#$/\\[\\]]/g, "_")}`;
+    const savedPrice = paymentPrices[priceKey]?.price;
+    const price = Number(q.price ?? savedPrice ?? 0);
+    const isPaid = String(q.accessType || (savedPrice ? "paid" : "free")).toLowerCase() === "paid";
+    const description = descriptionOf(q, type);
+    const details = [
+        chapter ? `Chapter: ${chapter}` : "",
+        `Quiz Type: ${type === "pyq" ? "Previous Year Questions (PYQ)" : "Chapter-wise Practice"}`,
+        count ? `Total Questions: ${count}` : "",
+        duration ? `Time Limit: ${durationText(duration)}` : ""
+    ].filter(Boolean);
+    return `<article class="quiz-card" data-search="${esc([title, chapter, description, type].join(" ").toLowerCase())}">
         <div class="quiz-card-top"><div class="quiz-card-icon"><i class="${iconOf(type, chapter)}"></i></div><span class="quiz-tag">${type === "pyq" ? "PYQ" : "Chapter"}</span></div>
         <h3>${esc(title)}</h3>
-        <p>${esc(descriptionOf(q, type))}</p>
+        <p class="quiz-card-description">${esc(description)}</p>
+        <h4 class="quiz-details-title">Quiz Details</h4>
         <div class="quiz-meta">
             <span><i class="fa-solid fa-list"></i>${count} ${count === 1 ? "Question" : "Questions"}</span>
             <span><i class="fa-regular fa-clock"></i>${esc(durationText(duration))}</span>
         </div>
-        <a href="${String(q.accessType || "free").toLowerCase() === "paid"
+        <div class="quiz-access-row">
+            <span class="quiz-access-label ${isPaid ? "paid" : "free"}">${isPaid ? "Paid Access" : "Free Access"}</span>
+            <strong class="quiz-card-price ${isPaid ? "" : "free"}">${isPaid ? (price > 0 ? "₹" + price.toLocaleString("en-IN") : "Price unavailable") : "FREE"}</strong>
+        </div>
+        <a href="${isPaid
             ? `payment.html?type=quiz&productId=${encodeURIComponent(q.__id)}&title=${encodeURIComponent(title)}`
             : `student/quiz.html?quizId=${encodeURIComponent(q.__id)}`}"
-           class="quiz-start-btn">${String(q.accessType || "free").toLowerCase() === "paid" ? "Buy Access" : "Start Quiz"}
+           class="quiz-start-btn">${isPaid ? "Buy Access" : "Start Quiz"}
            <i class="fa-solid fa-arrow-right"></i></a>
     </article>`;
 }
@@ -1690,11 +1765,13 @@ async function loadQuestionCounts() {
 }
 async function loadQuizzes() {
     try {
-        const [quizSnap, counts] = await Promise.all([
+        const [quizSnap, counts, priceSnap] = await Promise.all([
             get(ref(db, "quizzes")),
-            loadQuestionCounts()
+            loadQuestionCounts(),
+            get(ref(db, "paymentPrices"))
         ]);
         questionCounts = counts;
+        paymentPrices = priceSnap.exists() ? (priceSnap.val() || {}) : {};
         allQuizzes = quizSnap.exists()
             ? Object.entries(quizSnap.val() || {}).map(([id, quiz]) => ({...quiz, __id:id})).filter(q => {
                 const status = String(q.status ?? q.active ?? "active").toLowerCase();
