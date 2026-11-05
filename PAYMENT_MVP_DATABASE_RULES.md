@@ -103,7 +103,12 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
     "paymentDashboards": {
       "$token": {
         ".read": true,
-        ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists()"
+        ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists()",
+        "payments": {
+          "$requestId": {
+            ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (!data.exists() && auth == null) || (auth == null && data.exists() && newData.child('productType').val() == data.child('productType').val() && newData.child('productId').val() == data.child('productId').val() && newData.child('productName').val() == data.child('productName').val() && newData.child('amount').val() == data.child('amount').val() && newData.child('status').val() == data.child('status').val() && newData.child('chapterSlug').val() == data.child('chapterSlug').val() && newData.child('objectiveType').val() == data.child('objectiveType').val() && newData.child('classLevel').val() == data.child('classLevel').val())"
+          }
+        }
       }
     },
     "results": {
