@@ -421,23 +421,6 @@
             font-size: 13px;
         }
 
-        .toolbar-select {
-            height: 44px;
-            min-width: 150px;
-            padding: 0 12px;
-            border: 1px solid var(--border);
-            border-radius: 11px;
-            background: var(--card);
-            color: var(--text);
-            outline: none;
-            font: inherit;
-            font-size: 12px;
-        }
-
-        .toolbar-select:focus {
-            border-color: rgba(217,154,22,.55);
-        }
-
         .search-box input {
             width: 100%;
             height: 44px;
@@ -566,8 +549,7 @@
             color: var(--danger);
         }
 
-        .form-group input,
-        .form-group select {
+        .form-group input {
             width: 100%;
             height: 44px;
 
@@ -583,16 +565,7 @@
             font-size: 12px;
         }
 
-        .form-group select {
-            padding: 0 13px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--input);
-            color: var(--text);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
+        .form-group input:focus {
             border-color: rgba(217,154,22,.6);
         }
 
@@ -942,6 +915,32 @@
            RESPONSIVE
         ========================== */
 
+
+        .access-controls {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin: 0 0 18px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-2);
+        }
+
+        .access-controls select, .access-controls input {
+            width: 100%;
+            background: var(--input);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            outline: none;
+        }
+
+        @media (max-width: 600px) {
+            .access-controls { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 1000px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -986,10 +985,6 @@
             }
 
             .search-box {
-                width: 100%;
-            }
-
-            .toolbar-select {
                 width: 100%;
             }
 
@@ -1112,11 +1107,6 @@
                 <i class="fa-solid fa-users"></i>
                 <span>Students</span>
             </a>
-
-            <a href="payments.html">
-    <i class="fa-solid fa-credit-card"></i>
-    Payments
-</a>
 
             <a href="#" class="nav-link">
                 <i class="fa-solid fa-gear"></i>
@@ -1252,12 +1242,6 @@
 
                 </div>
 
-                <select id="classFilter" class="toolbar-select" aria-label="Filter chapters by class">
-                    <option value="all">All Classes</option>
-                    <option value="11">Class 11</option>
-                    <option value="12">Class 12</option>
-                </select>
-
                 <button class="primary-btn" id="addChapterBtn">
                     <i class="fa-solid fa-plus"></i>
                     Add Chapter
@@ -1287,17 +1271,6 @@
                 <form id="chapterForm">
 
                     <div class="form-grid">
-
-                        <!-- CLASS LEVEL -->
-
-                        <div class="form-group">
-                            <label for="chapterClass">Class <span>*</span></label>
-                            <select id="chapterClass" required>
-                                <option value="11">Class 11</option>
-                                <option value="12" selected>Class 12</option>
-                            </select>
-                            <div class="form-help">Choose the class this chapter belongs to.</div>
-                        </div>
 
                         <!-- CHAPTER -->
 
@@ -1363,6 +1336,24 @@
 
                         </div>
 
+                            <div class="access-controls">
+
+                                <div class="form-group">
+                                    <label>V.V.I Access <span>*</span></label>
+                                    <select id="vviAccessType" class="access-select" required>
+                                        <option value="free">Free</option>
+                                        <option value="paid">Paid</option>
+                                    </select>
+                                    <div class="form-help">Free PDF students access kar sakte hain; Paid ke liye price set karein.</div>
+                                </div>
+
+                                <div class="form-group" id="vviPriceGroup" style="display:none;">
+                                    <label>Price (₹) <span>*</span></label>
+                                    <input type="number" id="vviPrice" min="1" step="1" placeholder="Example: 29">
+                                </div>
+
+                            </div>
+
 
                         <!-- PYQ -->
 
@@ -1394,6 +1385,24 @@
                             All Objectives
                         </div>
 
+                            <div class="access-controls">
+
+                                <div class="form-group">
+                                    <label>PYQ Access <span>*</span></label>
+                                    <select id="pyqAccessType" class="access-select" required>
+                                        <option value="free">Free</option>
+                                        <option value="paid">Paid</option>
+                                    </select>
+                                    <div class="form-help">Free PDF students access kar sakte hain; Paid ke liye price set karein.</div>
+                                </div>
+
+                                <div class="form-group" id="pyqPriceGroup" style="display:none;">
+                                    <label>Price (₹) <span>*</span></label>
+                                    <input type="number" id="pyqPrice" min="1" step="1" placeholder="Example: 29">
+                                </div>
+
+                            </div>
+
 
                         <div class="form-group full">
 
@@ -1410,6 +1419,24 @@
                         </div>
 
                     </div>
+
+                            <div class="access-controls">
+
+                                <div class="form-group">
+                                    <label>All Objectives Access <span>*</span></label>
+                                    <select id="allAccessType" class="access-select" required>
+                                        <option value="free">Free</option>
+                                        <option value="paid">Paid</option>
+                                    </select>
+                                    <div class="form-help">Free PDF students access kar sakte hain; Paid ke liye price set karein.</div>
+                                </div>
+
+                                <div class="form-group" id="allPriceGroup" style="display:none;">
+                                    <label>Price (₹) <span>*</span></label>
+                                    <input type="number" id="allPrice" min="1" step="1" placeholder="Example: 29">
+                                </div>
+
+                            </div>
 
 
                     <div class="form-actions">
@@ -1459,7 +1486,6 @@
                         <thead>
 
                             <tr>
-                                <th>Class</th>
                                 <th>Chapter</th>
                                 <th>V.V.I PDF</th>
                                 <th>PYQ PDF</th>
@@ -1473,7 +1499,7 @@
                         <tbody id="chaptersTableBody">
 
                             <tr>
-                                <td colspan="7">
+                                <td colspan="6">
 
                                     <div class="loading">
                                         <i class="fa-solid fa-spinner fa-spin"></i>
@@ -1612,12 +1638,6 @@
     const searchInput =
         document.getElementById("searchInput");
 
-    const classFilter =
-        document.getElementById("classFilter");
-
-    const chapterClass =
-        document.getElementById("chapterClass");
-
     const chaptersTableBody =
         document.getElementById("chaptersTableBody");
 
@@ -1652,6 +1672,25 @@
 
     const allPdf =
         document.getElementById("allPdf");
+
+    const accessFields = {
+        vvi: { type: document.getElementById("vviAccessType"), price: document.getElementById("vviPrice"), group: document.getElementById("vviPriceGroup") },
+        pyq: { type: document.getElementById("pyqAccessType"), price: document.getElementById("pyqPrice"), group: document.getElementById("pyqPriceGroup") },
+        all: { type: document.getElementById("allAccessType"), price: document.getElementById("allPrice"), group: document.getElementById("allPriceGroup") }
+    };
+
+    function syncAccessFields(key) {
+        const field = accessFields[key];
+        const paid = field.type.value === "paid";
+        field.group.style.display = paid ? "block" : "none";
+        field.price.required = paid;
+        if (!paid) field.price.value = "";
+    }
+
+    Object.keys(accessFields).forEach(key => {
+        accessFields[key].type.addEventListener("change", () => syncAccessFields(key));
+        syncAccessFields(key);
+    });
 
 
     /* =========================
@@ -1972,7 +2011,7 @@
 
                 chaptersTableBody.innerHTML = `
                     <tr>
-                        <td colspan="7">
+                        <td colspan="6">
                             <div class="empty-state">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                                 <h3>Unable to load chapters</h3>
@@ -2068,14 +2107,9 @@
                 .trim()
                 .toLowerCase();
 
-        const selectedClass = classFilter.value;
 
         const filtered =
             chapters.filter(chapter => {
-
-                // Older records without a class are treated as Class 12.
-                const level = String(chapter.classLevel || chapter.class || "12");
-                if (selectedClass !== "all" && level !== selectedClass) return false;
 
                 const name =
                     String(
@@ -2099,7 +2133,7 @@
 
             chaptersTableBody.innerHTML = `
                 <tr>
-                    <td colspan="7">
+                    <td colspan="6">
 
                         <div class="empty-state">
 
@@ -2159,12 +2193,6 @@
             <tr>
 
                 <td>
-                    <span class="pdf-link" style="background:rgba(217,154,22,.10);border-color:rgba(217,154,22,.22);color:var(--primary-light);">
-                        Class ${escapeHtml(chapter.classLevel || chapter.class || "12")}
-                    </span>
-                </td>
-
-                <td>
 
                     <div class="chapter-name">
 
@@ -2190,17 +2218,17 @@
 
 
                 <td>
-                    ${pdfCell(chapter.vviPdf)}
+                    ${pdfCell(chapter.vviPdf)}<div class="form-help">${accessLabel(chapter.vviAccessType, chapter.vviPrice)}</div>
                 </td>
 
 
                 <td>
-                    ${pdfCell(chapter.pyqPdf)}
+                    ${pdfCell(chapter.pyqPdf)}<div class="form-help">${accessLabel(chapter.pyqAccessType, chapter.pyqPrice)}</div>
                 </td>
 
 
                 <td>
-                    ${pdfCell(chapter.allPdf)}
+                    ${pdfCell(chapter.allPdf)}<div class="form-help">${accessLabel(chapter.allAccessType, chapter.allPrice)}</div>
                 </td>
 
 
@@ -2244,6 +2272,12 @@
     /* =========================
        PDF CELL
     ========================== */
+
+    function accessLabel(type, price) {
+        if (type === "paid") return `Paid · ₹${Number(price) || 0}`;
+        return "Free";
+    }
+
 
     function pdfCell(url) {
 
@@ -2346,6 +2380,8 @@
     function resetForm() {
 
         chapterForm.reset();
+
+        Object.keys(accessFields).forEach(key => syncAccessFields(key));
 
         editingChapterId = null;
 
@@ -2462,9 +2498,6 @@
         editingChapterId = id;
 
 
-        chapterClass.value =
-            String(chapter.classLevel || chapter.class || "12");
-
         chapterName.value =
             chapter.name || "";
 
@@ -2479,6 +2512,14 @@
 
         allPdf.value =
             chapter.allPdf || "";
+
+        ["vvi", "pyq", "all"].forEach(key => {
+            const typeProp = key + "AccessType";
+            const priceProp = key + "Price";
+            accessFields[key].type.value = chapter[typeProp] === "paid" ? "paid" : "free";
+            accessFields[key].price.value = chapter[typeProp] === "paid" ? (chapter[priceProp] ?? "") : "";
+            syncAccessFields(key);
+        });
 
 
         formTitle.textContent =
@@ -2523,9 +2564,6 @@
 
             }
 
-
-            const classLevel =
-                String(chapterClass.value || "12");
 
             const name =
                 chapterName.value.trim();
@@ -2612,13 +2650,25 @@
             }
 
 
+            for (const key of ["vvi", "pyq", "all"]) {
+                const field = accessFields[key];
+                if (field.type.value === "paid") {
+                    const price = Number(field.price.value);
+                    if (!Number.isFinite(price) || price <= 0) {
+                        showToast(`${key.toUpperCase()} PDF ke liye valid price enter karein.`, "error");
+                        field.price.focus();
+                        return;
+                    }
+                }
+            }
+
+
             /* Prevent duplicate slug */
 
             const duplicate =
                 chapters.find(
                     chapter =>
                         chapter.slug === slug &&
-                        String(chapter.classLevel || chapter.class || "12") === classLevel &&
                         chapter.id !== editingChapterId
                 );
 
@@ -2653,13 +2703,18 @@
 
                     slug,
 
-                    classLevel,
-
                     vviPdf: vvi,
 
                     pyqPdf: pyq,
 
                     allPdf: all,
+
+                    vviAccessType: accessFields.vvi.type.value,
+                    vviPrice: accessFields.vvi.type.value === "paid" ? Number(accessFields.vvi.price.value) : 0,
+                    pyqAccessType: accessFields.pyq.type.value,
+                    pyqPrice: accessFields.pyq.type.value === "paid" ? Number(accessFields.pyq.price.value) : 0,
+                    allAccessType: accessFields.all.type.value,
+                    allPrice: accessFields.all.type.value === "paid" ? Number(accessFields.all.price.value) : 0,
 
                     updatedAt: now
 
@@ -2884,11 +2939,6 @@
 
     searchInput.addEventListener(
         "input",
-        renderChapters
-    );
-
-    classFilter.addEventListener(
-        "change",
         renderChapters
     );
 
