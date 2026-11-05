@@ -1053,8 +1053,7 @@
 
     const firebaseConfig = {
 
-        apiKey:
-            "AIzaSyB6YafK6HpL3q692b20ECPvXu78rUfByU",
+        apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
 
         authDomain:
             "chemistry-point-9a41b.firebaseapp.com",
@@ -1835,6 +1834,19 @@
 
             await loadQuizData();
 
+            if (loadedQuizData) {
+                const quizStatus = String(
+                    loadedQuizData.status ?? loadedQuizData.active ?? "active"
+                ).toLowerCase();
+                if (
+                    loadedQuizData.active === false ||
+                    ["inactive", "false", "disabled"].includes(quizStatus)
+                ) {
+                    showError("यह Quiz अभी Admin द्वारा inactive किया गया है।");
+                    return;
+                }
+            }
+
             // Paid quiz access is granted only after Admin approval.
             const resolvedQuizId = String(
                 quizId ||
@@ -1861,7 +1873,7 @@
                             access &&
                             String(access.status || "").toLowerCase() === "approved" &&
                             String(access.productType || "").toLowerCase() === "quiz" &&
-                            String(access.productId || "") === String(quizId)
+                            String(access.productId || "") === resolvedQuizId
                         );
                     }
                 } catch (accessError) {
