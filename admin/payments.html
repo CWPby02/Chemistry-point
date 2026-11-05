@@ -233,61 +233,6 @@ td{line-height:1.6;overflow-wrap:anywhere}
     <section class="panel">
       <div class="panel-head">
         <div>
-          <h3><i class="fa-solid fa-tags" style="color:var(--gold2)"></i> Product Prices</h3>
-          <p>Existing quiz ya PDF select karke uski price set karein.</p>
-        </div>
-      </div>
-
-      <form id="priceForm">
-        <div class="fields">
-          <div class="field">
-            <label for="productType">Product Type</label>
-            <select id="productType" required>
-              <option value="quiz">Quiz</option>
-              <option value="pdf">PDF</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="productSelect">Select Quiz / PDF</label>
-            <select id="productSelect" required>
-              <option value="">Loading products...</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="productId">Product ID</label>
-            <input id="productId" placeholder="Auto-filled product ID" readonly required>
-          </div>
-          <div class="field">
-            <label for="productName">Product Name</label>
-            <input id="productName" placeholder="Auto-filled product name" readonly required>
-          </div>
-          <div class="field full">
-            <label for="productPrice">Price (₹)</label>
-            <input id="productPrice" type="number" min="0" max="100000" step="0.01" placeholder="49" required>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-gold" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Price</button>
-          <button class="btn btn-muted" type="button" id="reloadProducts"><i class="fa-solid fa-rotate"></i> Reload Products</button>
-        </div>
-      </form>
-
-      <div class="notice">
-        <i class="fa-solid fa-circle-info"></i>
-        PDF dropdown mein chapter ke vviPdf, pyqPdf aur allPdf fields ke saath older nested PDF formats bhi check kiye jaate hain.
-      </div>
-
-      <div class="table-wrap" style="margin-top:18px">
-        <table>
-          <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Product ID</th><th>Action</th></tr></thead>
-          <tbody id="pricesTable"><tr><td colspan="5" class="empty">Loading prices...</td></tr></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head">
-        <div>
           <h3><i class="fa-solid fa-receipt" style="color:var(--gold2)"></i> Payment Requests</h3>
           <p>Transaction verify karne ke baad hi request approve karein.</p>
         </div>
@@ -316,7 +261,7 @@ td{line-height:1.6;overflow-wrap:anywhere}
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
@@ -335,8 +280,6 @@ const $ = id => document.getElementById(id);
 
 let currentUser = null;
 let requestsData = {};
-let pricesData = {};
-let availableProducts = [];
 
 function message(text, type = "success") {
   const el = $("message");
@@ -355,10 +298,6 @@ function money(value) {
 /* Avoid invalid Firebase Realtime Database key characters. */
 function safeKey(value) {
   return String(value).replace(/[.#$/\[\]]/g, "_");
-}
-
-function priceKey(product) {
-  return safeKey(`${product.type}_${product.id}`);
 }
 
 async function verifyAdmin(user) {
@@ -401,186 +340,6 @@ function cleanWhatsAppGroupLink(value) {
 
   // Remove query/tracking parameters.
   return `https://chat.whatsapp.com/${inviteCode}`;
-}
-
-function normalizeProducts(data, type) {
-  const products = [];
-  if (!data || typeof data !== "object") return products;
-
-  Object.entries(data).forEach(([key, item]) => {
-    if (!item || typeof item !== "object") return;
-
-    if (type === "quiz") {
-      const name = item.title || item.name || item.quizTitle;
-      if (!name) return;
-
-      products.push({ id: key, name: String(name), type: "quiz" });
-      return;
-    }
-
-    const chapterName =
-      item.chapterName || item.name || item.title || item.chapterTitle || key;
-
-    const objectiveFields = [
-      ["vviPdf", "V.V.I Objectives"],
-      ["pyqPdf", "PYQ Objectives"],
-      ["allPdf", "All Objectives"]
-    ];
-
-    objectiveFields.forEach(([field, label]) => {
-      const value = item[field];
-      const url = typeof value === "string"
-        ? value
-        : value && typeof value === "object"
-          ? value.pdfUrl || value.driveUrl || value.url || value.link
-          : "";
-
-      if (typeof url === "string" && url.trim()) {
-        products.push({
-          id: `${key}/${field}`,
-          name: `${chapterName} — ${label}`,
-          type: "pdf"
-        });
-      }
-    });
-
-    if (item.pdfs && typeof item.pdfs === "object") {
-      Object.entries(item.pdfs).forEach(([pdfKey, pdf]) => {
-        const url = typeof pdf === "string"
-          ? pdf
-          : pdf && typeof pdf === "object"
-            ? pdf.pdfUrl || pdf.pdfURL || pdf.driveUrl ||
-              pdf.googleDriveUrl || pdf.url || pdf.link
-            : "";
-
-        if (!url || typeof url !== "string") return;
-
-        const label = pdf && typeof pdf === "object"
-          ? pdf.name || pdf.title || pdf.label || pdf.type || pdfKey
-          : pdfKey;
-
-        products.push({
-          id: `${key}/${pdfKey}`,
-          name: `${chapterName} — ${label}`,
-          type: "pdf"
-        });
-      });
-    }
-
-    const directUrl =
-      item.pdfUrl || item.pdfURL || item.driveUrl || item.googleDriveUrl;
-
-    if (typeof directUrl === "string" && directUrl.trim() && !item.pdfs) {
-      products.push({ id: key, name: String(chapterName), type: "pdf" });
-    }
-  });
-
-  const unique = new Map();
-  products.forEach(product => unique.set(`${product.type}:${product.id}`, product));
-  return [...unique.values()];
-}
-
-async function loadProducts() {
-  const select = $("productSelect");
-  const type = $("productType").value;
-
-  select.replaceChildren(new Option("Loading products...", ""));
-  $("productId").value = "";
-  $("productName").value = "";
-  $("productPrice").value = "";
-  availableProducts = [];
-
-  try {
-    const snapshot = await get(ref(db, type === "quiz" ? "quizzes" : "chapters"));
-    availableProducts = normalizeProducts(snapshot.exists() ? snapshot.val() : {}, type);
-
-    select.replaceChildren(new Option(
-      availableProducts.length ? "Select a product" : "No products found",
-      ""
-    ));
-
-    availableProducts.forEach((product, index) => {
-      select.add(new Option(product.name, String(index)));
-    });
-
-    if (!availableProducts.length) {
-      message(
-        type === "quiz"
-          ? "Quiz nahi mila. /quizzes mein title/name fields check karein."
-          : "PDF nahi mili. /chapters ke PDF links aur database path check karein.",
-        "error"
-      );
-    }
-  } catch (error) {
-    console.error(error);
-    select.replaceChildren(new Option("Products load nahi hue", ""));
-    message("Products load nahi hue: " + error.message, "error");
-  }
-}
-
-$("productType").addEventListener("change", loadProducts);
-$("reloadProducts").addEventListener("click", loadProducts);
-
-$("productSelect").addEventListener("change", () => {
-  const value = $("productSelect").value;
-  const product = value === "" ? null : availableProducts[Number(value)];
-
-  $("productId").value = product?.id || "";
-  $("productName").value = product?.name || "";
-  $("productPrice").value = product
-    ? pricesData[priceKey(product)]?.price ?? ""
-    : "";
-});
-
-function renderPrices() {
-  const tbody = $("pricesTable");
-  tbody.replaceChildren();
-
-  const entries = Object.entries(pricesData || {}).filter(
-    ([, item]) => item && typeof item === "object"
-  );
-
-  if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">Abhi koi price add nahi hui.</td></tr>';
-    return;
-  }
-
-  entries.forEach(([key, item]) => {
-    const tr = document.createElement("tr");
-
-    [
-      item.name || key,
-      item.type || "—",
-      money(item.price),
-      item.productId || key
-    ].forEach(value => {
-      const td = document.createElement("td");
-      td.textContent = String(value);
-      tr.appendChild(td);
-    });
-
-    const action = document.createElement("td");
-    const btn = document.createElement("button");
-    btn.className = "btn btn-red";
-    btn.type = "button";
-    btn.textContent = "Delete";
-
-    btn.addEventListener("click", async () => {
-      if (!confirm(`"${item.name || key}" ki price entry delete karein?`)) return;
-
-      try {
-        await remove(ref(db, `paymentPrices/${key}`));
-        await loadPrices();
-        message("Price entry delete ho gayi.");
-      } catch (error) {
-        message("Delete nahi hua: " + error.message, "error");
-      }
-    });
-
-    action.appendChild(btn);
-    tr.appendChild(action);
-    tbody.appendChild(tr);
-  });
 }
 
 function renderRequests() {
@@ -755,19 +514,6 @@ async function loadSettings() {
   $("groupLink").value = data.groupLink || "";
 }
 
-async function loadPrices() {
-  const snap = await get(ref(db, "paymentPrices"));
-  pricesData = snap.exists() ? snap.val() : {};
-  renderPrices();
-
-  const value = $("productSelect").value;
-  const product = value === "" ? null : availableProducts[Number(value)];
-
-  if (product) {
-    $("productPrice").value = pricesData[priceKey(product)]?.price ?? "";
-  }
-}
-
 async function loadRequests() {
   const snap = await get(ref(db, "paymentRequests"));
   requestsData = snap.exists() ? snap.val() : {};
@@ -820,81 +566,6 @@ $("settingsForm").addEventListener("submit", async event => {
   }
 });
 
-$("priceForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  if (!currentUser) {
-    message("Admin login required.", "error");
-    return;
-  }
-
-  const type = $("productType").value;
-  const productId = $("productId").value.trim();
-  const name = $("productName").value.trim();
-  const price = Number($("productPrice").value);
-
-  if (
-    !$("productSelect").value ||
-    !productId ||
-    !name ||
-    $("productPrice").value.trim() === "" ||
-    !Number.isFinite(price) ||
-    price < 0 ||
-    price > 100000
-  ) {
-    message("Product select karein aur valid price enter karein.", "error");
-    return;
-  }
-
-  const key = priceKey({ type, id: productId });
-
-  try {
-    if (price <= 0) {
-      message("Paid product ke liye price ₹1 ya usse zyada honi chahiye.", "error");
-      return;
-    }
-
-    await set(ref(db, `paymentPrices/${key}`), {
-      type,
-      productId,
-      name,
-      price,
-      updatedAt: Date.now(),
-      updatedBy: currentUser.uid
-    });
-
-    // Keep the product's own access flag in sync with Payment Management.
-    if (type === "quiz") {
-      await update(ref(db, `quizzes/${productId}`), {
-        accessType: "paid",
-        price,
-        updatedAt: Date.now()
-      });
-    } else if (type === "pdf") {
-      const [chapterId, pdfField] = productId.split("/");
-      const objectiveType = {
-        vviPdf: "vvi",
-        pyqPdf: "pyq",
-        allPdf: "all"
-      }[pdfField];
-
-      if (chapterId && objectiveType) {
-        const changes = {};
-        changes[objectiveType + "AccessType"] = "paid";
-        changes[objectiveType + "Price"] = price;
-        changes.updatedAt = Date.now();
-        await update(ref(db, `chapters/${chapterId}`), changes);
-      }
-    }
-
-    await loadPrices();
-    message("Product price successfully save ho gayi.");
-  } catch (error) {
-    console.error(error);
-    message("Price save nahi hui. Firebase Rules check karein: " + error.message, "error");
-  }
-});
-
 $("reloadSettings").addEventListener("click", async () => {
   try {
     await loadSettings();
@@ -926,9 +597,7 @@ onAuthStateChanged(auth, async user => {
     // One failed read should not prevent other sections from loading.
     const results = await Promise.allSettled([
       loadSettings(),
-      loadPrices(),
-      loadRequests(),
-      loadProducts()
+      loadRequests()
     ]);
 
     const failed = results.filter(result => result.status === "rejected");
