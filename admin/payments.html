@@ -316,7 +316,7 @@ td{line-height:1.6;overflow-wrap:anywhere}
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
@@ -637,17 +637,61 @@ function renderRequests() {
     const action = document.createElement("td");
 
     if (status === "pending") {
-      const note = document.createElement("span");
-      note.className = "hint";
-      note.textContent = "Secure verification required";
-      action.appendChild(note);
+      const controls = document.createElement("div");
+      controls.className = "request-actions";
+      const approve = document.createElement("button");
+      approve.className = "btn btn-green";
+      approve.type = "button";
+      approve.textContent = "Approve";
+      approve.addEventListener("click", () => reviewRequest(key, item, "approved"));
+      const reject = document.createElement("button");
+      reject.className = "btn btn-red";
+      reject.type = "button";
+      reject.textContent = "Reject";
+      reject.addEventListener("click", () => reviewRequest(key, item, "rejected"));
+      controls.append(approve, reject);
+      action.appendChild(controls);
     } else {
-      action.textContent = "No action";
+      action.textContent = "Reviewed";
     }
 
     tr.append(paymentId, student, amount, statusCell, action);
     tbody.appendChild(tr);
   });
+}
+
+async function reviewRequest(requestId, item, status) {
+  if (!currentUser) {
+    message("Admin login required.", "error");
+    return;
+  }
+  if (!["approved", "rejected"].includes(status)) return;
+  const label = status === "approved" ? "Approve" : "Reject";
+  if (!confirm(`${label} payment for ${item.studentName || "this student"} — ${item.productName || item.productId}?`)) return;
+  const now = Date.now();
+  const changes = {
+    [`paymentRequests/${requestId}/status`]: status,
+    [`paymentRequests/${requestId}/reviewedAt`]: now,
+    [`paymentRequests/${requestId}/reviewedBy`]: currentUser.uid
+  };
+  if (item.requestSecret) {
+    changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}/status`] = status;
+    changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}/reviewedAt`] = now;
+  }
+  if (status === "rejected") {
+    const reason = prompt("Rejection reason (optional):", "");
+    if (reason === null) return;
+    changes[`paymentRequests/${requestId}/rejectionReason`] = reason.trim().slice(0, 240);
+    if (item.requestSecret) changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}/rejectionReason`] = reason.trim().slice(0, 240);
+  }
+  try {
+    await update(ref(db), changes);
+    await loadRequests();
+    message(status === "approved" ? "Payment approved. Student dashboard update ho gaya." : "Payment rejected. Student dashboard update ho gaya.");
+  } catch (error) {
+    console.error(error);
+    message("Payment status update nahi hua: " + error.message, "error");
+  }
 }
 
 async function loadSettings() {
