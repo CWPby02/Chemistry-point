@@ -80,6 +80,15 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
         "requestSecret": {
           ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists() || newData.val() == data.val()"
         },
+        "chapterSlug": {
+          ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists() || newData.val() == data.val()"
+        },
+        "objectiveType": {
+          ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists() || newData.val() == data.val()"
+        },
+        "classLevel": {
+          ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists() || newData.val() == data.val()"
+        },
         "utr": {
           ".validate": "newData.isString() && newData.val().length <= 40"
         },
@@ -130,6 +139,27 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
             },
             "status": {
               ".validate": "newData.val() == 'pending' || newData.val() == 'approved' || newData.val() == 'rejected'"
+            },
+            "chapterSlug": {
+              ".validate": "newData.isString()"
+            },
+            "objectiveType": {
+              ".validate": "newData.isString()"
+            },
+            "classLevel": {
+              ".validate": "newData.isString()"
+            },
+            "reviewedAt": {
+              ".validate": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true"
+            },
+            "reviewedBy": {
+              ".validate": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true"
+            },
+            "rejectionReason": {
+              ".validate": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true"
+            },
+            "$other": {
+              ".validate": false
             }
           }
         }
