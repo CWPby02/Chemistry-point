@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#101116">
+<title>My Dashboard | Chemistry Point</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--card:#191b22;--field:#111319;--text:#f5f5f7;--muted:#a8abb6;--gold:#e8b84d;--line:#30333d;--green:#42c98a;--red:#ff737d;--amber:#edbd57}
+body.light{color-scheme:light;--bg:#f5f6f8;--card:#fff;--field:#f8f9fb;--text:#171923;--muted:#646978;--gold:#946500;--line:#e0e2e8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}
+header,main,footer{width:min(900px,calc(100% - 28px));margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:1.1rem}.brand span{color:var(--gold)}.brand-logo{width:38px;height:38px;object-fit:contain;border-radius:10px;flex:none}
+button,a{font:inherit}button{cursor:pointer}.theme,.btn,.open-link{border:1px solid var(--line);border-radius:11px;padding:10px 14px;background:var(--card);color:var(--text);font-weight:700;text-decoration:none}
+.theme{font-size:.85rem}.btn.primary,.open-link{background:var(--gold);border-color:var(--gold);color:#17130a}
+main{padding:12px 0 42px}.hero{margin:8px 0 22px}.eyebrow{color:var(--gold);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+h1{font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.15;margin:7px 0}.muted,small{color:var(--muted)}
+.student-card,.payment-card,.empty,.error{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px}
+.student-card{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.student-id{font-weight:800;color:var(--gold);overflow-wrap:anywhere}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 12px}
+.section-title h2{font-size:1.1rem;margin:0}.count{font-size:.8rem;color:var(--muted)}
+.payment-list{display:grid;gap:13px}.payment-card{display:grid;gap:12px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.product{font-weight:800;font-size:1.02rem}.meta{color:var(--muted);font-size:.84rem;margin-top:3px}
+.status{flex:none;border-radius:30px;padding:5px 10px;font-size:.72rem;font-weight:850;text-transform:uppercase}
+.status.pending{color:var(--amber);background:#edbd5718}.status.approved{color:var(--green);background:#42c98a18}.status.rejected{color:var(--red);background:#ff737d18}
+.details{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:.82rem}.details strong{color:var(--text);font-weight:700}
+.note{padding:11px 13px;background:var(--field);border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:.84rem}
+.card-actions{display:flex;gap:9px;flex-wrap:wrap}.open-link{display:inline-flex;align-items:center;justify-content:center;min-height:40px}
+#message{white-space:pre-wrap;overflow-wrap:anywhere}.error{border-color:#ff737d66;color:var(--red)}
+.empty{text-align:center;color:var(--muted);padding:30px 18px}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 0 30px}
+@media(max-width:560px){.student-card{align-items:flex-start;flex-direction:column}.card-top{flex-direction:column}.status{align-self:flex-start}.card-actions>*{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="brand"><img class="brand-logo" src="assets/images/logo/logo.png" alt="Chemistry Point Logo"> <span>Chemistry Point</span></div><button class="theme" id="themeBtn" type="button">Light / Dark</button></header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">Private Student Area</div>
+    <h1>My Dashboard</h1>
+    <p class="muted">Apne payment status aur approved study access yahan dekhein.</p>
+  </section>
+  <section class="student-card" id="studentCard" hidden>
+    <div><small>Student Name</small><div class="product" id="studentName">—</div></div>
+    <div><small>Student ID</small><div class="student-id" id="studentId">—</div></div>
+  </section>
+  <div id="message" class="empty" role="status" aria-live="polite">Dashboard load ho raha hai…</div>
+  <section id="paymentsSection" hidden>
+    <div class="section-title"><h2>My Payments & Access</h2><span class="count" id="paymentCount"></span></div>
+    <div class="payment-list" id="paymentList"></div>
+  </section>
+</main>
+<footer>© <span id="year"></span> Code With Piyush · Chemistry Point</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+const firebaseConfig={
+  apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
+  authDomain:"chemistry-point-9a41b.firebaseapp.com",
+  databaseURL:"https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"chemistry-point-9a41b",
+  storageBucket:"chemistry-point-9a41b.firebasestorage.app",
+  messagingSenderId:"791007663942",
+  appId:"1:791007663942:web:693c008e475a2e74357747"
+};
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app,firebaseConfig.databaseURL);
+const $=id=>document.getElementById(id);
+const token=new URLSearchParams(location.search).get("token")||"";
+$("year").textContent=new Date().getFullYear();
+function showMessage(text,isError=false){$("message").hidden=false;$("message").className=isError?"error":"empty";$("message").textContent=text;}
+function money(value){const n=Number(value);return "₹"+(Number.isFinite(n)?n:0).toLocaleString("en-IN",{maximumFractionDigits:2});}
+function makeAccessLink(item){
+  const type=String(item.productType||item.type||"").toLowerCase();
+  if(type==="quiz") return "student/quiz.html?quizId="+encodeURIComponent(String(item.productId||""));
+  if(type==="objective"||type==="pdf"){
+    const chapter=String(item.chapterSlug||"");
+    const objectiveType=String(item.objectiveType||"vvi").toLowerCase();
+    const classLevel=String(item.classLevel||"12");
+    if(!chapter||!["vvi","pyq","all"].includes(objectiveType)) return "";
+    return "student/objective.html?class="+encodeURIComponent(classLevel)+"&chapter="+encodeURIComponent(chapter)+"&type="+encodeURIComponent(objectiveType);
+  }
+  return "";
+}
+function render(data){
+  $("studentCard").hidden=false;
+  $("studentName").textContent=String(data.studentName||"Student");
+  $("studentId").textContent=String(data.studentId||"");
+  const payments=data.payments&&typeof data.payments==="object"?Object.entries(data.payments):[];
+  $("paymentCount").textContent=payments.length+" item(s)";
+  $("paymentList").replaceChildren();
+  if(!payments.length){showMessage("Abhi koi payment record nahi mila.");return;}
+  $("message").hidden=true;$("paymentsSection").hidden=false;
+  payments.sort((a,b)=>Number(b[1]?.submittedAt||0)-Number(a[1]?.submittedAt||0));
+  for(const [requestId,item] of payments){
+    if(!item||typeof item!=="object") continue;
+    const status=String(item.status||"pending").toLowerCase();
+    const safeStatus=["pending","approved","rejected"].includes(status)?status:"pending";
+    const card=document.createElement("article");card.className="payment-card";
+    const top=document.createElement("div");top.className="card-top";
+    const titleBox=document.createElement("div");
+    const title=document.createElement("div");title.className="product";title.textContent=String(item.productName||"Paid Content");
+    const meta=document.createElement("div");meta.className="meta";meta.textContent=String(item.productType||item.type||"Product").toUpperCase()+" · "+String(item.productId||"");
+    titleBox.append(title,meta);
+    const badge=document.createElement("span");badge.className="status "+safeStatus;badge.textContent=safeStatus;
+    top.append(titleBox,badge);card.append(top);
+    const details=document.createElement("div");details.className="details";
+    for(const [label,value] of [["Amount",money(item.amount)],["UTR",item.utr||"Not submitted"],["Submitted",item.submittedAt?new Date(Number(item.submittedAt)).toLocaleString("en-IN"):"—"]]){
+      const span=document.createElement("span");span.textContent=label+": ";
+      const strong=document.createElement("strong");strong.textContent=String(value);span.append(strong);details.append(span);
+    }
+    card.append(details);
+    const note=document.createElement("div");note.className="note";
+    if(safeStatus==="pending") note.textContent="Payment request mil gayi hai. Admin UTR aur WhatsApp group mein bheje gaye screenshot ko verify karega.";
+    else if(safeStatus==="rejected") note.textContent="Payment approve nahi hui."+ (item.rejectionReason?" Reason: "+String(item.rejectionReason):" Admin se sampark karein.");
+    else note.textContent="Payment approve ho gayi hai. Aapka selected content ab available hai.";
+    card.append(note);
+    if(safeStatus==="approved"){
+      const link=makeAccessLink(item);
+      if(link){const actions=document.createElement("div");actions.className="card-actions";const a=document.createElement("a");a.className="open-link";a.href=link;a.textContent="Open "+(String(item.productType||"").toLowerCase()==="quiz"?"Quiz":"Objectives");actions.append(a);card.append(actions);}
+      else {const warn=document.createElement("div");warn.className="note";warn.textContent="Access link details abhi configured nahi hain. Admin se sampark karein.";card.append(warn);}
+    }
+    $("paymentList").append(card);
+  }
+}
+async function loadDashboard(){
+  if(!/^[a-f0-9]{64}$/i.test(token)){showMessage("Private dashboard link invalid hai. Payment submit karne ke baad mila hua complete link open karein.",true);return;}
+  try{
+    const snap=await get(ref(db,"paymentDashboards/"+token));
+    if(!snap.exists()){showMessage("Dashboard record nahi mila. Link check karein ya payment submit karne ke baad mila hua link dobara open karein.",true);return;}
+    const data=snap.val();
+    if(!data||typeof data!=="object"){showMessage("Dashboard data invalid hai.",true);return;}
+    render(data);
+  }catch(error){
+    console.error(error);
+    showMessage("Dashboard load nahi hua. Firebase Rules mein is private token record ka read access check karna hoga.",true);
+  }
+}
+$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("chemistryPointTheme",document.body.classList.contains("light")?"light":"dark");});
+if(localStorage.getItem("chemistryPointTheme")==="light")document.body.classList.add("light");
+loadDashboard();
+</script>
+</body>
+</html>

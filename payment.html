@@ -1,327 +1,120 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Payment | Chemistry Point</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Payment | Chemistry Point</title>
 <style>
-:root{color-scheme:dark;--bg:#101116;--card:#191b22;--text:#f5f5f7;--muted:#a8abb6;--gold:#e8b84d;--line:#30333d;--field:#111319}
-body.light{color-scheme:light;--bg:#f5f6f8;--card:#fff;--text:#171923;--muted:#646978;--gold:#946500;--line:#e0e2e8;--field:#fff}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif}
-header,main,footer{width:min(760px,calc(100% - 28px));margin:auto}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
-.brand{font-size:1.15rem;font-weight:850}
-.brand span,.amount,.id{color:var(--gold)}
-button{font:inherit;cursor:pointer}
-.theme,.btn{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--card);color:var(--text);font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;width:100%;margin:7px 0}
-.theme{width:auto}
-.primary{background:var(--gold);color:#17130a;border-color:var(--gold)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-main{padding:12px 0 34px}
-.heading{margin:8px 0 20px}
-.heading h1{font-size:clamp(1.7rem,5vw,2.4rem);line-height:1.15;margin:0 0 8px}
-.heading p,.muted{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin:14px 0}
-.card h2{font-size:1.08rem;margin:0 0 16px}
-.field{margin:14px 0}
-label{display:block;font-weight:650;margin-bottom:7px}
-input{width:100%;border:1px solid var(--line);background:var(--field);color:var(--text);padding:13px 14px;border-radius:11px;font:inherit}
-.product,.notice{border:1px solid var(--line);border-radius:12px;padding:14px}
-.product{background:var(--field)}
-.product strong{display:block}
-.product small{display:block;color:var(--muted);margin-top:4px}
-.amount{font-size:2.2rem;font-weight:850;margin:2px 0 16px}
-.notice{border-left:4px solid var(--gold);color:var(--muted);font-size:.94rem;margin:14px 0}
-#message{min-height:24px;font-size:.92rem;color:var(--gold);overflow-wrap:anywhere;white-space:pre-wrap}
-.id{font-weight:800;letter-spacing:.06em;overflow-wrap:anywhere}
-footer{text-align:center;color:var(--muted);padding:18px 0 28px;font-size:.88rem}
+:root{color-scheme:dark;--bg:#101116;--card:#191b22;--field:#111319;--text:#f5f5f7;--muted:#a8abb6;--gold:#e8b84d;--line:#30333d}
+body.light{color-scheme:light;--bg:#f5f6f8;--card:#fff;--field:#f8f9fb;--text:#171923;--muted:#646978;--gold:#946500;--line:#e0e2e8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,sans-serif}
+header,main,footer{width:min(720px,calc(100% - 28px));margin:auto}header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.brand{font-weight:850;font-size:1.15rem}.brand span,.amount,.id{color:var(--gold)}button,a{font:inherit}button{cursor:pointer}
+.theme,.btn{border:1px solid var(--line);border-radius:11px;padding:12px 15px;background:var(--card);color:var(--text);font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;width:100%;margin:8px 0}
+.theme{width:auto}.primary{background:var(--gold);color:#17130a;border-color:var(--gold)}button:disabled{opacity:.5;cursor:not-allowed}
+main{padding:10px 0 35px}.heading h1{font-size:clamp(1.7rem,5vw,2.3rem);margin:0 0 6px}.muted,small{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:20px;margin:14px 0}.card h2{font-size:1.05rem;margin:0 0 15px}
+.field{margin:13px 0}label{display:block;font-weight:650;margin-bottom:6px}input{width:100%;border:1px solid var(--line);background:var(--field);color:var(--text);padding:13px;border-radius:10px;font:inherit}
+.product,.notice{border:1px solid var(--line);border-radius:11px;padding:13px}.product{background:var(--field)}.product strong{display:block}.product small{display:block;margin-top:4px}
+.amount{font-size:2.1rem;font-weight:850;margin:5px 0 15px}.notice{border-left:4px solid var(--gold);color:var(--muted);font-size:.9rem;margin:13px 0}
+.id{font-weight:800;overflow-wrap:anywhere}#message{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--gold);font-size:.9rem;min-height:22px}
+#dashboardBox{display:none}.secret-link{overflow-wrap:anywhere;padding:10px;background:var(--field);border-radius:9px;font-size:.85rem}
+footer{text-align:center;color:var(--muted);padding:18px 0 28px;font-size:.85rem}
 </style>
 </head>
-<body>
-<header>
-  <div class="brand">Chemistry <span>Point</span></div>
-  <button class="theme" id="themeBtn" type="button">☀️ / 🌙</button>
-</header>
-
+<body> 
+<header><div class="brand">Chemistry <span>Point</span></div><button class="theme" id="themeBtn" type="button">Light / Dark</button></header>
 <main>
-<section class="heading">
-  <h1>Complete Your Payment</h1>
-  <p>Selected content ka payment karein. Admin approval ke baad access unlock hoga.</p>
-</section>
-
+<section class="heading"><h1>Complete Your Payment</h1><p class="muted">Details bharein, UPI se payment karein aur UTR submit karein. Admin verify karne ke baad access approve hoga.</p></section>
 <section class="card">
-  <h2>01. Student Details</h2>
-  <div class="field">
-    <label for="studentName">Student Name</label>
-    <input id="studentName" maxlength="80" autocomplete="name" placeholder="Apna naam likhein">
-  </div>
-  <div class="field">
-    <label for="phone">Mobile Number</label>
-    <input id="phone" type="tel" inputmode="tel" maxlength="15" placeholder="10-digit mobile number">
-  </div>
-  <div class="field">
-    <label>Selected Product</label>
-    <div class="product">
-      <strong id="productTitle">Loading…</strong>
-      <small id="productMeta">Product details load ho rahi hain</small>
-    </div>
-  </div>
-  <label>Your Student ID</label>
-  <div class="notice id" id="studentId">Generating…</div>
-  <div class="muted">Screenshot bhejte waqt Student ID zaroor share karein.</div>
-  <p id="message" role="status" aria-live="polite">Firebase connect ho raha hai…</p>
+<h2>01. Student Details</h2>
+<div class="field"><label for="studentName">Student Name</label><input id="studentName" maxlength="80" autocomplete="name" placeholder="Apna naam likhein"></div>
+<div class="field"><label for="phone">Mobile Number</label><input id="phone" type="tel" inputmode="numeric" maxlength="15" placeholder="10-digit mobile number"></div>
+<div class="field"><label>Selected Product</label><div class="product"><strong id="productTitle">Loading…</strong><small id="productMeta">Product details load ho rahi hain</small></div></div>
+<label>Your Student ID</label><div class="notice id" id="studentId">Generating…</div>
+<p id="message" role="status" aria-live="polite">Firebase connect ho raha hai…</p>
 </section>
-
 <section class="card">
-  <h2>02. Payment Details</h2>
-  <div class="muted">Admin ke saved price ke mutabik amount</div>
-  <div class="amount" id="amount">₹—</div>
-  <button class="btn primary" id="payBtn" type="button" disabled>Pay Now with UPI</button>
-  <div class="notice">Payment ke baad transaction screenshot verification WhatsApp group mein bhejein. Student ID bhi share karein. Admin manually payment verify karega.</div>
-  <button class="btn" id="whatsappBtn" type="button">Send Details on WhatsApp</button>
-  <button class="btn" id="groupBtn" type="button">Open Verification Group</button>
+<h2>02. Payment</h2><div class="muted">Admin ke saved price ke mutabik</div><div class="amount" id="amount">₹—</div>
+<button class="btn primary" id="payBtn" disabled>1. Create Request & Pay with UPI</button>
+<div class="notice">UPI payment ke baad apna UTR / Transaction ID neeche submit karein. Payment screenshot WhatsApp verification group mein bhejein.</div>
+<div class="field"><label for="utr">UTR / Transaction ID</label><input id="utr" maxlength="40" placeholder="Payment ke baad UTR enter karein"></div>
+<button class="btn primary" id="utrBtn" disabled>2. Submit UTR</button>
+<button class="btn" id="whatsappBtn" disabled>Send Details on WhatsApp</button>
+<button class="btn" id="groupBtn">Open Verification Group</button>
+</section>
+<section class="card" id="dashboardBox">
+<h2>Your Private Student Dashboard</h2>
+<p class="muted">Is link ko private rakhein. WhatsApp group mein share na karein. Jiske paas link hoga, woh dashboard dekh sakta hai.</p>
+<div class="secret-link" id="dashboardLink"></div>
+<button class="btn" id="copyDashboardBtn">Copy Dashboard Link</button>
 </section>
 </main>
-<footer>© 2026 Code With Piyush · Built with ❤️</footer>
-
+<footer>© 2026 Code With Piyush · Chemistry Point</footer>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",
-  authDomain: "chemistry-point-9a41b.firebaseapp.com",
-  databaseURL: "https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "chemistry-point-9a41b",
-  storageBucket: "chemistry-point-9a41b.firebasestorage.app",
-  messagingSenderId: "791007663942",
-  appId: "1:791007663942:web:693c008e475a2e74357747"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app, firebaseConfig.databaseURL);
-const $ = id => document.getElementById(id);
-const params = new URLSearchParams(location.search);
-const requestedType = (params.get("type") || "").trim().toLowerCase();
-const requestedProductId = (params.get("productId") || "").trim();
-const requestedTitle = (params.get("title") || "").trim();
-
-let settings = {};
-let prices = {};
-let product = null;
-
-function say(message) {
-  $("message").textContent = message;
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {getDatabase,ref,get,push,update} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+const firebaseConfig={apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",authDomain:"chemistry-point-9a41b.firebaseapp.com",databaseURL:"https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"chemistry-point-9a41b",storageBucket:"chemistry-point-9a41b.firebasestorage.app",messagingSenderId:"791007663942",appId:"1:791007663942:web:693c008e475a2e74357747"};
+const app=initializeApp(firebaseConfig),db=getDatabase(app,firebaseConfig.databaseURL),$=id=>document.getElementById(id),params=new URLSearchParams(location.search);
+const requestedType=(params.get("type")||"").trim().toLowerCase(),requestedProductId=(params.get("productId")||"").trim(),requestedTitle=(params.get("title")||"").trim();
+let settings={},prices={},product=null,currentRequest=null,dashboardToken=null;
+const sessionKey=()=> "cpPaymentSession:"+requestedType+":"+requestedProductId;
+function saveSession(){
+  if(!currentRequest||!dashboardToken)return;
+  localStorage.setItem(sessionKey(),JSON.stringify({
+    requestId:currentRequest.requestId,token:dashboardToken,
+    name:$("studentName").value.trim(),phone:$("phone").value.trim()
+  }));
 }
-
-function getStudentId() {
-  const key = "chemistryPointStudentId";
-  try {
-    let value = localStorage.getItem(key);
-    if (!value) {
-      const random = crypto.randomUUID
-        ? crypto.randomUUID()
-        : Math.random().toString(36).slice(2) + Date.now().toString(36);
-      value = "CWP-" + random.replaceAll("-", "").slice(0, 12).toUpperCase();
-      localStorage.setItem(key, value);
-    }
-    return value;
-  } catch {
-    return "CWP-" + Math.random().toString(36).slice(2, 14).toUpperCase();
-  }
+async function restoreSession(){
+  try{
+    const raw=localStorage.getItem(sessionKey());
+    if(!raw)return;
+    const saved=JSON.parse(raw);
+    if(!saved||!saved.requestId||!/^[a-f0-9]{64}$/i.test(saved.token||""))return;
+    const snap=await get(ref(db,"paymentDashboards/"+saved.token));
+    if(!snap.exists())return;
+    const data=snap.val()||{},payments=data.payments||{};
+    const record=payments[saved.requestId];
+    if(!record)return;
+    dashboardToken=saved.token;
+    currentRequest={requestId:saved.requestId,item:{...record,studentName:data.studentName,studentId:data.studentId,productName:record.productName||product?.name,productType:record.productType||product?.type,amount:record.amount}};
+    $("studentName").value=saved.name||data.studentName||"";
+    $("phone").value=saved.phone||"";
+    $("utrBtn").disabled=String(record.status||"pending").toLowerCase()!=="pending";
+    $("whatsappBtn").disabled=false;
+    $("dashboardBox").style.display="block";
+    const link=new URL("dashboard.html",location.href);link.searchParams.set("token",dashboardToken);
+    $("dashboardLink").textContent=link.href;
+    if(record.utr)$("utr").value=record.utr;
+    say("Aapki purani payment request restore ho gayi. Dashboard link private rakhein.");
+  }catch(error){console.warn("Payment session restore failed:",error)}
 }
-
-$("studentId").textContent = getStudentId();
-
-function getAmount() {
-  const n = Number(prices[product?.key]?.price);
-  return Number.isFinite(n) ? n : NaN;
-}
-
-function drawProduct() {
-  if (!product) return;
-
-  $("productTitle").textContent = product.name || requestedTitle || product.productId;
-  $("productMeta").textContent = `${product.type.toUpperCase()} · ID: ${product.productId}`;
-
-  const price = getAmount();
-  $("amount").textContent =
-    Number.isFinite(price) && price > 0
-      ? "₹" + price.toLocaleString("en-IN")
-      : "Price not set";
-
-  $("payBtn").disabled = !(Number.isFinite(price) && price > 0);
-}
-
-async function loadPaymentData() {
-  say("Firebase se payment settings load ho rahi hain…");
-
-  try {
-    const [configSnapshot, pricesSnapshot] = await Promise.all([
-      get(ref(db, "paymentConfig")),
-      get(ref(db, "paymentPrices"))
-    ]);
-
-    settings = configSnapshot.exists() ? configSnapshot.val() : {};
-    prices = pricesSnapshot.exists() ? pricesSnapshot.val() : {};
-
-    if (!prices || typeof prices !== "object") {
-      throw new Error("paymentPrices database path empty ya invalid hai.");
-    }
-
-    const rows = Object.entries(prices).map(([key, value]) => ({
-      key,
-      ...value,
-      productId: String(value?.productId || ""),
-      type: String(value?.type || "").toLowerCase()
-    }));
-
-    product = rows.find(item =>
-      item.productId === requestedProductId &&
-      (!requestedType || item.type === requestedType)
-    ) || null;
-
-    if (!product) {
-      $("productTitle").textContent = "Selected product nahi mila";
-      $("productMeta").textContent = "Product ID aur admin price record match nahi hue.";
-      say(
-        "Product record nahi mila.\n" +
-        "Payment link ke query parameters check karein: type, productId aur title.\n" +
-        "Admin panel mein saved Product ID bhi check karein."
-      );
-      return;
-    }
-
-    drawProduct();
-
-    if (!settings.upiId || !settings.whatsapp || !settings.groupLink) {
-      say("Product load ho gaya, lekin admin panel mein UPI ID, WhatsApp number ya group link missing hai.");
-    } else {
-      say("Product aur payment settings successfully load ho gaye.");
-    }
-  } catch (error) {
-    console.error("Chemistry Point Firebase error:", error);
-
-    const code = String(error?.code || error?.name || "UNKNOWN");
-    const detail = String(error?.message || error || "Unknown error");
-
-    if (!navigator.onLine) {
-      say("Internet connection nahi hai. Internet on karke page reload karein.");
-    } else if (
-      code.toLowerCase().includes("permission") ||
-      detail.toLowerCase().includes("permission_denied")
-    ) {
-      say(
-        "FIREBASE PERMISSION DENIED\n" +
-        "Database Rules paymentConfig/paymentPrices ko read karne nahi de rahe.\n" +
-        "Firebase Console → Realtime Database → Rules check karein.\n" +
-        "Public write permission enable mat karein."
-      );
-    } else {
-      say("FIREBASE ERROR\nCode: " + code + "\nDetails: " + detail);
-    }
+function say(t){$("message").textContent=t}
+function studentId(){const k="chemistryPointStudentId";let v=localStorage.getItem(k);if(!v){v="CWP-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),x=>x.toString(16).padStart(2,"0")).join("").toUpperCase();localStorage.setItem(k,v)}return v}
+function randomToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,"0")).join("")}
+function price(){const n=Number(prices[product?.key]?.price);return Number.isFinite(n)?n:NaN}
+function draw(){if(!product)return;$("productTitle").textContent=product.name||requestedTitle||product.productId;$("productMeta").textContent=product.type.toUpperCase()+" · ID: "+product.productId;const n=price();$("amount").textContent=Number.isFinite(n)&&n>0?"₹"+n.toLocaleString("en-IN"):"Price not set";$("payBtn").disabled=!(Number.isFinite(n)&&n>0)}
+function student(){const name=$("studentName").value.trim(),phone=$("phone").value.replace(/\D/g,""),amount=price();if(name.length<2){say("Apna naam enter karein.");return null}if(phone.length<10||phone.length>15){say("Valid mobile number enter karein.");return null}if(!product||!Number.isFinite(amount)||amount<=0){say("Product ya valid price available nahi hai.");return null}return{name,phone,amount,studentId:studentId()}}
+async function load(){try{const [c,p]=await Promise.all([get(ref(db,"paymentConfig")),get(ref(db,"paymentPrices"))]);settings=c.val()||{};prices=p.val()||{};const rows=Object.entries(prices).map(([key,v])=>({key,...v,productId:String(v?.productId||""),type:String(v?.type||"").toLowerCase()}));product=rows.find(x=>x.productId===requestedProductId&&(!requestedType||x.type===requestedType))||null;if(!product){$("productTitle").textContent="Product nahi mila";say("Payment link ka Product ID ya Type admin ke saved record se match nahi hua.");return}draw();say("Product aur payment settings load ho gayi.");}catch(e){console.error(e);say("Firebase data load nahi hua: "+e.message)}}
+$("studentId").textContent=studentId();
+$("payBtn").addEventListener("click",async()=>{const s=student();if(!s)return;if(!String(settings.upiId||"").includes("@")){say("Admin panel mein valid UPI ID set nahi hai.");return}if(currentRequest){openUpi(s);return}try{$("payBtn").disabled=true;say("Payment request ban rahi hai…");dashboardToken=randomToken();const requestRef=push(ref(db,"paymentRequests")),requestId=requestRef.key,now=Date.now();let chapterMeta={};
+if(product.type==="pdf"){
+  const [chapterId,pdfField]=product.productId.split("/");
+  if(chapterId){
+    const chapterSnap=await get(ref(db,"chapters/"+chapterId));
+    const chapterData=chapterSnap.exists()?chapterSnap.val():{};
+    const fieldType={vviPdf:"vvi",pyqPdf:"pyq",allPdf:"all"};
+    const nestedType=pdfField&&!fieldType[pdfField]?pdfField:"";
+    chapterMeta={chapterSlug:String(chapterData.slug||chapterData.chapterSlug||""),objectiveType:fieldType[pdfField]||nestedType||"vvi",classLevel:String(chapterData.classLevel||"12")};
   }
 }
-
-function getStudentDetails() {
-  const name = $("studentName").value.trim();
-  const phone = $("phone").value.replace(/\D/g, "");
-  const price = getAmount();
-
-  if (name.length < 2) {
-    say("Apna naam enter karein.");
-    return null;
-  }
-
-  if (phone.length < 10 || phone.length > 15) {
-    say("Valid mobile number enter karein.");
-    return null;
-  }
-
-  if (!product || !Number.isFinite(price) || price <= 0) {
-    say("Product ya valid price available nahi hai.");
-    return null;
-  }
-
-  return { name, phone, price, studentId: getStudentId() };
-}
-
-$("payBtn").addEventListener("click", () => {
-  const student = getStudentDetails();
-  if (!student) return;
-
-  const upiId = String(settings.upiId || "").trim();
-  if (!upiId.includes("@")) {
-    say("Admin panel mein valid UPI ID set nahi hai.");
-    return;
-  }
-
-  const query = new URLSearchParams({
-    pa: upiId,
-    pn: "Chemistry Point",
-    am: student.price.toFixed(2),
-    cu: "INR",
-    tn: `${product.name || requestedTitle || product.productId} | ${student.studentId}`
-  });
-
-  location.href = "upi://pay?" + query.toString();
-});
-
-$("whatsappBtn").addEventListener("click", () => {
-  const student = getStudentDetails();
-  if (!student) return;
-
-  const number = String(settings.whatsapp || "").replace(/\D/g, "");
-  if (number.length < 10) {
-    say("Admin panel mein valid WhatsApp number set nahi hai.");
-    return;
-  }
-
-  const message = [
-    "Chemistry Point Payment Details",
-    `Student Name: ${student.name}`,
-    `Mobile Number: ${student.phone}`,
-    `Product Type: ${product.type}`,
-    `Product: ${product.name || requestedTitle || product.productId}`,
-    `Product ID: ${product.productId}`,
-    `Amount: ₹${student.price}`,
-    `Student ID: ${student.studentId}`,
-    "Payment screenshot verification ke liye share karunga."
-  ].join("\n");
-
-  location.href = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
-});
-
-$("groupBtn").addEventListener("click", () => {
-  try {
-    const url = new URL(String(settings.groupLink || ""));
-    if (
-      url.protocol !== "https:" ||
-      !(url.hostname === "chat.whatsapp.com" || url.hostname.endsWith(".whatsapp.com"))
-    ) {
-      throw new Error("Invalid group link");
-    }
-    location.href = url.href;
-  } catch {
-    say("Admin panel mein valid WhatsApp group invite link save karein.");
-  }
-});
-
-$("themeBtn").addEventListener("click", () => {
-  document.body.classList.toggle("light");
-  localStorage.setItem(
-    "chemistryPointTheme",
-    document.body.classList.contains("light") ? "light" : "dark"
-  );
-});
-
-if (localStorage.getItem("chemistryPointTheme") === "light") {
-  document.body.classList.add("light");
-}
-
-loadPaymentData();
+const item={requestId,studentName:s.name,phone:s.phone,studentId:s.studentId,productType:product.type,productId:product.productId,productName:product.name||requestedTitle||product.productId,amount:s.amount,status:"pending",utr:"",requestSecret:dashboardToken,...chapterMeta,createdAt:now,submittedAt:now};
+const dashboard={studentName:s.name,studentId:s.studentId,createdAt:now,payments:{[requestId]:{productType:item.productType,productId:item.productId,productName:item.productName,amount:item.amount,status:"pending",utr:"",...chapterMeta,submittedAt:now}}};await update(ref(db),{["paymentRequests/"+requestId]:item,["paymentDashboards/"+dashboardToken]:dashboard});currentRequest={requestId,item};localStorage.setItem("cpDashboardToken",dashboardToken);saveSession();const link=new URL("dashboard.html",location.href);link.searchParams.set("token",dashboardToken);$("dashboardBox").style.display="block";$("dashboardLink").textContent=link.href;$("utrBtn").disabled=false;$("whatsappBtn").disabled=false;say("Request create ho gayi. Ab UPI payment karein. Dashboard link ko private rakhein.");openUpi(s);}catch(e){console.error(e);$("payBtn").disabled=false;say("Request create nahi hui. Firebase Rules update hone ke baad dobara try karein: "+e.message)}});
+function openUpi(s){const q=new URLSearchParams({pa:String(settings.upiId).trim(),pn:"Chemistry Point",am:s.amount.toFixed(2),cu:"INR",tn:(product.name||product.productId)+" | "+s.studentId});location.href="upi://pay?"+q.toString()}
+$("utrBtn").addEventListener("click",async()=>{if(!currentRequest||!dashboardToken){say("Pehle Create Request & Pay karein.");return}const utr=$("utr").value.trim().replace(/\s/g,"");if(!/^[A-Za-z0-9]{8,40}$/.test(utr)){say("Valid UTR / Transaction ID (8–40 characters) enter karein.");return}try{$("utrBtn").disabled=true;const updatedAt=Date.now();await update(ref(db),{["paymentRequests/"+currentRequest.requestId+"/utr"]:utr,["paymentRequests/"+currentRequest.requestId+"/submittedAt"]:updatedAt,["paymentDashboards/"+dashboardToken+"/payments/"+currentRequest.requestId+"/utr"]:utr,["paymentDashboards/"+dashboardToken+"/payments/"+currentRequest.requestId+"/submittedAt"]:updatedAt});currentRequest.item={...currentRequest.item,utr,submittedAt:updatedAt};saveSession();say("UTR submit ho gaya. Screenshot WhatsApp verification group mein bhejein.");}catch(e){console.error(e);say("UTR submit nahi hua: "+e.message)}finally{$("utrBtn").disabled=false}});
+$("whatsappBtn").addEventListener("click",()=>{const s=student();if(!s||!currentRequest)return;const number=String(settings.whatsapp||"").replace(/\D/g,"");if(number.length<10){say("Admin panel mein WhatsApp number set nahi hai.");return}const message=["Chemistry Point Payment Verification", "Student: "+s.name,"Mobile: "+s.phone,"Student ID: "+s.studentId,"Product: "+currentRequest.item.productName,"Product Type: "+currentRequest.item.productType,"Amount: ₹"+s.amount,"UTR: "+($("utr").value.trim()||"Will share separately"),"Please verify my payment. Screenshot attached separately."].join("\n");location.href="https://wa.me/"+number+"?text="+encodeURIComponent(message)});
+$("groupBtn").addEventListener("click",()=>{try{const u=new URL(settings.groupLink||"");if(u.protocol!=="https:"||u.hostname!=="chat.whatsapp.com")throw Error();location.href=u.href}catch{say("Admin panel mein valid WhatsApp group invite link save karein.")}});
+$("copyDashboardBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("dashboardLink").textContent);say("Private dashboard link copy ho gaya. Ise kisi group mein share na karein.")}catch{say("Link ko long-press karke copy karein.")}});
+$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");localStorage.setItem("chemistryPointTheme",document.body.classList.contains("light")?"light":"dark")});if(localStorage.getItem("chemistryPointTheme")==="light")document.body.classList.add("light");load().then(restoreSession);
 </script>
-</body>
-</html>
+</body></html>
