@@ -81,7 +81,7 @@ function makeAccessLink(item){
     const objectiveType=String(item.objectiveType||"vvi").toLowerCase();
     const classLevel=String(item.classLevel||"12");
     if(!chapter||!["vvi","pyq","all"].includes(objectiveType)) return "";
-    return "student/objective.html?class="+encodeURIComponent(classLevel)+"&chapter="+encodeURIComponent(chapter)+"&type="+encodeURIComponent(objectiveType);
+    return "student/pdf.html?class="+encodeURIComponent(classLevel)+"&chapter="+encodeURIComponent(chapter)+"&type="+encodeURIComponent(objectiveType);
   }
   return "";
 }
