@@ -103,10 +103,31 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
     "paymentDashboards": {
       "$token": {
         ".read": true,
-        ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || !data.exists()",
+        "studentName": {
+          ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (auth == null && !data.exists())",
+          ".validate": "newData.isString() && newData.val().length <= 80"
+        },
+        "studentId": {
+          ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (auth == null && !data.exists())",
+          ".validate": "newData.isString() && newData.val().length <= 40"
+        },
+        "createdAt": {
+          ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (auth == null && !data.exists())",
+          ".validate": "newData.isNumber()"
+        },
         "payments": {
           "$requestId": {
-            ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (!data.exists() && auth == null) || (auth == null && data.exists() && newData.child('productType').val() == data.child('productType').val() && newData.child('productId').val() == data.child('productId').val() && newData.child('productName').val() == data.child('productName').val() && newData.child('amount').val() == data.child('amount').val() && newData.child('status').val() == data.child('status').val() && newData.child('chapterSlug').val() == data.child('chapterSlug').val() && newData.child('objectiveType').val() == data.child('objectiveType').val() && newData.child('classLevel').val() == data.child('classLevel').val())"
+            ".write": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (auth == null && !data.exists()) || (auth == null && data.exists() && newData.child('productType').val() == data.child('productType').val() && newData.child('productId').val() == data.child('productId').val() && newData.child('productName').val() == data.child('productName').val() && newData.child('amount').val() == data.child('amount').val() && newData.child('status').val() == data.child('status').val() && newData.child('chapterSlug').val() == data.child('chapterSlug').val() && newData.child('objectiveType').val() == data.child('objectiveType').val() && newData.child('classLevel').val() == data.child('classLevel').val())",
+            ".validate": "newData.hasChildren(['productType','productId','productName','amount','status'])",
+            "utr": {
+              ".validate": "newData.isString() && newData.val().length <= 40"
+            },
+            "submittedAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "status": {
+              ".validate": "newData.val() == 'pending' || newData.val() == 'approved' || newData.val() == 'rejected'"
+            }
           }
         }
       }
