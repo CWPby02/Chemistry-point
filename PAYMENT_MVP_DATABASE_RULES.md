@@ -87,7 +87,7 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
           ".validate": "newData.isNumber()"
         },
         "createdAt": {
-          ".validate": "newData.isNumber()"
+          ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || (!data.exists() && newData.isNumber()) || newData.val() == data.val()"
         },
         "reviewedAt": {
           ".validate": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true"
@@ -96,7 +96,10 @@ Important MVP limitation: public `questions`, `chapters`, and Google Drive PDF U
           ".validate": "auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true"
         },
         "rejectionReason": {
-          ".validate": "newData.isString() && newData.val().length <= 240"
+          ".validate": "(auth != null && root.child('admins').child(auth.uid).child('role').val() == 'admin' && root.child('admins').child(auth.uid).child('active').val() == true) || newData.val() == data.val()"
+        },
+        "$other": {
+          ".validate": false
         }
       }
     },
