@@ -1701,16 +1701,19 @@ function iconOf(type, chapter) {
     if (c.includes("solid")) return "fa-solid fa-cubes";
     return "fa-solid fa-atom";
 }
+function safePriceKey(value) {
+    return String(value).replace(/[.#$/\[\]]/g, "_");
+}
 function card(q) {
     const type = typeOf(q);
     const title = titleOf(q);
     const chapter = chapterOf(q);
     const count = countOf(q);
     const duration = durationOf(q);
-    const priceKey = `quiz_${String(q.__id).replace(/[.#$/\\[\\]]/g, "_")}`;
+    const priceKey = safePriceKey(`quiz_${q.__id}`);
     const savedPrice = paymentPrices[priceKey]?.price;
     const price = Number(q.price ?? savedPrice ?? 0);
-    const isPaid = String(q.accessType || (savedPrice ? "paid" : "free")).toLowerCase() === "paid";
+    const isPaid = String(q.accessType || (savedPrice !== undefined ? "paid" : "free")).toLowerCase() === "paid";
     const description = descriptionOf(q, type);
     const details = [
         chapter ? `Chapter: ${chapter}` : "",
