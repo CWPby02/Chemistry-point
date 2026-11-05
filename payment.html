@@ -105,7 +105,7 @@ if(product.type==="pdf"){
     const chapterData=chapterSnap.exists()?chapterSnap.val():{};
     const fieldType={vviPdf:"vvi",pyqPdf:"pyq",allPdf:"all"};
     const nestedType=pdfField&&!fieldType[pdfField]?pdfField:"";
-    chapterMeta={chapterSlug:String(chapterData.slug||chapterData.chapterSlug||""),objectiveType:fieldType[pdfField]||nestedType||"vvi",classLevel:String(chapterData.classLevel||"12")};
+    chapterMeta={chapterSlug:String(params.get("chapter")||chapterData.slug||chapterData.chapterSlug||""),objectiveType:fieldType[pdfField]||nestedType||"vvi",classLevel:String(params.get("class")||chapterData.classLevel||"12")};
   }
 }
 const item={requestId,studentName:s.name,phone:s.phone,studentId:s.studentId,productType:product.type,productId:product.productId,productName:product.name||requestedTitle||product.productId,amount:s.amount,status:"pending",utr:"",requestSecret:dashboardToken,...chapterMeta,createdAt:now,submittedAt:now};
