@@ -301,8 +301,8 @@ td{line-height:1.6;overflow-wrap:anywhere}
 
       <div class="table-wrap" style="margin-top:15px">
         <table>
-          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Amount</th><th>UTR / Transaction ID</th><th>Status</th><th>Action</th></tr></thead>
-          <tbody id="requestsTable"><tr><td colspan="6" class="empty">Loading requests...</td></tr></tbody>
+          <thead><tr><th>Payment ID</th><th>Student / Product</th><th>Student ID</th><th>Mobile Number</th><th>Amount</th><th>UTR / Transaction ID</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="requestsTable"><tr><td colspan="8" class="empty">Loading requests...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -610,7 +610,7 @@ function renderRequests() {
   $("approvedAmount").textContent = money(total);
 
   if (!entries.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty">Abhi koi payment request nahi mili.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="empty">Abhi koi payment request nahi mili.</td></tr>';
     return;
   }
 
@@ -624,6 +624,12 @@ function renderRequests() {
     const student = document.createElement("td");
     student.textContent =
       `${item.studentName || item.name || "Student"} · ${item.productName || item.productId || "Product"}`;
+
+    const studentId = document.createElement("td");
+    studentId.textContent = item.studentId ? String(item.studentId) : "—";
+
+    const mobile = document.createElement("td");
+    mobile.textContent = item.phone ? String(item.phone) : "—";
 
     const amount = document.createElement("td");
     amount.textContent = money(item.amount ?? item.price);
@@ -658,7 +664,7 @@ function renderRequests() {
       action.textContent = "Reviewed";
     }
 
-    tr.append(paymentId, student, amount, utrCell, statusCell, action);
+    tr.append(paymentId, student, studentId, mobile, amount, utrCell, statusCell, action);
     tbody.appendChild(tr);
   });
 }
