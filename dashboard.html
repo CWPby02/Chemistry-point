@@ -22,6 +22,7 @@ h1{font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.15;margin:7px 0}.muted,small
 .student-id{font-weight:800;color:var(--gold);overflow-wrap:anywhere}.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 12px}
 .section-title h2{font-size:1.1rem;margin:0}.count{font-size:.8rem;color:var(--muted)}
 .payment-list{display:grid;gap:13px}.payment-card{display:grid;gap:12px}
+.performance-list{display:grid;gap:10px}.performance-card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px}.performance-top{display:flex;justify-content:space-between;gap:12px;font-weight:750}.performance-meta{font-size:.82rem;color:var(--muted);margin-top:5px}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .product{font-weight:800;font-size:1.02rem}.meta{color:var(--muted);font-size:.84rem;margin-top:3px}
 .status{flex:none;border-radius:30px;padding:5px 10px;font-size:.72rem;font-weight:850;text-transform:uppercase}
@@ -51,6 +52,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 0 30px
   <section id="paymentsSection" hidden>
     <div class="section-title"><h2>मेरी खरीदारी और पढ़ाई की सुविधा</h2><span class="count" id="paymentCount"></span></div>
     <div class="payment-list" id="paymentList"></div>
+  </section>
+  <section id="performanceSection" hidden>
+    <div class="section-title"><h2>मेरी क्विज़ प्रगति</h2><span class="count" id="performanceCount"></span></div>
+    <div class="performance-list" id="performanceList"></div>
   </section>
 </main>
 <footer>© <span id="year"></span> Code With Piyush · Chemistry Point</footer>
@@ -91,6 +96,25 @@ function render(data){
   $("studentId").textContent=String(data.studentId||"");
   const payments=data.payments&&typeof data.payments==="object"?Object.entries(data.payments):[];
   $("paymentCount").textContent=payments.length+" खरीदारी";
+  const performance=data.performance&&typeof data.performance==="object"?Object.values(data.performance):[];
+  $("performanceList").replaceChildren();
+  $("performanceCount").textContent=performance.length+" क्विज़";
+  if(performance.length){
+    performance.sort((a,b)=>new Date(b.submittedAt||0)-new Date(a.submittedAt||0));
+    $("performanceSection").hidden=false;
+    for(const item of performance){
+      const card=document.createElement("article");card.className="performance-card";
+      const top=document.createElement("div");top.className="performance-top";
+      const name=document.createElement("span");name.textContent=String(item.quizTitle||"क्विज़");
+      const pct=document.createElement("strong");pct.textContent=String(Number(item.percentage)||0)+"%";
+      top.append(name,pct);
+      const meta=document.createElement("div");meta.className="performance-meta";
+      meta.textContent="सही: "+(Number(item.score)||0)+" / "+(Number(item.total)||0)+" · गलत: "+(Number(item.wrong)||0)+" · छोड़े: "+(Number(item.unattempted)||0);
+      const date=document.createElement("div");date.className="performance-meta";
+      date.textContent=item.submittedAt?new Date(item.submittedAt).toLocaleString("hi-IN"):"तारीख उपलब्ध नहीं";
+      card.append(top,meta,date);$("performanceList").append(card);
+    }
+  }
   $("paymentList").replaceChildren();
   if(!payments.length){showMessage("Abhi koi payment record nahi mila.");return;}
   $("message").hidden=true;$("paymentsSection").hidden=false;
