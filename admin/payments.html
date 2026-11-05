@@ -645,28 +645,68 @@ function renderRequests() {
 
     const action = document.createElement("td");
 
-    if (status === "pending") {
-      const controls = document.createElement("div");
-      controls.className = "request-actions";
+    const controls = document.createElement("div");
+    controls.className = "request-actions";
+
+    if (status !== "approved") {
       const approve = document.createElement("button");
       approve.className = "btn btn-green";
       approve.type = "button";
       approve.textContent = "Approve";
       approve.addEventListener("click", () => reviewRequest(key, item, "approved"));
+      controls.appendChild(approve);
+    }
+
+    if (status !== "rejected") {
       const reject = document.createElement("button");
       reject.className = "btn btn-red";
       reject.type = "button";
       reject.textContent = "Reject";
       reject.addEventListener("click", () => reviewRequest(key, item, "rejected"));
-      controls.append(approve, reject);
-      action.appendChild(controls);
-    } else {
-      action.textContent = "Reviewed";
+      controls.appendChild(reject);
     }
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "btn btn-red";
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => deleteRequest(key, item));
+    controls.appendChild(deleteBtn);
+    action.appendChild(controls);
 
     tr.append(paymentId, student, studentId, mobile, amount, utrCell, statusCell, action);
     tbody.appendChild(tr);
   });
+}
+
+async function deleteRequest(requestId, item) {
+  if (!currentUser) {
+    message("Admin login required.", "error");
+    return;
+  }
+
+  const studentName = item.studentName || item.name || "this student";
+  const productName = item.productName || item.productId || "this product";
+  if (!confirm(
+    `Delete payment request for ${studentName} — ${productName}? Its linked dashboard access will also be removed. This cannot be undone.`
+  )) return;
+
+  const changes = {
+    [`paymentRequests/${requestId}`]: null
+  };
+
+  if (item.requestSecret) {
+    changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}`] = null;
+  }
+
+  try {
+    await update(ref(db), changes);
+    await loadRequests();
+    message("Payment request delete ho gayi. Is purchase ka dashboard access bhi hata diya gaya.");
+  } catch (error) {
+    console.error(error);
+    message("Request delete nahi hui: " + error.message, "error");
+  }
 }
 
 async function reviewRequest(requestId, item, status) {
@@ -692,6 +732,9 @@ async function reviewRequest(requestId, item, status) {
     if (reason === null) return;
     changes[`paymentRequests/${requestId}/rejectionReason`] = reason.trim().slice(0, 240);
     if (item.requestSecret) changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}/rejectionReason`] = reason.trim().slice(0, 240);
+  } else {
+    changes[`paymentRequests/${requestId}/rejectionReason`] = null;
+    if (item.requestSecret) changes[`paymentDashboards/${item.requestSecret}/payments/${requestId}/rejectionReason`] = null;
   }
   try {
     await update(ref(db), changes);
