@@ -1701,6 +1701,10 @@
                 </th>
 
                 <th>
+                  Access
+                </th>
+
+                <th>
                   Status
                 </th>
 
@@ -1718,7 +1722,7 @@
               <tr>
 
                 <td
-                  colspan="7"
+                  colspan="8"
                   class="empty">
 
                   <i class="fa-solid fa-spinner fa-spin"></i>
@@ -1940,6 +1944,51 @@
                 class="form-control"
                 id="quizDescription"
                 placeholder="Quiz के बारे में short description..."></textarea>
+
+            </div>
+
+
+            <!-- ACCESS TYPE / PRICE -->
+
+            <div class="form-group">
+
+              <label>
+                Quiz Access <span>*</span>
+              </label>
+
+              <select
+                class="form-control"
+                id="quizAccessType"
+                required>
+
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+
+              </select>
+
+              <small class="form-help">
+                Free quiz सभी students के लिए; Paid quiz के लिए price निर्धारित करें।
+              </small>
+
+            </div>
+
+            <div class="form-group" id="quizPriceGroup" style="display:none;">
+
+              <label>
+                Price (₹) <span>*</span>
+              </label>
+
+              <input
+                type="number"
+                class="form-control"
+                id="quizPrice"
+                min="1"
+                step="1"
+                placeholder="Example: 49">
+
+              <small class="form-help">
+                Paid quiz की कीमत रुपये में डालें।
+              </small>
 
             </div>
 
@@ -2168,6 +2217,24 @@
 
     const quizActive =
       document.getElementById("quizActive");
+
+    const quizAccessType =
+      document.getElementById("quizAccessType");
+
+    const quizPriceGroup =
+      document.getElementById("quizPriceGroup");
+
+    const quizPrice =
+      document.getElementById("quizPrice");
+
+    function syncQuizPriceField() {
+      const isPaid = quizAccessType.value === "paid";
+      quizPriceGroup.style.display = isPaid ? "flex" : "none";
+      quizPrice.required = isPaid;
+      if (!isPaid) quizPrice.value = "";
+    }
+
+    quizAccessType.addEventListener("change", syncQuizPriceField);
 
     const saveQuizBtn =
       document.getElementById("saveQuizBtn");
@@ -2420,7 +2487,7 @@
             <tr>
 
               <td
-                colspan="7"
+                colspan="8"
                 class="empty">
 
                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -2734,7 +2801,7 @@
           <tr>
 
             <td
-              colspan="7"
+              colspan="8"
               class="empty">
 
               <i class="fa-solid fa-circle-question"></i>
@@ -2845,6 +2912,12 @@
                 quiz.duration || 0
               )} min
 
+            </td>
+
+            <td>
+              <span class="type-badge">
+                ${quiz.accessType === "paid" ? `Paid ₹${Number(quiz.price || 0)}` : "Free"}
+              </span>
             </td>
 
 
@@ -2972,6 +3045,10 @@
       quizActive.checked =
         true;
 
+      quizAccessType.value = "free";
+      quizPrice.value = "";
+      syncQuizPriceField();
+
       quizDuration.value =
         30;
 
@@ -3066,6 +3143,14 @@
       quizActive.checked =
         quiz.active !== false;
 
+      quizAccessType.value =
+        quiz.accessType === "paid" ? "paid" : "free";
+
+      quizPrice.value =
+        quiz.accessType === "paid" ? (quiz.price ?? "") : "";
+
+      syncQuizPriceField();
+
 
       saveQuizBtn.innerHTML = `
         <i class="fa-solid fa-pen-to-square"></i>
@@ -3124,6 +3209,12 @@
         const active =
           quizActive.checked;
 
+        const accessType =
+          quizAccessType.value === "paid" ? "paid" : "free";
+
+        const price =
+          accessType === "paid" ? Number(quizPrice.value) : 0;
+
 
         if (!title) {
 
@@ -3178,6 +3269,12 @@
         }
 
 
+        if (accessType === "paid" && (!Number.isFinite(price) || price <= 0)) {
+          showToast("Paid quiz के लिए valid price डालें।", "error");
+          return;
+        }
+
+
         saveQuizBtn.disabled =
           true;
 
@@ -3213,6 +3310,10 @@
             description,
 
             active,
+
+            accessType,
+
+            price,
 
             updatedAt:
               now
