@@ -1836,14 +1836,21 @@
             await loadQuizData();
 
             // Paid quiz access is granted only after Admin approval.
+            const resolvedQuizId = String(
+                quizId ||
+                loadedQuizData?._quizId ||
+                loadedQuizData?.quizId ||
+                loadedQuizData?.id ||
+                ""
+            );
+
             if (
-                quizId &&
                 loadedQuizData &&
                 String(loadedQuizData.accessType || "free").toLowerCase() === "paid"
             ) {
                 let approved = false;
                 try {
-                    const savedRaw = localStorage.getItem("cpPaymentSession:quiz:" + quizId);
+                    const savedRaw = localStorage.getItem("cpPaymentSession:quiz:" + resolvedQuizId);
                     const saved = savedRaw ? JSON.parse(savedRaw) : null;
                     if (saved && saved.token && saved.requestId) {
                         const accessSnapshot = await get(
