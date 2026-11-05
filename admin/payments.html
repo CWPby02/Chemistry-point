@@ -800,6 +800,11 @@ $("priceForm").addEventListener("submit", async event => {
   const key = priceKey({ type, id: productId });
 
   try {
+    if (price <= 0) {
+      message("Paid product ke liye price ₹1 ya usse zyada honi chahiye.", "error");
+      return;
+    }
+
     await set(ref(db, `paymentPrices/${key}`), {
       type,
       productId,
@@ -808,6 +813,30 @@ $("priceForm").addEventListener("submit", async event => {
       updatedAt: Date.now(),
       updatedBy: currentUser.uid
     });
+
+    // Keep the product's own access flag in sync with Payment Management.
+    if (type === "quiz") {
+      await update(ref(db, `quizzes/${productId}`), {
+        accessType: "paid",
+        price,
+        updatedAt: Date.now()
+      });
+    } else if (type === "pdf") {
+      const [chapterId, pdfField] = productId.split("/");
+      const objectiveType = {
+        vviPdf: "vvi",
+        pyqPdf: "pyq",
+        allPdf: "all"
+      }[pdfField];
+
+      if (chapterId && objectiveType) {
+        const changes = {};
+        changes[objectiveType + "AccessType"] = "paid";
+        changes[objectiveType + "Price"] = price;
+        changes.updatedAt = Date.now();
+        await update(ref(db, `chapters/${chapterId}`), changes);
+      }
+    }
 
     await loadPrices();
     message("Product price successfully save ho gayi.");
