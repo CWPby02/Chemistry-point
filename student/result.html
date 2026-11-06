@@ -51,7 +51,7 @@
 .correct{color:#63c174}
 .wrong{color:#e07878}
 .unattempted{color:#aeb3bb}
-.result-note{text-align:center;color:#858a93;font-size:12px;margin:18px 0 0}
+.invalid-result{display:none;margin:24px 0;padding:28px;border:1px solid rgba(217,154,22,.3);border-radius:18px;background:var(--card-bg,#13161a);text-align:center}.invalid-result[hidden]{display:none}.invalid-result h2{margin:0 0 8px}.invalid-result p{color:#aeb3bb;line-height:1.6}.invalid-result a{display:inline-flex;margin-top:10px;padding:11px 16px;border-radius:10px;background:var(--primary,#d99a16);color:#111;text-decoration:none;font-weight:700}.result-note{text-align:center;color:#858a93;font-size:12px;margin:18px 0 0}
 
 @media(max-width:700px){
 .result-page{padding:35px 0 60px}
@@ -117,7 +117,7 @@
             <p id="quizSubtitle">Solid State • Chapter Wise Practice Test</p>
         </div>
 
-        <section class="result-card">
+        <section class="invalid-result" id="invalidResult" hidden>\n            <h2><i class="fa-solid fa-circle-info"></i> Result Not Found</h2>\n            <p>इस browser session में कोई valid Quiz Result नहीं मिला। अपना Quiz पूरा करके Submit करें, तभी Result और Certificate उपलब्ध होंगे।</p>\n            <a href="../quiz.html">Go to Quizzes</a>\n        </section>\n\n        <section class="result-card">
             <div class="score-area">
                 <div class="score-circle" id="scoreCircle">
                     <div class="score-circle-content">
@@ -210,7 +210,7 @@
                 </div>
             </div>
 
-            <p class="result-note">Demo result अभी frontend testing के लिए है। Real score Firebase से बाद में आएगा।</p>
+            <p class="result-note">यह परिणाम अभी-अभी submit किए गए Quiz के आधार पर दिखाया गया है।</p>
         </section>
     </div>
 </main>
@@ -222,126 +222,105 @@
 </footer>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-
-const rawScore = params.get("score");
-const rawTotal = params.get("total");
-const rawAnswered = params.get("answered");
-const rawUnattempted = params.get("unattempted");
-const rawPercentage = params.get("percentage");
-
 /*
- * Keep the existing demo display when no real score is passed.
- * Real quiz values from the URL replace the demo values.
+ * Result is read only from the quiz submission saved in this tab.
+ * URL parameters are deliberately ignored so manually opening or
+ * editing result.html cannot create a default/fabricated score.
  */
-let resultData = {
-    score: 4,
-    total: 5,
-    answered: 5,
-    unattempted: 0,
-    percentage: 80,
-    wrong: 1
-};
-
-if (
-    rawScore !== null &&
-    rawTotal !== null &&
-    Number.isFinite(Number(rawScore)) &&
-    Number.isFinite(Number(rawTotal)) &&
-    Number(rawTotal) > 0
-) {
-    const total = Math.max(0, Number(rawTotal));
-    const score = Math.max(0, Math.min(Number(rawScore), total));
-
-    const answered = rawAnswered !== null && Number.isFinite(Number(rawAnswered))
-        ? Math.max(0, Math.min(Number(rawAnswered), total))
-        : score;
-
-    const unattempted = rawUnattempted !== null && Number.isFinite(Number(rawUnattempted))
-        ? Math.max(0, Math.min(Number(rawUnattempted), total))
-        : Math.max(0, total - answered);
-
-    const percentage = rawPercentage !== null && rawPercentage.trim() !== ""
-        && Number.isFinite(Number(rawPercentage))
-        ? Math.max(0, Math.min(Number(rawPercentage), 100))
-        : Math.round((score / total) * 100);
-
-    resultData = {
-        score,
-        total,
-        answered,
-        unattempted,
-        percentage,
-        wrong: Math.max(0, total - score - unattempted)
-    };
-}
-
-const safeScore = resultData.score;
-const total = resultData.total;
-const safeUnattempted = resultData.unattempted;
-const wrong = resultData.wrong;
-const safePercentage = resultData.percentage;
-
-document.getElementById("percentage").textContent = safePercentage + "%";
-document.getElementById("correctCount").textContent = safeScore;
-document.getElementById("wrongCount").textContent = wrong;
-document.getElementById("unattemptedCount").textContent = safeUnattempted;
-
-document.getElementById("scoreCircle").style.background =
-    `conic-gradient(var(--primary,#d99a16) 0 ${safePercentage}%, rgba(255,255,255,.08) ${safePercentage}% 100%)`;
-
-const message = document.getElementById("resultMessage");
-const resultText = document.getElementById("resultText");
-
-if (safePercentage >= 80) {
-    message.textContent = "Excellent Work! 🎉";
-    resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। आपकी preparation अच्छी दिशा में है।`;
-} else if (safePercentage >= 50) {
-    message.textContent = "Good Attempt! 👍";
-    resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। थोड़ा और practice करने से improvement हो सकता है।`;
-} else {
-    message.textContent = "Keep Practicing! 💪";
-    resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। Questions को दोबारा practice करें।`;
-}
-
-/* Update performance breakdown */
-document.getElementById("correctBreakdown").textContent =
-    `${safeScore} ${safeScore === 1 ? "Question" : "Questions"}`;
-
-document.getElementById("wrongBreakdown").textContent =
-    `${wrong} ${wrong === 1 ? "Question" : "Questions"}`;
-
-document.getElementById("unattemptedBreakdown").textContent =
-    `${safeUnattempted} ${safeUnattempted === 1 ? "Question" : "Questions"}`;
-
-/* Certificate connection */
+const resultCard = document.querySelector(".result-card");
+const breakdown = document.querySelector(".breakdown");
+const invalidResult = document.getElementById("invalidResult");
 const certificateBtn = document.getElementById("certificateBtn");
 
-const studentName =
-    params.get("studentName") ||
-    params.get("name") ||
-    params.get("student") ||
-    "";
+let resultData = null;
 
-const quizTitle =
-    params.get("quizTitle") ||
-    params.get("title") ||
-    document.getElementById("quizSubtitle").textContent.trim();
-
-const certificateParams = new URLSearchParams({
-    score: String(safeScore),
-    total: String(total),
-    percentage: String(safePercentage),
-    answered: String(resultData.answered),
-    unattempted: String(safeUnattempted),
-    quizTitle: quizTitle
-});
-
-if (studentName.trim()) {
-    certificateParams.set("studentName", studentName.trim());
+try {
+    const saved = sessionStorage.getItem("chemistryPointQuizResult");
+    if (saved) resultData = JSON.parse(saved);
+} catch (error) {
+    console.warn("Unable to read quiz result:", error);
 }
 
-certificateBtn.href = `certificate.html?${certificateParams.toString()}`;
+function isValidQuizResult(data) {
+    if (!data || typeof data !== "object") return false;
+
+    const total = Number(data.total);
+    const score = Number(data.score);
+    const wrong = Number(data.wrong);
+    const unattempted = Number(data.unattempted);
+    const answered = Number(data.answered);
+    const submittedAt = Date.parse(data.submittedAt || "");
+
+    return Number.isInteger(total) && total > 0 &&
+        Number.isInteger(score) && score >= 0 && score <= total &&
+        Number.isInteger(wrong) && wrong >= 0 &&
+        Number.isInteger(unattempted) && unattempted >= 0 &&
+        Number.isInteger(answered) && answered >= 0 &&
+        score + wrong + unattempted === total &&
+        score + wrong === answered &&
+        Array.isArray(data.questions) && data.questions.length === total &&
+        Number.isFinite(submittedAt) &&
+        typeof data.quizTitle === "string" && data.quizTitle.trim().length > 0;
+}
+
+if (!isValidQuizResult(resultData)) {
+    resultCard.hidden = true;
+    breakdown.hidden = true;
+    invalidResult.hidden = false;
+    certificateBtn.setAttribute("aria-disabled", "true");
+} else {
+    const total = Number(resultData.total);
+    const safeScore = Number(resultData.score);
+    const wrong = Number(resultData.wrong);
+    const safeUnattempted = Number(resultData.unattempted);
+    const answered = Number(resultData.answered);
+    const safePercentage = Math.round((safeScore / total) * 100);
+
+    document.getElementById("quizSubtitle").textContent =
+        resultData.quizTitle + (resultData.chapter ? " • " + resultData.chapter : "");
+
+    document.getElementById("percentage").textContent = safePercentage + "%";
+    document.getElementById("correctCount").textContent = safeScore;
+    document.getElementById("wrongCount").textContent = wrong;
+    document.getElementById("unattemptedCount").textContent = safeUnattempted;
+
+    document.getElementById("scoreCircle").style.background =
+        `conic-gradient(var(--primary,#d99a16) 0 ${safePercentage}%, rgba(255,255,255,.08) ${safePercentage}% 100%)`;
+
+    const message = document.getElementById("resultMessage");
+    const resultText = document.getElementById("resultText");
+
+    if (safePercentage >= 80) {
+        message.textContent = "Excellent Work!";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। आपकी तैयारी अच्छी दिशा में है।`;
+    } else if (safePercentage >= 50) {
+        message.textContent = "Good Attempt!";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। नियमित अभ्यास जारी रखें।`;
+    } else {
+        message.textContent = "Keep Practicing!";
+        resultText.textContent = `आपने ${total} में से ${safeScore} questions सही किए। गलत उत्तरों को दोबारा समझें।`;
+    }
+
+    document.getElementById("correctBreakdown").textContent =
+        `${safeScore} ${safeScore === 1 ? "Question" : "Questions"}`;
+    document.getElementById("wrongBreakdown").textContent =
+        `${wrong} ${wrong === 1 ? "Question" : "Questions"}`;
+    document.getElementById("unattemptedBreakdown").textContent =
+        `${safeUnattempted} ${safeUnattempted === 1 ? "Question" : "Questions"}`;
+
+    certificateBtn.href = "certificate.html";
+    certificateBtn.removeAttribute("aria-disabled");
+    document.getElementById("resultText").setAttribute(
+        "aria-label",
+        `Answered ${answered} out of ${total} questions`
+    );
+}
+
+certificateBtn.addEventListener("click", event => {
+    if (certificateBtn.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+    }
+});
 
 /* Page year */
 const year = document.getElementById("year");
