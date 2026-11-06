@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /student/
+Disallow: /dashboard.html
+Disallow: /payment.html
+
+Sitemap: https://chemistry-point.gt.tc/sitemap.xml
