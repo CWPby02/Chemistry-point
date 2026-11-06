@@ -86,8 +86,8 @@ function renderAdmission(){
 async function loadAdmission(){
  try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
   const db=firebase.database();
-  const [admissionSnap,contactSnap]=await Promise.all([db.ref("siteContent/admission").once("value"),db.ref("siteContent/contact/teacherWhatsApp").once("value")]);
-  admissionConfig={...admissionConfig,...(admissionSnap.val()||{}),whatsappNumber:contactSnap.val()||""};
+  const admissionSnap=await db.ref("siteContent/admission").once("value");
+  admissionConfig={...admissionConfig,...(admissionSnap.val()||{})};
  }catch(error){console.warn("Admission settings could not be loaded",error);}
  renderAdmission();
 }
