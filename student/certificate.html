@@ -50,7 +50,7 @@
             font-size: 14px;
         }
 
-        .name-panel {
+        .invalid-certificate{max-width:720px;margin:20px auto;padding:28px;text-align:center;background:#fff;border:1px solid #e0e5ef;border-radius:14px;color:#172033}\n        .invalid-certificate h2{margin:0 0 8px}\n        .invalid-certificate p{color:#657087;line-height:1.6}\n        .invalid-certificate a{display:inline-block;margin-top:10px;padding:11px 16px;border-radius:8px;background:#bd963e;color:#151515;text-decoration:none;font-weight:700}\n        .invalid-certificate[hidden]{display:none}\n        [hidden]{display:none!important}\n\n        .name-panel {
             display: flex;
             gap: 10px;
             align-items: center;
@@ -456,7 +456,7 @@
             </button>
         </section>
 
-        <div class="certificate-scroll">
+        <div id="invalidCertificate" class="invalid-certificate" hidden>\n            <h2>Certificate Not Available</h2>\n            <p>इस browser session में कोई valid Quiz Result नहीं मिला। पहले Quiz पूरा करके Submit करें, फिर Result page से Certificate खोलें।</p>\n            <a href="../quiz.html">Go to Quizzes</a>\n        </div>\n\n        <div class="certificate-scroll">
             <section id="certificate" aria-label="Student achievement certificate">
                 <div class="certificate-border"></div>
 
@@ -541,19 +541,36 @@
     <script>
         const certificate = document.getElementById("certificate");
         const nameInput = document.getElementById("studentNameInput");
+        const certificateScroll = document.querySelector(".certificate-scroll");
+        const actionButtons = document.querySelector(".action-buttons");
+        const namePanel = document.querySelector(".name-panel");
+        const invalidCertificate = document.getElementById("invalidCertificate");
 
-        function getParams() {
-            return new URLSearchParams(window.location.search);
+        let quizResult = null;
+        try {
+            const saved = sessionStorage.getItem("chemistryPointQuizResult");
+            if (saved) quizResult = JSON.parse(saved);
+        } catch (error) {
+            console.warn("Unable to read quiz result:", error);
         }
 
-        function getFirstParam(params, keys, fallback = "") {
-            for (const key of keys) {
-                const value = params.get(key);
-                if (value && value.trim()) {
-                    return value.trim();
-                }
-            }
-            return fallback;
+        function isValidQuizResult(data) {
+            if (!data || typeof data !== "object") return false;
+            const total = Number(data.total);
+            const score = Number(data.score);
+            const wrong = Number(data.wrong);
+            const unattempted = Number(data.unattempted);
+            const answered = Number(data.answered);
+            return Number.isInteger(total) && total > 0 &&
+                Number.isInteger(score) && score >= 0 && score <= total &&
+                Number.isInteger(wrong) && wrong >= 0 &&
+                Number.isInteger(unattempted) && unattempted >= 0 &&
+                Number.isInteger(answered) && answered >= 0 &&
+                score + wrong + unattempted === total &&
+                score + wrong === answered &&
+                Array.isArray(data.questions) && data.questions.length === total &&
+                Number.isFinite(Date.parse(data.submittedAt || "")) &&
+                typeof data.quizTitle === "string" && data.quizTitle.trim().length > 0;
         }
 
         function calculateGrade(percentage) {
@@ -566,80 +583,51 @@
             return "Needs Improvement";
         }
 
-        function safeNumber(value, fallback = 0) {
-            const number = Number(value);
-            return Number.isFinite(number) ? number : fallback;
+        function updateCertificate() {
+            if (!isValidQuizResult(quizResult)) return false;
+
+            const studentName = nameInput.value.trim();
+            if (!studentName) return false;
+
+            const score = Number(quizResult.score);
+            const total = Number(quizResult.total);
+            const percentage = Math.round((score / total) * 100);
+
+            document.getElementById("certificateStudentName").textContent = studentName;
+            document.getElementById("certificateQuizTitle").textContent = quizResult.quizTitle;
+            document.getElementById("certificateScore").textContent = `${score} / ${total}`;
+            document.getElementById("certificatePercentage").textContent = `${percentage}%`;
+            document.getElementById("certificateGrade").textContent = calculateGrade(percentage);
+
+            const submittedDate = new Date(quizResult.submittedAt);
+            document.getElementById("certificateDate").textContent =
+                submittedDate.toLocaleDateString("en-IN", {
+                    day: "2-digit", month: "short", year: "numeric"
+                });
+
+            return true;
         }
 
-        function updateCertificate() {
-            const params = getParams();
-
-            const studentName =
-                nameInput.value.trim() ||
-                getFirstParam(params, ["studentName", "name", "student"], "Student Name");
-
-            const quizTitle = getFirstParam(
-                params,
-                ["quizTitle", "title"],
-                "Chemistry Quiz"
-            );
-
-            const score = safeNumber(
-                getFirstParam(params, ["score", "marks"], "0")
-            );
-
-            const total = Math.max(
-                0,
-                safeNumber(getFirstParam(params, ["total", "maxMarks"], "0"))
-            );
-
-            const suppliedPercentage = params.get("percentage");
-            let percentage = 0;
-
-            if (suppliedPercentage !== null && suppliedPercentage.trim() !== "") {
-                percentage = safeNumber(suppliedPercentage, 0);
-            } else if (total > 0) {
-                percentage = (score / total) * 100;
-            }
-
-            percentage = Math.max(0, Math.min(100, percentage));
-
-            document.getElementById("certificateStudentName").textContent =
-                studentName;
-
-            document.getElementById("certificateQuizTitle").textContent =
-                quizTitle;
-
-            document.getElementById("certificateScore").textContent =
-                `${score} / ${total}`;
-
-            document.getElementById("certificatePercentage").textContent =
-                `${percentage.toFixed(1)}%`;
-
-            document.getElementById("certificateGrade").textContent =
-                calculateGrade(percentage);
-
-            document.getElementById("certificateDate").textContent =
-                new Date().toLocaleDateString("en-IN", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                });
+        if (!isValidQuizResult(quizResult)) {
+            namePanel.hidden = true;
+            certificateScroll.hidden = true;
+            actionButtons.hidden = true;
+            invalidCertificate.hidden = false;
         }
 
         document.getElementById("generateBtn").addEventListener("click", () => {
             if (!nameInput.value.trim()) {
                 nameInput.focus();
-                alert("Bhai, pehle student ka naam enter karo.");
+                alert("पहले विद्यार्थी का नाम दर्ज करें।");
                 return;
             }
-            updateCertificate();
+            if (updateCertificate()) {
+                certificateScroll.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
         });
 
         nameInput.addEventListener("keydown", event => {
-            if (event.key === "Enter") {
-                document.getElementById("generateBtn").click();
-            }
+            if (event.key === "Enter") document.getElementById("generateBtn").click();
         });
 
         function downloadBlob(blob, filename) {
