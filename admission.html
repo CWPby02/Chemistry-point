@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Chemistry Point में Admission और course information के लिए Pardeep Sir से WhatsApp पर संपर्क करें।">
+<title>Admission | Chemistry Point</title>
+<link rel="icon" href="assets/images/logo/logo.png">
+<link rel="stylesheet" href="assets/css/root.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+.admission-wrap{min-height:70vh;padding:78px 0 100px;background:var(--bg-secondary,#101114)}
+.admission-card{max-width:850px;margin:auto;padding:clamp(22px,5vw,48px);border:1px solid var(--border);border-radius:22px;background:var(--bg-card,#15171b)}
+.admission-kicker{color:var(--primary-light);font-size:12px;font-weight:800;letter-spacing:1.5px}
+.admission-card h1{margin:12px 0;font:800 clamp(32px,5vw,52px) Poppins, sans-serif;line-height:1.15}
+.admission-card h1 span{color:var(--primary-light)}
+.admission-description{color:var(--text-secondary);line-height:1.8;margin:15px 0 26px}
+.admission-list{display:grid;gap:12px;margin:25px 0}
+.admission-course{display:flex;gap:12px;align-items:flex-start;padding:15px;border:1px solid var(--border);border-radius:12px;color:var(--text-primary)}
+.admission-course i{color:var(--primary-light);margin-top:4px}
+.admission-form{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:28px}
+.admission-field{display:grid;gap:7px}
+.admission-field.full{grid-column:1/-1}
+.admission-field label{font-size:12px;font-weight:700;color:var(--text-primary)}
+.admission-field input,.admission-field select,.admission-field textarea{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:var(--input-bg,var(--bg-main));color:var(--text-primary);font:inherit;outline:none}
+.admission-field textarea{min-height:100px;resize:vertical}
+.admission-submit{grid-column:1/-1;min-height:48px;border:0;border-radius:11px;background:var(--primary);color:#17120a;font-weight:800;cursor:pointer}
+.admission-status{grid-column:1/-1;color:var(--text-secondary);font-size:13px;line-height:1.7}
+.admission-disabled{padding:20px;border:1px solid var(--border);border-radius:12px;color:var(--text-secondary)}
+@media(max-width:620px){.admission-wrap{padding:50px 0 70px}.admission-form{grid-template-columns:1fr}.admission-field.full,.admission-submit,.admission-status{grid-column:auto}}
+</style>
+</head>
+<body>
+<header class="site-header">
+ <div class="container nav-container">
+  <a href="index.html" class="brand"><img src="assets/images/logo/logo.png" alt="Chemistry Point"><div class="brand-text"><strong>Chemistry Point</strong><span>By Pardeep Sir</span></div></a>
+  <nav class="main-nav"><a href="index.html">Home</a><a href="videos.html">Videos</a><a href="objectives.html">Objectives</a><a href="quiz.html">Quiz</a><a href="admission.html" class="active">Admission</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Open Menu"><i class="fa-solid fa-bars"></i></button>
+ </div>
+ <div class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="videos.html">Videos</a><a href="objectives.html">Objectives</a><a href="quiz.html">Quiz</a><a href="admission.html" class="active">Admission</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+</header>
+<main class="admission-wrap"><div class="container"><section class="admission-card">
+<span class="admission-kicker">CHEMISTRY POINT</span>
+<h1 id="admissionTitle">Admission <span>Enquiry</span></h1>
+<p class="admission-description" id="admissionDescription">Course और admission की जानकारी पाने के लिए नीचे जानकारी भरें। Submit करने पर WhatsApp खुलेगा।</p>
+<div class="admission-list" id="admissionCourses"></div>
+<div id="admissionFormArea">
+<form class="admission-form" id="admissionForm">
+<div class="admission-field"><label for="studentName">विद्यार्थी का नाम</label><input id="studentName" maxlength="100" required placeholder="अपना नाम लिखें"></div>
+<div class="admission-field"><label for="studentPhone">मोबाइल नंबर</label><input id="studentPhone" type="tel" inputmode="numeric" maxlength="15" required placeholder="अपना मोबाइल नंबर"></div>
+<div class="admission-field"><label for="studentClass">कक्षा</label><select id="studentClass" required><option value="">कक्षा चुनें</option><option>Class 11</option><option>Class 12</option><option>Other</option></select></div>
+<div class="admission-field"><label for="courseChoice">कोर्स</label><select id="courseChoice" required><option value="">कोर्स चुनें</option></select></div>
+<div class="admission-field full"><label for="studentMessage">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="studentMessage" maxlength="1500" placeholder="अपना सवाल या जानकारी लिखें"></textarea></div>
+<button class="admission-submit" type="submit"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर Admission Enquiry भेजें</button>
+<p class="admission-status" id="admissionStatus" role="status"></p>
+</form>
+</div>
+</section></div></main>
+<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img src="assets/images/logo/logo.png" alt="Chemistry Point"><h3>Chemistry Point</h3><p>By Pardeep Sir</p></div><div class="footer-column"><h4>Quick Links</h4><a href="index.html">Home</a><a href="videos.html">Videos</a><a href="objectives.html">Objectives</a><a href="quiz.html">Quiz</a></div><div class="footer-column"><h4>Information</h4><a href="admission.html">Admission</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div><div class="footer-bottom"><div class="container"><p>© 2026 Chemistry Point. All Rights Reserved.</p></div></div></footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig={apiKey:"AIzaSyB6Yaf6K9HpL3q692b20ECPvXu78rUfByU",authDomain:"chemistry-point-9a41b.firebaseapp.com",databaseURL:"https://chemistry-point-9a41b-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"chemistry-point-9a41b",storageBucket:"chemistry-point-9a41b.firebasestorage.app",messagingSenderId:"791007663942",appId:"1:791007663942:web:693c008e475a2e74357747"};
+let admissionConfig={enabled:true,title:"Admission Enquiry",description:"Course और admission की जानकारी पाने के लिए नीचे जानकारी भरें। Submit करने पर WhatsApp खुलेगा।",courses:["Class 11 Chemistry","Class 12 Chemistry"],whatsappNumber:""};
+const $=id=>document.getElementById(id);
+function safeText(value){return String(value??"").trim()}
+function renderAdmission(){
+ $("admissionTitle").textContent=safeText(admissionConfig.title)||"Admission Enquiry";
+ $("admissionDescription").textContent=safeText(admissionConfig.description);
+ const courses=Array.isArray(admissionConfig.courses)?admissionConfig.courses:[];
+ $("admissionCourses").replaceChildren();
+ $("courseChoice").innerHTML='<option value="">कोर्स चुनें</option>';
+ courses.filter(Boolean).forEach(course=>{
+  const item=document.createElement("div");item.className="admission-course";
+  const icon=document.createElement("i");icon.className="fa-solid fa-book-open";
+  const label=document.createElement("span");label.textContent=course;
+  item.append(icon,label);$("admissionCourses").append(item);
+  const option=document.createElement("option");option.value=course;option.textContent=course;$("courseChoice").append(option);
+ });
+ $("admissionFormArea").hidden=admissionConfig.enabled===false;
+ if(!admissionConfig.enabled){const note=document.createElement("div");note.className="admission-disabled";note.textContent="फिलहाल Admission enquiry बंद है। कृपया बाद में संपर्क करें।";$("admissionFormArea").replaceChildren(note);}
+}
+async function loadAdmission(){
+ try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+  const db=firebase.database();
+  const [admissionSnap,contactSnap]=await Promise.all([db.ref("siteContent/admission").once("value"),db.ref("siteContent/contact/teacherWhatsApp").once("value")]);
+  admissionConfig={...admissionConfig,...(admissionSnap.val()||{}),whatsappNumber:contactSnap.val()||""};
+ }catch(error){console.warn("Admission settings could not be loaded",error);}
+ renderAdmission();
+}
+$("admissionForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ const number=safeText(admissionConfig.whatsappNumber).replace(/\D/g,"");
+ if(!/^\d{8,15}$/.test(number)){$("admissionStatus").textContent="Pardeep Sir का WhatsApp नंबर Admin → Settings में सेट नहीं है।";return;}
+ const data={name:$("studentName").value.trim(),phone:$("studentPhone").value.trim(),className:$("studentClass").value,course:$("courseChoice").value,message:$("studentMessage").value.trim()};
+ if(!data.name||!data.phone||!data.className||!data.course){$("admissionStatus").textContent="कृपया सभी जरूरी जानकारी भरें।";return;}
+ const message=["नमस्ते Pardeep Sir,","मुझे Chemistry Point में Admission की जानकारी चाहिए।","","विद्यार्थी का नाम: "+data.name,"मोबाइल नंबर: "+data.phone,"कक्षा: "+data.className,"कोर्स: "+data.course,"अतिरिक्त जानकारी: "+(data.message||"नहीं")].join("\n");
+ window.open("https://wa.me/"+number+"?text="+encodeURIComponent(message),"_blank","noopener,noreferrer");
+ $("admissionStatus").textContent="WhatsApp खुल गया है। Enquiry भेजने के लिए WhatsApp में Send दबाएँ।";
+});
+const menuBtn=$("menuBtn"),mobileNav=$("mobileNav");menuBtn.addEventListener("click",()=>mobileNav.classList.toggle("show"));
+loadAdmission();
+</script>
+</body></html>
