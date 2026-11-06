@@ -132,7 +132,7 @@
             <div style="max-width:1050px;margin:25px auto 0">
                 <div class="contact-form-card">
                     <h2>Send Us a Message</h2>
-                    <p>अपना message भेजें। Message Firebase के /contactMessages path पर save होगा, यदि Database Rules अनुमति देते हैं।</p>
+                    <p>अपना संदेश भरें। Submit करने पर आपका संदेश सीधे Pardeep Sir के WhatsApp पर खुलेगा।</p>
                     <form id="contactForm">
                         <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" placeholder="Enter your name" maxlength="100" required></div>
                         <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="Enter your email" maxlength="200" required></div>
@@ -156,7 +156,7 @@
                 </div>
             </div>
 
-            <div class="contact-note"><i class="fa-solid fa-circle-info"></i><p>Contact details Firebase में उपलब्ध होने पर ही दिखाई देंगे। अपना phone, email और social links /siteContent/contact में जोड़ें। Messages अलग /contactMessages path में save होते हैं।</p></div>
+            <div class="contact-note"><i class="fa-solid fa-circle-info"></i><p>Submit करने पर WhatsApp खुलेगा। वहाँ संदेश भेजने के लिए Send बटन दबाएँ। इस फॉर्म का डेटा Firebase में सेव नहीं होता।</p></div>
         </div>
     </section>
 </main>
@@ -310,6 +310,7 @@ async function loadContactData() {
         }
         setPhone("pardeep", contact.teacherPhone);
         const teacherWhatsApp = typeof contact.teacherWhatsApp === "string" ? contact.teacherWhatsApp.trim() : "";
+        contactWhatsAppNumber = teacherWhatsApp;
         const whatsappClean = teacherWhatsApp.replace(/[\s()-]/g, "");
         const teacherWhatsAppUrl = /^\+?\d{8,15}$/.test(whatsappClean)
             ? "https://wa.me/" + whatsappClean.replace(/\D/g, "")
@@ -365,32 +366,38 @@ async function loadContactData() {
 const contactForm = document.getElementById("contactForm");
 const contactSubmit = document.getElementById("contactSubmit");
 const formStatus = document.getElementById("formStatus");
-contactForm.addEventListener("submit", async (event) => {
+let contactWhatsAppNumber = "";
+
+contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
     formStatus.textContent = "";
-    contactSubmit.disabled = true;
-    contactSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-    try {
-        if (!window.firebase) throw new Error("Firebase SDK load नहीं हुआ।");
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        const payload = {
-            name: document.getElementById("name").value.trim(),
-            email: document.getElementById("email").value.trim(),
-            message: document.getElementById("message").value.trim(),
-            createdAt: new Date().toISOString(),
-            status: "new"
-        };
-        if (!payload.name || !payload.email || !payload.message) throw new Error("कृपया सभी fields भरें।");
-        await firebase.database().ref("contactMessages").push(payload);
-        formStatus.textContent = "आपका message successfully भेज दिया गया है।";
-        contactForm.reset();
-    } catch (error) {
-        console.error("Contact message save failed:", error);
-        formStatus.textContent = "Message save नहीं हुआ। Firebase Rules में /contactMessages पर create permission और connection check करें।";
-    } finally {
-        contactSubmit.disabled = false;
-        contactSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+
+    const payload = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        message: document.getElementById("message").value.trim()
+    };
+    if (!payload.name || !payload.email || !payload.message) {
+        formStatus.textContent = "कृपया सभी जानकारी भरें।";
+        return;
     }
+    const number = String(contactWhatsAppNumber || "").replace(/\D/g, "");
+    if (!/^\d{8,15}$/.test(number)) {
+        formStatus.textContent = "Pardeep Sir का WhatsApp नंबर सेट नहीं है। Admin Panel → Settings → Teacher WhatsApp में नंबर सेव करें।";
+        return;
+    }
+
+    const text = [
+        "नमस्ते Pardeep Sir,",
+        "",
+        "मुझे Chemistry Point वेबसाइट से संपर्क करना है।",
+        "नाम: " + payload.name,
+        "ईमेल: " + payload.email,
+        "संदेश: " + payload.message
+    ].join("\n");
+    const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(text);
+    window.open(url, "_blank", "noopener,noreferrer");
+    formStatus.textContent = "WhatsApp खुल गया है। संदेश भेजने के लिए WhatsApp में Send दबाएँ।";
 });
 loadContactData();
 </script>
